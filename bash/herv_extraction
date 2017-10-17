@@ -1,0 +1,1 @@
+awk '$13 ~ /ERV/ { for(i=6;i<=13;i++)printf "%s\t",$i;printf "\n"  }' rmsk.txt > 
