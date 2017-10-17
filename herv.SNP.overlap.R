@@ -65,8 +65,14 @@ scanSNPs <- function(ranges) {
 load(HERV.DATA)
 
 hervS1.filtered.ranges <- hervS1.ranges[grepl('^chr\\d+$', seqnames(hervS1.ranges))]
+hervS2.filtered.ranges <- hervS2.ranges[grepl('^chr\\d+$', seqnames(hervS2.ranges))]
 
-S1.SNPs <- scanSNPs(hervS1.filtered.ranges)
+hervS1.SNPs <- scanSNPs(hervS1.filtered.ranges)
+save(hervS1.SNPs, file = paste0(DATA.DIR, 'hervS1.SNP.RData'))
 
+
+hervS2.SNPs <- scanSNPs(hervS2.filtered.ranges)
+
+hervS1.SNPs.present <- S1.SNPs$snps[apply(S1.SNPs$snps, 1, function(row) any(row != 0)),]
 
 
