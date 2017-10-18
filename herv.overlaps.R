@@ -7,6 +7,10 @@ METH.DATA = paste0(DATA.DIR, '/F4/KORAF4_illuminamethylation450k_qn_bmiq_n1727/K
 
 HERV.DATA <- paste0(DATA.DIR, 'herv/ranges.RData')
 
+EXPR.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/expression.RData')
+METH.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/methylation.RData')
+
+
 require(GenomicRanges)
 require(illuminaHumanv3.db)
 require(FDb.InfiniumMethylation.hg19)
@@ -183,8 +187,7 @@ print.overlap.info(meth.S1.2kb.overlap)
 print.overlap.info(meth.S2.2kb.overlap)
 print.overlap.info(meth.S3.2kb.overlap)
 
-save(meth.S1.overlap, meth.S2.overlap, meth.S3.overlap, meth.S1.1kb.overlap, meth.S2.1kb.overlap, meth.S3.1kb.overlap, meth.S1.2kb.overlap, meth.S2.2kb.overlap, meth.S3.2kb.overlap, file = paste0(DATA.DIR, 'overlaps/methylation.RData'))
-load(paste0(DATA.DIR, 'overlaps/methylation.RData'))
+save(meth.S1.overlap, meth.S2.overlap, meth.S3.overlap, meth.S1.1kb.overlap, meth.S2.1kb.overlap, meth.S3.1kb.overlap, meth.S1.2kb.overlap, meth.S2.2kb.overlap, meth.S3.2kb.overlap, file = METH.OVERLAP.DATA)
 save(meth.S1.overlap, file = paste0(DATA.DIR, 'overlaps/meth.S1.overlap.RData'))
 
 both.S1.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.overlap, meth.S1.overlap)

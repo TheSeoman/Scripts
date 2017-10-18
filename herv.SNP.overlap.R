@@ -1,9 +1,18 @@
 DATA.DIR = '/media/data/Masterarbeit/data/'
 
 F.SNPS = paste0(DATA.DIR, 'SNPs/full_sorted.bgz')
+F.SAMPLES = paste0(DATA.DIR,"F4/individuals.txt")
 
 HERV.DATA <- paste0(DATA.DIR, 'herv/ranges.RData')
 
+
+split.ranges <- function (ranges, split.size) {
+  out <- list()
+  for (i in 0:floor(length(ranges)/split.size)) {
+    out[i+1] <- ranges[(i*split.size+1):min((i+1)*split.size, length(ranges))]
+  }
+  return(out)
+}
 
 scanSNPs <- function(ranges) {
   require(Rsamtools);
@@ -12,11 +21,11 @@ scanSNPs <- function(ranges) {
   # rather naive implementation for now	
   snpTabix <- TabixFile(file=F.SNPS);
   result <- scanTabix(snpTabix, param=ranges);
+  message(paste0("scanTabix on ", F.SNPS, " for ", length(ranges), " ranges."))
   counts <- countTabix(snpTabix, param=ranges);
+  message(paste0("countTabix on ", F.SNPS, " for ", length(ranges), " ranges."))
   result <- result[names(counts[counts>0])];
   result <- unlist(result);
-  
-  ranges <- ranges[grepl('chr\\d+$|chrX|chrY', seqnames(ranges))]
   
   if(!is.null(result)) {
     # get data frame
@@ -50,11 +59,13 @@ scanSNPs <- function(ranges) {
     for(i in 6:ncol(data)){
       data[,i] <- factor(round(as.numeric(data[,i])));
     }
+    message("Rounded genotype information.")
     
     #create colnames using individual codes
-    ids <- read.table(paste0(DATA.DIR,"F4/individuals.txt"), stringsAsFactors=F, colClasses="character");
+    ids <- read.table(F.SAMPLES, stringsAsFactors=F, colClasses="character");
     colnames(data)<- c("chr", "name", "pos", "orig", "alt", ids[,1])
     rownames(data) <- data$name;
+    message("Created colnames.")
     
     return(list(snpInfo=data[,c(1,3,4,5)], snps=data[,6:ncol(data)]));
   } else {
@@ -62,16 +73,23 @@ scanSNPs <- function(ranges) {
     return(list());
   }
 }
+
 load(HERV.DATA)
 
 hervS1.filtered.ranges <- hervS1.ranges[grepl('^chr\\d+$', seqnames(hervS1.ranges))]
+hervS1.1kb.filtered.ranges <- hervS1.1kb.ranges[grepl('^chr\\d+$', seqnames(hervS1.1kb.ranges))]
 hervS2.filtered.ranges <- hervS2.ranges[grepl('^chr\\d+$', seqnames(hervS2.ranges))]
 
-hervS1.SNPs <- scanSNPs(hervS1.filtered.ranges)
-save(hervS1.SNPs, file = paste0(DATA.DIR, 'hervS1.SNP.RData'))
+hervS3.filtered.ranges <- hervS3.ranges[grepl('^chr\\d+$', seqnames(hervS3.ranges))]
 
+hervS1.SNPs <- scanSNPs(hervS1.filtered.ranges)
+hervS1.1kb.SNPs <- scanSNPs(hervS1.1kb.filtered.ranges)
+save(hervS1.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS1.SNP.RData'))
 
 hervS2.SNPs <- scanSNPs(hervS2.filtered.ranges)
+
+hervS3.SNPs <- scanSNPs(hervS3.filtered.ranges)
+save(hervS3.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS3.SNP.RData'))
 
 hervS1.SNPs.present <- S1.SNPs$snps[apply(S1.SNPs$snps, 1, function(row) any(row != 0)),]
 
