@@ -14,6 +14,18 @@ split.ranges <- function (ranges, split.size) {
   return(out)
 }
 
+split.scan.combine <- function (ranges, split.size) {
+  out <- list()
+  split <- split.ranges(ranges, split.size)
+  snps <- list()
+  unique.snp.ids <- c()
+  for (i in 1:length(split)) {
+    snps[i] <- scanSNPs(split[i])
+    unique.snp.ids <- unique(c(unique.snp.ids, rownames(snps[i]$snpInfo)))
+  }
+  
+}
+
 scanSNPs <- function(ranges) {
   require(Rsamtools);
   require(data.table);
