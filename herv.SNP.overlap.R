@@ -74,6 +74,26 @@ scanSNPs <- function(ranges) {
   }
 }
 
+create.granges.from.snpinfo <- function(snpinfo) {
+  return (
+    GRanges(seqnames = snpinfo$chr,
+            ranges = IRanges(
+              names = rownames(snpinfo),
+              start = as.numeric(snpinfo$pos), 
+              width = 1
+            ), 
+            strand = c('*'),
+            orig = Rle(snpinfo$orig),
+            alt = Rle(snpinfo$alt)
+          )
+  )
+}
+
+plot.hist.overlap.snps <- function (herv.ranges, snp.ranges) {
+  overlap.hits <- findOverlaps(herv.ranges, snp.ranges, type = 'any')
+  hist(table(as.factor(queryHits(overlap.hits))), breaks = c(1:300), xlim = c(0, 30))
+}
+
 load(HERV.DATA)
 
 hervS1.filtered.ranges <- hervS1.ranges[grepl('^chr\\d+$', seqnames(hervS1.ranges))]
@@ -83,13 +103,23 @@ hervS2.filtered.ranges <- hervS2.ranges[grepl('^chr\\d+$', seqnames(hervS2.range
 hervS3.filtered.ranges <- hervS3.ranges[grepl('^chr\\d+$', seqnames(hervS3.ranges))]
 
 hervS1.SNPs <- scanSNPs(hervS1.filtered.ranges)
-hervS1.1kb.SNPs <- scanSNPs(hervS1.1kb.filtered.ranges)
+hervS1.SNPs$ranges <- create.granges.from.snpinfo(hervS1.SNPs$snpInfo)
 save(hervS1.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS1.SNP.RData'))
+plot.hist.overlap.snps(hervS1.ranges, hervS1.SNPs$ranges)
+
+hervS1.1kb.SNPs <- scanSNPs(hervS1.1kb.filtered.ranges)
+hervS1.1kb.SNPs$ranges <- create.granges.from.snpinfo(hervS1.1kb.SNPs$snpInfo)
 
 hervS2.SNPs <- scanSNPs(hervS2.filtered.ranges)
 
 hervS3.SNPs <- scanSNPs(hervS3.filtered.ranges)
+
+hervS3.SNP.ranges <- create.granges.from.snpinfo(hervS3.SNPs$snpInfo)
+
+
+
 save(hervS3.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS3.SNP.RData'))
+
 
 hervS1.SNPs.present <- S1.SNPs$snps[apply(S1.SNPs$snps, 1, function(row) any(row != 0)),]
 

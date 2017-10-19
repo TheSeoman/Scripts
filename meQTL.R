@@ -7,7 +7,13 @@ find.meQTL.overlap <- function(meth.ranges, meQTL.cosmo) {
   cpg.enriched <- cpg[cpg %in% meQTL.cosmo$cpg]  
   pairs.enriched <- meQTL.cosmo$pair[meQTL.cosmo$cpg %in% cpg.enriched]
   distinct.snps <- unique(meQTL.cosmo$snp[cosmo$cpg %in% cpg.enriched])
-  cosmo_herv <- meQTL.cosmo[meQTL.cosmo$cpg %in% cpg.enriched]
+  cosmo.herv <- meQTL.cosmo[meQTL.cosmo$cpg %in% cpg.enriched]
+  out <- list()
+  out$pairs <- pairs.enriched
+  out$cpg <- cpg.enriched
+  out$snps <- distinct.snps
+  out$cosmo <- comso.herv
+  return(out)
 }
 
 load(MEQTL.DATA)

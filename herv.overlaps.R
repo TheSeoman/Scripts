@@ -105,7 +105,7 @@ hervS1.2kb.ranges <- create.granges(hervS1.annot, 2000)
 hervS2.2kb.ranges <- create.granges(hervS2.annot, 2000)
 hervS3.2kb.ranges <- create.granges(hervS3.annot, 2000)
 
-save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = HERV.DATA))
+save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = HERV.DATA)
 
 expr.ranges <- get.expression.ranges()
 load(EXPR.DATA)
@@ -139,6 +139,10 @@ expr.S3.1kb.overlap <- calc.overlap.data(hervS3.1kb.ranges, expr.ranges, expr.da
 print.overlap.info(expr.S1.1kb.overlap)
 print.overlap.info(expr.S2.1kb.overlap)
 print.overlap.info(expr.S3.1kb.overlap)
+
+annotation[annotation$ProbeID %in% expr.S1.overlap$essay.ranges$ids,]
+annotation[annotation$ProbeID %in% expr.S1.1kb.overlap$essay.ranges$ids,]
+annotation[annotation$ProbeID %in% expr.S1.2kb.overlap$essay.ranges$ids,]
 
 pdf('/media/data/Masterarbeit/Plots/herv.expr.1kb.var.pdf', width = 8, height = 8)
 layout(matrix(c(1:4), 2, 2, byrow = F))
