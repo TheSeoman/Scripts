@@ -27,7 +27,7 @@ covariates_file_name = paste(DATA.DIR, "eQTL/covariates.tsv", sep="");
 output_file_name = paste0(DATA.DIR, "eQTL/out.tsv")
 
 # Only associations significant at this level will be saved
-pvOutputThreshold = 1e-2;
+pvOutputThreshold = 1e-7;
 
 # Error covariance matrix
 # Set to numeric() for identity.
