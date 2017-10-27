@@ -128,6 +128,7 @@ hervS3.SNPs <- scanSNPs(hervS3.filtered.ranges)
 
 hervS3.SNP.ranges <- create.granges.from.snpinfo(hervS3.SNPs$snpInfo)
 
+load(paste0(DATA.DIR, 'SNPs/hervS2.SNP.RData'))
 
 
 save(hervS3.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS3.SNP.RData'))
