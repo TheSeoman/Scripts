@@ -1,0 +1,1 @@
+awk '{print $2}' full_sorted > snp_ids        

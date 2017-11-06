@@ -6,13 +6,33 @@ EXPR.OUT = paste0(DATA.DIR, 'eQTL/expression.tsv')
 EXPR.FILT.OUT = paste0(DATA.DIR, 'eQTL/expression_S2_2kb.tsv')
 
 SAMP.SNPS = paste0(DATA.DIR, 'SNPs/individuals.txt')
-IND.SAMP.SNP.OUT = paste0(DATA.DIR, 'SNPs/snp_sample_indices.txt')
-SAMPLES.SNPS.OUT= paste0(DATA.DIR, 'SNPs/snp_samples.txt')
-IND.SNP.ID.OUT = paste0(DATA.DIR, 'SNPs/snp_indices.txt')
+IND.SAMP.SNP.OUT = paste0(DATA.DIR, 'SNPs/snp.sample.indices.txt')
+SAMPLES.SNPS.OUT= paste0(DATA.DIR, 'SNPs/snp.samples.txt')
+IND.SNP.ID.OUT = paste0(DATA.DIR, 'SNPs/snp.indices.txt')
 
 EXPR.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/expression.RData')
 S2.SNP.DATA <- paste0(DATA.DIR, 'SNPs/hervS2.SNP.RData')
 SNP.IDS <- paste0(DATA.DIR, 'SNPs/snp.ids.tsv')
+
+get.expression.positions <- function () {
+  require(illuminaHumanv3.db)
+  allLocs <- unlist(as.list(illuminaHumanv3GENOMICLOCATION))
+  start <- as.numeric(unlist(lapply(allLocs , function(x)
+    strsplit(as.character(x),":")[[1]][2])));
+  validPos <- !is.na(start);
+  start <- start[validPos];
+  
+  chrs <- unlist(lapply(allLocs, function(x)
+    strsplit(as.character(x),":")[[1]][1]))[validPos];
+  end <- as.numeric(unlist(lapply(allLocs , function(x)
+    strsplit(as.character(x),":")[[1]][3])))[validPos];
+  strand <- substr(unlist(lapply(allLocs , function(x)
+    strsplit(as.character(x),":")[[1]][4])), 1, 1)[validPos];
+  ids <- names(allLocs)[validPos];
+  table <- cbind(ids, chrs, start, end)
+  colnames(table) <- c('geneid', 'chr', 's1', 's2')
+  return(table)
+}
 
 covariates.all <- read.table(COVARIATES, sep = ";", header = TRUE)
 
