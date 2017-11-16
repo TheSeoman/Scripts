@@ -1,9 +1,10 @@
 DATA.DIR = '/media/data/Masterarbeit/data/'
 COVARIATES = paste0(DATA.DIR, 'individuals_all_covariates.csv')
 COVARIATES.OUT = paste0(DATA.DIR, 'eQTL/covariates.tsv')
-EXPR.DATA = paste0(DATA.DIR, 'F4/Expression/kora_f4_normalized.Rdata')
+EXPR.DATA = paste0(DATA.DIR, 'Expression/kora_f4_normalized.Rdata')
 EXPR.OUT = paste0(DATA.DIR, 'eQTL/expression.tsv')
 EXPR.FILT.OUT = paste0(DATA.DIR, 'eQTL/expression_S2_2kb.tsv')
+EXPR.POS.OUT = paste0(DATA.DIR, 'eQTL/expression.pos.tsv')
 
 SAMP.SNPS = paste0(DATA.DIR, 'SNPs/individuals.txt')
 IND.SAMP.SNP.OUT = paste0(DATA.DIR, 'SNPs/snp.sample.indices.txt')
@@ -33,6 +34,9 @@ get.expression.positions <- function () {
   colnames(table) <- c('geneid', 'chr', 's1', 's2')
   return(table)
 }
+
+expr.pos <- get.expression.positions();
+write.table(expr.pos, EXPR.POS.OUT, sep = '\t', quote = FALSE, row.names = FALSE)
 
 covariates.all <- read.table(COVARIATES, sep = ";", header = TRUE)
 
