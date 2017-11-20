@@ -202,7 +202,7 @@ chromHMM.range.annotation.proportions <- function (ranges, ids, dir = paste0(roa
     message(paste0('# areas: ', length(ann.split), ' #elements: ', length(unlist(ann.split))))
     for (i in c(1:length(ann.split))) {
       ann.split[[i]][1][[1]][2] = start(ranges[i])
-      ann.split[[i]][length(ann.split[[1]])][[1]][3] = end(ranges[i])
+      ann.split[[i]][length(ann.split[[i]])][[1]][3] = end(ranges[i])
     }
   
   

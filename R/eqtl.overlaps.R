@@ -3,14 +3,14 @@ DATA.DIR = '/media/data/Masterarbeit/data/'
 F.CIS.EQTL = paste0(DATA.DIR, 'eQTL/journal.pone.0093844.s005.XLS')
 F.TRANS.EQTL = paste0(DATA.DIR, 'eQTL/journal.pone.0093844.s004.XLS')
 
-S2.SNP.DATA <- paste0(DATA.DIR, 'SNPs/hervS2.SNP.RData')
+S2.SNP.INFO.DATA <- paste0(DATA.DIR, 'SNPs/hervS2.snp.info.RData')
 EXPR.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/expression.RData')
 
 HERV.SMALL.ME <- paste0(DATA.DIR, 'eQTL/old_snps/me.RData')
 HERV.MAF001.ME <- paste0(DATA.DIR, 'eQTL/me.RData')
 
 load(EXPR.OVERLAP.DATA)
-load(S2.SNP.DATA)
+load(S2.SNP.INFO.DATA)
 
 find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
   out <- list()
@@ -66,7 +66,7 @@ colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
 trans.eqtl <- read.xls(F.TRANS.EQTL, sheet = 1, header = TRUE)
 trans.eqtl <- trans.eqtl[,c(2,4, 5)]
 colnames(trans.eqtl) <- c('snpid', 'probeid', 'gene')
-S2 <- find.herv.eqtl(cis.eqtl, NULL, hervS2.SNPs$snpInfo, expr.S2.overlap$essay.data)
+S2 <- find.herv.eqtl(cis.eqtl, NULL, hervS2.snp.info, expr.S2.overlap$essay.data)
 export.genes(S2, 'eQTL/S2.schramm.')
 
 
@@ -80,20 +80,15 @@ colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
 # MAFOO1 snps set eqtl
 require(illuminaHumanv3.db)
 load(HERV.MAF001.ME)
+all.genes <- unlist(as.list(illuminaHumanv3SYMBOL))
 cis.genes <- unlist(as.list(illuminaHumanv3SYMBOL[as.character(me$cis$eqtls$gene)]))
 cis.eqtl <- as.data.frame(cbind(as.character(me$cis$eqtls$snps), as.character(me$cis$eqtls$gene), cis.genes))
 colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
 trans.genes <- unlist(as.list(illuminaHumanv3SYMBOL[as.character(me$trans$eqtls$gene)]))
 trans.eqtl <- as.data.frame(cbind(as.character(me$trans$eqtls$snps), as.character(me$trans$eqtls$gene), trans.genes))
 colnames(trans.eqtl) <- c('snpid', 'probeid', 'gene')
-S2 <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS2.SNPs$snpInfo, expr.S2.overlap$essay.data)
+S2 <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS2.snp.info, expr.S2.overlap$essay.data)
 export.genes(S2, 'eQTL/S2.MAF001.')
 
-
-
-
-
-
-
-
-
+library(topGO)
+GOdata <- new("topGOdata", ontology = "BP", allGenes <- as.factor(all.genes[!is.na(all.genes)]), geneSel = as.factor(S2$snp.trans.eqtl$gene), nodeSize = 10, annot = annFUN.GO2genes)
