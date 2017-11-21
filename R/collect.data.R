@@ -1,32 +1,4 @@
-# input paths not yet extracted
-
-#' set some needed directories KORA data directory
-KORA.DIR <- "/storage/groups/groups_epigenereg/analyses/PV_K14115g_Heinig/"
-F.METH <- paste0(KORA.DIR, "data/20160204/KORAF4_illuminamethylation450k_qn_bmiq_n1727/KF4_beta_qn_bmiq.RData");
-F.EXPR <- paste0(KORA.DIR, "data/20160204/Expression/kora_f4_normalized.Rdata");
-F.COVA <- paste0(KORA.DIR, "data/20160204/Expression/technical_covariables_kora_f4.Rdata");
-F.IDMAP <- paste0(KORA.DIR, "data/20160204/individuals_covariates.csv")
-
-# path to indexed genotype file (tabix)
-F.SNPS <- paste0(KORA.DIR, "results/20160204/genoF4/dosage_combined/MAF001/full_sorted.bgz")
-
-#' set some needed directories KORA data directory
-KORA.DIR <- "/media/data/Masterarbeit/data/F4/"
-F.METH <- paste0(KORA.DIR, "KORAF4_illuminamethylation450k_qn_bmiq_n1727/KF4_beta_qn_bmiq.RData");
-F.EXPR <- paste0(KORA.DIR, "Expression/kora_f4_normalized.Rdata");
-F.COVA <- paste0(KORA.DIR, "Expression/technical_covariables_kora_f4.Rdata");
-F.IDMAP <- paste0(KORA.DIR, "individuals_covariates.csv")
-
-# path to indexed genotype file (tabix)
-F.SNPS <- paste0(KORA.DIR, "results/20160204/genoF4/dosage_combined/MAF001/full_sorted.bgz")
-
-
-# sanity check when sourcing the script
-if(!dir.exists(KORA.DIR)){
-  message("Directory ", KORA.DIR, " does not exist. Be careful using the methods!");
-} else {
-  message("Using ", KORA.DIR, " as data directory.");
-}
+source('Scripts/R/paths.R')
 
 
 #'
@@ -57,7 +29,7 @@ collect.data <- function(snp.ranges=NULL, meth.probes=NULL, expr.probes=NULL,
 	cat("Loading KORA data.\n")
 
 	# load id mapping to intersect expr/meth/geno data
-	ID.MAP <- read.table(F.IDMAP, 
+	ID.MAP <- read.table(PATHS$F.IDMAP, 
 					header=T, sep=";", stringsAsFactors = F)
 	# convert ids to character (instead of int) for easier subsetting of data matrices
 	ID.MAP$axio_s4f4 <- as.character(ID.MAP$axio_s4f4)
@@ -72,7 +44,7 @@ collect.data <- function(snp.ranges=NULL, meth.probes=NULL, expr.probes=NULL,
 	if(!exists("f4.norm") | !exists("beta")) {
 	 cat("Preparing raw data.\n");
 	 # defined in sourced kora common script
-	 load(F.EXPR); load(F.METH);
+	 load(PATHS$EXPR.DATA); load(PATHS$METH.DATA);
 	 
 	 if(cache.global){
 	   assign("f4.norm", f4.norm, .GlobalEnv)
@@ -118,21 +90,20 @@ collect.data <- function(snp.ranges=NULL, meth.probes=NULL, expr.probes=NULL,
 	 geno <- geno[ID.MAP$axio_s4f4,,drop=F]
 	}
 	# get the methylation PCA results
-	load(paste0(DATA.DIR, "/kora/methylation/control_probe_pcs_n1727.RData"))
+	load(PATHS$F.CONTROL.PROBES)
 	pcs <- pcs[ID.MAP$meth_f4,]
 	colnames(pcs) <- paste(colnames(pcs), "cp", sep="_")
 	meth.pcs <- pcs
 	rm(pcs);
 
 	# load technical covariates for expression data
-	load(paste0(DATA.DIR, "/kora/expression/technical_covariables_kora_f4.Rdata"));
+	load(PATHS$F.COVA);
 	rownames(covars.f4) <- covars.f4[,1];
 	covars.f4 <- covars.f4[ID.MAP$expr_s4f4ogtt,c(2:6)];
 	covars.f4$sex <- as.factor(covars.f4$sex);
 
 	# load houseman blood count data for methylation
-	houseman <- read.table(paste0(DATA.DIR, 
-						"/kora/methylation/Houseman/KF4_QN_BMIQ_estimated_cell_distribution_meanimpute473_lessThanOneFALSE.csv"), 
+	houseman <- read.table(PATHS$F.HOUSEMAN, 
 					  sep=";", header=T,row.names=1);
 	houseman <- houseman[ID.MAP$meth_f4,];
 
@@ -174,7 +145,7 @@ scanSNPs <- function(ranges) {
 	require(data.table);
 
 	# rather naive implementation for now	
-	snpTabix <- TabixFile(file=F.SNPS);
+	snpTabix <- TabixFile(file=PATHS$F.SNP);
 	result <- scanTabix(snpTabix, param=ranges);
 	counts <- countTabix(snpTabix, param=ranges);
 	result <- result[names(counts[counts>0])];
@@ -214,7 +185,7 @@ scanSNPs <- function(ranges) {
 		}
 
 		#create colnames using individual codes
-		ids <- read.table(paste0(KORA.DIR,"/results/current/genoF4/individuals.txt"), stringsAsFactors=F, colClasses="character");
+		ids <- read.table(PATHS$F.SAMPLES, stringsAsFactors=F, colClasses="character");
 		colnames(data)<- c("chr", "name", "pos", "orig", "alt", ids[,1])
 		rownames(data) <- data$name;
 
