@@ -1,3 +1,5 @@
+# input paths not yet extracted
+
 #' set some needed directories KORA data directory
 KORA.DIR <- "/storage/groups/groups_epigenereg/analyses/PV_K14115g_Heinig/"
 F.METH <- paste0(KORA.DIR, "data/20160204/KORAF4_illuminamethylation450k_qn_bmiq_n1727/KF4_beta_qn_bmiq.RData");
@@ -21,9 +23,9 @@ F.SNPS <- paste0(KORA.DIR, "results/20160204/genoF4/dosage_combined/MAF001/full_
 
 # sanity check when sourcing the script
 if(!dir.exists(KORA.DIR)){
-    message("Directory ", KORA.DIR, " does not exist. Be careful using the methods!");
+  message("Directory ", KORA.DIR, " does not exist. Be careful using the methods!");
 } else {
-    message("Using ", KORA.DIR, " as data directory.");
+  message("Using ", KORA.DIR, " as data directory.");
 }
 
 
@@ -47,9 +49,9 @@ if(!dir.exists(KORA.DIR)){
 #' 
 collect.data <- function(snp.ranges=NULL, meth.probes=NULL, expr.probes=NULL, 
                          cache.global=F) {
-
-	if(is.null(snp.ranges)){
-	 stop("SNP ranges need to be supplied when loading KORA data.")
+  
+  if(is.null(snp.ranges)){
+    stop("SNP ranges need to be supplied when loading KORA data.")
 	}
 	
 	cat("Loading KORA data.\n")

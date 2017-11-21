@@ -1,3 +1,5 @@
+# file paths not yet extracted
+
 DATA.DIR = '~/data/'
 KORA.DIR = '/storage/groups/groups_epigenereg/analyses/PV_K14115g_Heinig/'
 

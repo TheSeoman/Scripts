@@ -1,15 +1,4 @@
-DATA.DIR = '/media/data/Masterarbeit/data/'
-HERVS1.ANNOT = paste0(DATA.DIR, 'herv/hervS1.bed')
-HERVS2.ANNOT = paste0(DATA.DIR, 'herv/hervS2.bed')
-HERVS3.ANNOT = paste0(DATA.DIR, 'herv/hervS3.bed')
-EXPR.DATA = paste0(DATA.DIR, 'F4/Expression/kora_f4_normalized.Rdata')
-METH.DATA = paste0(DATA.DIR, '/F4/KORAF4_illuminamethylation450k_qn_bmiq_n1727/KF4_beta_qn_bmiq.RData')
-
-HERV.DATA <- paste0(DATA.DIR, 'herv/ranges.RData')
-
-EXPR.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/expression.RData')
-METH.OVERLAP.DATA <- paste0(DATA.DIR, 'overlaps/methylation.RData')
-
+source('Scripts/R/paths.R')
 
 require(GenomicRanges)
 require(illuminaHumanv3.db)
@@ -105,16 +94,16 @@ hervS1.2kb.ranges <- create.granges(hervS1.annot, 2000)
 hervS2.2kb.ranges <- create.granges(hervS2.annot, 2000)
 hervS3.2kb.ranges <- create.granges(hervS3.annot, 2000)
 
-save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = HERV.DATA)
+save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = PATHS$HERV.DATA)
 
 expr.ranges <- get.expression.ranges()
-load(EXPR.DATA)
+load(PATHS$EXPR.DATA)
 expr.data <- f4.norm
 
 #meth.ranges <- features(FDb.InfiniumMethylation.hg19)
 meth.ranges <- getPlatform(platform='HM450', genome='hg19')
 meth.ranges <- meth.ranges[grep('cg|ch', meth.ranges$probeType)]
-load(METH.DATA)
+load(PATHS$METH.DATA)
 meth.data <- data.frame(transform(beta))
 rm(beta)
 
@@ -158,7 +147,7 @@ print.overlap.info(expr.S1.2kb.overlap)
 print.overlap.info(expr.S2.2kb.overlap)
 print.overlap.info(expr.S3.2kb.overlap)
 
-save(expr.S1.overlap, expr.S2.overlap, expr.S3.overlap, expr.S1.1kb.overlap, expr.S2.1kb.overlap, expr.S3.1kb.overlap, expr.S1.2kb.overlap, expr.S2.2kb.overlap, expr.S3.2kb.overlap, file = paste0(DATA.DIR, 'overlaps/expression.RData'))
+save(expr.S1.overlap, expr.S2.overlap, expr.S3.overlap, expr.S1.1kb.overlap, expr.S2.1kb.overlap, expr.S3.1kb.overlap, expr.S1.2kb.overlap, expr.S2.2kb.overlap, expr.S3.2kb.overlap, file = PATHS$EXPR.OVERLAP.DATA))
 
 
 meth.S1.overlap <- calc.overlap.data(hervS1.ranges, meth.ranges, meth.data)
@@ -191,8 +180,7 @@ print.overlap.info(meth.S1.2kb.overlap)
 print.overlap.info(meth.S2.2kb.overlap)
 print.overlap.info(meth.S3.2kb.overlap)
 
-save(meth.S1.overlap, meth.S2.overlap, meth.S3.overlap, meth.S1.1kb.overlap, meth.S2.1kb.overlap, meth.S3.1kb.overlap, meth.S1.2kb.overlap, meth.S2.2kb.overlap, meth.S3.2kb.overlap, file = METH.OVERLAP.DATA)
-save(meth.S1.overlap, file = paste0(DATA.DIR, 'overlaps/meth.S1.overlap.RData'))
+save(meth.S1.overlap, meth.S2.overlap, meth.S3.overlap, meth.S1.1kb.overlap, meth.S2.1kb.overlap, meth.S3.1kb.overlap, meth.S1.2kb.overlap, meth.S2.2kb.overlap, meth.S3.2kb.overlap, file = PATHS$METH.OVERLAP.DATA)
 
 both.S1.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.overlap, meth.S1.overlap)
 both.S2.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.overlap, meth.S2.overlap)

@@ -1,10 +1,4 @@
-DATA.DIR = '/media/data/Masterarbeit/data/'
-
-F.SNPS = paste0(DATA.DIR, 'SNPs/Old snps/full_sorted.bgz')
-F.SAMPLES = paste0(DATA.DIR,"F4/individuals.txt")
-
-HERV.DATA <- paste0(DATA.DIR, 'herv/ranges.RData')
-
+source('Scripts/R/paths.R')
 
 split.ranges <- function (ranges, split.size) {
   out <- list()
@@ -43,7 +37,7 @@ scan.snps <- function(ranges) {
   # create system command using tabix...
   ranges.str <- paste(ranges, collapse=" ")
   
-  cmd <- paste0("tabix ", F.SNPS, " ", ranges.str)
+  cmd <- paste0("tabix ", F.SNP, " ", ranges.str)
   data <- try(fread(cmd, sep="\t", data.table=F), silent=T)
   if(inherits(data, "try-error")){
     cat("No SNPs found in specified regions.\n")
@@ -86,7 +80,7 @@ plot.hist.overlap.snps <- function (herv.ranges, snp.ranges) {
   hist(table(as.factor(queryHits(overlap.hits))), breaks = c(1:300), xlim = c(0, 30))
 }
 
-load(HERV.DATA)
+load(PATHS$HERV.DATA)
 
 hervS1.filtered.ranges <- hervS1.ranges[grepl('^chr\\d+$', seqnames(hervS1.ranges))]
 hervS1.1kb.filtered.ranges <- hervS1.1kb.ranges[grepl('^chr\\d+$', seqnames(hervS1.1kb.ranges))]
@@ -96,7 +90,7 @@ hervS3.filtered.ranges <- hervS3.ranges[grepl('^chr\\d+$', seqnames(hervS3.range
 
 hervS1.SNPs <- scanSNPs(hervS1.filtered.ranges)
 hervS1.SNPs$ranges <- create.granges.from.snpinfo(hervS1.SNPs$snpInfo)
-save(hervS1.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS1.SNP.RData'))
+save(hervS1.SNPs, file = PATHS$HERVS1.SNP.DATA)
 plot.hist.overlap.snps(hervS1.ranges, hervS1.SNPs$ranges)
 
 hervS1.1kb.SNPs <- scanSNPs(hervS1.1kb.filtered.ranges)
@@ -108,10 +102,7 @@ hervS3.SNPs <- scan.snps(hervS3.filtered.ranges)
 
 hervS3.SNP.ranges <- create.granges.from.snpinfo(hervS3.SNPs$snpInfo)
 
-load(paste0(DATA.DIR, 'SNPs/hervS2.SNP.RData'))
-
-
-save(hervS3.SNPs, file = paste0(DATA.DIR, 'SNPs/hervS3.SNP.RData'))
+save(hervS3.SNPs, file = PATHS$HERVS3.SNP.DATA)
 
 
 hervS1.SNPs.present <- S1.SNPs$snps[apply(S1.SNPs$snps, 1, function(row) any(row != 0)),]
