@@ -8,6 +8,7 @@ scan.snps <- function(ranges) {
   ranges.str <- paste(ranges, collapse=" ")
   
   cmd <- paste0("tabix ", PATHS$F.SNP, " ", ranges.str)
+  message(paste0("Running: ", cmd))
   data <- try(fread(cmd, sep="\t", data.table=F), silent=T)
   if(inherits(data, "try-error")){
     cat("No SNPs found in specified regions.\n")
@@ -29,6 +30,8 @@ scan.snps <- function(ranges) {
     return(list(snpInfo=data[,c(1,3,4,5)], snps=data[,6:ncol(data)]))
   }
 }
+
+load(PATHS$HERV.S2.2KB.DATA)
 
 args <- commandArgs(TRUE)
 batch.number <- as.integer(args[1])
