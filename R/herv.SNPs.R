@@ -1,15 +1,4 @@
-# file paths not yet extracted
-
-DATA.DIR = '~/data/'
-KORA.DIR = '/storage/groups/groups_epigenereg/analyses/PV_K14115g_Heinig/'
-
-F.SNPS = paste0(KORA.DIR, 'results/20160204/genoF4/dosage_combined/MAF001/full_sorted.bgz')
-F.SAMPLES = paste0(KORA.DIR, 'results/20160204/genoF4/individuals.txt')
-
-HERV.DATA <- paste0(DATA.DIR, 'herv/ranges.RData')
-
-F.S3.SNPs <- paste0(DATA.DIR, 'SNPs/hervS3.SNP.RData')
-F.S3.2kb.SNPs <- paste0(DATA.DIR, 'SNPs/hervS3.1kb.SNP.RData')
+source('Scripts/R/paths.R')
 
 require(GenomicRanges)
 
@@ -18,11 +7,11 @@ scanSNPs <- function(ranges) {
   require(data.table);
   
   # rather naive implementation for now	
-  snpTabix <- TabixFile(file=F.SNPS);
+  snpTabix <- TabixFile(file=PATHS$F.SNP);
   result <- scanTabix(snpTabix, param=ranges);
-  message(paste0("scanTabix on ", F.SNPS, " for ", length(ranges), " ranges."))
+  message(paste0("scanTabix on ", PATHS$F.SNP, " for ", length(ranges), " ranges."))
   counts <- countTabix(snpTabix, param=ranges);
-  message(paste0("countTabix on ", F.SNPS, " for ", length(ranges), " ranges."))
+  message(paste0("countTabix on ", PATHS$F.SNP, " for ", length(ranges), " ranges."))
   result <- result[names(counts[counts>0])];
   result <- unlist(result);
   
@@ -61,7 +50,7 @@ scanSNPs <- function(ranges) {
     message("Rounded genotype information.")
     
     #create colnames using individual codes
-    ids <- read.table(F.SAMPLES, stringsAsFactors=F, colClasses="character");
+    ids <- read.table(PATHS$F.SAMPLES, stringsAsFactors=F, colClasses="character");
     colnames(data)<- c("chr", "name", "pos", "orig", "alt", ids[,1])
     rownames(data) <- data$name;
     message("Created colnames.")
@@ -73,15 +62,15 @@ scanSNPs <- function(ranges) {
   }
 }
 
-load(HERV.DATA)
+load(PATHS$HERV.DATA)
 print('Filtering ranges.')
 hervS3.filtered.ranges <- hervS3.ranges[grepl('^chr\\d+$', seqnames(hervS3.ranges))]
 hervS3.2kb.filtered.ranges <- hervS3.2kb.ranges[grepl('^chr\\d+$', seqnames(hervS3.2kb.ranges))]
 
 print('Start scanning for SNPs in hervS3.filtered.ranges')
 hervS3.SNPs <- scanSNPs(hervS3.filtered.ranges)
-message(paste0('Saving hervS3.SNPs to ', F.S3.SNPs))
-save(hervS3.SNPs, file = F.S3.SNPs)
+message(paste0('Saving hervS3.SNPs to ', PATHS$HERVS3.SNP.DATA))
+save(hervS3.SNPs, file = PATHS$HERVS3.SNP.DATA)
 
 #print('Start scanning for SNPs in hervS3.2kb.filtered.ranges')
 #hervS3.2kb.SNPs <- scanSNPs(hervS3.filtered.ranges)
