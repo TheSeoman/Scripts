@@ -37,12 +37,17 @@ get.residuals <- function(data, data.type, col.names=NULL) {
       return(lm(fm, data=data));
     });
   } else if(data.type == "expr") {
+    i <- 0;
     if(is.null(cols)){
       cols <- colnames(data)[grepl("^ILMN_", colnames(data))];
     }
     res <- lapply(cols, function(n) {      
+      i <- i+1;
+      if (i %% floor(length(cols) / 1000) == 0) {
+        message(paste0(i/length(cols)*100, '% finished'))
+      }
       fm <- as.formula(paste0(n, "~",
-                         "1+age+sex+RIN+batch1+batch2"))     
+                         "1+age+sex+RIN+plate+storage.time"))     
       return(lm(fm,data=data))
     });
   } else {
