@@ -43,11 +43,12 @@ batch.number <- as.integer(args[1])
 batch.count <- as.integer(args[2])
 batch.size <- ceiling(length(hervS2.2kb.ranges) / batch.count)
 
-ranges <- hervS2.2kb.ranges[((batch.number-1)*batch.size+1):(batch.number*batch.size)]
+ranges <- hervS2.2kb.ranges[((batch.number-1)*batch.size+1):(min(batch.number*batch.size, length(hervS2.2kb.ranges)))]
 
-batch.name = paste0('batch', batch.number)
-assign(batch.name, scan.snps(ranges))
+snps <- scan.snps(ranges)
 
-
+if(length(snps) > 0) {
+  saveRDS(snps, file = paste0(PATHS$DATA.DIR, 'SNPs/S2.2kb/batch', batch.number, '.rds'))
+}
 
 
