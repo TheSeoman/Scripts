@@ -1,15 +1,20 @@
 source('Scripts/R/paths.R')
 
 library(data.table)
+require(Rsamtools)
 
 scan.snps <- function(ranges) {
 
   # create system command using tabix...
-  ranges.str <- paste(ranges, collapse=" ")
+  ranges.str <- paste(sapply(ranges, function(range) {
+    irange = ranges(range)
+    element = paste0(seqnames(range), ':', start(irange), '-', end(irange))
+    return(element)
+  }), collapse=" ")
   
   cmd <- paste0("tabix ", PATHS$F.SNP, " ", ranges.str)
   message(paste0("Running: ", cmd))
-  data <- try(fread(cmd, sep="\t", data.table=F), silent=T)
+  data <- try(fread(cmd, sep="\t", data.table=F), silent=F)
   if(inherits(data, "try-error")){
     cat("No SNPs found in specified regions.\n")
     return(list())
