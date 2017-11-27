@@ -1,7 +1,6 @@
 source('Scripts/R/paths.R')
 
 library(data.table)
-require(Rsamtools)
 
 scan.snps <- function(ranges) {
 
@@ -13,7 +12,6 @@ scan.snps <- function(ranges) {
   }), collapse=" ")
   
   cmd <- paste0("tabix ", PATHS$F.SNP, " ", ranges.str)
-  message(paste0("Running: ", cmd))
   data <- try(fread(cmd, sep="\t", data.table=F), silent=F)
   if(inherits(data, "try-error")){
     cat("No SNPs found in specified regions.\n")
