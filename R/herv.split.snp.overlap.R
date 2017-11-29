@@ -1,6 +1,7 @@
 source('Scripts/R/paths.R')
 
 library(data.table)
+library(GenomicRanges)
 
 scan.snps <- function(ranges) {
 
@@ -37,16 +38,18 @@ scan.snps <- function(ranges) {
 load(PATHS$HERV.S2.2KB.DATA)
 
 args <- commandArgs(TRUE)
-batch.number <- as.integer(args[1])
-batch.count <- as.integer(args[2])
-batch.size <- ceiling(length(hervS2.2kb.ranges) / batch.count)
+batch.start <- as.integer(args[1])
+batch.end <- as.integer(args[2])
+batch.size <- 1000
 
-ranges <- hervS2.2kb.ranges[((batch.number-1)*batch.size+1):(min(batch.number*batch.size, length(hervS2.2kb.ranges)))]
 
-snps <- scan.snps(ranges)
-
-if(length(snps) > 0) {
-  saveRDS(snps, file = paste0(PATHS$DATA.DIR, 'SNPs/S2.2kb/batch', batch.number, '.rds'))
+for( batch.number in c(batch.start:batch.end)) {
+  message(paste('Processing batch:', batch.number, sep = ' '))
+  ranges <- hervS2.2kb.ranges[((batch.number-1)*batch.size+1):(min(batch.number*batch.size, length(hervS2.2kb.ranges)))]
+  snps <- scan.snps(ranges)
+  if(length(snps) > 0) {
+    saveRDS(snps, file = paste0(PATHS$DATA.DIR, 'SNPs/S2.2kb/batch', batch.number, '.rds'))
+  }
 }
 
 
