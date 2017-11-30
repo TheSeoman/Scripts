@@ -28,22 +28,22 @@ find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
 
 export.genes <- function(herv.eqtl.list, prefix) {
   if (dim(herv.eqtl.list$snp.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$snp.cis.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'snp.cis.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$snp.cis.eqtl$gene[!is.na(herv.eqtl.list$snp.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'snp.cis.genes.txt'))
   }
   if (dim(herv.eqtl.list$snp.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$snp.trans.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'snp.trans.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$snp.trans.eqtl$gene[!is.na(herv.eqtl.list$snp.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'snp.trans.genes.txt'))
   }
   if (dim(herv.eqtl.list$expr.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$expr.cis.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'expr.cis.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$expr.cis.eqtl$gene[!is.na(herv.eqtl.list$expr.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'expr.cis.genes.txt'))
   }
   if (dim(herv.eqtl.list$expr.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$expr.trans.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'expr.trans.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$expr.trans.eqtl$gene[!is.na(herv.eqtl.list$expr.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'expr.trans.genes.txt'))
   }
   if (dim(herv.eqtl.list$both.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$both.cis.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'both.cis.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$both.cis.eqtl$gene[!is.na(herv.eqtl.list$both.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.cis.genes.txt'))
   }
   if (dim(herv.eqtl.list$both.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$both.trans.eqtl$gene)), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
+    write(as.character(unique(herv.eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
   }
 }
 

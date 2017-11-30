@@ -2,28 +2,63 @@ source('Scripts/R/paths.R')
 
 require(GenomicRanges)
 
+## annotate with the roadmap chromHMM states
+roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
+                           sep="\t",
+                           stringsAsFactors=F)
+
+mnemonics =
+  read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
+           sep="\t")
+levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
+labels = mnemonics[,"DESCRIPTION"]
+
+use = roadmap.samples$ANATOMY == "BLOOD"
+ids = roadmap.samples[use,"Epigenome.ID..EID."]
+cells = roadmap.samples[use,"Standardized.Epigenome.name"]
+
+## match this to the houseman cell types
+type = rep("other", sum(use))
+type[grep("CD4", roadmap.samples[use,5])] = "CD4T"
+type[grep("CD8", roadmap.samples[use,5])] = "CD8T"
+type[grep("CD15", roadmap.samples[use,5])] = "Gran"
+type[grep("CD56", roadmap.samples[use,5])] = "NK"
+type[grep("CD19", roadmap.samples[use,5])] = "Bcell"
+type[grep("CD14", roadmap.samples[use,5])] = "Mono"
+
+
+#call for each sample
 sum.up.chromHMM.states = function (ann.list, ranges) {
   
-  message(paste0('# areas: ', length(ann.list), ' #elements: ', length(unlist(ann.list))))
-  for (element in c(1:length(ann.list))) {
-    element.name = ls(ann.list[i])
+  res = lapply(ann.list, function(sample) {
+  message(paste0('# areas: ', length(sample), ' #elements: ', length(unlist(sample))))
+  for (i in c(1:length(sample))) {
+    element.name = ls(sample[i])
     element.split = strsplit(element.name, split = '[:-]')
-    ann.list[[i]][[1]][2] = element.split[[1]][2]
-    ann.list[[i]][[length(ann.list[[i]])]][3] = element.split[[1]][3]
+    sample[[i]][[1]][2] = element.split[[1]][2]
+    sample[[i]][[length(sample[[i]])]][3] = element.split[[1]][3]
   }
   
+  temp <- unlist(sample)
   
-  ann.table = data.frame(matrix(unlist(ann.list), ncol=4, byrow=TRUE),stringsAsFactors=FALSE) 
+  ann.table = data.frame(matrix(temp[!is.na(temp)], ncol=4, byrow=TRUE), stringsAsFactors=FALSE) 
   colnames(ann.table) = c("chr", "start", "end", "state")
   ann.table$length = as.numeric(ann.table$end) - as.numeric(ann.table$start)
   
-  ann.summed = data.frame(matrix(ncol = 15, nrow = 0))
+  ann.summed = data.frame(matrix(ncol = length(levels), nrow = 0))
   colnames(ann.summed) = levels
   for(level in levels) {
     ann.summed[1, level] <- sum(ann.table$length[ann.table$state == level]) 
   }
   
   return (ann.summed)
+  })
+  
+  annotation <- data.frame(matrix(unlist(res), ncol = 15, byrow = TRUE))
+  colnames(annotation) <- levels
+  rownames(annotation) <- ids
+  
+  return(annotation)
 }
 
 load(PATHS$HERVS2.CHROMMHMM.DATA)
@@ -52,9 +87,22 @@ hervS3.annotation <- lapply(hervS2.annotation, function (sample.states) {
 })
 save(hervS3.annotation, file = PATHS$HERVS3.CHROMMHMM.DATA)
 
+hervS3.summed.annotation = sum.up.chromHMM.states(hervS3.annotation)
 
-hervS3.summed.annotation = sum.up.chromHMM.states(hervS3.annotation, hervS3.ranges)
+#plots etc
+library(ggplot2)
+library(reshape2)
 
-hervS3.ranges.withann = hervS3.ranges[hervS3.elements %in% ls(hervS3.annotation[[1]])]
-sp <- strsplit(ls(hervS3.annotation[[1]]), split = '[-:]')
+plot.summed.annotation <- function (annotation) {
+annotation.prop <- annotation/rowSums(annotation)
+plot.data = melt(annotation.prop)
+colnames(plot.data) = c("State", "Proportion")
+plot.data = cbind(plot.data, Cell=ids)
+plot.data = plot.data[order(plot.data$State), ]
+plot.data = cbind(plot.data, Type=type)
+
+print(qplot(State, Cell, fill=Proportion, geom="tile", data=plot.data)
+      +  theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5))
+      + facet_grid(Type ~ ., scale="free_y", space="free_y"))
+}
 
