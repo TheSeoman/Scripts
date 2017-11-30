@@ -21,6 +21,7 @@ snp.chromHMM.annotation <- function(snp.ranges,
   library(Rsamtools)
   
   annotation = sapply(ids, function(id) {
+    message(paste('Getting states in' , id, 'for', length(snp.ranges), 'SNPs', sep = ' '))
     file = paste0(dir, id, suffix)
     avail = as.logical(seqnames(snp.ranges) %in% seqnamesTabix(file))
     avail.ann = scanTabix(file, param=snp.ranges[avail])
