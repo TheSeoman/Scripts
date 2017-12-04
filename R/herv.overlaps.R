@@ -78,9 +78,9 @@ plot.coefficient.of.variance <- function(data, data.type, main, file) {
   plot(mean, cvar, xlab = paste0('mean ', data.type), ylab = 'coefficent of variance', pch = 3) 
 }
 
-hervS1.annot <- read.table(HERVS1.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
-hervS2.annot <- read.table(HERVS2.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
-hervS3.annot <- read.table(HERVS3.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
+hervS1.annot <- read.table(PATHS$HERVS1.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
+hervS2.annot <- read.table(PATHS$HERVS2.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
+hervS3.annot <- read.table(PATHS$HERVS3.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
 
 hervS1.ranges <- create.granges(hervS1.annot)
 hervS2.ranges <- create.granges(hervS2.annot)

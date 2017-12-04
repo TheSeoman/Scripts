@@ -21,7 +21,6 @@ snp.chromHMM.annotation <- function(snp.ranges,
   library(Rsamtools)
   
   annotation = sapply(ids, function(id) {
-    message(paste('Getting states in' , id, 'for', length(snp.ranges), 'SNPs', sep = ' '))
     file = paste0(dir, id, suffix)
     avail = as.logical(seqnames(snp.ranges) %in% seqnamesTabix(file))
     avail.ann = scanTabix(file, param=snp.ranges[avail])
@@ -37,8 +36,8 @@ snp.chromHMM.annotation <- function(snp.ranges,
 }
 
 load(PATHS$HERV.SNP.RANGES.DATA)
-hervS1.snp.annotation = snp.chromHMM.annotation(hervS1.snp.ranges, ids)
+#hervS1.snp.annotation = snp.chromHMM.annotation(hervS1.snp.ranges, ids)
+#save(hervS1.snp.annotation, file = PATHS$HERVS1.SNP.CHROMHMM.DATA)
 
-save(hervS1.snp.annotation, file = PATHS$HERVS1.SNP.CHROMHMM.DATA)
-
-
+hervS2.2kb.snp.annotation = snp.chromHMM.annotation(hervS1.snp.ranges, ids)
+save(hervS2.2kb.snp.annotation, file = PATHS$HERVS1.SNP.CHROMHMM.DATA)

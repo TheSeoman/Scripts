@@ -2,6 +2,7 @@ source("Scripts/R/paths.R")
 
 load(PATHS$EXPR.OVERLAP.DATA)
 load(PATHS$S2.SNP.INFO.DATA)
+load(PATHS$HERV.SNP.INFO.DATA)
 
 find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
   out <- list()
@@ -14,6 +15,9 @@ find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
   both.cis.eqtl <- cis.eqtl[cis.eqtl$snpid %in% rownames(snp) & cis.eqtl$probeid %in% rownames(expr),]
   both.trans.eqtl <- trans.eqtl[trans.eqtl$snpid %in% rownames(snp) & trans.eqtl$probeid %in% rownames(expr),]
   
+  either.cis.eqtl <- cis.eqtl[cis.eqtl$snpid %in% rownames(snp) | cis.eqtl$probeid %in% rownames(expr),]
+  either.trans.eqtl <- trans.eqtl[trans.eqtl$snpid %in% rownames(snp) | trans.eqtl$probeid %in% rownames(expr),]
+  
   out$snp.cis.eqtl <- snp.cis.eqtl
   out$snp.trans.eqtl <- snp.trans.eqtl
   
@@ -22,6 +26,9 @@ find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
   
   out$both.cis.eqtl <- both.cis.eqtl
   out$both.trans.eqtl <- both.trans.eqtl
+  
+  out$either.cis.eqtl <- either.cis.eqtl
+  out$either.trans.eqtl <- either.trans.eqtl
   
   return(out)
 }
@@ -78,8 +85,11 @@ colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
 trans.genes <- unlist(as.list(illuminaHumanv3SYMBOL[as.character(me$trans$eqtls$gene)]))
 trans.eqtl <- as.data.frame(cbind(as.character(me$trans$eqtls$snps), as.character(me$trans$eqtls$gene), trans.genes))
 colnames(trans.eqtl) <- c('snpid', 'probeid', 'gene')
+hervS1.eqtl <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS1.snp.info, expr.S1.overlap$essay.data)
 S2 <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS2.snp.info, expr.S2.overlap$essay.data)
 export.genes(S2, 'eQTL/S2.MAF001.')
 
 library(topGO)
+library(ALL)
+data(ALL)
 GOdata <- new("topGOdata", ontology = "BP", allGenes <- as.factor(all.genes[!is.na(all.genes)]), geneSel = as.factor(S2$snp.trans.eqtl$gene), nodeSize = 10, annot = annFUN.GO2genes)
