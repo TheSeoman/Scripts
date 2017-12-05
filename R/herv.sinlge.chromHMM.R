@@ -35,18 +35,12 @@ chromHMM.range.annotation <- function (ranges, id, dir = paste0(PATHS$ROADMAP.DI
   return (ann.split)
 }
 
-load(HERV.S2.DATA)
-# message('Calculate chromHMM states for hervS1')
-# hervS1.annotation <- chromHMM.range.annotation(hervS1.ranges, ids)
+load(PATHS$HERVS2.2KB.RANGES.DATA)
 args <- commandArgs(TRUE)
 id <- ids[as.integer(args[1])]
-message(paste0('Calculate chromHMM states for hervS2 in ', id))
-annotation.name = paste('hervS2', id, 'chromHMM', sep = '.') 
-assign(annotation.name, chromHMM.range.annotation(hervS2.ranges, id))
-# message('Calculate chromHMM states for hervS3')
-# hervS3.annotation <- chromHMM.range.annotation(hervS3.ranges, ids)
+message(paste0('Calculate chromHMM states for hervS2.2kb in ', id))
+annotation = chromHMM.range.annotation(hervS2.2kb.ranges, id)
 
-annotation <- get(annotation.name)
-save(annotation, file = paste0(PATHS$CHROMHMM.OUT.DIR, id, '.chromHMM.RData'))
+save(annotation, file = paste0(PATHS$CHROMHMM.OUT.DIR, 'S2.2kb/', id, '.chromHMM.RData'))
 
 

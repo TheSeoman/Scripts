@@ -35,7 +35,7 @@ scan.snps <- function(ranges) {
   }
 }
 
-load(PATHS$HERVS2.2KB.DATA)
+load(PATHS$HERVS2.2KB.RANGES.DATA)
 
 args <- commandArgs(TRUE)
 batch.start <- as.integer(args[1])
