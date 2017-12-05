@@ -3,6 +3,7 @@ source('Scripts/R/paths.R')
 require(GenomicRanges)
 require(illuminaHumanv3.db)
 require(FDb.InfiniumMethylation.hg19)
+require(rtracklayer)
 
 get.expression.ranges <- function () {
   require(illuminaHumanv3.db)
@@ -60,41 +61,34 @@ print.overlap.info <- function(overlap) {
                  "\n# probes: ", dim(overlap$essay.data)[1]))
 }
 
-create.granges <- function (annotation, flanking = 0) {
-  return (
-    GRanges(
-      seqnames = annotation$Chr,
-      ranges = IRanges(annotation$start - flanking, end = annotation$end + flanking),
-      strand = annotation$strand
+
+enlarge.ranges <- function(ranges, flanking) {
+    return (
+      GRanges(
+        seqnames = seqnames(ranges),
+        ranges = IRanges(start = start(ranges) - flanking, end = end(ranges) + flanking),
+        strand = strand(ranges),
+        name = ranges$name,
+        score = ranges$score
+      )
     )
-  )
 }
 
-plot.coefficient.of.variance <- function(data, data.type, main, file) {
-  mean <- apply(data, 1, mean, na.rm = T)
-  sd <- apply(data, 1, sd, na.rm = T)
-  cvar <- sd/mean * 100
-  hist(cvar, xlab = 'coefficient of variance', main = main, breaks = 50)
-  plot(mean, cvar, xlab = paste0('mean ', data.type), ylab = 'coefficent of variance', pch = 3) 
-}
+hervS1.ranges <- import(PATHS$HERVS1.ANNOT, format = 'BED')
+hervS2.ranges <- import(PATHS$HERVS2.ANNOT, format = 'BED')
+hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
 
-hervS1.annot <- read.table(PATHS$HERVS1.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
-hervS2.annot <- read.table(PATHS$HERVS2.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
-hervS3.annot <- read.table(PATHS$HERVS3.ANNOT, sep = "\t", col.names = c('Chr', 'start', 'end', 'strand', 'family', 'class', 'superfamily'))
+hervS1.1kb.ranges <- enlarge.ranges(hervS1.ranges, 1000)
+hervS2.1kb.ranges <- enlarge.ranges(hervS2.ranges, 1000)
+hervS3.1kb.ranges <- enlarge.ranges(hervS3.ranges, 1000)
 
-hervS1.ranges <- create.granges(hervS1.annot)
-hervS2.ranges <- create.granges(hervS2.annot)
-hervS3.ranges <- create.granges(hervS3.annot)
+hervS1.2kb.ranges <- enlarge.ranges(hervS1.ranges, 2000)
+hervS2.2kb.ranges <- enlarge.ranges(hervS2.ranges, 2000)
+hervS3.2kb.ranges <- enlarge.ranges(hervS3.ranges, 2000)
 
-hervS1.1kb.ranges <- create.granges(hervS1.annot, 1000)
-hervS2.1kb.ranges <- create.granges(hervS2.annot, 1000)
-hervS3.1kb.ranges <- create.granges(hervS3.annot, 1000)
-
-hervS1.2kb.ranges <- create.granges(hervS1.annot, 2000)
-hervS2.2kb.ranges <- create.granges(hervS2.annot, 2000)
-hervS3.2kb.ranges <- create.granges(hervS3.annot, 2000)
-
-save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = PATHS$HERV.DATA)
+save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = PATHS$HERV.RANGES.DATA)
+save(hervS2.ranges, file = PATHS$HERVS2.RANGES.DATA)
+save(hervS2.2kb.ranges, file = PATHS$HERVS2.2KB.RANGES.DATA)
 
 expr.ranges <- get.expression.ranges()
 load(PATHS$EXPR.DATA)
@@ -115,11 +109,6 @@ print.overlap.info(expr.S1.overlap)
 print.overlap.info(expr.S2.overlap)
 print.overlap.info(expr.S3.overlap)
 
-pdf('/media/data/Masterarbeit/Plots/herv.expr.var.pdf', width = 8, height = 8)
-layout(matrix(c(1:4), 2, 2, byrow = F))
-plot.coefficient.of.variance(expr.S1.overlap$essay.data, 'expression', 'Probes overlapping with hERV set 1', '')
-plot.coefficient.of.variance(expr.S2.overlap$essay.data, 'expression', 'Probes overlapping with hERV set 2', '')
-dev.off()
 
 expr.S1.1kb.overlap <- calc.overlap.data(hervS1.1kb.ranges, expr.ranges, expr.data)
 expr.S2.1kb.overlap <- calc.overlap.data(hervS2.1kb.ranges, expr.ranges, expr.data)
@@ -129,16 +118,6 @@ print.overlap.info(expr.S1.1kb.overlap)
 print.overlap.info(expr.S2.1kb.overlap)
 print.overlap.info(expr.S3.1kb.overlap)
 
-annotation[annotation$ProbeID %in% expr.S1.overlap$essay.ranges$ids,]
-annotation[annotation$ProbeID %in% expr.S1.1kb.overlap$essay.ranges$ids,]
-annotation[annotation$ProbeID %in% expr.S1.2kb.overlap$essay.ranges$ids,]
-
-pdf('/media/data/Masterarbeit/Plots/herv.expr.1kb.var.pdf', width = 8, height = 8)
-layout(matrix(c(1:4), 2, 2, byrow = F))
-plot.coefficient.of.variance(expr.S1.1kb.overlap$essay.data, 'expression', 'Probes overlapping with hERV set 1 + flanking 1kb', '')
-plot.coefficient.of.variance(expr.S2.1kb.overlap$essay.data, 'expression', 'Probes overlapping with hERV set 2 + flanking 1kb', '')
-dev.off()
-
 expr.S1.2kb.overlap <- calc.overlap.data(hervS1.2kb.ranges, expr.ranges, expr.data)
 expr.S2.2kb.overlap <- calc.overlap.data(hervS2.2kb.ranges, expr.ranges, expr.data)
 expr.S3.2kb.overlap <- calc.overlap.data(hervS3.2kb.ranges, expr.ranges, expr.data)
@@ -147,7 +126,7 @@ print.overlap.info(expr.S1.2kb.overlap)
 print.overlap.info(expr.S2.2kb.overlap)
 print.overlap.info(expr.S3.2kb.overlap)
 
-save(expr.S1.overlap, expr.S2.overlap, expr.S3.overlap, expr.S1.1kb.overlap, expr.S2.1kb.overlap, expr.S3.1kb.overlap, expr.S1.2kb.overlap, expr.S2.2kb.overlap, expr.S3.2kb.overlap, file = PATHS$EXPR.OVERLAP.DATA))
+save(expr.S1.overlap, expr.S2.overlap, expr.S3.overlap, expr.S1.1kb.overlap, expr.S2.1kb.overlap, expr.S3.1kb.overlap, expr.S1.2kb.overlap, expr.S2.2kb.overlap, expr.S3.2kb.overlap, file = PATHS$EXPR.OVERLAP.DATA)
 
 
 meth.S1.overlap <- calc.overlap.data(hervS1.ranges, meth.ranges, meth.data)
@@ -157,12 +136,6 @@ meth.S3.overlap <- calc.overlap.data(hervS3.ranges, meth.ranges, meth.data)
 print.overlap.info(meth.S1.overlap)
 print.overlap.info(meth.S2.overlap)
 print.overlap.info(meth.S3.overlap)
-
-pdf('/media/data/Masterarbeit/Plots/herv.meth.var.pdf', width = 8, height = 8)
-layout(matrix(c(1:4), 2, 2, byrow = F))
-plot.coefficient.of.variance(meth.S1.overlap$essay.data, 'methylation', 'Probes overlapping with hERV set 1', '')
-plot.coefficient.of.variance(meth.S2.overlap$essay.data, 'methylation', 'Probes overlapping with hERV set 2', '')
-dev.off()
 
 meth.S1.1kb.overlap <- calc.overlap.data(hervS1.1kb.ranges, meth.ranges, meth.data)
 meth.S2.1kb.overlap <- calc.overlap.data(hervS2.1kb.ranges, meth.ranges, meth.data)
@@ -186,12 +159,6 @@ both.S1.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, exp
 both.S2.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.overlap, meth.S2.overlap)
 both.S3.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.overlap, meth.S3.overlap)
 
-pdf('/media/data/Masterarbeit/Plots/herv.meth.var.pdf', width = 8, height = 8)
-layout(matrix(c(1:4), 2, 2, byrow = F))
-plot.coefficient.of.variance(meth.S1.overlap$essay.data, 'methylation', 'Probes overlapping with hERV set 1', '')
-plot.coefficient.of.variance(meth.S2.overlap$essay.data, 'methylation', 'Probes overlapping with hERV set 2', '')
-dev.off()
-
 both.S1.1kb.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.1kb.overlap, meth.S1.1kb.overlap)
 both.S2.1kb.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.1kb.overlap, meth.S2.1kb.overlap)
 both.S3.1kb.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.1kb.overlap, meth.S3.1kb.overlap)
@@ -199,5 +166,3 @@ both.S3.1kb.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges,
 both.S1.2kb.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.2kb.overlap, meth.S1.2kb.overlap)
 both.S2.2kb.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.2kb.overlap, meth.S2.2kb.overlap)
 both.S3.2kb.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.2kb.overlap, meth.S3.2kb.overlap)
-
-plot.coefficient.of.variance(meth.S1.overlap$essay.data, 'methylation', 'Probes overlapping with hERV set 1', '')

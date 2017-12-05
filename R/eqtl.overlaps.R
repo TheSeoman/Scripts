@@ -1,7 +1,6 @@
 source("Scripts/R/paths.R")
 
 load(PATHS$EXPR.OVERLAP.DATA)
-load(PATHS$S2.SNP.INFO.DATA)
 load(PATHS$HERV.SNP.INFO.DATA)
 
 find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
@@ -89,7 +88,6 @@ hervS1.eqtl <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS1.snp.info, expr.S1.ove
 S2 <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS2.snp.info, expr.S2.overlap$essay.data)
 export.genes(S2, 'eQTL/S2.MAF001.')
 
-library(topGO)
-library(ALL)
-data(ALL)
-GOdata <- new("topGOdata", ontology = "BP", allGenes <- as.factor(all.genes[!is.na(all.genes)]), geneSel = as.factor(S2$snp.trans.eqtl$gene), nodeSize = 10, annot = annFUN.GO2genes)
+library(GSEABase)
+library(hgu95av2.db)
+library(GO.db)
