@@ -10,8 +10,8 @@ get.ranges.from.annotation <- function (annotation) {
     ann.list <- unlist(sample)
     ann.table = data.frame(matrix(ann.list[!is.na(ann.list)], ncol=4, byrow=TRUE), stringsAsFactors=FALSE) 
     ann.table = ann.table[!duplicated(ann.table),]
-    ann.table[,2] = as.numeric(ann.table[,2])
-    ann.table[,3] = as.numeric(ann.table[,3]) - 1 
+    ann.table[,2] = as.numeric(ann.table[,2]) + 1
+    ann.table[,3] = as.numeric(ann.table[,3]) 
     ann.ranges = GRanges(seqnames = ann.table[,1], ranges = IRanges(start = as.numeric(ann.table[,2]), end = as.numeric(ann.table[,3])), state = ann.table[,4])
     
     return(ann.ranges)
