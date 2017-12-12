@@ -22,8 +22,8 @@ get.expression.positions <- function () {
   
   ids <- names(allLocs)[validPos]
   
-  table <- cbind(ids, chrs, start, end)
-  colnames(table) <- c('geneid', 'chr', 's1', 's2')
+  table <- cbind(ids, chrs, strand, start, end)
+  colnames(table) <- c('probeid', 'chr', 'strand', 's1', 's2')
   return(table)
 }
 
