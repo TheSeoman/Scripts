@@ -96,30 +96,79 @@ library(ggplot2)
 library(reshape2)
 
 plot.summed.annotation <- function (annotation) {
-annotation.prop <- annotation/rowSums(annotation)
-plot.data = melt(annotation.prop)
-colnames(plot.data) = c("State", "Proportion")
-plot.data = cbind(plot.data, Cell=ids)
-plot.data = plot.data[order(plot.data$State), ]
-plot.data = cbind(plot.data, Type=type)
-
-print(qplot(State, Cell, fill=Proportion, geom="tile", data=plot.data)
+  annotation.prop <- annotation / rowSums(annotation)
+  plot.data = melt(annotation.prop)
+  colnames(plot.data) = c("State", "Proportion")
+  plot.data = cbind(plot.data, Cell = ids)
+  plot.data = plot.data[order(plot.data$State),]
+  plot.data = cbind(plot.data, Type = type)
+  
+  print(qplot(State, Cell, fill=Proportion, geom="tile", data=plot.data)
       +  theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5))
       + facet_grid(Type ~ ., scale="free_y", space="free_y"))
 }
 
-plot.weighted.summed.annotation <- function (annotation) {
+plot.weighted.summed.annotation <- function (annotation, title) {
   houseman = read.csv(PATHS$F.HOUSEMAN, sep = ";")
   colnames(annotation) <- labels
-  by.type = apply(annotation / rowSums(annotation), 2, tapply, type, mean)
+  by.type = apply(annotation, 2, tapply, type, mean)
   pop.mean = colMeans(houseman[, -1])
   overall.state = t(pop.mean %*% by.type[names(pop.mean), ])
   colnames(overall.state) = "Weighted.proportion"
   overall.state = data.frame(State = rownames(overall.state), overall.state)
-  ggplot(data=overall.state) + geom_bar(aes(State, y=Weighted.proportion), stat="identity")  + theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5, size=13), axis.title=element_text(size=14), plot.title=element_text(size=16)) + ggtitle('chromHMM state proportions over all HERV set 1 elements')
+  ggplot(data=overall.state) + geom_bar(aes(State, y=Weighted.proportion), stat="identity")  + theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5, size=13), axis.title=element_text(size=14), plot.title=element_text(size=16)) + ggtitle(title)
 }
 
 png(paste0(PATHS$PLOT.DIR, 'hervS1.chromHMM.weighted.png'), width = 700, height = 700)
-plot.weighted.summed.annotation(hervS1.summed.annotation)
+plot.weighted.summed.annotation(hervS1.summed.annotation, 'chromHMM state proportions over all HERV set 1 elements')
+dev.off()
+
+load(PATHS$HERV.MEQTL.CHROMHMM.ANNOTATION.DATA)
+
+get.counted.annotation <- function (annotation) {
+  counted.annotation <-
+    apply(annotation, 2, function(sample) {
+      counted = data.frame(matrix(ncol = length(levels), nrow = 0))
+      colnames(counted) = levels
+      for (level in levels) {
+        counted[1, level] <- length(sample[sample == level])
+      }
+      return (counted)
+    })
+  counted.annotation <- data.frame(matrix(unlist(counted.annotation), ncol = 15, byrow = TRUE))
+  colnames(counted.annotation) <- labels
+  rownames(counted.annotation) <- ids
+  
+  return (counted.annotation)
+}
+
+hervS1.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.meqtl.snp.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS1.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1')
+dev.off()
+
+hervS1.1kb.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.1kb.meqtl.snp.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS1.1kb.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS1.1kb.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1 + 1kb flanking')
+dev.off()
+
+hervS1.2kb.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.2kb.meqtl.snp.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS1.2kb.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS1.2kb.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1 + 2kb flanking')
+dev.off()
+
+hervS2.meqtl.snp.counted.annotation <- get.counted.annotation(hervS2.meqtl.snp.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS2.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS2.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 2')
+dev.off()
+
+hervS1.meqtl.meth.counted.annotation <- get.counted.annotation(hervS1.meqtl.meth.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS1.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 1')
+dev.off()
+
+hervS2.meqtl.meth.counted.annotation <- get.counted.annotation(hervS2.meqtl.meth.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS2.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS2.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 2')
 dev.off()
 
