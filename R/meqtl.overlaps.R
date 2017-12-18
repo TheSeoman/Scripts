@@ -13,6 +13,23 @@ if(!file.exists(PATHS$MEQTL.PAIRS.DATA)){
   load(PATHS$MEQTL.PAIRS.DATA)
 }
 
+if(!file.exists(PATHS$MEQTL.SNP.RANGES.DATA)) {
+  load(PATHS$MEQTL.COSMO.DATA)
+  first <- !duplicated(cosmo$snp)
+  meqtl.snp.ranges <- GRanges(seqnames = paste0('chr', cosmo$snp.chr[first]), ranges = IRanges(start = cosmo$snp.pos[first], width = 1))
+  names(meqtl.snp.ranges) <- cosmo$snp[first]
+  save(meqtl.snp.ranges, file = PATHS$MEQTL.SNP.RANGES.DATA)
+} 
+
+if(!file.exists(PATHS$MEQTL.METH.RANGES.DATA)) {
+  load(PATHS$MEQTL.COSMO.DATA)
+  first <- !duplicated(cosmo$cpg)
+  meqtl.meth.ranges <- GRanges(seqnames = paste0('chr', cosmo$cpg.chr[first]), ranges = IRanges(start = cosmo$cpg.pos[first], width = 1))
+  names(meqtl.meth.ranges) <- cosmo$cpg[first]
+  save(meqtl.meth.ranges, file = PATHS$MEQTL.METH.RANGES.DATA)
+} 
+
+
 find.meqtl.overlap <- function(meth.ranges, snp.ranges, meqtl.pairs) {
   out <- list()
   out$snp <- meqtl.pairs[meqtl.pairs$snp %in% names(snp.ranges),]

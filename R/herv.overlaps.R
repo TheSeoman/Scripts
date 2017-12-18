@@ -78,6 +78,8 @@ hervS1.ranges <- import(PATHS$HERVS1.ANNOT, format = 'BED')
 hervS2.ranges <- import(PATHS$HERVS2.ANNOT, format = 'BED')
 hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
 
+ltr.ranges <- import(PATHS$F.LTR.ANNOT, format = 'BED')
+
 hervS1.1kb.ranges <- enlarge.ranges(hervS1.ranges, 1000)
 hervS2.1kb.ranges <- enlarge.ranges(hervS2.ranges, 1000)
 hervS3.1kb.ranges <- enlarge.ranges(hervS3.ranges, 1000)
@@ -97,6 +99,7 @@ expr.data <- f4.norm
 #meth.ranges <- features(FDb.InfiniumMethylation.hg19)
 meth.ranges <- getPlatform(platform='HM450', genome='hg19')
 meth.ranges <- meth.ranges[grep('cg|ch', meth.ranges$probeType)]
+save(meth.ranges, file = PATHS$METH.RANGES.DATA)
 load(PATHS$METH.DATA)
 meth.data <- data.frame(transform(beta))
 rm(beta)
@@ -108,7 +111,6 @@ expr.S3.overlap <- calc.overlap.data(hervS3.ranges, expr.ranges, expr.data)
 print.overlap.info(expr.S1.overlap)
 print.overlap.info(expr.S2.overlap)
 print.overlap.info(expr.S3.overlap)
-
 
 expr.S1.1kb.overlap <- calc.overlap.data(hervS1.1kb.ranges, expr.ranges, expr.data)
 expr.S2.1kb.overlap <- calc.overlap.data(hervS2.1kb.ranges, expr.ranges, expr.data)

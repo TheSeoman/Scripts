@@ -167,6 +167,11 @@ png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.meth.chromHMM.weighted.png'), width = 5
 plot.weighted.summed.annotation(hervS1.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 1')
 dev.off()
 
+hervS1.2kb.meqtl.meth.counted.annotation <- get.counted.annotation(hervS1.2kb.meqtl.meth.annotation)
+png(paste0(PATHS$PLOT.DIR, 'hervS1.2kb.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
+plot.weighted.summed.annotation(hervS1.2k.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 1')
+dev.off()
+
 hervS2.meqtl.meth.counted.annotation <- get.counted.annotation(hervS2.meqtl.meth.annotation)
 png(paste0(PATHS$PLOT.DIR, 'hervS2.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
 plot.weighted.summed.annotation(hervS2.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 2')
