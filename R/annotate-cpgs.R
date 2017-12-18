@@ -1,3 +1,4 @@
+source('Scripts/R/paths.R')
 ## annotation of CpG sites with functional genomics data and TFBS predictions
 
 ## speed up!
