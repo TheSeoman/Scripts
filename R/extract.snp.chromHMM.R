@@ -25,7 +25,7 @@ get.snp.annotation <- function (snp.ranges, annotation.ranges, sample.ids) {
     overlap <- findOverlaps(snp.ranges, sample.annotation.ranges)
     return (sample.annotation.ranges[subjectHits(overlap)]$state)
   })
-  snp.annotation <- cbind.data.frame(snp.annotation.list)
+  snp.annotation <- data.frame(snp.annotation.list)
   rownames(snp.annotation) <- names(snp.ranges)
   colnames(snp.annotation) <- ids
   return(snp.annotation)

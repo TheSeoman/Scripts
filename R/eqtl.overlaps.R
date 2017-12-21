@@ -88,6 +88,4 @@ hervS1.eqtl <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS1.snp.info, expr.S1.ove
 S2 <- find.herv.eqtl(cis.eqtl, trans.eqtl, hervS2.snp.info, expr.S2.overlap$essay.data)
 export.genes(S2, 'eQTL/S2.MAF001.')
 
-library(GSEABase)
-library(hgu95av2.db)
-library(GO.db)
+

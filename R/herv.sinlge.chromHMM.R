@@ -35,12 +35,12 @@ chromHMM.range.annotation <- function (ranges, id, dir = paste0(PATHS$ROADMAP.DI
   return (ann.split)
 }
 
-load(PATHS$MEQTL.SNP.RANGES.DATA)
+load(PATHS$SNP.RANGES.DATA)
 args <- commandArgs(TRUE)
 id <- ids[as.integer(args[1])]
-message(paste0('Calculate chromHMM states for meqtl.snp.ranges in ', id))
-annotation = chromHMM.range.annotation(meqtl.snp.ranges, id)
+message(paste0('Calculate chromHMM states for snp.ranges in ', id))
+annotation = chromHMM.range.annotation(snp.ranges, id)
 
-save(annotation, file = paste0(PATHS$CHROMHMM.OUT.DIR, 'meqtl.snp.ranges/', id, '.chromHMM.RData'))
+save(annotation, file = paste0(PATHS$CHROMHMM.OUT.DIR, 'snp.ranges/', id, '.chromHMM.RData'))
 
 
