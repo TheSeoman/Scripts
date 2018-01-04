@@ -24,9 +24,8 @@ get.ranges.from.annotation <- function (annotation) {
 }
 
 combine.single.1nt.chromHMM <-
-  function (sample.dir, samples, ranges) {
-    annotation.list <-
-      lapply(list.files(sample.dir)[c(start:end)], function(file) {
+  function (sample.dir, samples, ranges, start = 1, end = 27) {
+    annotation.list <- lapply(list.files(sample.dir)[c(start:end)], function(file) {
         message(paste0('loading: ', file))
         load(paste0(sample.dir, file))
         return(annotation)
@@ -73,3 +72,5 @@ load(PATHS$METH.RANGES.DATA)
 sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/meth.ranges/')
 
 meth.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, meth.ranges)
+
+save(meth.chromhmm.states, file = PATHS$METH.CHROMHMM.DATA)
