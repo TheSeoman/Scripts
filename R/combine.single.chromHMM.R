@@ -36,15 +36,20 @@ combine.single.1nt.chromHMM <-
     
     samples <- samples[order(samples)]
     
+    i <- 1
     ann.list <- lapply(annotation.list, function(annotation) {
+      message(paste0('processing: ', samples[i]))
       annotation.loc <- names(annotation)
       missing.loc <- ranges.map[!(names(ranges.map) %in% annotation.loc)]
       names(annotation) <- ranges.map[annotation.loc]
       annotation[missing.loc] <- NA
       annotation <- annotation[order(names(annotation))]
+      i <- i + 1
       return(annotation)
     })
     
+    
+    message('Creating matrix...')
     annotation.combined <-
       data.frame(matrix(nrow = length(ranges), ncol = length(annotation.list)))
     
