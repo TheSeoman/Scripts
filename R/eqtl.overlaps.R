@@ -38,7 +38,7 @@ export.genes <- function(herv.eqtl.list, prefix) {
     write(as.character(unique(herv.eqtl.list$both.cis.eqtl$gene[!is.na(herv.eqtl.list$both.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.cis.genes.txt'))
   }
   if (dim(herv.eqtl.list$both.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
+    write(as.character(unique(hervsave(hervS1..eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
   }
 }
 
@@ -112,3 +112,4 @@ save(hervS1.eqtl.overlap, hervS2.eqtl.overlap, hervS3.eqtl.overlap, hervS1.1kb.e
 
 save(hervS1.eqtl.enrichment, hervS2.eqtl.enrichment, hervS3.eqtl.enrichment, hervS1.1kb.eqtl.enrichment, hervS2.1kb.eqtl.enrichment, hervS3.1kb.eqtl.enrichment, 
      hervS1.2kb.eqtl.enrichment, hervS2.2kb.eqtl.enrichment, hervS3.2kb.eqtl.enrichment, file = PATHS$HERV.EQTL.ENRICHMENT.DATA)
+
