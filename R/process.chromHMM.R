@@ -29,7 +29,6 @@ type[grep("CD14", roadmap.samples[use,5])] = "Mono"
 
 #call for each sample
 sum.up.chromHMM.states = function (ann.list) {
-  
   res = lapply(ann.list, function(sample) {
   message(paste0('# areas: ', length(sample), ' #elements: ', length(unlist(sample))))
   for (i in c(1:length(sample))) {
@@ -108,6 +107,7 @@ plot.summed.annotation <- function (annotation) {
       + facet_grid(Type ~ ., scale="free_y", space="free_y"))
 }
 
+
 plot.weighted.summed.annotation <- function (annotation, title) {
   houseman = read.csv(PATHS$F.HOUSEMAN, sep = ";")
   colnames(annotation) <- labels
@@ -118,6 +118,20 @@ plot.weighted.summed.annotation <- function (annotation, title) {
   overall.state = data.frame(State = rownames(overall.state), overall.state)
   ggplot(data=overall.state) + geom_bar(aes(State, y=Weighted.proportion), stat="identity")  + theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5, size=13), axis.title=element_text(size=14), plot.title=element_text(size=16)) + ggtitle(title)
 }
+
+plot.weighted.normalized.annotation <- function (annotation, background) {
+  backgroud.prop = background / rowSums(background)
+  annotation = annotation / background.prop 
+  houseman = read.csv(PATHS$F.HOUSEMAN, sep = ";")
+  colnames(annotation) <- labels
+  by.type = apply(annotation, 2, tapply, type, mean)
+  pop.mean = colMeans(houseman[, -1])
+  overall.state = t(pop.mean %*% by.type[names(pop.mean), ])
+  colnames(overall.state) = "Weighted.proportion"
+  overall.state = data.frame(State = rownames(overall.state), overall.state)
+  ggplot(data=overall.state) + geom_bar(aes(State, y=Weighted.proportion), stat="identity")  + theme(axis.text.x=element_text(angle=90, hjust = 1, vjust=0.5, size=13), axis.title=element_text(size=14), plot.title=element_text(size=16)) + ggtitle(title)
+}
+
 
 png(paste0(PATHS$PLOT.DIR, 'hervS1.chromHMM.weighted.png'), width = 700, height = 700)
 plot.weighted.summed.annotation(hervS1.summed.annotation, 'chromHMM state proportions over all HERV set 1 elements')

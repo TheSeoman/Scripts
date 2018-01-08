@@ -89,7 +89,7 @@ load(PATHS$CHROMHMM.SAMPLE.DATA)
 # snp
 load(PATHS$SNP.RANGES.DATA)
 sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/snp.ranges/')
-snp.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, snp.ranges)
+snp.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, snp.ranges, 1, 1)
 save(snp.chromhmm.states, file = PATHS$SNP.CHROMHMM.DATA)
 
 # expr

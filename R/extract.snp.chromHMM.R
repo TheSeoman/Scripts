@@ -62,8 +62,6 @@ hervS3.1kb.meqtl.meth.annotation <- hervS2.2kb.snp.annotation[unique(hervS3.1kb.
 hervS3.2kb.meqtl.snp.annotation <- hervS2.2kb.snp.annotation[unique(hervS3.2kb.meqtl.overlap$snp$snp),]
 hervS3.2kb.meqtl.meth.annotation <- hervS2.2kb.snp.annotation[unique(hervS3.2kb.meqtl.overlap$meth$cpg),]
 
-
-
 save(hervS1.meqtl.snp.annotation, hervS1.meqtl.meth.annotation, hervS1.1kb.meqtl.snp.annotation, hervS1.1kb.meqtl.meth.annotation , hervS1.2kb.meqtl.snp.annotation, hervS1.2kb.meqtl.meth.annotation, 
      hervS2.meqtl.snp.annotation, hervS2.meqtl.meth.annotation, hervS2.1kb.meqtl.snp.annotation, hervS2.1kb.meqtl.meth.annotation , hervS2.2kb.meqtl.snp.annotation, hervS2.2kb.meqtl.meth.annotation,
      hervS3.meqtl.snp.annotation, hervS3.meqtl.meth.annotation, hervS3.1kb.meqtl.snp.annotation, hervS3.1kb.meqtl.meth.annotation , hervS3.2kb.meqtl.snp.annotation, hervS3.2kb.meqtl.meth.annotation,
