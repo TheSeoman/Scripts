@@ -20,7 +20,6 @@ if (!file.exists(PATHS$GSC.DATA)) {
   }
   
   gsc = get.gsc(Homo.sapiens, "SYMBOL")
-  dir.create(dirname(gsc.file), recursive=T)
   save(gsc, file=PATHS$GSC.DATA)
 } else {
   load(PATHS$GSC.DATA)

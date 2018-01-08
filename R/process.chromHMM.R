@@ -2,58 +2,36 @@ source('Scripts/R/paths.R')
 
 require(GenomicRanges)
 
-if (!file.exists(PATHS$CHROMHMM.SAMPLE.DATA)) {
-  ids <- (function() {
-    roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
-                               sep="\t",
-                               stringsAsFactors=F)
-    
-    mnemonics =
-      read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
-               sep="\t")
-    levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
-    labels = mnemonics[,"DESCRIPTION"]
-    
-    use = roadmap.samples$ANATOMY == "BLOOD"
-    ids = roadmap.samples[use,"Epigenome.ID..EID."]
-    ids <- ids[order(ids)]
-    return(ids)
-  }) ()
-  save(ids, file = PATHS$CHROMHMM.SAMPLE.DATA)
+if (!file.exists(PATHS$CHROMHMM.META.DATA)) {
+  roadmap.samples = read.csv(
+    paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
+    sep = "\t",
+    stringsAsFactors = F
+  )
+  
+  mnemonics =
+    read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
+             sep = "\t")
+  levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep = "_"))
+  labels = mnemonics[, "DESCRIPTION"]
+  
+  use = roadmap.samples$ANATOMY == "BLOOD"
+  ids = roadmap.samples[use, "Epigenome.ID..EID."]
+  ids <- ids[order(ids)]
+  cells = roadmap.samples[use, "Standardized.Epigenome.name"]
+  
+  ## match this to the houseman cell types
+  type = rep("other", sum(use))
+  type[grep("CD4", roadmap.samples[use, 5])] = "CD4T"
+  type[grep("CD8", roadmap.samples[use, 5])] = "CD8T"
+  type[grep("CD15", roadmap.samples[use, 5])] = "Gran"
+  type[grep("CD56", roadmap.samples[use, 5])] = "NK"
+  type[grep("CD19", roadmap.samples[use, 5])] = "Bcell"
+  type[grep("CD14", roadmap.samples[use, 5])] = "Mono"
+  type <- type[order(ids)]
+  save(ids, type, levels, file = PATHS$CHROMHMM.META.DATA)
 } else {
-  load(PATHS$CHROMHMM.SAMPLE.DATA)
-}
-
-if (!file.exists(PATHS$CHROMHMM.CELL.TYPE.DATA)) {
-  type <- (function() {
-    roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
-                               sep="\t",
-                               stringsAsFactors=F)
-    
-    mnemonics =
-      read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
-               sep="\t")
-    levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
-    labels = mnemonics[,"DESCRIPTION"]
-    
-    use = roadmap.samples$ANATOMY == "BLOOD"
-    ids = roadmap.samples[use,"Epigenome.ID..EID."]
-    cells = roadmap.samples[use,"Standardized.Epigenome.name"]
-    
-    ## match this to the houseman cell types
-    type = rep("other", sum(use))
-    type[grep("CD4", roadmap.samples[use,5])] = "CD4T"
-    type[grep("CD8", roadmap.samples[use,5])] = "CD8T"
-    type[grep("CD15", roadmap.samples[use,5])] = "Gran"
-    type[grep("CD56", roadmap.samples[use,5])] = "NK"
-    type[grep("CD19", roadmap.samples[use,5])] = "Bcell"
-    type[grep("CD14", roadmap.samples[use,5])] = "Mono"
-    type <- type[order(ids)]
-    return(type)
-  }) ()
-  save(type, file = PATHS$CHROMHMM.CELL.TYPE.DATA)
-} else {
-  load(PATHS$CHROMHMM.CELL.TYPE.DATA)
+  load(PATHS$CHROMHMM.META.DATA)
 }
 
 #call for each sample
@@ -185,38 +163,11 @@ get.counted.annotation <- function (annotation) {
   return (counted.annotation)
 }
 
-hervS1.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.meqtl.snp.annotation)
+hervS1.meth.annotation <- meth.chromhmm.states[unique(names(meth.S1.overlap$essay.ranges)),]
+
+counted.annotation <- get.counted.annotation(hervS1.meqtl.annotation$cpg.cpg)
 png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS1.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1')
+plot.weighted.summed.annotation(counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1')
 dev.off()
 
-hervS1.1kb.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.1kb.meqtl.snp.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS1.1kb.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS1.1kb.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1 + 1kb flanking')
-dev.off()
-
-hervS1.2kb.meqtl.snp.counted.annotation <- get.counted.annotation(hervS1.2kb.meqtl.snp.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS1.2kb.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS1.2kb.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1 + 2kb flanking')
-dev.off()
-
-hervS2.meqtl.snp.counted.annotation <- get.counted.annotation(hervS2.meqtl.snp.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS2.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS2.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 2')
-dev.off()
-
-hervS1.meqtl.meth.counted.annotation <- get.counted.annotation(hervS1.meqtl.meth.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS1.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 1')
-dev.off()
-
-hervS1.2kb.meqtl.meth.counted.annotation <- get.counted.annotation(hervS1.2kb.meqtl.meth.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS1.2kb.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS1.2k.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 1')
-dev.off()
-
-hervS2.meqtl.meth.counted.annotation <- get.counted.annotation(hervS2.meqtl.meth.annotation)
-png(paste0(PATHS$PLOT.DIR, 'hervS2.meqtl.meth.chromHMM.weighted.png'), width = 500, height = 500)
-plot.weighted.summed.annotation(hervS2.meqtl.snp.counted.annotation, 'chromHMM state proportions over meQTL-cpgs in HERV set 2')
-dev.off()
 

@@ -22,11 +22,4 @@ extract.meqtl.annotation <- function (meqtl.overlap, meth.annotation, snp.annota
 }
 
 # snps in meQTLs related to hervs
-for (set in c('S1', 'S2', 'S3')) {
-  for (flanking in c('', '.1kb', '.2kb')) {
-    assign(paste0('herv', set, flanking, '.meqtl.annotation', extract.meqtl.annotation(get(paste0('herv', set, flanking, '.meqtl.overlap')), meth.chromhmm.states, snp.chromhmm.states)))
-  }
-}
 
-save(hervS1.meqtl.annotation, hervS1.1kb.meqtl.annotation, hervS1.2kb.meqtl.annotation, hervS2.meqtl.annotation, hervS2.1kb.meqtl.annotation, 
-     hervS2.2kb.meqtl.annotation, hervS3.meqtl.annotation, hervS3.1kb.meqtl.annotation, hervS3.2kb.meqtl.annotation, file = PATHS$HERV.MEQTL.CHROMHMM.ANNOTATION.DATA)

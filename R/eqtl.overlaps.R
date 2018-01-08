@@ -4,7 +4,10 @@ source('Scripts/R/go.enrichment.R')
 load(PATHS$EXPR.OVERLAP.DATA)
 load(PATHS$HERV.SNP.INFO.DATA)
 
-find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
+load(PATHS$EXPR.CHROMHMM.DATA)
+load(PATHS$SNP.CHROMHMM.DATA)
+
+get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp, expr) {
   out <- list()
   out$snp.cis <- cis.eqtl[cis.eqtl$snps %in% rownames(snp),]
   out$snp.trans <- trans.eqtl[trans.eqtl$snps %in% rownames(snp),]
@@ -21,28 +24,7 @@ find.herv.eqtl <- function (cis.eqtl, trans.eqtl, snp, expr) {
   return(out)
 }
 
-export.genes <- function(herv.eqtl.list, prefix) {
-  if (dim(herv.eqtl.list$snp.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$snp.cis.eqtl$gene[!is.na(herv.eqtl.list$snp.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'snp.cis.genes.txt'))
-  }
-  if (dim(herv.eqtl.list$snp.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$snp.trans.eqtl$gene[!is.na(herv.eqtl.list$snp.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'snp.trans.genes.txt'))
-  }
-  if (dim(herv.eqtl.list$expr.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$expr.cis.eqtl$gene[!is.na(herv.eqtl.list$expr.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'expr.cis.genes.txt'))
-  }
-  if (dim(herv.eqtl.list$expr.trans.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$expr.trans.eqtl$gene[!is.na(herv.eqtl.list$expr.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'expr.trans.genes.txt'))
-  }
-  if (dim(herv.eqtl.list$both.cis.eqtl)[1] != 0) {
-    write(as.character(unique(herv.eqtl.list$both.cis.eqtl$gene[!is.na(herv.eqtl.list$both.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.cis.genes.txt'))
-  }
-  if (dim(herv.eqtl.list$both.trans.eqtl)[1] != 0) {
-    write(as.character(unique(hervS1.eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
-  }
-}
-
-eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) {
+get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) {
   universe <- unique(expr.annotation[!is.na(expr.annotation)])
   out <- list()
   snp.trans.genes <- unique(expr.annotation[herv.eqtl.overlap$snp.trans$gene])
@@ -69,6 +51,23 @@ eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) {
     out$either.trans <- go.enrichment(either.trans.genes, universe, gsc, c('BP'))
   }
   return(out)    
+}
+
+get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, expr.annotation) {
+  out <- list()
+  #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
+  out$cis.snp.snp <- snp.annotation[eqtl.overlap$snp.cis$snps,]
+  out$cis.expr.snp <- snp.annotation[eqtl.overlap$expr.cis$snps,]
+  out$cis.both.snp <- snp.annotation[eqtl.overlap$both.cis$snps,]
+  out$cis.either.snp <- snp.annotation[eqtl.overlap$either.cis$snps,]
+  out$trans.snp.snp <- snp.annotation[eqtl.overlap$snp.trans$snps,]
+  out$trans.expr.snp <- snp.annotation[eqtl.overlap$expr.trans$snps,]
+  out$trans.both.snp <- snp.annotation[eqtl.overlap$both.trans$snps,]
+  out$trans.either.snp <- snp.annotation[eqtl.overlap$either.trans$snps,]
+  
+  
+  
+  return(out)
 }
 
 # schramm eqtl
@@ -98,12 +97,12 @@ hervS1.eqtl.overlap <- find.herv.eqtl(me$cis$eqtls, me$trans$eqtls, hervS1.snp.i
 hervS1.eqtl.overlap.enrichment <- eqtl.overlap.go.enrichment(hervS1.eqtl.overlap, eqtl.genes)
 
 for (set in c('S1', 'S2', 'S3')) {
-  for (flanking in c('.', '.1kb.', '.2kb.')) {
-    overlap.name <- paste0('herv', set, flanking, 'eqtl.overlap')
-    assign(overlap.name, find.herv.eqtl(me$cis$eqtls, me$trans$eqtls, get(paste0('herv', set, flanking, 'snp.info')), get(paste0('expr.', set, flanking, 'overlap'))$essay.data))
-    enrichment.name <- paste0('herv', set, flanking, 'eqtl.enrichment')
-    assign(enrichment.name, eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
-    
+  for (flanking in c('', '.1kb', '.2kb')) {
+    overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
+    assign(overlap.name, get.herv.eqtl.overlap(me$cis$eqtls, me$trans$eqtls, get(paste0('herv', set, flanking, '.snp.info')), get(paste0('expr.', set, flanking, 'overlap'))$essay.data))
+    assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
+    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.chromhmm.annotation(get(overlap.name), snp.annotation, expr.annotation))
+     
   }
 }
 
