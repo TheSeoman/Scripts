@@ -59,15 +59,15 @@ get.meqtl.overlap.go.enrichment <- function (herv.meqtl.overlap, meth.annotation
 get.meqtl.overlap.chromhmm.annotation <- function (meqtl.overlap, meth.annotation, snp.annotation) {
   out <- list()
   #annotation of meqtl-snps, where the snps themselves lie in herv elements
-  out$snp.snp <- snp.annotation[unique(meqtl.overlap$snp$snp),]
+  out$snp.snp <- snp.annotation[unique(as.character(meqtl.overlap$snp$snp)),]
   #annotation of meqtl-cpgs, where the associated snps lie in herv elements
-  out$snp.cpg <- meth.annotation[unique(meqtl.overlap$snp$cpg),]
-  out$cpg.snp <- snp.annotation[unique(meqtl.overlap$meth$snp),]
-  out$cpg.cpg <- meth.annotation[unique(meqtl.overlap$meth$cpg),]
-  out$both.snp <- snp.annotation[unique(meqtl.overlap$both$snp),]
-  out$both.cpg <- meth.annotation[unique(meqtl.overlap$both$cpg),]
-  out$either.snp <- snp.annotation[unique(meqtl.overlap$either$snp),]
-  out$either.cpg <- meth.annotation[unique(meqtl.overlap$either$cpg),]
+  out$snp.cpg <- meth.annotation[unique(as.character(meqtl.overlap$snp$cpg)),]
+  out$cpg.snp <- snp.annotation[unique(as.character(meqtl.overlap$meth$snp)),]
+  out$cpg.cpg <- meth.annotation[unique(as.character(meqtl.overlap$meth$cpg)),]
+  out$both.snp <- snp.annotation[unique(as.character(meqtl.overlap$both$snp)),]
+  out$both.cpg <- meth.annotation[unique(as.character(meqtl.overlap$both$cpg)),]
+  out$either.snp <- snp.annotation[unique(as.character(meqtl.overlap$either$snp)),]
+  out$either.cpg <- meth.annotation[unique(as.character(meqtl.overlap$either$cpg)),]
   return(out)
 }
 
@@ -83,8 +83,8 @@ if (!file.exists(PATHS$MEQTL.GENE.ANNOTATION.DATA)) {
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
-    assign(overlap.name, find.meqtl.overlap(get(paste0('meth.', set, '.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
-    assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
+    #assign(overlap.name, find.meqtl.overlap(get(paste0('meth.', set, '.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
+    #assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
     assign(paste0('herv', set, flanking, '.meqtl.annotation'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
   }
 }
@@ -97,3 +97,4 @@ save(hervS1.meqtl.annotation, hervS1.1kb.meqtl.annotation, hervS1.2kb.meqtl.anno
 
 save(hervS1.meqtl.enrichment, hervS2.meqtl.enrichment, hervS3.meqtl.enrichment, hervS1.1kb.meqtl.enrichment, hervS2.1kb.meqtl.enrichment, hervS3.1kb.meqtl.enrichment, 
      hervS1.2kb.meqtl.enrichment, hervS2.2kb.meqtl.enrichment, hervS3.2kb.meqtl.enrichment, file = PATHS$HERV.MEQTL.ENRICHMENT.DATA)
+

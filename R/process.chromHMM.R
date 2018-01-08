@@ -165,9 +165,10 @@ get.counted.annotation <- function (annotation) {
 
 hervS1.meth.annotation <- meth.chromhmm.states[unique(names(meth.S1.overlap$essay.ranges)),]
 
-counted.annotation <- get.counted.annotation(hervS1.meqtl.annotation$cpg.cpg)
+counted.annotation <- get.counted.annotation(test)
 png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.snp.chromHMM.weighted.png'), width = 500, height = 500)
 plot.weighted.summed.annotation(counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1')
 dev.off()
+
 
 
