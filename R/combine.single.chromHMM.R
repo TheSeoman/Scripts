@@ -93,6 +93,6 @@ snp.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, snp.ranges, 
 save(snp.chromhmm.states, file = PATHS$SNP.CHROMHMM.DATA)
 
 # expr
-# sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/expr.ranges/')
-# expr.chromhmm.annotation <- combine.single.broad.chromHMM(sample.dir, ids)
-# save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.DATA)
+sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/expr.ranges/')
+expr.chromhmm.annotation <- combine.single.broad.chromHMM(sample.dir, ids)
+save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.DATA)

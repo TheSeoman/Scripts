@@ -42,3 +42,17 @@ go.enrichment <- function(genes, universe, gsc, ontologies=c("MF", "BP", "CC")) 
   }
   return(go.tab)
 }
+
+extract.significant <- function(herv.set.name, condition, enrichment, cutoff = 0.05) {
+  if(enrichment[1, 'q'] > cutoff) {
+    significant <- enrichment[1,]
+  } else {
+    significant <- enrichment[enrichment$q <= cutoff,]
+  }
+  significant$set <- c(herv.set.name)
+  significant$condition <- c(condition)
+  significant <- significant[, c(10, 11, 1:9)]
+  return(significant)
+}
+
+

@@ -38,7 +38,7 @@ export.genes <- function(herv.eqtl.list, prefix) {
     write(as.character(unique(herv.eqtl.list$both.cis.eqtl$gene[!is.na(herv.eqtl.list$both.cis.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.cis.genes.txt'))
   }
   if (dim(herv.eqtl.list$both.trans.eqtl)[1] != 0) {
-    write(as.character(unique(hervsave(hervS1..eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
+    write(as.character(unique(hervS1.eqtl.list$both.trans.eqtl$gene[!is.na(herv.eqtl.list$both.trans.eqtl$gene)])), file = paste0(PATHS$DATA.DIR, prefix, 'both.trans.genes.txt'))
   }
 }
 
@@ -99,11 +99,11 @@ hervS1.eqtl.overlap.enrichment <- eqtl.overlap.go.enrichment(hervS1.eqtl.overlap
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('.', '.1kb.', '.2kb.')) {
-    eqtl.overlap <- paste0('herv', set, flanking, 'eqtl.overlap')
-    assign(eqtl.overlap, find.herv.eqtl(me$cis$eqtls, me$trans$eqtls, get(paste0('herv', set, flanking, 'snp.info')), get(paste0('expr.', set, flanking, 'overlap'))$essay.data))
-    eqtl.enrichment <- paste0('herv', set, flanking, 'eqtl.enrichment')
-    assign(eqtl.enrichment, eqtl.overlap.go.enrichment(get(eqtl.overlap), eqtl.genes))
-    saveRDS(get(eqtl.enrichment), file = paste0(PATHS$DATA.DIR, 'eQTL/go.enrichments/herv', set, flanking, 'overlap.enrichment.rds'))
+    overlap.name <- paste0('herv', set, flanking, 'eqtl.overlap')
+    assign(overlap.name, find.herv.eqtl(me$cis$eqtls, me$trans$eqtls, get(paste0('herv', set, flanking, 'snp.info')), get(paste0('expr.', set, flanking, 'overlap'))$essay.data))
+    enrichment.name <- paste0('herv', set, flanking, 'eqtl.enrichment')
+    assign(enrichment.name, eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
+    
   }
 }
 
@@ -113,3 +113,15 @@ save(hervS1.eqtl.overlap, hervS2.eqtl.overlap, hervS3.eqtl.overlap, hervS1.1kb.e
 save(hervS1.eqtl.enrichment, hervS2.eqtl.enrichment, hervS3.eqtl.enrichment, hervS1.1kb.eqtl.enrichment, hervS2.1kb.eqtl.enrichment, hervS3.1kb.eqtl.enrichment, 
      hervS1.2kb.eqtl.enrichment, hervS2.2kb.eqtl.enrichment, hervS3.2kb.eqtl.enrichment, file = PATHS$HERV.EQTL.ENRICHMENT.DATA)
 
+total.significant.enrichment <- data.frame(matrix(ncol = 11, nrow = 0))
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    eqtl.enrichment <- paste0('herv', set, flanking, '.eqtl.enrichment')
+    for (condition in ls(get(eqtl.enrichment))) {
+      significant <- extract.significant(paste0('herv', set, flanking), condition, get(eqtl.enrichment)[[condition]])
+      total.significant.enrichment <- rbind(total.significant, significant)
+    }
+  }
+}
+
+write.table(total.significant, file = paste0(PATHS$DATA.DIR, 'eQTL/BP.enrichment.summary.tsv'), sep = '\t', quote = FALSE, row.names = FALSE)

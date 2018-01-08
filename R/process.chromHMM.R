@@ -2,30 +2,59 @@ source('Scripts/R/paths.R')
 
 require(GenomicRanges)
 
-## annotate with the roadmap chromHMM states
-roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
-                           sep="\t",
-                           stringsAsFactors=F)
+if (!file.exists(PATHS$CHROMHMM.SAMPLE.DATA)) {
+  ids <- (function() {
+    roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
+                               sep="\t",
+                               stringsAsFactors=F)
+    
+    mnemonics =
+      read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
+               sep="\t")
+    levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
+    labels = mnemonics[,"DESCRIPTION"]
+    
+    use = roadmap.samples$ANATOMY == "BLOOD"
+    ids = roadmap.samples[use,"Epigenome.ID..EID."]
+    ids <- ids[order(ids)]
+    return(ids)
+  }) ()
+  save(ids, file = PATHS$CHROMHMM.SAMPLE.DATA)
+} else {
+  load(PATHS$CHROMHMM.SAMPLE.DATA)
+}
 
-mnemonics =
-  read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
-           sep="\t")
-levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
-labels = mnemonics[,"DESCRIPTION"]
-
-use = roadmap.samples$ANATOMY == "BLOOD"
-ids = roadmap.samples[use,"Epigenome.ID..EID."]
-cells = roadmap.samples[use,"Standardized.Epigenome.name"]
-
-## match this to the houseman cell types
-type = rep("other", sum(use))
-type[grep("CD4", roadmap.samples[use,5])] = "CD4T"
-type[grep("CD8", roadmap.samples[use,5])] = "CD8T"
-type[grep("CD15", roadmap.samples[use,5])] = "Gran"
-type[grep("CD56", roadmap.samples[use,5])] = "NK"
-type[grep("CD19", roadmap.samples[use,5])] = "Bcell"
-type[grep("CD14", roadmap.samples[use,5])] = "Mono"
-
+if (!file.exists(PATHS$CHROMHMM.CELL.TYPE.DATA)) {
+  type <- (function() {
+    roadmap.samples = read.csv(paste0(PATHS$ROADMAP.DIR, "sample_info.txt"),
+                               sep="\t",
+                               stringsAsFactors=F)
+    
+    mnemonics =
+      read.csv(paste0(PATHS$ROADMAP.DIR, "chromHMM/15state/mnemonics.txt"),
+               sep="\t")
+    levels = with(mnemonics, paste(STATE.NO., MNEMONIC, sep="_"))
+    labels = mnemonics[,"DESCRIPTION"]
+    
+    use = roadmap.samples$ANATOMY == "BLOOD"
+    ids = roadmap.samples[use,"Epigenome.ID..EID."]
+    cells = roadmap.samples[use,"Standardized.Epigenome.name"]
+    
+    ## match this to the houseman cell types
+    type = rep("other", sum(use))
+    type[grep("CD4", roadmap.samples[use,5])] = "CD4T"
+    type[grep("CD8", roadmap.samples[use,5])] = "CD8T"
+    type[grep("CD15", roadmap.samples[use,5])] = "Gran"
+    type[grep("CD56", roadmap.samples[use,5])] = "NK"
+    type[grep("CD19", roadmap.samples[use,5])] = "Bcell"
+    type[grep("CD14", roadmap.samples[use,5])] = "Mono"
+    type <- type[order(ids)]
+    return(type)
+  }) ()
+  save(type, file = PATHS$CHROMHMM.CELL.TYPE.DATA)
+} else {
+  load(PATHS$CHROMHMM.CELL.TYPE.DATA)
+}
 
 #call for each sample
 sum.up.chromHMM.states = function (ann.list) {
