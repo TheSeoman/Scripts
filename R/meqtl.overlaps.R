@@ -4,6 +4,7 @@ source('Scripts/R/go.enrichment.R')
 library(FDb.InfiniumMethylation.hg19)
 
 load(PATHS$METH.OVERLAP.DATA)
+load(PATHS$SNP.RANGES.DATA)
 load(PATHS$METH.CHROMHMM.DATA)
 load(PATHS$SNP.CHROMHMM.DATA)
 
@@ -74,6 +75,7 @@ load(PATHS$HERV.MEQTL.OVERLAP.DATA)
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
+    message(paste0('Processing: herv', set, flanking))
     overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
     #assign(overlap.name, find.meqtl.overlap(get(paste0('meth.', set, '.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
     #assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))

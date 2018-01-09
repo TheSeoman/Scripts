@@ -19,7 +19,7 @@ get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp, expr) {
   out$both.trans <-  trans.eqtl[trans.eqtl$snps %in% rownames(snp) & trans.eqtl$gene %in% rownames(expr),]
   
   out$either.cis <- cis.eqtl[cis.eqtl$snps %in% rownames(snp) | cis.eqtl$gene %in% rownames(expr),]
-  out$either.trans <- trans.eqtl[trans.eqtl$snps %in% rownames(snp) | trans.eqtl$gene %in% rownames(expr),]
+  out$either.trans <- trans.eqtl[trans.eqtl$snps %in% rownanmes(snp) | trans.eqtl$gene %in% rownames(expr),]
   
   return(out)
 }
@@ -53,6 +53,10 @@ get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) 
   return(out)    
 }
 
+filter.expr.chromhmm.annotation <- function(expr.annotation.list, expr.ids) {
+  filtered.annotation.list <- lapply(expr.annotation.list, function(annotation) annotation[[expr.ids]])
+}
+
 get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, expr.annotation) {
   out <- list()
   #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
@@ -70,34 +74,14 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, e
   return(out)
 }
 
-# schramm eqtl
-require(gdata)
-cis.eqtl <- read.xls(PATHS$F.CIS.EQTL, sheet = 1, header = TRUE)
-cis.eqtl <- cis.eqtl[,c(1, 5, 6)]
-colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
-trans.eqtl <- read.xls(PATHS$F.TRANS.EQTL, sheet = 1, header = TRUE)
-trans.eqtl <- trans.eqtl[,c(2,4, 5)]
-colnames(trans.eqtl) <- c('snpid', 'probeid', 'gene')
-S2 <- find.herv.eqtl(cis.eqtl, NULL, hervS2.snp.info, expr.S2.overlap$essay.data)
-export.genes(S2, 'eQTL/S2.schramm.')
-
-
-# small snps set eqtl
-require(illuminaHumanv3.db)
-genes <- unlist(as.list(illuminaHumanv3SYMBOL[as.character(me$all$eqtls$gene)]))
-load(PATHS$HERV.SMALL.ME)
-cis.eqtl <- cbind(as.character(me$all$eqtls$snps), as.character(me$all$eqtls$gene), genes)
-colnames(cis.eqtl) <- c('snpid', 'probeid', 'gene')
-
 # MAFOO1 snps set eqtl
 require(illuminaHumanv3.db)
 load(PATHS$HERV.MAF001.ME)
 eqtl.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(me$cis$eqtls$gene), as.character(me$trans$eqtls$gene)))]
-hervS1.eqtl.overlap <- find.herv.eqtl(me$cis$eqtls, me$trans$eqtls, hervS1.snp.info, expr.S1.overlap$essay.data)
-hervS1.eqtl.overlap.enrichment <- eqtl.overlap.go.enrichment(hervS1.eqtl.overlap, eqtl.genes)
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
+    cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
     assign(overlap.name, get.herv.eqtl.overlap(me$cis$eqtls, me$trans$eqtls, get(paste0('herv', set, flanking, '.snp.info')), get(paste0('expr.', set, flanking, 'overlap'))$essay.data))
     assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
@@ -111,6 +95,9 @@ save(hervS1.eqtl.overlap, hervS2.eqtl.overlap, hervS3.eqtl.overlap, hervS1.1kb.e
 
 save(hervS1.eqtl.enrichment, hervS2.eqtl.enrichment, hervS3.eqtl.enrichment, hervS1.1kb.eqtl.enrichment, hervS2.1kb.eqtl.enrichment, hervS3.1kb.eqtl.enrichment, 
      hervS1.2kb.eqtl.enrichment, hervS2.2kb.eqtl.enrichment, hervS3.2kb.eqtl.enrichment, file = PATHS$HERV.EQTL.ENRICHMENT.DATA)
+
+save(hervS1.eqtl.annotation, hervS2.eqtl.annotation, hervS3.eqtl.annotation, hervS1.1kb.eqtl.annotation, hervS2.1kb.eqtl.annotation, hervS3.1kb.eqtl.annotation, 
+     hervS1.2kb.eqtl.annotation, hervS2.2kb.eqtl.annotation, hervS3.2kb.eqtl.annotation, file = PATHS$HERV.EQTL.ANNOTATION.DATA)
 
 total.significant.enrichment <- data.frame(matrix(ncol = 11, nrow = 0))
 for (set in c('S1', 'S2', 'S3')) {
