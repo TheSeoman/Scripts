@@ -1,5 +1,9 @@
 source('Scripts/R/paths.R')
 
+require(GSEABase)
+require(GOstats)
+
+
 if (!file.exists(PATHS$GSC.DATA)) {
   library(Homo.sapiens)
   
@@ -27,9 +31,6 @@ if (!file.exists(PATHS$GSC.DATA)) {
 
 
 go.enrichment <- function(genes, universe, gsc, ontologies=c("MF", "BP", "CC")) {
-  require(GSEABase)
-  require(GOstats)
-
   go.tab = NULL
   for (ontology in ontologies) {
     params = GSEAGOHyperGParams(name="GO", ontology=ontology, geneIds=genes, universeGeneIds=universe, pvalueCutoff=1, testDirection="over", geneSetCollection=gsc, conditional=FALSE)

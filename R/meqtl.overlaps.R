@@ -44,6 +44,14 @@ get.meqtl.overlap.go.enrichment <- function (herv.meqtl.overlap, meth.annotation
   meth.meqtl.genes <- unique(meqtl.gene.annotation[herv.meqtl.overlap$meth$cpg, 'nearestGeneSymbol'])
   meth.meqtl.genes <- meth.meqtl.genes[!is.na(meth.meqtl.genes)]
   out$meth <- go.enrichment(meth.meqtl.genes, universe, gsc, c('BP'))
+  
+  both.meqtl.genes <- unique(meqtl.gene.annotation[herv.meqtl.overlap$both$cpg, 'nearestGeneSymbol'])
+  both.meqtl.genes <- both.meqtl.genes[!is.na(both.meqtl.genes)]
+  out$both <- go.enrichment(both.meqtl.genes, universe, gsc, c('BP'))
+  
+  either.meqtl.genes <- unique(meqtl.gene.annotation[herv.meqtl.overlap$either$cpg, 'nearestGeneSymbol'])
+  either.meqtl.genes <- either.meqtl.genes[!is.na(either.meqtl.genes)]
+  out$either <- go.enrichment(either.meqtl.genes, universe, gsc, c('BP'))
   return(out)    
 }
 
