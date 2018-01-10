@@ -51,7 +51,7 @@ snps$fileDelimiter = "\t"
 # the TAB character
 snps$fileOmitCharacters = "NA"
 # denote missing values;
-snps$fileSkipRows = 0
+snps$fileSkipRows = 1
 # one row of column labels
 snps$fileSkipColumns = 1
 # one column of row labels
@@ -123,4 +123,4 @@ me = Matrix_eQTL_main(
 )
 
 
-save(me, file = PATHS$HERV.MAF001.ME)
+save(me, file = PATHS$MAF001.ME)

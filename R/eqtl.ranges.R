@@ -16,7 +16,8 @@ get.expression.ranges <- function () {
   strand <- substr(unlist(lapply(allLocs , function(x)
     strsplit(as.character(x),":")[[1]][4])), 1, 1)[validPos];
   ids <- names(allLocs)[validPos];
-  gr <- GRanges(chrs, ranges=IRanges(start,end), strand=strand, ids);
+  gr <- GRanges(chrs, ranges=IRanges(start,end), strand=strand);
+  names(gr) <- ids
   return(gr)
 }
 

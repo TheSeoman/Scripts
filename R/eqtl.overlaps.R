@@ -1,17 +1,17 @@
 source("Scripts/R/paths.R")
 source('Scripts/R/go.enrichment.R')
 
-cat('Loading expression overlap data...')
+cat('Loading expression overlap data...', fill = TRUE)
 load(PATHS$EXPR.OVERLAP.DATA)
 cat('Loading herv snp ranges')
 load(PATHS$HERV.SNP.RANGES.DATA)
 
-cat('Loading chromhmm data for expression probes')
+cat('Loading chromhmm data for expression probes', fill = TRUE)
 load(PATHS$EXPR.CHROMHMM.DATA)
-cat('Loading chromhmm data for expression snps')
+cat('Loading chromhmm data for expression snps', fill = TRUE)
 load(PATHS$SNP.CHROMHMM.DATA)
 
-cat('Loading matrix-eqtl result')
+cat('Loading matrix-eqtl result', fill = TRUE)
 load(PATHS$MAF001.ME)
 
 
@@ -85,10 +85,6 @@ get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) 
   return(out)    
 }
 
-filter.expr.chromhmm.annotation <- function(expr.annotation.list, expr.ids) {
-  filtered.annotation.list <- lapply(expr.annotation.list, function(annotation) annotation[[expr.ids]])
-}
-
 get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, expr.annotation.list) {
   out <- list()
   #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
@@ -102,14 +98,16 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, e
   out$trans.both.snp <- snp.annotation[eqtl.overlap$both.trans$snps,]
   out$trans.either.snp <- snp.annotation[eqtl.overlap$either.trans$snps,]
   
-  out$cis.snp.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$snp.cis$expr)
-  out$cis.expr.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$expr.cis$expr)
-  out$cis.both.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$both.cis$expr)
-  out$cis.either.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$either.cis$expr)
-  out$trans.snp.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$snp.trans$expr)
-  out$trans.expr.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$expr.trans$expr)
-  out$trans.both.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$both.trans$expr)
-  out$trans.either.expr <- filter.expr.chromhmm.annotation(expr.annotation.list, eqtl.overlap$either.trans$expr)
+  #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
+  out$cis.snp.expr <- expr.annotation[eqtl.overlap$snp.cis$snps,]
+  #annotation of cis-eqtl-snps, where the associated expression probes lie in herv elements
+  out$cis.expr.expr <- expr.annotation[eqtl.overlap$expr.cis$snps,]
+  out$cis.both.expr <- expr.annotation[eqtl.overlap$both.cis$snps,]
+  out$cis.either.expr <- expr.annotation[eqtl.overlap$either.cis$snps,]
+  out$trans.snp.expr <- expr.annotation[eqtl.overlap$snp.trans$snps,]
+  out$trans.expr.expr <- expr.annotation[eqtl.overlap$expr.trans$snps,]
+  out$trans.both.expr <- expr.annotation[eqtl.overlap$both.trans$snps,]
+  out$trans.either.expr <- expr.annotation[eqtl.overlap$either.trans$snps,]
   
   return(out)
 }
@@ -125,7 +123,7 @@ for (set in c('S1', 'S2', 'S3')) {
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
     assign(overlap.name, get.herv.eqtl.overlap(me$cis$eqtls, me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.ranges'))), get(paste0('expr.', set, flanking, '.overlap'))$essay.ranges$ids))
     assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
-    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.chromhmm.annotation(get(overlap.name), snp.annotation, expr.annotation))
+    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }
 

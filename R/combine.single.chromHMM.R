@@ -15,8 +15,8 @@ combine.single.1nt.chromHMM <-
     
     samples <- samples[order(samples)]
     
-    annotation.loc <- names(annotation)
     ann.list <- lapply(annotation.list, function(annotation) {
+      annotation.loc <- names(annotation)
       message('...')
       missing.loc <- ranges.map[!(names(ranges.map) %in% annotation.loc)]
       names(annotation) <- ranges.map[annotation.loc]
@@ -64,21 +64,31 @@ get.majority.chromHMM <- function (annotation.list, samples, ranges) {
       if (length(ann) == 1) {
         return(ann[[1]][4])
       } else {
-        lengths <- lapply(ann, function(x) as.numeric(x[3])-as.numeric(x[2]))
-        return(ann[[which(a==max(a)[1])]])
+        lengths <- unlist(lapply(ann, function(x) as.numeric(x[3])-as.numeric(x[2])))
+        return(ann[[which(lengths==max(lengths)[1])]][4])
       }
     })
     return(temp)
   })
+  
+  complete.list <- lapply(majority.annotation.list, function(annotation) {
+    message('...')
+    annotation.ids <- names(annotation)
+    missing.ids <- names(ranges)[!names(ranges) %in% annotation.ids]
+    annotation[missing.ids] <- NA
+    annotation <- annotation[order(names(annotation))]
+    return(annotation)
+  })
+  
   message('Creating matrix...')
   annotation.combined <-
-    data.frame(matrix(nrow = length(ranges), ncol = length(majority.annotation.list)))
+    data.frame(matrix(nrow = length(ranges), ncol = length(complete.list)))
   
-  rownames(annotation.combined) <- names(annotation.list)
+  rownames(annotation.combined) <- names(ranges)
   colnames(annotation.combined) <- samples[start:end]
   
-  for (i in 1:length(ann.list)) {
-    annotation.combined[, i] <- ann.list[[i]]
+  for (i in 1:length(complete.list)) {
+    annotation.combined[, i] <- unlist(complete.list[[i]])
   }
   
   return(annotation.combined)
@@ -102,5 +112,8 @@ load(PATHS$CHROMHMM.SAMPLE.DATA)
 # expr
 load(PATHS$EXPR.RANGES.DATA)
 sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/expr.ranges/')
-expr.chromhmm.annotation <- combine.single.broad.chromHMM(sample.dir, ids, expr.ranges)
-save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.LIST.DATA)
+expr.chromhmm.annotation.list <- combine.single.broad.chromHMM(sample.dir, ids, expr.ranges)
+save(expr.chromhmm.annotation.list, file = PATHS$EXPR.CHROMHMM.LIST.DATA)
+expr.chromhmm.annotation <- get.majority.chromHMM(expr.chromhmm.annotation.list, ids, expr.ranges)
+save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.DATA)
+

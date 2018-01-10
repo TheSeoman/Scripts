@@ -3,7 +3,6 @@ source('Scripts/R/paths.R')
 require(GSEABase)
 require(GOstats)
 
-
 if (!file.exists(PATHS$GSC.DATA)) {
   library(Homo.sapiens)
   
