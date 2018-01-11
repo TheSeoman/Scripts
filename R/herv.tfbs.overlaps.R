@@ -75,14 +75,24 @@ if (!file.exists(PATHS$TFBS.DATA)) {
   
   save(blood.tfbs, file = PATHS$TFBS.DATA)
 } else {
-  load(PATHS$TRBS.DATA)
+  load(PATHS$TFBS.DATA)
 }
 
 calc.herv.tfbs.overlap <- function(herv.ranges, tfbs.ranges) {
-  overlap.hits <- findOverlaps(herv.ranges, tfbs.ranges) 
-  herv.tfbs.ranges <- tfbs.ranges[subjectHits(overlap.hits)]  
-  View(table(table(queryHits(overlap.hits))))
-  
+  out <- list()
+  out$hits <- findOverlaps(herv.ranges, tfbs.ranges) 
+  out$tfbs.ranges <- tfbs.ranges[unique(subjectHits(out$hits))]
+  out$herv.ranges <- herv.ranges[unique(queryHits(out$hits))]
+  return(out)
 }
 
 load(PATHS$HERV.DATA)
+
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    cat(paste0('Processing: herv', set, flanking), fill = TRUE)
+    overlap.name <- paste0('herv', set, flanking, '.tfbs.overlap')
+    assign(overlap.name, calc.herv.tfbs.overlap(get(paste0('herv', set, flanking, '.ranges')), blood.tfbs))
+  }
+}
+

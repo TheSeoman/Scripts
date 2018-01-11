@@ -21,6 +21,7 @@ meth.pos <- meth.pos[rownames(meth.pos) %in% rownames(beta),]
 id.map <- covariates.all[covariates.all$expr_s4f4ogtt %in% colnames(f4.norm) &
                          covariates.all$meth_f4 %in% colnames(beta) , c('expr_s4f4ogtt', 'meth_f4')]
 id.map <- id.map[order(id.map$expr_s4f4ogtt), ]
+colnames(expr.pos) <- c('geneid', 'chr', 'pos')
 
 expr.filtered <- f4.norm[rownames(expr.pos), as.character(id.map$expr_s4f4ogtt)]
 meth.filtered <- beta[rownames(meth.pos), as.character(id.map$meth_f4)]
@@ -33,7 +34,7 @@ covariates.filtered <- covariates.all[covariates.all$expr_s4f4ogtt %in% colnames
 
 write.table(
   expr.pos,
-  ,
+  PATHS$F.EXMEQTL.EXPRESSION.POS,
   sep = '\t',
   quote = FALSE,
   row.names = FALSE)
@@ -41,7 +42,7 @@ write.table(
 
 write.table(
   expr.filtered,
-  ,
+  PATHS$F.EXMEQTL.EXPRESSION.FILTERED,
   sep = '\t',
   row.names = TRUE,
   col.names = TRUE,
@@ -49,15 +50,21 @@ write.table(
 
 write.table(
   meth.pos,
-  ,
+  PATHS$F.EXMEQTL.METHYLATION.POS,
   sep = '\t',
   quote = FALSE,
   row.names = FALSE)
 
 write.table(
   meth.filtered,
-  ,
+  PATHS$F.EXMEQTL.METHYLATION.FILTERED ,
   sep = '\t',
   row.names = TRUE,
   col.names = TRUE,
   quote = FALSE)
+
+write.table(t(covariates.filtered),
+            PATHS$F.EXMEQTL.COVARIATES.FILTERED,
+            sep = '\t',
+            quote = FALSE,
+            col.names = FALSE)

@@ -26,6 +26,7 @@ get.snp.ranges <- function(){
   snp.pos <- read.table(PATHS$F.SNP.POS, sep = '\t', header = TRUE)
   snp.ranges <- GRanges(seqnames = snp.pos$chr, ranges <- IRanges(start = as.numeric(snp.pos$pos), width = 1))  
   names(snp.ranges) <- snp.pos$snp
+  return(snp.ranges)
 }
 
 expr.ranges <- get.expression.ranges()
