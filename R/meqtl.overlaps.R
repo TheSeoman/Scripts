@@ -4,7 +4,7 @@ source('Scripts/R/go.enrichment.R')
 library(FDb.InfiniumMethylation.hg19)
 
 cat('Loading methylation-herv overlaps...', fill = TRUE)
-load(PATHS$METH.OVERLAP.DATA)
+load(PATHS$HERV.METH.OVERLAP.DATA)
 cat('Loading herv-snp ranges...', fill = TRUE)
 load(PATHS$SNP.RANGES.DATA)
 cat('Loading methylation chromHMM annotation...', fill = TRUE)
@@ -82,7 +82,7 @@ for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
-    #assign(overlap.name, find.meqtl.overlap(get(paste0('meth.', set, '.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
+    #assign(overlap.name, find.meqtl.overlap(get(paste0('herv', set, flanking, '.meth.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
     #assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
     assign(paste0('herv', set, flanking, '.meqtl.annotation'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
   }

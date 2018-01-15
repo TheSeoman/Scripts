@@ -97,7 +97,7 @@ collect.data <- function(snp.ranges=NULL, meth.probes=NULL, expr.probes=NULL,
 	rm(pcs);
 
 	# load technical covariates for expression data
-	load(PATHS$F.COVA);
+	load(PATHS$COVARIABLES.DATA);
 	rownames(covars.f4) <- covars.f4[,1];
 	covars.f4 <- covars.f4[ID.MAP$expr_s4f4ogtt,c(2:6)];
 	covars.f4$sex <- as.factor(covars.f4$sex);

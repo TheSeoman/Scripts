@@ -33,7 +33,7 @@ expr$fileSkipColumns = 1
 # one column of row labels
 expr$fileSliceSize = 2000
 # read file in slices of 2,000 rows
-expr$LoadFile(PATHS$F.EXMEQTL.EXPRESSION.FILTERED)
+expr$LoadFile(PATHS$F.EQTM.EXPRESSION.FILTERED)
 
 
 ## Load methylation data
@@ -49,7 +49,7 @@ meth$fileSkipColumns = 1
 # one column of row labels
 meth$fileSliceSize = 2000
 # read file in slices of 2,000 rows
-meth$LoadFile(PATHS$F.EXMEQTL.METHYLATION.FILTERED)
+meth$LoadFile(PATHS$F.EQTM.METHYLATION.FILTERED)
 
 ## Load covariates
 
@@ -63,29 +63,29 @@ cvrt$fileSkipRows = 1
 # one row of column labels
 cvrt$fileSkipColumns = 1
 # one column of row labels
-if (length(PATHS$F.EXMEQTL.COVARIATES.FILTERED) > 0) {
-  cvrt$LoadFile(PATHS$F.EXMEQTL.COVARIATES.FILTERED)
+if (length(PATHS$F.EQTM.COVARIATES.FILTERED) > 0) {
+  cvrt$LoadFile(PATHS$F.EQTM.COVARIATES.FILTERED)
 }
 
-snpspos = read.table(PATHS$F.EXMEQTL.METHYLATION.POS,
+snpspos = read.table(PATHS$F.EQTM.METHYLATION.POS,
                      header = TRUE,
                      stringsAsFactors = FALSE)
-genepos = read.table(PATHS$F.EXMEQTL.EXPRESSION.POS,
+genepos = read.table(PATHS$F.EQTM.EXPRESSION.POS,
                      header = TRUE,
                      stringsAsFactors = FALSE)
 
 ## Run the analysis
 
-exmeqtl = Matrix_eQTL_main(
+eqtm.me = Matrix_eQTL_main(
   snps = meth,
   gene = expr,
   cvrt = cvrt,
-  output_file_name = PATHS$F.EXMEQTL.TRANS,
+  output_file_name = PATHS$F.EQTM.TRANS,
   pvOutputThreshold = pvOutputThreshold.trans,
   useModel = useModel,
   errorCovariance = errorCovariance,
   verbose = TRUE,
-  output_file_name.cis = PATHS$F.EXMEQTL.CIS,
+  output_file_name.cis = PATHS$F.EQTM.CIS,
   pvOutputThreshold.cis = pvOutputThreshold.cis,
   snpspos = snpspos,
   genepos = genepos,
@@ -95,5 +95,5 @@ exmeqtl = Matrix_eQTL_main(
   noFDRsaveMemory = FALSE
 )
 
-save(exmeqtl, file = PATHS$F.EXMEQTL.ME)
+save(eqtm.me, file = PATHS$EQTM.ME.DATA)
 

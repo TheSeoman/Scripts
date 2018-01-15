@@ -5,53 +5,74 @@ require(illuminaHumanv3.db)
 require(FDb.InfiniumMethylation.hg19)
 require(rtracklayer)
 
-get.expression.ranges <- function () {
-  require(illuminaHumanv3.db)
-  allLocs <- unlist(as.list(illuminaHumanv3GENOMICLOCATION))
-  start <- as.numeric(unlist(lapply(allLocs , function(x)
-    strsplit(as.character(x),":")[[1]][2])));
-  validPos <- !is.na(start);
-  start <- start[validPos];
-
-  chrs <- unlist(lapply(allLocs, function(x)
-    strsplit(as.character(x),":")[[1]][1]))[validPos];
-  end <- as.numeric(unlist(lapply(allLocs , function(x)
-    strsplit(as.character(x),":")[[1]][3])))[validPos];
-  strand <- substr(unlist(lapply(allLocs , function(x)
-    strsplit(as.character(x),":")[[1]][4])), 1, 1)[validPos];
-  ids <- names(allLocs)[validPos];
-  gr <- GRanges(chrs, ranges=IRanges(start,end), strand=strand, ids);
-  return(gr)
+if(!file.exists(PATHS$EXPR.RANGES.DATA)) {
+  get.expression.ranges <- function () {
+    require(illuminaHumanv3.db)
+    allLocs <- unlist(as.list(illuminaHumanv3GENOMICLOCATION))
+    start <- as.numeric(unlist(lapply(allLocs , function(x)
+      strsplit(as.character(x),":")[[1]][2])));
+    validPos <- !is.na(start);
+    start <- start[validPos];
+    
+    chrs <- unlist(lapply(allLocs, function(x)
+      strsplit(as.character(x),":")[[1]][1]))[validPos];
+    end <- as.numeric(unlist(lapply(allLocs , function(x)
+      strsplit(as.character(x),":")[[1]][3])))[validPos];
+    strand <- substr(unlist(lapply(allLocs , function(x)
+      strsplit(as.character(x),":")[[1]][4])), 1, 1)[validPos];
+    ids <- names(allLocs)[validPos];
+    gr <- GRanges(chrs, ranges=IRanges(start,end), strand=strand)
+    return(gr)
+  }
+  expr.ranges <- get.expression.ranges()
+  save(expr.ranges, file = PATHS$EXPR.RANGES.DATA)
+} else {
+  load(PATHS$EXPR.RANGES)
 }
 
-calc.overlap.data <- function (herv.ranges, essay.ranges, essay.data) {
+if (!file.exists(PATHS$METH.RANGES.DATA)) {
+  meth.ranges <- getPlatform(platform = 'HM450', genome = 'hg19')
+  meth.ranges <- meth.ranges[grep('cg|ch', meth.ranges$probeType)]
+  save(meth.ranges, file = PATHS$METH.RANGES.DATA)
+} else {
+  load(PATHS$METH.RANGES.DATA)
+}
+
+calc.overlap.data <- function (herv.ranges, essay.ranges, essay.data, data.type) {
   overlap.hits <- findOverlaps(herv.ranges, essay.ranges, type = 'any')
   herv.overlap.ranges <- herv.ranges[unique(queryHits(overlap.hits))]
   essay.overlap.ranges <- essay.ranges[unique(subjectHits(overlap.hits))]
-  if (!is.null(essay.ranges$ids)) {
-    essay.overlap.ids <- unique(intersect(essay.overlap.ranges$ids, rownames(essay.data)))
-  } else {
-    essay.overlap.ids <- unique(intersect(names(essay.overlap.ranges), rownames(essay.data)))
-  }
+  essay.overlap.ids <- unique(intersect(names(essay.overlap.ranges), rownames(essay.data)))
   essay.overlap.data <- essay.data[essay.overlap.ids,]
   out <- list()
-  out$hits <- overlap.hits
+  out$pairs <- cbind.data.frame(names(herv.ranges[queryHits(overlap.hits)]), names(essay.ranges[subjectHits(overlap.hits)]), stringsAsFactors = FALSE)
+  colnames(out$pairs) <- c('herv.id', paste0(data.type, '.id'))
   out$herv.ranges <- herv.overlap.ranges
-  out$essay.ranges <- essay.overlap.ranges
-  out$essay.data <- essay.overlap.data
+  out[[paste0(data.type, '.ranges')]] <- essay.overlap.ranges
+  out[[paste0(data.type, '.data')]] <- essay.overlap.data
   return(out)
 }
 
-combine.overlaps <- function (herv.ranges, essay1.ranges, essay2.ranges ,overlap1, overlap2) {
-  herv.indices <- intersect(queryHits(overlap1$hits), queryHits(overlap2$hits))
-  essay1.indices <- unique(subjectHits(overlap1$hits)[queryHits(overlap1$hits) %in% herv.indices])
-  essay2.indices <- unique(subjectHits(overlap2$hits)[queryHits(overlap2$hits) %in% herv.indices])
+combine.overlaps <- function (overlap1, overlap2, overlap1.type, overlap2.type) {
+  herv.ids <- intersect(overlap1$pairs$herv.id, overlap2$pairs$herv.id)
   out <- list()
-  out$herv.ranges <- herv.ranges[herv.indices]
-  out$essay1.ranges <- essay1.ranges[essay1.indices]
-  out$essay2.ranges <- essay2.ranges[essay2.indices]
-  out$essay1.data <- overlap1$essay.data[unique(out$essay1.ranges$ids),]
-  out$essay2.data <- overlap2$essay.data[unique(names(out$essay2.ranges)),]
+  out$herv.ranges <- overlap1$herv.ranges[herv.ids]
+  overlap1.pairs <- overlap1$pairs[overlap1$pairs$herv.id %in% herv.ids, ]
+  overlap2.pairs <- overlap2$pairs[overlap2$pairs$herv.id %in% herv.ids, ]
+  out$pairs <- data.frame(matrix(nrow = 0, ncol = 3))
+  for(herv.id in herv.ids) {
+    for(essay1.id in overlap1.pairs[overlap1.pairs$herv.id == herv.id, 2]) {
+      for(essay2.id in overlap2.pairs[overlap2.pairs$herv.id == herv.id, 2]) {
+        out$pairs <- rbind.data.frame(out$pairs, c(herv.id, essay1.id, essay2.id), stringsAsFactors = FALSE)
+      }
+    }
+  }
+  colnames(out$pairs) <- c('herv.id', paste0(overlap1.type, '.id'), paste0(overlap2.type, '.id'))
+  
+  out[[paste0(overlap1.type, '.ranges')]] <- overlap1[[paste0(overlap1.type, '.ranges')]][unique(overlap1.pairs[, 2])]
+  out[[paste0(overlap2.type, '.ranges')]] <- overlap1[[paste0(overlap1.type, '.ranges')]][unique(overlap1.pairs[, 2])]
+  out[[paste0(overlap1.type, '.data')]] <- overlap1[[paste0(overlap1.type, '.data')]][unique(overlap1.pairs[, 2]),]
+  out[[paste0(overlap2.type, '.data')]] <- overlap1[[paste0(overlap1.type, '.data')]][unique(overlap1.pairs[, 2]),]
   return (out)
 }
 
@@ -63,108 +84,107 @@ print.overlap.info <- function(overlap) {
 
 
 enlarge.ranges <- function(ranges, flanking) {
-    return (
-      GRanges(
+    enlarged.ranges <- GRanges(
         seqnames = seqnames(ranges),
         ranges = IRanges(start = start(ranges) - flanking, end = end(ranges) + flanking),
         strand = strand(ranges),
         name = ranges$name,
         score = ranges$score
-      )
     )
+    names(enlarged.ranges) <- names(ranges)
+    return (enlarged.ranges)
 }
 
-hervS1.ranges <- import(PATHS$HERVS1.ANNOT, format = 'BED')
-hervS2.ranges <- import(PATHS$HERVS2.ANNOT, format = 'BED')
-hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
+name.ranges.by.coordinates <- function(ranges) {
+  names <- paste0(as.character(seqnames(ranges)), ':', start(ranges), '-', end(ranges))
+  names(ranges) <- names
+  return (ranges)
+}
 
-ltr.ranges <- import(PATHS$F.LTR.ANNOT, format = 'BED')
+hervS1.ranges <- name.ranges.by.coordinates(hervS1.ranges)
 
-hervS1.1kb.ranges <- enlarge.ranges(hervS1.ranges, 1000)
-hervS2.1kb.ranges <- enlarge.ranges(hervS2.ranges, 1000)
-hervS3.1kb.ranges <- enlarge.ranges(hervS3.ranges, 1000)
+if(!file.exists(PATHS$HERV.RANGES.DATA)) {
+  hervS1.ranges <- import(PATHS$HERVS1.ANNOT, format = 'BED')
+  hervS1.ranges <- name.ranges.by.coordinates(hervS1.ranges)
+  hervS2.ranges <- import(PATHS$HERVS2.ANNOT, format = 'BED')
+  hervS2.ranges <- name.ranges.by.coordinates(hervS2.ranges)
+  hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
+  hervS3.ranges <- name.ranges.by.coordinates(hervS3.ranges)
+  
+  hervS1.1kb.ranges <- enlarge.ranges(hervS1.ranges, 1000)
+  hervS2.1kb.ranges <- enlarge.ranges(hervS2.ranges, 1000)
+  hervS3.1kb.ranges <- enlarge.ranges(hervS3.ranges, 1000)
+  
+  hervS1.2kb.ranges <- enlarge.ranges(hervS1.ranges, 2000)
+  hervS2.2kb.ranges <- enlarge.ranges(hervS2.ranges, 2000)
+  hervS3.2kb.ranges <- enlarge.ranges(hervS3.ranges, 2000)
+  
+  save(
+    hervS1.ranges,
+    hervS2.ranges,
+    hervS3.ranges,
+    hervS1.1kb.ranges,
+    hervS2.1kb.ranges,
+    hervS3.1kb.ranges,
+    hervS1.2kb.ranges,
+    hervS2.2kb.ranges,
+    hervS3.2kb.ranges,
+    file = PATHS$HERV.RANGES.DATA
+  )
+  save(hervS2.ranges, file = PATHS$HERVS2.RANGES.DATA)
+  save(hervS2.2kb.ranges, file = PATHS$HERVS2.2KB.RANGES.DATA)
+} else {
+  load(PATHS$HERV.RANGES.DATA)
+}
 
-hervS1.2kb.ranges <- enlarge.ranges(hervS1.ranges, 2000)
-hervS2.2kb.ranges <- enlarge.ranges(hervS2.ranges, 2000)
-hervS3.2kb.ranges <- enlarge.ranges(hervS3.ranges, 2000)
-
-save(hervS1.ranges, hervS2.ranges, hervS3.ranges, hervS1.1kb.ranges, hervS2.1kb.ranges, hervS3.1kb.ranges, hervS1.2kb.ranges, hervS2.2kb.ranges, hervS3.2kb.ranges, file = PATHS$HERV.RANGES.DATA)
-save(hervS2.ranges, file = PATHS$HERVS2.RANGES.DATA)
-save(hervS2.2kb.ranges, file = PATHS$HERVS2.2KB.RANGES.DATA)
-
-expr.ranges <- get.expression.ranges()
 load(PATHS$EXPR.DATA)
 expr.data <- f4.norm
 
-#meth.ranges <- features(FDb.InfiniumMethylation.hg19)
-meth.ranges <- getPlatform(platform='HM450', genome='hg19')
-meth.ranges <- meth.ranges[grep('cg|ch', meth.ranges$probeType)]
-save(meth.ranges, file = PATHS$METH.RANGES.DATA)
 load(PATHS$METH.DATA)
-meth.data <- data.frame(transform(beta))
+meth.data <- data.frame(beta)
 rm(beta)
 
-expr.S1.overlap <- calc.overlap.data(hervS1.ranges, expr.ranges, expr.data)
-expr.S2.overlap <- calc.overlap.data(hervS2.ranges, expr.ranges, expr.data)
-expr.S3.overlap <- calc.overlap.data(hervS3.ranges, expr.ranges, expr.data)
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    expr.overlap.name <- paste0('herv', set, flanking, '.expr.overlap')
+    meth.overlap.name <- paste0('herv', set, flanking, '.meth.overlap')
+    assign(expr.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), expr.ranges, expr.data, 'expr')) 
+    assign(meth.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), meth.ranges, meth.data, 'meth'))
+  }
+}
 
-print.overlap.info(expr.S1.overlap)
-print.overlap.info(expr.S2.overlap)
-print.overlap.info(expr.S3.overlap)
+save(
+  hervS1.expr.overlap,
+  hervS2.expr.overlap,
+  hervS3.expr.overlap,
+  hervS1.1kb.expr.overlap,
+  hervS2.1kb.expr.overlap,
+  hervS3.1kb.expr.overlap,
+  hervS1.2kb.expr.overlap,
+  hervS2.2kb.expr.overlap,
+  hervS3.2kb.expr.overlap,
+  file = PATHS$HERV.EXPR.OVERLAP.DATA
+)
 
-expr.S1.1kb.overlap <- calc.overlap.data(hervS1.1kb.ranges, expr.ranges, expr.data)
-expr.S2.1kb.overlap <- calc.overlap.data(hervS2.1kb.ranges, expr.ranges, expr.data)
-expr.S3.1kb.overlap <- calc.overlap.data(hervS3.1kb.ranges, expr.ranges, expr.data)
+save(
+  hervS1.meth.overlap,
+  hervS2.meth.overlap,
+  hervS3.meth.overlap,
+  hervS1.1kb.meth.overlap,
+  hervS2.1kb.meth.overlap,
+  hervS3.1kb.meth.overlap,
+  hervS1.2kb.meth.overlap,
+  hervS2.2kb.meth.overlap,
+  hervS3.2kb.meth.overlap,
+  file = PATHS$HERV.METH.OVERLAP.DATA
+)
 
-print.overlap.info(expr.S1.1kb.overlap)
-print.overlap.info(expr.S2.1kb.overlap)
-print.overlap.info(expr.S3.1kb.overlap)
-
-expr.S1.2kb.overlap <- calc.overlap.data(hervS1.2kb.ranges, expr.ranges, expr.data)
-expr.S2.2kb.overlap <- calc.overlap.data(hervS2.2kb.ranges, expr.ranges, expr.data)
-expr.S3.2kb.overlap <- calc.overlap.data(hervS3.2kb.ranges, expr.ranges, expr.data)
-
-print.overlap.info(expr.S1.2kb.overlap)
-print.overlap.info(expr.S2.2kb.overlap)
-print.overlap.info(expr.S3.2kb.overlap)
-
-save(expr.S1.overlap, expr.S2.overlap, expr.S3.overlap, expr.S1.1kb.overlap, expr.S2.1kb.overlap, expr.S3.1kb.overlap, expr.S1.2kb.overlap, expr.S2.2kb.overlap, expr.S3.2kb.overlap, file = PATHS$EXPR.OVERLAP.DATA)
-
-
-meth.S1.overlap <- calc.overlap.data(hervS1.ranges, meth.ranges, meth.data)
-meth.S2.overlap <- calc.overlap.data(hervS2.ranges, meth.ranges, meth.data)
-meth.S3.overlap <- calc.overlap.data(hervS3.ranges, meth.ranges, meth.data)
-
-print.overlap.info(meth.S1.overlap)
-print.overlap.info(meth.S2.overlap)
-print.overlap.info(meth.S3.overlap)
-
-meth.S1.1kb.overlap <- calc.overlap.data(hervS1.1kb.ranges, meth.ranges, meth.data)
-meth.S2.1kb.overlap <- calc.overlap.data(hervS2.1kb.ranges, meth.ranges, meth.data)
-meth.S3.1kb.overlap <- calc.overlap.data(hervS3.1kb.ranges, meth.ranges, meth.data)
-
-print.overlap.info(meth.S1.1kb.overlap)
-print.overlap.info(meth.S2.1kb.overlap)
-print.overlap.info(meth.S3.1kb.overlap)
-
-meth.S1.2kb.overlap <- calc.overlap.data(hervS1.2kb.ranges, meth.ranges, meth.data)
-meth.S2.2kb.overlap <- calc.overlap.data(hervS2.2kb.ranges, meth.ranges, meth.data)
-meth.S3.2kb.overlap <- calc.overlap.data(hervS3.2kb.ranges, meth.ranges, meth.data)
-
-print.overlap.info(meth.S1.2kb.overlap)
-print.overlap.info(meth.S2.2kb.overlap)
-print.overlap.info(meth.S3.2kb.overlap)
-
-save(meth.S1.overlap, meth.S2.overlap, meth.S3.overlap, meth.S1.1kb.overlap, meth.S2.1kb.overlap, meth.S3.1kb.overlap, meth.S1.2kb.overlap, meth.S2.2kb.overlap, meth.S3.2kb.overlap, file = PATHS$METH.OVERLAP.DATA)
-
-both.S1.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.overlap, meth.S1.overlap)
-both.S2.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.overlap, meth.S2.overlap)
-both.S3.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.overlap, meth.S3.overlap)
-
-both.S1.1kb.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.1kb.overlap, meth.S1.1kb.overlap)
-both.S2.1kb.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.1kb.overlap, meth.S2.1kb.overlap)
-both.S3.1kb.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.1kb.overlap, meth.S3.1kb.overlap)
-
-both.S1.2kb.overlap <- combine.overlaps(hervS1.ranges, expr.ranges, meth.ranges, expr.S1.2kb.overlap, meth.S1.2kb.overlap)
-both.S2.2kb.overlap <- combine.overlaps(hervS2.ranges, expr.ranges, meth.ranges, expr.S2.2kb.overlap, meth.S2.2kb.overlap)
-both.S3.2kb.overlap <- combine.overlaps(hervS3.ranges, expr.ranges, meth.ranges, expr.S3.2kb.overlap, meth.S3.2kb.overlap)
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    overlap.name <- paste0('herv', set, flanking, '.both.overlap') 
+    cat(overlap.name, fill = TRUE)
+    assign(overlap.name, combine.overlaps(get(paste0('herv', set, flanking, '.expr.overlap')),
+                                          get(paste0('herv', set, flanking, '.meth.overlap')),
+                                          'expr', 'meth'))
+  }
+}

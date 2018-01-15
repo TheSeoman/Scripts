@@ -91,7 +91,6 @@ cvrt$fileSkipColumns = 1
 # one column of row labels
 if (length(covariates_file_name) > 0) {
   cvrt$LoadFile(covariates_file_name)
-  
 }
 
 snpspos = read.table(PATHS$F.SNP.POS,
@@ -103,7 +102,7 @@ genepos = read.table(PATHS$F.EXPR.POS,
 
 ## Run the analysis
 
-me = Matrix_eQTL_main(
+eqtl.me = Matrix_eQTL_main(
   snps = snps,
   gene = gene,
   cvrt = cvrt,
@@ -123,4 +122,4 @@ me = Matrix_eQTL_main(
 )
 
 
-save(me, file = PATHS$MAF001.ME)
+save(eqtl.me, file = PATHS$MAF001.ME.DATA)

@@ -6,7 +6,7 @@ qsub_out_dir="/home/icb/julian.schmidt/qsub/"
 qsub_script_dir="/home/icb/julian.schmidt/Scripts/qsub/"
 qsub_calls_file="/home/icb/julian.schmidt/qsub.calls.txt"
 
-qsub_script_file=$qsub_dir'run.'$script_name'.sh'
+qsub_script_file=$qsub_script_dir'run.'$script_name'.sh'
 r_script_file=$r_script_dir$script_name'.R'
 
 if [ ! -f $qsub_script_file ]; then

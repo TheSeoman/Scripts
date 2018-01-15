@@ -104,16 +104,16 @@ load(PATHS$CHROMHMM.SAMPLE.DATA)
 # save(meth.chromhmm.states, file = PATHS$METH.CHROMHMM.DATA)
 
 # snp
-#load(PATHS$SNP.RANGES.DATA)
-#sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/snp.ranges/')
-#snp.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, snp.ranges, 1, 27)
-#save(snp.chromhmm.states, file = PATHS$SNP.CHROMHMM.DATA)
+load(PATHS$SNP.RANGES.DATA)
+sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/snp.ranges/')
+snp.chromhmm.states <- combine.single.1nt.chromHMM(sample.dir, ids, snp.ranges, 1, 27)
+save(snp.chromhmm.states, file = PATHS$SNP.CHROMHMM.DATA)
 
 # expr
-load(PATHS$EXPR.RANGES.DATA)
-sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/expr.ranges/')
-expr.chromhmm.annotation.list <- combine.single.broad.chromHMM(sample.dir, ids, expr.ranges)
-save(expr.chromhmm.annotation.list, file = PATHS$EXPR.CHROMHMM.LIST.DATA)
-expr.chromhmm.annotation <- get.majority.chromHMM(expr.chromhmm.annotation.list, ids, expr.ranges)
-save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.DATA)
+# load(PATHS$EXPR.RANGES.DATA)
+# sample.dir <- paste0(PATHS$DATA.DIR, 'chromHMM/expr.ranges/')
+# expr.chromhmm.annotation.list <- combine.single.broad.chromHMM(sample.dir, ids, expr.ranges)
+# save(expr.chromhmm.annotation.list, file = PATHS$EXPR.CHROMHMM.LIST.DATA)
+# expr.chromhmm.annotation <- get.majority.chromHMM(expr.chromhmm.annotation.list, ids, expr.ranges)
+# save(expr.chromhmm.annotation, file = PATHS$EXPR.CHROMHMM.DATA)
 
