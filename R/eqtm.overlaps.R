@@ -121,7 +121,7 @@ for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtm.overlap')
-    assign(overlap.name, get.herv.eqtm.overlap(eqtm$cis$eqtls, eqtm$trans$eqtls, names(get(paste0('herv', set, flanking, '.expr.overlap'))$essay.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$essay.ranges)))
+    assign(overlap.name, get.herv.eqtm.overlap(eqtm$cis$eqtls, eqtm$trans$eqtls, names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
     assign(paste0('herv', set, flanking, '.eqtm.enrichment'), get.eqtm.overlap.go.enrichment(get(overlap.name), eqtm.genes))
     #assign(paste0('herv', set, flanking, '.eqtm.annotation'), get.eqtm.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }

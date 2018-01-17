@@ -5,8 +5,8 @@ library(FDb.InfiniumMethylation.hg19)
 
 cat('Loading methylation-herv overlaps...', fill = TRUE)
 load(PATHS$HERV.METH.OVERLAP.DATA)
-cat('Loading herv-snp ranges...', fill = TRUE)
-load(PATHS$SNP.RANGES.DATA)
+cat('Loading herv-snp overlap...', fill = TRUE)
+load(PATHS$HERV.SNP.OVERLAP.DATA)
 cat('Loading methylation chromHMM annotation...', fill = TRUE)
 load(PATHS$METH.CHROMHMM.DATA)
 cat('Loading snp chromHMM annotation...', fill = TRUE)
@@ -22,12 +22,12 @@ if(!file.exists(PATHS$MEQTL.PAIRS.DATA)){
   load(PATHS$MEQTL.PAIRS.DATA)
 }
 
-find.meqtl.overlap <- function(meth.ranges, snp.ranges, meqtl.pairs) {
+get.herv.meqtl.overlap <- function(meqtl.pairs, snp.ids, meth.ids) {
   out <- list()
-  out$snp <- meqtl.pairs[meqtl.pairs$snp %in% names(snp.ranges),]
-  out$meth <- meqtl.pairs[meqtl.pairs$cpg %in% names(meth.ranges),]
-  out$both <- meqtl.pairs[meqtl.pairs$cpg %in% names(meth.ranges) & meqtl.pairs$snp %in% names(snp.ranges),]
-  out$either <- meqtl.pairs[meqtl.pairs$cpg %in% names(meth.ranges) | meqtl.pairs$snp %in% names(snp.ranges),]
+  out$snp <- meqtl.pairs[meqtl.pairs$snp %in% snp.ids,]
+  out$meth <- meqtl.pairs[meqtl.pairs$cpg %in% meth.ids,]
+  out$both <- meqtl.pairs[meqtl.pairs$cpg %in% meth.ids & meqtl.pairs$snp %in% snp.ids,]
+  out$either <- meqtl.pairs[meqtl.pairs$cpg %in% meth.ids | meqtl.pairs$snp %in% snp.ids,]
   return(out)
 }
 
@@ -66,7 +66,7 @@ get.meqtl.overlap.chromhmm.annotation <- function (meqtl.overlap, meth.annotatio
   out$either.cpg <- meth.annotation[unique(as.character(meqtl.overlap$either$cpg)),]
   return(out)
 }
-
+ 
 if (!file.exists(PATHS$MEQTL.GENE.ANNOTATION.DATA)) {
   meth.ranges <- getPlatform(platform='HM450', genome='hg19')
   meqtl.nearest.genes <- getNearestGene(meth.ranges[unique(meqtl.pairs$cpg)])
@@ -76,26 +76,28 @@ if (!file.exists(PATHS$MEQTL.GENE.ANNOTATION.DATA)) {
   load(PATHS$MEQTL.GENE.ANNOTATION.DATA)
 }
 
-load(PATHS$HERV.MEQTL.OVERLAP.DATA)
-
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
-    #assign(overlap.name, find.meqtl.overlap(get(paste0('herv', set, flanking, '.meth.overlap'))$essay.ranges, get(paste0('herv', set, '.snp.ranges')), meqtl.pairs))
-    #assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
-    assign(paste0('herv', set, flanking, '.meqtl.annotation'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
+    cat('Getting overlaps...', fill = TRUE)
+    assign(overlap.name, get.herv.meqtl.overlap(meqtl.pairs, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
+    cat('Calculating enrichments...', fill = TRUE)
+    assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
+    cat('Getting annotations', fill = TRUE)
+    assign(paste0('herv', set, flanking, '.meqtl.annotation.part'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
   }
 }
 
-# save(hervS1.meqtl.overlap, hervS2.meqtl.overlap, hervS3.meqtl.overlap, hervS1.1kb.meqtl.overlap, hervS2.1kb.meqtl.overlap, hervS3.1kb.meqtl.overlap, 
-#      hervS1.2kb.meqtl.overlap, hervS2.2kb.meqtl.overlap, hervS3.2kb.meqtl.overlap, file = PATHS$HERV.MEQTL.OVERLAP.DATA)
+cat('Saving herv-meqtl overlaps...', fill = TRUE)
+save(hervS1.meqtl.overlap, hervS2.meqtl.overlap, hervS3.meqtl.overlap, hervS1.1kb.meqtl.overlap, hervS2.1kb.meqtl.overlap, hervS3.1kb.meqtl.overlap,
+     hervS1.2kb.meqtl.overlap, hervS2.2kb.meqtl.overlap, hervS3.2kb.meqtl.overlap, file = PATHS$HERV.MEQTL.OVERLAP.DATA)
+
+cat('Saving herv-meqtl enrichments...', fill = TRUE)
+save(hervS1.meqtl.enrichment, hervS2.meqtl.enrichment, hervS3.meqtl.enrichment, hervS1.1kb.meqtl.enrichment, hervS2.1kb.meqtl.enrichment, hervS3.1kb.meqtl.enrichment,
+     hervS1.2kb.meqtl.enrichment, hervS2.2kb.meqtl.enrichment, hervS3.2kb.meqtl.enrichment, file = PATHS$HERV.MEQTL.ENRICHMENT.DATA)
 
 cat('Saving herv-meqtl chromHMM annotations...', fill = TRUE)
 save(hervS1.meqtl.annotation, hervS1.1kb.meqtl.annotation, hervS1.2kb.meqtl.annotation, hervS2.meqtl.annotation, hervS2.1kb.meqtl.annotation,
      hervS2.2kb.meqtl.annotation, hervS3.meqtl.annotation, hervS3.1kb.meqtl.annotation, hervS3.2kb.meqtl.annotation, file = PATHS$HERV.MEQTL.CHROMHMM.ANNOTATION.DATA)
-
-# save(hervS1.meqtl.enrichment, hervS2.meqtl.enrichment, hervS3.meqtl.enrichment, hervS1.1kb.meqtl.enrichment, hervS2.1kb.meqtl.enrichment, hervS3.1kb.meqtl.enrichment, 
-#      hervS1.2kb.meqtl.enrichment, hervS2.2kb.meqtl.enrichment, hervS3.2kb.meqtl.enrichment, file = PATHS$HERV.MEQTL.ENRICHMENT.DATA)
-
 cat('Done.', fill = TRUE)

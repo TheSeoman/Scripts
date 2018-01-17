@@ -3,111 +3,84 @@ source('Scripts/R/go.enrichment.R')
 
 cat('Loading expression overlap data...', fill = TRUE)
 load(PATHS$HERV.EXPR.OVERLAP.DATA)
-cat('Loading herv snp ranges')
-load(PATHS$HERV.SNP.RANGES.DATA)
+cat('Loading herv snp overlap data')
+load(PATHS$HERV.SNP.OVERLAP.DATA)
 
 cat('Loading chromhmm data for expression probes', fill = TRUE)
 load(PATHS$EXPR.CHROMHMM.DATA)
-cat('Loading chromhmm data for expression snps', fill = TRUE)
+cat('Loading chromhmm data for snps', fill = TRUE)
 load(PATHS$SNP.CHROMHMM.DATA)
 
 cat('Loading matrix-eqtl result', fill = TRUE)
+
 load(PATHS$MAF001.ME)
 
 
 get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp.ids, expr.ids) {
   out <- list()
-  out$snp.cis <- cis.eqtl[cis.eqtl$snps %in% snp.ids,]
-  out$snp.trans <- trans.eqtl[trans.eqtl$snps %in% snp.ids,]
+  out$cis.snp <- cis.eqtl[cis.eqtl$snps %in% snp.ids,]
+  out$trans.snp <- trans.eqtl[trans.eqtl$snps %in% snp.ids,]
   
-  out$expr.cis <-  cis.eqtl[cis.eqtl$gene %in% expr.ids,]
-  out$expr.trans <- trans.eqtl[trans.eqtl$gene %in% expr.ids,]
+  out$cis.expr <-  cis.eqtl[cis.eqtl$gene %in% expr.ids,]
+  out$trans.expr <- trans.eqtl[trans.eqtl$gene %in% expr.ids,]
   
-  out$both.cis <- cis.eqtl[cis.eqtl$snps %in% snp.ids & cis.eqtl$gene %in% expr.ids,]
-  out$both.trans <-  trans.eqtl[trans.eqtl$snps %in% snp.ids & trans.eqtl$gene %in% expr.ids,]
+  out$cis.both <- cis.eqtl[cis.eqtl$snps %in% snp.ids & cis.eqtl$gene %in% expr.ids,]
+  out$trans.both <-  trans.eqtl[trans.eqtl$snps %in% snp.ids & trans.eqtl$gene %in% expr.ids,]
   
-  out$either.cis <- cis.eqtl[cis.eqtl$snps %in% snp.ids | cis.eqtl$gene %in% expr.ids,]
-  out$either.trans <- trans.eqtl[trans.eqtl$snps %in% snp.ids | trans.eqtl$gene %in% expr.ids,]
+  out$cis.either <- cis.eqtl[cis.eqtl$snps %in% snp.ids | cis.eqtl$gene %in% expr.ids,]
+  out$trans.either <- trans.eqtl[trans.eqtl$snps %in% snp.ids | trans.eqtl$gene %in% expr.ids,]
   
   return(out)
 }
 
-get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.annotation) {
-  universe <- unique(expr.annotation[!is.na(expr.annotation)])
-  out <- list()
-  snp.trans.genes <- unique(expr.annotation[herv.eqtl.overlap$snp.trans$gene])
-  snp.trans.genes <- snp.trans.genes[!is.na(snp.trans.genes)]
-  if (length(snp.trans.genes) > 0) {
-    out$snp.trans <- go.enrichment(snp.trans.genes, universe, gsc, c('BP'))
+get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.genes) {
+  universe <- unique(expr.genes[!is.na(expr.genes)])
+  out <- lapply(herv.eqtl.overlap, function(eqtls) {
+    genes <- unique(expr.genes[eqtls$gene])
+    genes <- genes[!is.na(genes)]
+    if (length(genes) > 1){
+      enrichment <- go.enrichment(genes, universe, gsc, c('BP'))
+    } else {
+      enrichment <- NULL
+    }
+    return(genes)
+    return(enrichment)
+  })
+  names(out) <- names(herv.eqtl.overlap)
+  return(out)
+}
+
+print.eqtl.overlap.summary <- function(overlap) {
+  for(key in names(overlap)) {
+    cat(key, fill = TRUE) 
+    e <- overlap[[key]]
+    cat(paste(dim(e)[1], length(unique(e$snps)), length(unique(e$gene)), sep = '\t'), fill = TRUE)
   }
-  
-  expr.trans.genes <- unique(expr.annotation[herv.eqtl.overlap$expr.trans$gene])
-  expr.trans.genes <- expr.trans.genes[!is.na(expr.trans.genes)]
-  if (length(expr.trans.genes) > 0) {
-    out$expr.trans <- go.enrichment(expr.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  both.trans.genes <- unique(expr.annotation[herv.eqtl.overlap$both.trans$gene])
-  both.trans.genes <- both.trans.genes[!is.na(both.trans.genes)]
-  if (length(both.trans.genes) > 0) {
-    out$both.trans <- go.enrichment(both.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  either.trans.genes <- unique(expr.annotation[herv.eqtl.overlap$either.trans$gene])
-  either.trans.genes <- either.trans.genes[!is.na(either.trans.genes)]
-  if (length(either.trans.genes) > 0) {
-    out$either.trans <- go.enrichment(either.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  snp.cis.genes <- unique(expr.annotation[herv.eqtl.overlap$snp.cis$gene])
-  snp.cis.genes <- snp.cis.genes[!is.na(snp.cis.genes)]
-  if (length(snp.cis.genes) > 0) {
-    out$snp.cis <- go.enrichment(snp.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  expr.cis.genes <- unique(expr.annotation[herv.eqtl.overlap$expr.cis$gene])
-  expr.cis.genes <- expr.cis.genes[!is.na(expr.cis.genes)]
-  if (length(expr.cis.genes) > 0) {
-    out$expr.cis <- go.enrichment(expr.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  both.cis.genes <- unique(expr.annotation[herv.eqtl.overlap$both.cis$gene])
-  both.cis.genes <- both.cis.genes[!is.na(both.cis.genes)]
-  if (length(both.cis.genes) > 0) {
-    out$both.cis <- go.enrichment(both.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  either.cis.genes <- unique(expr.annotation[herv.eqtl.overlap$either.cis$gene])
-  either.cis.genes <- either.cis.genes[!is.na(either.cis.genes)]
-  if (length(either.cis.genes) > 0) {
-    out$either.cis <- go.enrichment(either.cis.genes, universe, gsc, c('BP'))
-  }
-  return(out)    
 }
 
 get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, expr.annotation) {
   out <- list()
   #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
-  out$cis.snp.snp <- snp.annotation[eqtl.overlap$snp.cis$snps,]
+  out$cis.snp.snp <- snp.annotation[eqtl.overlap$cis.snp$snps,]
   #annotation of cis-eqtl-snps, where the associated expression probes lie in herv elements
-  out$cis.expr.snp <- snp.annotation[eqtl.overlap$expr.cis$snps,]
-  out$cis.both.snp <- snp.annotation[eqtl.overlap$both.cis$snps,]
-  out$cis.either.snp <- snp.annotation[eqtl.overlap$either.cis$snps,]
-  out$trans.snp.snp <- snp.annotation[eqtl.overlap$snp.trans$snps,]
-  out$trans.expr.snp <- snp.annotation[eqtl.overlap$expr.trans$snps,]
-  out$trans.both.snp <- snp.annotation[eqtl.overlap$both.trans$snps,]
-  out$trans.either.snp <- snp.annotation[eqtl.overlap$either.trans$snps,]
+  out$cis.expr.snp <- snp.annotation[eqtl.overlap$cis.expr$snps,]
+  out$cis.both.snp <- snp.annotation[eqtl.overlap$cis.both$snps,]
+  out$cis.either.snp <- snp.annotation[eqtl.overlap$cis.either$snps,]
+  out$trans.snp.snp <- snp.annotation[eqtl.overlap$trans.snp$snps,]
+  out$trans.expr.snp <- snp.annotation[eqtl.overlap$trans.expr$snps,]
+  out$trans.both.snp <- snp.annotation[eqtl.overlap$trans.both$snps,]
+  out$trans.either.snp <- snp.annotation[eqtl.overlap$trans.either$snps,]
   
   #annotation of cis-eqtl-snps, where the snps themselves lie in herv elements
-  out$cis.snp.expr <- expr.annotation[eqtl.overlap$snp.cis$snps,]
+  out$cis.snp.expr <- expr.annotation[eqtl.overlap$cis.snp$snps,]
   #annotation of cis-eqtl-snps, where the associated expression probes lie in herv elements
-  out$cis.expr.expr <- expr.annotation[eqtl.overlap$expr.cis$snps,]
-  out$cis.both.expr <- expr.annotation[eqtl.overlap$both.cis$snps,]
-  out$cis.either.expr <- expr.annotation[eqtl.overlap$either.cis$snps,]
-  out$trans.snp.expr <- expr.annotation[eqtl.overlap$snp.trans$snps,]
-  out$trans.expr.expr <- expr.annotation[eqtl.overlap$expr.trans$snps,]
-  out$trans.both.expr <- expr.annotation[eqtl.overlap$both.trans$snps,]
-  out$trans.either.expr <- expr.annotation[eqtl.overlap$either.trans$snps,]
+  out$cis.expr.expr <- expr.annotation[eqtl.overlap$cis.expr$snps,]
+  out$cis.both.expr <- expr.annotation[eqtl.overlap$cis.both$snps,]
+  out$cis.either.expr <- expr.annotation[eqtl.overlap$cis.either$snps,]
+  out$trans.snp.expr <- expr.annotation[eqtl.overlap$trans.snp$snps,]
+  out$trans.expr.expr <- expr.annotation[eqtl.overlap$trans.expr$snps,]
+  out$trans.both.expr <- expr.annotation[eqtl.overlap$trans.both$snps,]
+  out$trans.either.expr <- expr.annotation[eqtl.overlap$trans.either$snps,]
   
   return(out)
 }
@@ -115,15 +88,15 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, e
 # MAFOO1 snps set eqtl
 cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
 require(illuminaHumanv3.db)
-eqtl.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(me$cis$eqtls$gene), as.character(me$trans$eqtls$gene)))]
+eqtl.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtl.me$cis$eqtls$gene), as.character(eqtl.me$trans$eqtls$gene)))]
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
-    assign(overlap.name, get.herv.eqtl.overlap(me$cis$eqtls, me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.ranges'))), names(get(paste0('herv', set, flanking, 'expr.overlap'))$essay.ranges)))
+    assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
     assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
-    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
+    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.overlap.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }
 
@@ -142,7 +115,7 @@ total.significant.enrichment <- data.frame(matrix(ncol = 11, nrow = 0))
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     eqtl.enrichment <- paste0('herv', set, flanking, '.eqtl.enrichment')
-    for (condition in ls(get(eqtl.enrichment))) {
+    for (condition in names(get(eqtl.enrichment))) {
       significant <- extract.significant(paste0('herv', set, flanking), condition, get(eqtl.enrichment)[[condition]])
       total.significant.enrichment <- rbind(total.significant, significant)
     }

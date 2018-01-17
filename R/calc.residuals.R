@@ -37,7 +37,7 @@ get.residuals <- function(data, data.type, col.names=NULL) {
                                      paste0("PC", 
                                             paste(1:20, "cp", sep="_"), 
                                             collapse="+"))))
-      return(lm(fm, data=data));
+      return(lm(fm, data=datana.action=na.exclude));
     });
   } else if(data.type == "expr") {
     if(is.null(cols)){
@@ -46,23 +46,12 @@ get.residuals <- function(data, data.type, col.names=NULL) {
     res <- lapply(cols, function(n) {      
       fm <- as.formula(paste0(n, "~",
                               "1+age+sex+RIN+plate+storage.time"))     
-      return(lm(fm,data=data))
+      return(lm(fm,data=data, na.action=na.exclude));
     });
   } else {
     stop("Data type not supported for residual calculation.")
   }
-  # build the full residual matrix from model results
-  residual.mat <- matrix(nrow=nrow(data), ncol = length(cols))
-  rownames(residual.mat) <- rownames(data)
-  residual.list <- lapply(res, resid)
-  residual.full.list <- lapply(residual.list, function(x) {
-    mis <- rownames(data)[!rownames(data) %in% names(x)]
-    x[mis] <- NA
-    x[order(names(x))]
-    return(x)
-  })
-    
-  residual.mat <- matrix(data=unlist(residual.full.list), nrow=nrow(data)) 
+  residual.mat <- matrix(data=unlist(res), nrow=nrow(data)) 
   colnames(residual.mat) <- cols;
   rownames(residual.mat) <- rownames(data);
   
