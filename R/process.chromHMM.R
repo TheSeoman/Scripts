@@ -68,7 +68,7 @@ sum.up.chromHMM.states = function (ann.list) {
 }
 
 load(PATHS$HERVS2.CHROMHMM.DATA)
-hervS2.elements = ls(hervS2.annotation[[1]])
+hervS2.elements = names(hervS2.annotation[[1]])
 
 load(PATHS$HERV.DATA)
 hervS1.elements = sapply(hervS1.ranges, function(range) {
