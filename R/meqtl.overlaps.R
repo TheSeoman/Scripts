@@ -12,10 +12,21 @@ load(PATHS$METH.CHROMHMM.DATA)
 cat('Loading snp chromHMM annotation...', fill = TRUE)
 load(PATHS$SNP.CHROMHMM.DATA)
 
+
+if(!file.exists(PATHS$MEQTL.TRANS.PAIRS.DATA)) {
+  load(PATHS$MEQTL.TRANS.DATA)
+  meqtl.trans.pairs <- cosmo[, c('cpg', 'snp', 'p.disco', 'p.comb')]
+  rm(cosmo)
+  save(meqtl.trans.pairs, file = PATHS$MEQTL.TRANS.PAIRS.DATA)
+} else {
+  load(PATHS$MEQTL.TRANS.PAIRS.DATA)
+}
+
 if(!file.exists(PATHS$MEQTL.PAIRS.DATA)){
   cat('Generating cosmo-pairs file...', fill = TRUE)
   load(PATHS$MEQTL.COSMO.DATA)
   meqtl.pairs <- cosmo[, c('cpg', 'snp', 'p.disco', 'p.comb')]
+  rm(cosmo)
   save(meqtl.pairs, file = PATHS$MEQTL.PAIRS.DATA)
 } else {
   cat('Loading cosmo-pairs file...', fill = TRUE)

@@ -37,7 +37,7 @@ get.residuals <- function(data, data.type, col.names=NULL) {
                                      paste0("PC", 
                                             paste(1:20, "cp", sep="_"), 
                                             collapse="+"))))
-      return(lm(fm, data=datana.action=na.exclude));
+      return(lm(fm, data=data, na.action=na.exclude));
     });
   } else if(data.type == "expr") {
     if(is.null(cols)){
@@ -46,12 +46,12 @@ get.residuals <- function(data, data.type, col.names=NULL) {
     res <- lapply(cols, function(n) {      
       fm <- as.formula(paste0(n, "~",
                               "1+age+sex+RIN+plate+storage.time"))     
-      return(lm(fm,data=data, na.action=na.exclude));
+      return(lm(fm, data=data, na.action=na.exclude));
     });
   } else {
     stop("Data type not supported for residual calculation.")
   }
-  residual.mat <- matrix(data=unlist(res), nrow=nrow(data)) 
+  residual.mat <- matrix(data=unlist(lapply(res, resid)), nrow=nrow(data))
   colnames(residual.mat) <- cols;
   rownames(residual.mat) <- rownames(data);
   
@@ -89,8 +89,9 @@ meth.data <- t(beta[names(meth.ranges), order(colnames(beta))])
 
 meth.matrix <- cbind.data.frame(pcs[rownames(meth.data), 1:20], houseman[rownames(meth.data), 1:5], meth.data ,stringsAsFactors = FALSE)
 rownames(meth.matrix) <- rownames(meth.data)
+save(meth.matrix, file = paste0(PATHS$DATA.DIR, 'Methylation/meth.cov.matrix.RData'))
 cat('Calculating methylation residuals...', fill = TRUE)
 
-meth.residuals <- get.residuals(meth.matrix, 'meth')
+meth.residuals40 <- get.residuals(meth.matrix, 'meth')
 cat('Saving methylation residuals...', fill = TRUE)                                
 save(meth.residuals, file = PATHS$METH.RESIDUALS.DATA)
