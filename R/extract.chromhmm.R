@@ -6,6 +6,8 @@ cat('Loading herv-ranges and chromHMM annotations', fill = TRUE)
 load(PATHS$HERV.RANGES.DATA)
 load(PATHS$HERVS2.2KB.CHROMHMM.DATA)
 
+load(PATHS$CHROMHMM.SAMPLE.DATA)
+
 get.ranges.from.annotation <- function (annotation) {
   annotation.ranges <- lapply(annotation, function(sample){
     ann.list <- unlist(sample)
@@ -20,10 +22,12 @@ get.ranges.from.annotation <- function (annotation) {
   return(annotation.ranges)
 }
 
-get.annotation.from.ranges <- function(query.ranges, annotation.ranges.list) {
-  subject.annotation <- lapply(annotation.ranges.list, function(annotation.ranges) {
+get.annotation.from.ranges <- function(query.ranges, annotation.ranges.list, samples) {
+  subject.annotation <- lapply(1:length(annotation.ranges.list), function(index) {
+    annotation.ranges <- annotation.ranges.list[[index]]
     temp <- list()
     overlaps <- findOverlaps(query.ranges, annotation.ranges)
+    cat(paste0('Processing: ', samples[index]), fill = T)
     last.name <- ''
     new.index <- 1
     for(i in 1:length(overlaps)) {
@@ -43,8 +47,8 @@ get.annotation.from.ranges <- function(query.ranges, annotation.ranges.list) {
         ann.row <- c(as.character(seqnames(ann.range)), start(ann.range), min(end(ann.range), end(query.range)), ann.range$state)
         temp[[query.name]][[new.index]] <- ann.row
       }
-    }    
-    
+    } 
+    return(temp)
   })
   return(subject.annotation)
 }
@@ -58,12 +62,12 @@ get.annotation.by.names <- function(query.ranges, annotation.list) {
 cat('Generating ranges from chromHMM annotations', fill = TRUE)
 hervS2.2kb.annotation.ranges.list <- get.ranges.from.annotation(hervS2.2kb.annotation)
 cat('Extracting annotations for hervS2.1kb', fill = TRUE)
-hervS2.1kb.annotation <- get.annotation.from.ranges(hervS2.1kb.ranges, hervS2.2kb.annotation.ranges.list)
-save(hervS2.1kb.annotation, file = paste0(PATHS$DATA.DIR, 'chromHMM/extractions/hervS2.1kb.annotation.RData'))
+# hervS2.1kb.annotation <- get.annotation.from.ranges(hervS2.1kb.ranges, hervS2.2kb.annotation.ranges.list, ids)
+# save(hervS2.1kb.annotation, file = paste0(PATHS$DATA.DIR, 'chromHMM/extractions/hervS2.1kb.annotation.RData'))
 cat('Extracting annotations for hervS2', fill = TRUE)
-hervS2.annotation <- get.annotation.from.ranges(hervS2.ranges, hervS2.2kb.annotation.ranges.list)
+hervS2.annotation <- get.annotation.from.ranges(hervS2.ranges, hervS2.2kb.annotation.ranges.list, ids)
 save(hervS2.annotation, file = paste0(PATHS$DATA.DIR, 'chromHMM/extractions/hervS2.annotation.RData'))
-save(hervS2.annotation, hervS2.1kb.annotation, hervS2.2kb.annotation, file = PATHS$HERVS2.CHROMHMM.DATA)
+# save(hervS2.annotation, hervS2.1kb.annotation, hervS2.2kb.annotation, file = PATHS$HERVS2.CHROMHMM.DATA)
 
 # cat('Extracting annotations for hervS1', fill = TRUE)
 # hervS1.2kb.annotation <- get.annotation.by.names(hervS1.2kb.ranges, hervS2.2kb.annotation)

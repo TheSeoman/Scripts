@@ -89,16 +89,22 @@ if (!file.exists(PATHS$MEQTL.GENE.ANNOTATION.DATA)) {
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
-    cat(paste0('Processing: herv', set, flanking), fill = TRUE)
-    overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
-    cat('Getting overlaps...', fill = TRUE)
-    assign(overlap.name, get.herv.meqtl.overlap(meqtl.pairs, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
-    cat('Calculating enrichments...', fill = TRUE)
-    assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
-    cat('Getting annotations', fill = TRUE)
-    assign(paste0('herv', set, flanking, '.meqtl.annotation.part'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
+    # cat(paste0('Processing: herv', set, flanking), fill = TRUE)
+    # overlap.name <- paste0('herv', set, flanking, '.meqtl.overlap')
+    # cat('Getting overlaps...', fill = TRUE)
+    # assign(overlap.name, get.herv.meqtl.overlap(meqtl.pairs, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
+    # cat('Calculating enrichments...', fill = TRUE)
+    # assign(paste0('herv', set, flanking, '.meqtl.enrichment'), get.meqtl.overlap.go.enrichment(get(overlap.name), meqtl.gene.annotation))
+    # cat('Getting annotations', fill = TRUE)
+    # assign(paste0('herv', set, flanking, '.meqtl.annotation.part'), get.meqtl.overlap.chromhmm.annotation(get(overlap.name), meth.chromhmm.states, snp.chromhmm.states))
+    trans.overlap.name <- paste0('herv', set, flanking, '.meqtl.trans.overlap')
+    assign(trans.overlap.name, get.herv.meqtl.overlap(meqtl.trans.pairs, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
   }
 }
+
+cat('Saving herv-trans.meqtl overlaps...', fill = TRUE)
+save(hervS1.meqtl.trans.overlap, hervS2.meqtl.trans.overlap, hervS3.meqtl.trans.overlap, hervS1.1kb.meqtl.trans.overlap, hervS2.1kb.meqtl.trans.overlap, hervS3.1kb.meqtl.trans.overlap,
+     hervS1.2kb.meqtl.trans.overlap, hervS2.2kb.meqtl.trans.overlap, hervS3.2kb.meqtl.trans.overlap, file = PATHS$HERV.MEQTL.TRANS.OVERLAP.DATA)
 
 cat('Saving herv-meqtl overlaps...', fill = TRUE)
 save(hervS1.meqtl.overlap, hervS2.meqtl.overlap, hervS3.meqtl.overlap, hervS1.1kb.meqtl.overlap, hervS2.1kb.meqtl.overlap, hervS3.1kb.meqtl.overlap,
