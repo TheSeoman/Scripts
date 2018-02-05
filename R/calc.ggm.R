@@ -7,8 +7,11 @@ require(BDgraph)
 set <- 'hervS1'
 filter <- 'snp'
 seed <- 'meqtl'
+flanking <- 2.5e5
+string <- F
 
-GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '/')
+GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
+dir.create(paste0(GGM.DIR, 'ggm/'), showWarnings = F, recursive = T)
 
 args <- commandArgs(TRUE)
 snp.index <- as.integer(args[1])

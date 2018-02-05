@@ -5,14 +5,23 @@ require('illuminaHumanv3.db')
 set <- 'hervS1'
 filter <- 'snp'
 seed <- 'meqtl'
+flanking <- 2.5e5
+string  <- F
 
-GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '/')
+GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
 load(paste0(GGM.DIR, 'snps.RData'))
+load(paste0(GGM.DIR, 'data.meta.RData'))
 load(paste0(GGM.DIR, 'data.overview.RData'))
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
+
+load(PATHS$EQTM.ME.DATA)
 cis.eqtl.pairs <- get(paste0(set, '.eqtl.overlap'))[[paste0('cis.', filter)]]
 trans.eqtl.pairs <- get(paste0(set, '.eqtl.overlap'))[[paste0('trans.', filter)]]
+
+trans.eqtm.pairs <- eqtm.me$trans$eqtls[, c('snps', 'gene')]
+cis.eqtm.pairs <- eqtm.me$cis$eqtls[, c('snps', 'gene')]
+eqtm.pairs <- rbind.data.frame(trans.eqtm.pairs, cis.eqtm.pairs, stringsAsFactors = F)
 
 snp <- snps[1]
 
@@ -43,3 +52,5 @@ for (snp in snps) {
   
   ggm.overview[snp,] <- c(entities, edges, meqtls, meqtl.edges, eqtls, eqtl.edges)
 }
+
+save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.RData'))

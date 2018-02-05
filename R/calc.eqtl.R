@@ -5,8 +5,9 @@ source("Scripts/R/paths.R")
 #
 # Be sure to use an up to date version of R and Matrix eQTL.
 
-library(MatrixEQTL)
+use.residuals = T
 
+library(MatrixEQTL)
 ## Settings
 
 # Linear model to use, modelANOVA, modelLINEAR, or modelLINEAR_CROSS
@@ -17,17 +18,23 @@ useModel = modelLINEAR
 SNP_file_name = PATHS$F.SNP.FILTERED
 
 
-# Gene expression file name
-expression_file_name = PATHS$F.EXPR.FILTERED
-
-# Covariates file name
-# Set to character() for no covariates
-covariates_file_name = PATHS$F.COVARIATES.FILTERED
+if (use.residuals) {
+  expression_file_name = PATHS$F.EXPR.RESIDUALS.FILTERED
+  covariates_file_name = character()
+  output_file_name.cis = PATHS$F.MAF001.RES.CIS.EQTL.OUT
+  output_file_name.trans = PATHS$F.MAF001.RES.TRANS.EQTL.OUT  
+  me.out.file = PATHS$MAF001.RES.ME.DATA
+} else {
+  expression_file_name = PATHS$F.EXPR.FILTERED
+  covariates_file_name = PATHS$F.COVARIATES.FILTERED
+  output_file_name.cis = PATHS$F.MAF001.COV.CIS.EQTL.OUT
+  output_file_name.trans = PATHS$F.MAF001.COV.TRANS.EQTL.OUT
+  me.out.file = PATHS$MAF001.COV.ME.DATA
+}
 
 
 # Output file name
-output_file_name.cis = PATHS$F.CIS.EQTL.OUT
-output_file_name.trans = PATHS$F.TRANS.EQTL.OUT
+
 
 # Only associations significant at this level will be saved
 pvOutputThreshold.cis = 1e-6
@@ -122,4 +129,4 @@ eqtl.me = Matrix_eQTL_main(
 )
 
 
-save(eqtl.me, file = PATHS$MAF001.ME.DATA)
+save(eqtl.me, file = me.out.file)

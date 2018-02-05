@@ -1,3 +1,5 @@
+BASE.DIR <- '/home/icb/johann.hawe/work/analysis/meQTLs/'
+
 #' Gets trans-associated CpGs for a sentinel SNP
 #'
 #' Get all trans cpgs for an individual sentinel SNP using a "cosmo"
@@ -1393,7 +1395,7 @@ tfbs.heatmap <- function(res, qcol, threshold, prune, max.or=Inf, min.or=0) {
 #' 
 get.snp.range <- function(snp){
   library(data.table)
-  snps <- fread("/storage/groups/groups_epigenereg/analyses/meQTLs/results/20171020/gtex-snp-locations.txt")
+  snps <- fread(paste0("results/current/gtex-snp-locations.txt"))
   snps <- snps[RS_ID_dbSNP142_CHG37p13 %in% snp,]
   if(nrow(snps)<1){
     warning("SNP not found on gtex db.\n") 
@@ -1414,7 +1416,7 @@ get.snp.range <- function(snp){
 #' @author Johann Hawe
 #' 
 get.chipseq.context <- function(cpgs){
-  load("results/current/cpgs_with_chipseq_context_100.RData")
+  load(paste0(BASE.DIR, "results/current/cpgs_with_chipseq_context_100.RData"))
   tfbs.ann <- tfbs.ann[rownames(tfbs.ann) %in% cpgs,,drop=F]
   
   return(tfbs.ann[cpgs,,drop=F])
@@ -1588,10 +1590,10 @@ load.string.db <- function(reload=F) {
   
   cat("Loading string db.", "\n")
  
-  fcache <- "/storage/groups/groups_epigenereg/analyses/meQTLs/results/20171020/string.v9.expr.RData"
+  fcache <- paste0(BASE.DIR, "results/current/string.v9.expr.RData")
   if(reload || !file.exists(fcache)){
   # load db anew
-  string.all <- fread(paste0("/storage/cmbstore/projects/epigenereg/datasets/string/20160819/human_gene_hgnc_symbol.links.detailed.v9.0.txt"),
+  string.all <- fread(paste0(BASE.DIR, "data/current/string/human_gene_hgnc_symbol.links.detailed.v9.0.txt"),
                         data.table=F, header=T, stringsAsFactors=F)
   string.inter <- string.all[string.all$experimental>=1 | string.all$database>=1,]
   rm(string.all)
@@ -1602,7 +1604,7 @@ load.string.db <- function(reload=F) {
                        string.inter[,2], 
                        string.db)
 
-  expr = read.csv("data/current/gtex/GTEx_Analysis_v6_RNA-seq_RNA-SeQCv1.1.8_gene_median_rpkm.gct", 
+  expr = read.csv(paste0(BASE.DIR, "data/current/gtex/GTEx_Analysis_v6_RNA-seq_RNA-SeQCv1.1.8_gene_median_rpkm.gct"), 
                         sep="\t", 
                         skip=2, 
                         stringsAsFactors=F)
@@ -2973,4 +2975,20 @@ handle.na.cpgs <- function(data){
   ndata <- ndata[cc,,drop=F]
   
   return(ndata)
+}
+
+graph.from.fit <- function(ggm.fit){
+  library(BDgraph)
+  library(graph)
+  library(igraph)
+  
+  # get the graph instance from the ggm fit
+  cutoff <- 0.9
+  g.adj <- BDgraph::select(ggm.fit, cut = cutoff)
+  g <- as_graphnel(graph.adjacency(g.adj, mode="undirected", diag=F))
+  
+  # set node and edge attributes
+  # g <- annotate.graph(g, ranges)
+  
+  return(g)
 }
