@@ -8,7 +8,6 @@ require('illuminaHumanv3.db')
 require(Rsamtools)
 
 load(PATHS$HERV.MEQTL.TRANS.OVERLAP.DATA)
-load(PATHS$HERV.EQTL.OVERLAP.DATA)
 load(PATHS$METH.COV.MATRIX.DATA)
 load(PATHS$EXPR.RESIDUALS.DATA)
 load(PATHS$METH.TFBS.OVERLAP.DATA)
@@ -140,6 +139,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     overview <-  c(length(meth.ids), length(tfbs.genes), length(snp.genes), length(snp.expr.no.gene.ids), 
                    length(meth.genes), length(meth.expr.no.gene.ids))
     
+    if(string) {
       tfbs.ann <- get.chipseq.context(meth.ids)
       cpgs.with.tfbs <- meth.ids[meth.ids %in% rownames(tfbs.ann[rowSums(tfbs.ann)>0,])]
       snp.genes.in.string <- snp.genes[snp.genes %in% nodes(STRING.DB)]
@@ -176,7 +176,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     colnames(expr.gene.data) <- total.genes
     rownames(expr.gene.data) <- rownames(expr.residuals)
     
-    snp.data <- get.snp.data(snp.range)
+    snp.data <- get.snp.data(snp.range, snp.samples)
     
     ggm.data <- cbind.data.frame(snp.data[id.map$axio_s4f4, , drop=F], meth.data[id.map$meth_f4, , drop=F], expr.no.gene.data[id.map$expr_s4f4ogtt, , drop=F], expr.gene.data[id.map$expr_s4f4ogtt,])
     rownames(ggm.data) <- id.map$expr_s4f4ogtt
@@ -191,4 +191,4 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
   save(data.meta, file = paste0(GGM.DIR, 'data.meta.RData'))
 }
 
-prepare.ggm.data(set = 'hervS1', filter = 'snp', seed = 'meqtl', string = T, snp.count.threshold = 5, flanking = 2.5e5)
+prepare.ggm.data(set = 'hervS1', filter = 'snp', seed = 'meqtl', string = F, snp.count.threshold = 5, flanking = 5e5)
