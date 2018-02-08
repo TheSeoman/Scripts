@@ -7,13 +7,13 @@ require(BDgraph)
 set <- 'hervS1'
 filter <- 'snp'
 seed <- 'meqtl'
-flanking <- 5e5
+flanking <- 2.5e5
 string  <- F
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
 load(PATHS$HERV.METH.OVERLAP.DATA)
 load(PATHS$HERV.EXPR.OVERLAP.DATA)
-load(PATHS$EQTM.ME.DATA)
+load(PATHS$EQTM.COV.ME.DATA)
 
 GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
 load(paste0(GGM.DIR, 'snps.RData'))
@@ -39,19 +39,15 @@ colnames(all.eqtm.pairs) <- c('cpg', 'expr.id')
 all.eqtm.pairs$cpg <- as.character(all.eqtm.pairs$cpg)
 all.eqtm.pairs$expr.id <- as.character(all.eqtm.pairs$expr.id)
 
+cutoff <- 0.6
 
-
-snp <- snps[1]
-
-
-
-ggm.overview <- matrix(nrow = length(snps), ncol = 23)
 ggm.meta <- list()
+ggm.overview <- data.frame(matrix(nrow = length(snps), ncol = 26))
 rownames(ggm.overview) <- snps
 colnames(ggm.overview) <- c('entities', 'edges', 'ccs', 'cc.sizes', 'snp.cc.size',
                             'cpgs', 'con.cpgs', 'direct.cpgs', 
-                            'herv.cpgs', 'con.herv.cpgs', 'cpg.genes', 'con.cpg.genes', 'herv.cpg.genes',
-                            'snp.genes', 'con.snp.genes', 'herv.snp.genes', 'con.herv.snp.genes', 
+                            'herv.cpgs', 'con.herv.cpgs', 'cpg.genes', 'con.cpg.genes', 'direct.cpg.genes', 'con.direct.cpg.genes' ,'herv.cpg.genes',
+                            'snp.genes', 'con.snp.genes', 'direct.snp.genes', 'herv.snp.genes', 'con.herv.snp.genes', 
                             'pos.eqtl', 'con.eqtl', 'direct.eqtl', 
                             'pos.eqtm', 'con.eqtm', 'direct.eqtm')
 
@@ -61,7 +57,7 @@ for (snp in snps) {
     load(paste0(GGM.DIR, 'ggm/', snp, '.RData'))
     ggms[[snp]] <- ggm
     meta <- data.meta[[snp]]
-    ggm.res <- graph.from.fit(ggm, NULL)
+    ggm.res <- graph.from.fit(ggm, cutoff)
     ccs <- connComp(ggm.res)
     cc.lengths <- unlist(lapply(ccs, length))
     biggest.cc <- ccs[[which.max(cc.lengths)]]
@@ -80,10 +76,12 @@ for (snp in snps) {
     
     cpg.genes <- data.frame(row.names = c(meta$meth.genes, meta$meth.no.gene.probes))
     cpg.genes$con <- rownames(cpg.genes) %in% snp.cc
+    cpg.genes$direct <- rownames(cpg.genes) %in% unlist(adj(ggm.res, rownames(cpgs)))
     cpg.genes$herv <- rownames(cpg.genes) %in% herv.expr.ids | rownames(cpg.genes) %in% herv.genes
     
     snp.genes <- data.frame(row.names = c(meta$snp.genes, meta$snp.no.gene.probes))
     snp.genes$con <- rownames(snp.genes) %in% snp.cc
+    snp.genes$direct <- rownames(snp.genes) %in% adj(ggm.res, snp)[[1]]
     snp.genes$herv <- rownames(snp.genes) %in% herv.expr.ids | rownames(snp.genes) %in% herv.genes
     
     eqtl.expr.ids <- unique(as.character(cis.eqtl.pairs[cis.eqtl.pairs$snps == snp, 'gene']))
@@ -104,21 +102,19 @@ for (snp in snps) {
       cpg.edges <- adj(ggm.res, row[1])
       return(row[2] %in% cpg.edges | row[3] %in% cpg.edges)
     })
-    #                        entities         edges0.5   edges0.9    ccs                   
     ggm.overview[snp,] <- c(length(entities), edges, length(ccs), paste(sort(cc.lengths[cc.lengths > 1], decreasing = T), collapse = ', '), length(snp.cc),
-    #                       cpgs         con.cpgs           direct.cpgs 
                             dim(cpgs)[1], sum(cpgs$con), sum(cpgs$direct), sum(cpgs$herv), sum(cpgs$herv & cpgs$con), 
-                            dim(cpg.genes)[1], sum(cpg.genes$con), sum(cpg.genes$herv), 
-    #                       'snp.genes', 'con.snp.genes', 
-                            dim(snp.genes)[1], sum(snp.genes$con), sum(snp.genes$herv), sum(snp.genes$herv & snp.genes$con),
-    #                       'pos.eqtl', 'con.eqtl', 'direct.eqtl', 
+                            dim(cpg.genes)[1], sum(cpg.genes$con), sum(cpg.genes$direct), sum(cpg.genes$direct & cpg.genes$con), sum(cpg.genes$herv), 
+                            dim(snp.genes)[1], sum(snp.genes$con), sum(snp.genes$direct), sum(snp.genes$herv), sum(snp.genes$herv & snp.genes$con),
                             dim(eqtls)[1], sum(eqtls$con), sum(eqtls$con), 
-    #                       'pos.eqtm', 'con.eqtm', 'direct.eqtm'
                             dim(eqtm.pairs)[1], sum(eqtm.pairs$con), sum(eqtm.pairs$direct))
     
     ggm.meta[[snp]] <- list(ccs = ccs, cpgs = cpgs, cpg.genes = cpg.genes, snp.genes = snp.genes, eqtls = eqtls, eqtm.pairs = eqtm.pairs)
     
 }
+for(i in c(1:3, 5:26)) {
+  ggm.overview[, i] <- as.integer(ggm.overview[, i])
+}
 
-save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.RData'))
-save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta.RData'))
+save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.', cutoff,'.RData'))
+save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta', cutoff, '.RData'))

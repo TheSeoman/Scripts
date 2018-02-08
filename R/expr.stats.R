@@ -21,4 +21,6 @@ layout(matrix(c(1:2), 1, 2, byrow = T))
 plot(expr.mean, expr.sd/expr.mean * 100, pch = 3, xlab = 'mean expression', ylab = 'coefficent of variation', main = 'Expression per probe')
 hist(expr.sd/expr.mean * 100, breaks = seq(0, 35, 0.25), xlab = 'coefficent of variation', main = '')
 dev.off()
- 
+
+
+load(PATHS$METH.RANGES)
