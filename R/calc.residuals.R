@@ -58,38 +58,47 @@ get.residuals <- function(data, data.type, col.names=NULL) {
   return(residual.mat)
 }
 
-cat('Loading expression data and covariates...', fill = TRUE)
-load(PATHS$EXPR.DATA)
-load(PATHS$EXPR.RANGES)
-load(PATHS$COVARIABLES.DATA)
-covars.f4$sex <- as.factor(covars.f4$sex);
-covars.f4$plate <- as.factor(covars.f4$plate)
-covars.f4 <- covars.f4[order(covars.f4$ZZ.NR),]
-
-expr.ranges <- expr.ranges[order(expr.ranges)]
-
-expr.data <- t(f4.norm[names(expr.ranges), colnames(f4.norm)])
-expr.matrix <- cbind.data.frame(covars.f4[, 2:6], expr.data, stringsAsFactors = FALSE)
-rownames(expr.matrix) <- rownames(expr.data)
+if(!file.exists(PATHS$EXPR.COV.MATRIX)) {
+  cat('Loading expression data and covariates...', fill = TRUE)
+  load(PATHS$EXPR.DATA)
+  load(PATHS$EXPR.RANGES)
+  load(PATHS$COVARIABLES.DATA)
+  covars.f4$sex <- as.factor(covars.f4$sex);
+  covars.f4$plate <- as.factor(covars.f4$plate)
+  covars.f4 <- covars.f4[order(covars.f4$ZZ.NR),]
+  
+  expr.ranges <- expr.ranges[order(expr.ranges)]
+  
+  expr.data <- t(f4.norm[names(expr.ranges), colnames(f4.norm)])
+  expr.matrix <- cbind.data.frame(covars.f4[, 2:6], expr.data, stringsAsFactors = FALSE)
+  rownames(expr.matrix) <- rownames(expr.data)
+  save(expr.matrix, file = PATHS$EXPR.COV.MATRIX)
+} else {
+  load(PATHS$EXPR.COV.MATRIX)
+}
 
 cat('Calculation expression residuals...', fill = TRUE)                                
 expr.residuals <- get.residuals(expr.matrix, 'expr')
 cat('Saving expression residuals...', fill = TRUE)                                
 save(expr.residuals, file = PATHS$EXPR.RESIDUALS.DATA)
 
-cat('Loading methylation data and covariates...', fill = TRUE)
-houseman <- read.table(PATHS$F.HOUSEMAN ,sep=";", header=T,row.names=1);
-houseman <- houseman[order(rownames(houseman)), ]
-load(PATHS$METH.PCS.DATA)
-pcs <- pcs[order(rownames(pcs)),]
-colnames(pcs) <- paste(colnames(pcs), "cp", sep="_")
-load(PATHS$METH.DATA)
-load(PATHS$METH.RANGES.DATA)
-meth.data <- t(beta[names(meth.ranges), order(colnames(beta))])
-
-meth.matrix <- cbind.data.frame(pcs[rownames(meth.data), 1:20], houseman[rownames(meth.data), 1:5], meth.data ,stringsAsFactors = FALSE)
-rownames(meth.matrix) <- rownames(meth.data)
-save(meth.matrix, file = paste0(PATHS$DATA.DIR, 'Methylation/meth.cov.matrix.RData'))
+if(!file.exists(PATHS$METH.COV.MATRIX.DATA)) {
+  cat('Loading methylation data and covariates...', fill = TRUE)
+  houseman <- read.table(PATHS$F.HOUSEMAN ,sep=";", header=T,row.names=1);
+  houseman <- houseman[order(rownames(houseman)), ]
+  load(PATHS$METH.PCS.DATA)
+  pcs <- pcs[order(rownames(pcs)),]
+  colnames(pcs) <- paste(colnames(pcs), "cp", sep="_")
+  load(PATHS$METH.DATA)
+  load(PATHS$METH.RANGES.DATA)
+  meth.data <- t(beta[names(meth.ranges), order(colnames(beta))])
+  
+  meth.matrix <- cbind.data.frame(pcs[rownames(meth.data), 1:20], houseman[rownames(meth.data), 1:5], meth.data ,stringsAsFactors = FALSE)
+  rownames(meth.matrix) <- rownames(meth.data)
+  save(meth.matrix, file = PATHS$METH.COV.MATRIX.DATA)
+} else {
+  load(PATHS$METH.COV.MATRIX.DATA)
+}
 cat('Calculating methylation residuals...', fill = TRUE)
 
 meth.residuals40 <- get.residuals(meth.matrix, 'meth')

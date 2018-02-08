@@ -7,7 +7,7 @@ require(BDgraph)
 set <- 'hervS1'
 filter <- 'snp'
 seed <- 'meqtl'
-flanking <- 2.5e5
+flanking <- 5e5
 string  <- F
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
@@ -120,5 +120,5 @@ for (snp in snps) {
     
 }
 
-save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.nocut.RData'))
-save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta.nocut.RData'))
+save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.RData'))
+save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta.RData'))
