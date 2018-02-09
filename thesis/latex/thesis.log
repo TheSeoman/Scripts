@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  9 FEB 2018 15:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  9 FEB 2018 15:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1257,7 +1257,7 @@ Overfull \hbox (50.64464pt too wide) in paragraph at lines 95--96
 [3] [4 <../figures/expr_var.pdf>] [5] [6]
 
 LaTeX Warning: Reference `fig:herv.expr.var' on page  undefined on input line 1
-81.
+82.
 
 [7] [8] (./thesis.aux)
 
@@ -1275,7 +1275,7 @@ Here is how much of TeX's memory you used:
  </home/seoman/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on thesis.pdf (8 pages, 963962 bytes).
+Output written on thesis.pdf (8 pages, 964106 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream
