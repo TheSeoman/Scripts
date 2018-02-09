@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  5 FEB 2018 16:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  9 FEB 2018 15:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1242,32 +1242,40 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5]
-<../figures/herv_expr_var.pdf, id=24, 578.16pt x 578.16pt>
-File: ../figures/herv_expr_var.pdf Graphic file (type pdf)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+<../figures/expr_var.pdf, id=15, 505.89pt x 289.08pt>
+File: ../figures/expr_var.pdf Graphic file (type pdf)
 
-<use ../figures/herv_expr_var.pdf>
-Package pdftex.def Info: ../figures/herv_expr_var.pdf used on input line 173.
-(pdftex.def)             Requested size: 462.52863pt x 462.52863pt.
+<use ../figures/expr_var.pdf>
+Package pdftex.def Info: ../figures/expr_var.pdf used on input line 95.
+(pdftex.def)             Requested size: 505.88875pt x 289.07928pt.
 
-Overfull \hbox (7.28452pt too wide) in paragraph at lines 173--174
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 95--96
 [][] 
  []
 
-[6] [7] [8 <../figures/herv_expr_var.pdf>] (./thesis.aux) ) 
+[3] [4 <../figures/expr_var.pdf>] [5] [6]
+
+LaTeX Warning: Reference `fig:herv.expr.var' on page  undefined on input line 1
+81.
+
+[7] [8] (./thesis.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 24633 strings out of 494910
- 616567 string characters out of 6179836
+ 24634 strings out of 494910
+ 616556 string characters out of 6179836
  759204 words of memory out of 5000000
- 27473 multiletter control sequences out of 15000+600000
+ 27474 multiletter control sequences out of 15000+600000
  8538 words of font info for 30 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  68i,7n,79p,724b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/seoman/.texm
-f-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/share/texlive/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on thesis.pdf (8 pages, 85121 bytes).
+ </home/seoman/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb>
+Output written on thesis.pdf (8 pages, 963962 bytes).
 PDF statistics:
  55 PDF objects out of 1000 (max. 8388607)
  38 compressed objects within 1 object stream
