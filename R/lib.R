@@ -2977,13 +2977,12 @@ handle.na.cpgs <- function(data){
   return(ndata)
 }
 
-graph.from.fit <- function(ggm.fit){
+graph.from.fit <- function(ggm.fit, cutoff = 0.9){
   library(BDgraph)
   library(graph)
   library(igraph)
   
   # get the graph instance from the ggm fit
-  cutoff <- 0.9
   g.adj <- BDgraph::select(ggm.fit, cut = cutoff)
   g <- as_graphnel(graph.adjacency(g.adj, mode="undirected", diag=F))
   

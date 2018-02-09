@@ -17,7 +17,6 @@ if (!file.exists(PATHS$CHROMHMM.META.DATA)) {
   
   use = roadmap.samples$ANATOMY == "BLOOD"
   ids = roadmap.samples[use, "Epigenome.ID..EID."]
-  ids <- ids[order(ids)]
   cells = roadmap.samples[use, "Standardized.Epigenome.name"]
   
   ## match this to the houseman cell types
@@ -29,6 +28,7 @@ if (!file.exists(PATHS$CHROMHMM.META.DATA)) {
   type[grep("CD19", roadmap.samples[use, 5])] = "Bcell"
   type[grep("CD14", roadmap.samples[use, 5])] = "Mono"
   type <- type[order(ids)]
+  ids <- ids[order(ids)]
   save(ids, type, levels, file = PATHS$CHROMHMM.META.DATA)
 } else {
   load(PATHS$CHROMHMM.META.DATA)
@@ -38,16 +38,7 @@ if (!file.exists(PATHS$CHROMHMM.META.DATA)) {
 sum.up.chromHMM.states = function (ann.list) {
   res = lapply(ann.list, function(sample) {
   message(paste0('# areas: ', length(sample), ' #elements: ', length(unlist(sample))))
-  for (i in c(1:length(sample))) {
-    element.name = ls(sample[i])
-    element.split = strsplit(element.name, split = '[:-]')
-    sample[[i]][[1]][2] = element.split[[1]][2]
-    sample[[i]][[length(sample[[i]])]][3] = element.split[[1]][3]
-  }
-  
-  temp <- unlist(sample)
-  
-  ann.table = data.frame(matrix(temp[!is.na(temp)], ncol=4, byrow=TRUE), stringsAsFactors=FALSE) 
+  ann.table = data.frame(matrix(unlist(sample), ncol=4, byrow=TRUE), stringsAsFactors=FALSE) 
   colnames(ann.table) = c("chr", "start", "end", "state")
   ann.table$length = as.numeric(ann.table$end) - as.numeric(ann.table$start)
   
@@ -66,6 +57,12 @@ sum.up.chromHMM.states = function (ann.list) {
   
   return(annotation)
 }
+
+weight.chromhmm.states <- function(annotation.table) {
+  
+}
+
+load(PATHS$SNP.CHROMHMM.DATA)
 
 load(PATHS$HERVS2.CHROMHMM.DATA)
 hervS2.elements = names(hervS2.annotation[[1]])
@@ -146,7 +143,7 @@ dev.off()
 
 load(PATHS$HERV.MEQTL.CHROMHMM.ANNOTATION.DATA)
 
-get.counted.annotation <- function (annotation) {
+count.sample.annotation <- function (annotation) {
   counted.annotation <-
     apply(annotation, 2, function(sample) {
       counted = data.frame(matrix(ncol = length(levels), nrow = 0))
@@ -170,5 +167,27 @@ png(paste0(PATHS$PLOT.DIR, 'hervS1.meqtl.snp.chromHMM.weighted.png'), width = 50
 plot.weighted.summed.annotation(counted.annotation, 'chromHMM state proportions over meQTL-snps in HERV set 1')
 dev.off()
 
+count.snp.annotation <- function (snp.annotation) {
+  weighted <- apply(snp.annotation, 1, function(states) {
+    row <- vector(mode = 'numeric', length = 15)
+    temp <- matrix(nrow = 15, ncol = 27)
+    temp[] <- 0
+    
+    for( i in 1:27 ) {
+      temp[which(levels == states[i]) , i] <- 1
+    }
+    by.type = apply(t(temp), 2, tapply, type, mean)
+    pop.mean = colMeans(houseman[, -1])
+    pop.mean = pop.mean/sum(pop.mean)
+    weighted.state = pop.mean %*% by.type[names(pop.mean), ]
+    return(weighted.state)
+  })
+  rownames(weithed) <- levels
+  return(t(weighted))  
+  
+}
 
+load(PATHS$SNP.CHROMHMM.DATA)
+
+snp.chromhmm.counted <- get.counted.annotation(snp.chromhmm.states)
 

@@ -4,6 +4,7 @@ require('GenomicRanges')
 
 cat('Loading herv-ranges and chromHMM annotations', fill = TRUE)
 load(PATHS$HERV.RANGES.DATA)
+load(PATHS$HERVS2.CHROMHMM.DATA)
 load(PATHS$HERVS2.2KB.CHROMHMM.DATA)
 
 load(PATHS$CHROMHMM.SAMPLE.DATA)
@@ -72,8 +73,8 @@ save(hervS2.annotation, file = paste0(PATHS$DATA.DIR, 'chromHMM/extractions/herv
 # cat('Extracting annotations for hervS1', fill = TRUE)
 # hervS1.2kb.annotation <- get.annotation.by.names(hervS1.2kb.ranges, hervS2.2kb.annotation)
 # hervS1.1kb.annotation <- get.annotation.by.names(hervS1.1kb.ranges, hervS2.1kb.annotation)
-# hervS1.annotation <- get.annotation.by.names(hervS1.ranges, hervS2.annotation)
-# save(hervS1.annotation, hervS1.1kb.annotation, hervS1.2kb.annotation, file = PATHS$HERVS1.CHROMHMM.DATA)
+hervS1.annotation <- get.annotation.by.names(hervS1.ranges, hervS2.annotation)
+save(hervS1.annotation, file = PATHS$HERVS1.CHROMHMM.DATA)
 # 
 # cat('Extracting annotations for hervS3', fill = TRUE)
 # hervS3.2kb.annotation <- get.annotation.by.names(hervS3.2kb.ranges, hervS1.2kb.annotation)

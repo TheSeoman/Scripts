@@ -1,5 +1,4 @@
 source('Scripts/R/paths.R')
-source('Scripts/R/residuals.R')
 source('Scripts/R/preprocess-ggm-data.methods.R')
 
 require('GenomicRanges')
@@ -8,11 +7,9 @@ require('illuminaHumanv3.db')
 require(Rsamtools)
 
 load(PATHS$HERV.MEQTL.TRANS.OVERLAP.DATA)
-load(PATHS$HERV.EQTL.OVERLAP.DATA)
-load(PATHS$METH.COV.MATRIX.DATA)
+load(PATHS$METH.RESIDUALS.DATA)
 load(PATHS$EXPR.RESIDUALS.DATA)
 load(PATHS$METH.TFBS.OVERLAP.DATA)
-
 
 load(PATHS$EXPR.RANGES.DATA)
 load(PATHS$METH.RANGES.DATA)
@@ -82,37 +79,44 @@ if(F){
   filter <- 'snp'
   seed <- 'meqtl'
   snp.count.threshold = 5
-  flanking <- 5e5
+  flanking <- 2.5e5
   string <- F
 }
 
-prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', string = F, snp.count.threshold = 5, flanking = 5e5) {
+prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', string = F, snp.count.threshold = 5, flanking = 5e5, batch = NULL, batch.size = NULL) {
   GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
   dir.create(paste0(GGM.DIR, 'data/'), showWarnings = F, recursive = T)
-  
-  meqtl.pairs <- get(paste0(set, '.meqtl.trans.overlap'))[[filter]]
-  meqtl.count <- table(meqtl.pairs$snp)[table(meqtl.pairs$snp) > 0]
-  snps <- names(meqtl.count[meqtl.count >= snp.count.threshold])
-  
   data <- list()
-  
   data.meta <- list()
-  
-  data.overview <- data.frame(matrix(ncol = ifelse(string, 8, 7), nrow = length(snps)))
-  if (string) {
-    colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'path.genes', 'total.entities')
+  meqtl.pairs <- get(paste0(set, '.meqtl.trans.overlap'))[[filter]]
+
+  if(!file.exists(paste0(GGM.DIR, 'snps.RData'))) {
+    meqtl.count <- table(meqtl.pairs$snp)[table(meqtl.pairs$snp) > 0]
+    snps <- names(meqtl.count[meqtl.count >= snp.count.threshold])
+    
+    data.overview <- data.frame(matrix(ncol = ifelse(string, 8, 7), nrow = length(snps)))
+    if (string) {
+      colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'path.genes', 'total.entities')
+    } else {
+      colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'total.entities')
+    }
+    rownames(data.overview) <- snps
+    save(snps, file = paste0(GGM.DIR, 'snps.RData'))
   } else {
-    colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'total.entities')
+    load(paste0(GGM.DIR, 'snps.RData'))
   }
-  rownames(data.overview) <- snps
-  
-  save(snps, file = paste0(GGM.DIR, 'snps.RData'))
   
   if(string) {
     load.string.db()
   }
   
-  for (snp in snps) {
+  if(is.null(batch) | is.null(batch.size)) {
+    range <- c(1:length(snps))
+  } else {
+    range <- c(((batch-1)*batch.size+1):(batch*batch.size))    
+  }
+  
+  for (snp in snps[range]) {
     cat(paste0('Processing snp: ', snp), fill = T)
     snp.range <- snp.ranges[snp]
     snp.expr.ids <- get.nearby.probes(snp.range, expr.ranges, flanking)
@@ -128,7 +132,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     
     expr.no.gene.data <- expr.residuals[, unique(c(snp.expr.no.gene.ids, meth.expr.no.gene.ids)), drop = F]
     
-    meth.data <- get.residuals(meth.matrix[, c(1:25, which(colnames(meth.matrix) %in% meth.ids))], 'meth', meth.ids)
+    meth.data <- meth.residuals[, meth.ids]
     tfbs.ids <- unique(meth.tfbs.overlap$pairs[meth.tfbs.overlap$pairs$meth.id %in% meth.ids, 'tfbs.id'])
     tfbs.genes <- unique(meth.tfbs.overlap$tfbs.ranges[tfbs.ids]$TF)
     
@@ -140,6 +144,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     overview <-  c(length(meth.ids), length(tfbs.genes), length(snp.genes), length(snp.expr.no.gene.ids), 
                    length(meth.genes), length(meth.expr.no.gene.ids))
     
+    if(string) {
       tfbs.ann <- get.chipseq.context(meth.ids)
       cpgs.with.tfbs <- meth.ids[meth.ids %in% rownames(tfbs.ann[rowSums(tfbs.ann)>0,])]
       snp.genes.in.string <- snp.genes[snp.genes %in% nodes(STRING.DB)]
@@ -176,7 +181,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     colnames(expr.gene.data) <- total.genes
     rownames(expr.gene.data) <- rownames(expr.residuals)
     
-    snp.data <- get.snp.data(snp.range)
+    snp.data <- get.snp.data(snp.range, snp.samples)
     
     ggm.data <- cbind.data.frame(snp.data[id.map$axio_s4f4, , drop=F], meth.data[id.map$meth_f4, , drop=F], expr.no.gene.data[id.map$expr_s4f4ogtt, , drop=F], expr.gene.data[id.map$expr_s4f4ogtt,])
     rownames(ggm.data) <- id.map$expr_s4f4ogtt
@@ -187,8 +192,6 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     
     save(ggm.data, file = paste0(GGM.DIR, 'data/', snp, '.RData'))
   }
-  save(data.overview, file = paste0(GGM.DIR, 'data.overview.RData'))
+  save(data.overview, file = paste0(GGM.DIR, 'data.overview', batch, '.RData'))
   save(data.meta, file = paste0(GGM.DIR, 'data.meta.RData'))
 }
-
-prepare.ggm.data(set = 'hervS1', filter = 'snp', seed = 'meqtl', string = T, snp.count.threshold = 5, flanking = 2.5e5)
