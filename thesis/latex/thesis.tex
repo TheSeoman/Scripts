@@ -1,6 +1,4 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[margin=2.5cm]{geometry}
-\usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{csvsimple}
@@ -12,15 +10,91 @@
 \usepackage{longtable}
 \usepackage{tocloft}
 
-\usepackage{textcomp}
+%\usepackage[pdftex]{graphicx}
+\usepackage[ansinew]{inputenc}
+\usepackage{geometry}
+%\usepackage{bbold}
+\geometry{a4paper,left=2.5cm,right=2.5cm, top=2.5cm, bottom=3cm}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 
+\usepackage{textcomp}
+\usepackage[hyphens,spaces]{url}
 
 \begin{document}
+\sloppy
 \sectionfont{\LARGE}
 \subsectionfont{\Large}
 \subsubsectionfont{\Large}
 \counterwithin{figure}{section}
 \counterwithin{table}{section}
+
+\begin{titlepage}
+
+
+%%LR
+\sffamily
+
+\begin{center}
+
+
+% Oberer Teil der Titelseite:
+\includegraphics[width=0.3\textwidth]{../figures/LMU-logo.jpg}
+\hfill
+\includegraphics[width=0.4\textwidth]{../figures/TUM-logo.jpg}  
+\\[5cm]
+
+{\LARGE Department of Bioinformatics and Computational Biology}\\[0.5cm]
+{Technische Universit\"at M\"unchen}\\
+[2cm]
+{\Large Master's Thesis in Bioinformatics}\\[1.5cm]
+
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries Variation of HERV elements in the KORA cohort
+}\\[0.4cm]
+
+\HRule \\[1.5cm]
+
+{\Large Julian Schmidt}\\[2.5cm]
+
+\vfill
+\end{center}
+\end{titlepage}
+\pagestyle{empty}
+
+%%LR comprehensive title
+\begin{titlepage}
+{\sffamily
+
+
+\begin{center}
+\includegraphics[width=0.3\textwidth]{../figures/LMU-logo.jpg}
+\hfill
+\includegraphics[width=0.4\textwidth]{../figures/TUM-logo.jpg}  
+\\[1.5cm]  
+
+{\LARGE Department of Bioinformatics and Computational Biology}\\[0.5cm]
+{Technische Universit\"at M\"unchen}\\[1cm]
+
+{\Large Master's Thesis in Bioinformatics}\\[2cm]
+{\textbf{\LARGE Variation of HERV elements in the KORA cohort}}\\[2cm]
+{\textbf{\LARGE Variation von HERV elementen in der KORA Kohorte}}\\[4cm]
+
+\end{center}
+\begin{center}\Large
+  \begin{tabular}{ll}
+    Author:& Julian Schmidt\\
+    Supervisor: & Dr. Matthias Heinig\\
+    Advisor:        & Johann Hawe\\
+    Submitted:     &  15.03.2018\\
+  \end{tabular}
+\end{center}
+
+}% end title page
+
+\end{titlepage}
+
+
 \pagenumbering{gobble}
 
 \tableofcontents
@@ -66,7 +140,7 @@
 
 
 \subsection{hERV annotation}
-hERV annotation was pertained from RepeatMasker human annotation downloaded from the UCSC genome browser download section \\(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz).
+hERV annotation was pertained from RepeatMasker human annotation downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}.
  
 The annotation then was filtered for elements containing "ERV" in the repeat name column. This lead to a total of 42508 elements with a mean width of 796 bp covering a total of 33.9 MB. This set will be called "hERV set 1", or short hERV s1.
 
@@ -103,7 +177,7 @@ DNA methylation was measured using the Infinium HumanMethylation450K BeadChip, w
 Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes.
  
 \subsubsection{Genotypes}
-Genotyping was performed with the Affymetrix Axiom array. The Iluminus calling algorithm was used for genotype calling and missing values imputed using the IMPUTE2 software. SNPs were filtered at IMPUTE value of 0.4. 
+Genotyping was performed with the Affymetrix Axiom array. The Iluminus calling algorithm was used for genotype calling and missing values imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. SNPs were filtered at IMPUTE value of 0.4. 
 
 After excluding all SNPs with a minor allele frequency of less than one percent measurements of 9533127 SNPs for xxxx individuals were available. 
 
@@ -115,6 +189,19 @@ Previously process methylation quantitative trait loci (meQTL) data was used. Th
 xxxx distinct cpg-sites and xxxxxx snps were part of at least one meQTL. xxxx pairs consisted of cpgs and snps on the same chromosome, while xxxxx association were between different chromosomes. 
 
 \subsection{Transcription factor binding}
+Transcription factor binding sites were obtained from two publicy available sources: 
+
+First was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
+
+It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{doi:10.1093/nar/gku1280}. The pipeline uses the tools MEME-ChIP\cite{doi:10.1093/bioinformatics/btr189} and FIMO\cite{doi:10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifes with known motifs from Jaspar\cite{} and TransFac\cite{} using machine learning methods and manual curation. 
+
+The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2173371 peaks for 125 transcription factors.  
+
+The second source was the ReMap project\cite{doi:10.1093/nar/gku1280}. It combines 395 publicy available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+
+It contains xxxxx peaks. After filtering for 19 blood related cell types a of xxxx peaks of xxx different transcription factors remained. 
+
+Combining both filtered data sets lead to a total of xxxxx peaks of xxx transcription factors.
 
 
 \subsection{chromHMM}
@@ -207,10 +294,14 @@ Measurements for a total of 80754 SNPs within hERV set 1, that occurr in at leas
 
 \subsection{hERV realated regulatory networks}
 
-
+\newpage
 \section{Discussion}
 
-
+\newpage
 \section{Conclusion}
+
+\newpage
+\bibliography{mybib}{}
+\bibliographystyle{unsrt}
 
 \end{document}

@@ -1,0 +1,35 @@
+\begin{thebibliography}{1}
+
+\bibitem{10.1371/journal.pgen.1000529}
+Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
+\newblock A flexible and accurate genotype imputation method for the next
+  generation of genome-wide association studies.
+\newblock {\em PLOS Genetics}, 5(6):1--15, 06 2009.
+
+\bibitem{10.1101/gr.139105.112}
+Jie Wang, Jiali Zhuang, Sowmya Iyer, XinYing Lin, Troy~W. Whitfield, Melissa~C.
+  Greven, Brian~G. Pierce, Xianjun Dong, Anshul Kundaje, Yong Cheng, Oliver~J.
+  Rando, Ewan Birney, Richard~M. Myers, William~S. Noble, Michael Snyder, and
+  Zhiping Weng.
+\newblock Sequence features and chromatin structure around the genomic regions
+  bound by 119 human transcription factors.
+\newblock {\em Genome Res}, 22(9):1798--1812, Sep 2012.
+
+\bibitem{doi:10.1093/nar/gku1280}
+Aurelien Griffon, Quentin Barbier, Jordi Dalino, Jacques van Helden, Salvatore
+  Spicuglia, and Benoit Ballester.
+\newblock Integrative analysis of public chip-seq experiments reveals a complex
+  multi-cell regulatory landscape.
+\newblock {\em Nucleic Acids Research}, 43(4):e27, 2015.
+
+\bibitem{doi:10.1093/bioinformatics/btr189}
+Philip Machanick and Timothy~L. Bailey.
+\newblock Meme-chip: motif analysis of large dna datasets.
+\newblock {\em Bioinformatics}, 27(12):1696--1697, 2011.
+
+\bibitem{doi:10.1093/bioinformatics/btr064}
+Charles~E. Grant, Timothy~L. Bailey, and William~Stafford Noble.
+\newblock Fimo: scanning for occurrences of a given motif.
+\newblock {\em Bioinformatics}, 27(7):1017--1018, 2011.
+
+\end{thebibliography}
