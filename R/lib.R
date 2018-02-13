@@ -1416,7 +1416,7 @@ get.snp.range <- function(snp){
 #' @author Johann Hawe
 #' 
 get.chipseq.context <- function(cpgs){
-  load(paste0(BASE.DIR, "results/current/cpgs_with_chipseq_context_100.RData"))
+  load(PATHS$TFBS.ANN.DATA)
   tfbs.ann <- tfbs.ann[rownames(tfbs.ann) %in% cpgs,,drop=F]
   
   return(tfbs.ann[cpgs,,drop=F])
@@ -1590,8 +1590,9 @@ load.string.db <- function(reload=F) {
   
   cat("Loading string db.", "\n")
  
-  fcache <- paste0(BASE.DIR, "results/current/string.v9.expr.RData")
+  fcache <- paste0(PATHS$DATA.DIR, 'string/string.v9.expr.RData')
   if(reload || !file.exists(fcache)){
+  cat("Generating strig db anew", fill = T)
   # load db anew
   string.all <- fread(paste0(BASE.DIR, "data/current/string/human_gene_hgnc_symbol.links.detailed.v9.0.txt"),
                         data.table=F, header=T, stringsAsFactors=F)
@@ -1629,7 +1630,7 @@ load.string.db <- function(reload=F) {
     load(fcache)
   }
   # set to global environment
-  assign("STRING.DB", string.db, envir=.GlobalEnv)
+  assign("STRING.DB", STRING.DB, envir=.GlobalEnv)
 
   cat("Done.\n")
 }

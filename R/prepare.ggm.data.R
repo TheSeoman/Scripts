@@ -89,7 +89,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
   data <- list()
   data.meta <- list()
   meqtl.pairs <- get(paste0(set, '.meqtl.trans.overlap'))[[filter]]
-
+  
   if(!file.exists(paste0(GGM.DIR, 'snps.RData'))) {
     meqtl.count <- table(meqtl.pairs$snp)[table(meqtl.pairs$snp) > 0]
     snps <- names(meqtl.count[meqtl.count >= snp.count.threshold])
@@ -158,9 +158,9 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
       string.db = subGraph(intersect(nodes(string.db), nodeset), string.db)
       
       path.genes <- get.string.shortest.paths(cis = cpgs.with.tfbs, 
-                                            trans=unique(c(snp.genes.in.string, tfs)), 
-                                            snp.genes=snp.genes.in.string,
-                                            string.db)
+                                              trans=unique(c(snp.genes.in.string, tfs)), 
+                                              snp.genes=snp.genes.in.string,
+                                              string.db)
       
       total.genes <- unique(c(total.genes, path.genes))
       
@@ -193,5 +193,7 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
     save(ggm.data, file = paste0(GGM.DIR, 'data/', snp, '.RData'))
   }
   save(data.overview, file = paste0(GGM.DIR, 'data.overview', batch, '.RData'))
-  save(data.meta, file = paste0(GGM.DIR, 'data.meta.RData'))
+  save(data.meta, file = paste0(GGM.DIR, 'data.meta', batch, '.RData'))
 }
+
+

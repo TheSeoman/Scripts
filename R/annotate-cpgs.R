@@ -22,7 +22,8 @@ if (!require(BSgenome.Hsapiens.UCSC.hg19)) {
 
 
 ## get 100bp intervals around the CpG sites
-cpgs = features(FDb.InfiniumMethylation.hg19)
+load(PATHS$METH.RANGES.DATA)
+cpgs = meth.ranges #features(FDb.InfiniumMethylation.hg19)
 context = resize(cpgs, 100, fix="center")
 
 ## get the corresponding sequence
@@ -45,9 +46,11 @@ save(affinities, file="results/current/cpgs_with_affinties.RData")
 ## also annotate CpGs with ChIP-seq binding sites
 library(rtracklayer)
 library(data.table)
+library(GenomicRanges)
 
 
 tfbs = import(paste0(PATHS$TFBS.DIR, "/tfbs/filPeaks_public.bed"))
+tfbs = import(paste0(PATHS$DATA.DIR, "/tfbs/ReMap2_public_nrPeaks_hg19.bed"))
 ann = t(matrix(unlist(strsplit(values(tfbs)[,"name"], ".", fixed=T)), nrow=3))
 colnames(ann) = c("geo_id", "TF", "condition")
 values(tfbs) = DataFrame(name=values(tfbs)[,"name"], data.frame(ann, stringsAsFactors=F))
@@ -70,13 +73,19 @@ selected = tfbs[values(tfbs)[,"condition"] %in% conditions[conditions[,"blood.re
 
 
 ## load the encode tfs separately
+encode <- import(paste0(PATHS$DATA.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"))
 encode = as.data.frame(fread(paste0(PATHS$DATA.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"), header=F))
 encode = GRanges(seqnames=encode[,1], ranges=IRanges(encode[,2] + 1, encode[,3]), name=paste("ENCODE", encode[,4], tolower(encode[,6]), sep="."), geo_id="ENCODE", TF=encode[,4], condition=tolower(encode[,6]))
+
+conditions <- unique(unlist(lapply(encode$condition, strsplit, ',')))
 
 encode.lcl = encode[grep("gm", values(encode)[,"condition"])]
 values(encode.lcl)[,"condition"] = "lcl"
 encode.k562 = encode[grep("k562", values(encode)[,"condition"])]
 values(encode.k562)[,"condition"] = "k562"
+
+encode.selected2 = encode[grep("k562|gm", values(encode)[,"condition"])]
+encode.selected <- c(encode.lcl, encode.k562)
 
 selected = c(selected, encode.lcl, encode.k562)
 
@@ -91,7 +100,7 @@ tfbs.ann = sapply(chip.exp, function(x) overlapsAny(context, selected[chip == x]
 rownames(tfbs.ann) = names(cpgs)
 
 save(tfbs.ann, file="results/current/cpgs_with_chipseq.RData")
-save(tfbs.ann, file="results/current/cpgs_with_chipseq_context_100.RData")
+save(tfbs.ann, file=PATHS$TFBS.ANN.DATA) #"results/current/cpgs_with_chipseq_context_100.RData"
 
 chip.exp = data.frame(chip.exp, t(matrix(unlist(strsplit(chip.exp, ".", fixed=T)), nrow=2)))
 colnames(chip.exp) = c("experiment", "TF", "conditon")
