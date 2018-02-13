@@ -70,7 +70,7 @@ selected = tfbs[values(tfbs)[,"condition"] %in% conditions[conditions[,"blood.re
 
 
 ## load the encode tfs separately
-encode = as.data.frame(fread(paste0(PATHS$TFBS.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"), header=F))
+encode = as.data.frame(fread(paste0(PATHS$DATA.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"), header=F))
 encode = GRanges(seqnames=encode[,1], ranges=IRanges(encode[,2] + 1, encode[,3]), name=paste("ENCODE", encode[,4], tolower(encode[,6]), sep="."), geo_id="ENCODE", TF=encode[,4], condition=tolower(encode[,6]))
 
 encode.lcl = encode[grep("gm", values(encode)[,"condition"])]
