@@ -15,21 +15,52 @@ Jie Wang, Jiali Zhuang, Sowmya Iyer, XinYing Lin, Troy~W. Whitfield, Melissa~C.
   bound by 119 human transcription factors.
 \newblock {\em Genome Res}, 22(9):1798--1812, Sep 2012.
 
-\bibitem{doi:10.1093/nar/gku1280}
+\bibitem{10.1093/bioinformatics/btr189}
+Philip Machanick and Timothy~L. Bailey.
+\newblock Meme-chip: motif analysis of large dna datasets.
+\newblock {\em Bioinformatics}, 27(12):1696--1697, 2011.
+
+\bibitem{10.1093/bioinformatics/btr064}
+Charles~E. Grant, Timothy~L. Bailey, and William~Stafford Noble.
+\newblock Fimo: scanning for occurrences of a given motif.
+\newblock {\em Bioinformatics}, 27(7):1017--1018, 2011.
+
+\bibitem{10.1093/nar/gkx1126}
+Aziz Khan, Oriol Fornes, Arnaud Stigliani, Marius Gheorghe, Jaime~A
+  Castro-Mondragon, Robin van~der Lee, Adrien Bessy, Jeanne Chèneby,
+  Shubhada~R Kulkarni, Ge~Tan, Damir Baranasic, David~J Arenillas, Albin
+  Sandelin, Klaas Vandepoele, Boris Lenhard, Benoît Ballester, Wyeth~W
+  Wasserman, François Parcy, and Anthony Mathelier.
+\newblock Jaspar 2018: update of the open-access database of transcription
+  factor binding profiles and its web framework.
+\newblock {\em Nucleic Acids Research}, 46(D1):D260--D266, 2018.
+
+\bibitem{10.1093/nar/gkj143}
+V.~Matys, O.~V. Kel-Margoulis, E.~Fricke, I.~Liebich, S.~Land, A.~Barre-Dirrie,
+  I.~Reuter, D.~Chekmenev, M.~Krull, K.~Hornischer, N.~Voss, P.~Stegmaier,
+  B.~Lewicki-Potapov, H.~Saxel, A.~E. Kel, and E.~Wingender.
+\newblock Transfac(?) and its module transcompel(?): transcriptional gene
+  regulation in eukaryotes.
+\newblock {\em Nucleic Acids Res}, 34(Database issue):D108--D110, Jan 2006.
+\newblock 16381825[pmid].
+
+\bibitem{10.1093/nar/gku1280}
 Aurelien Griffon, Quentin Barbier, Jordi Dalino, Jacques van Helden, Salvatore
   Spicuglia, and Benoit Ballester.
 \newblock Integrative analysis of public chip-seq experiments reveals a complex
   multi-cell regulatory landscape.
 \newblock {\em Nucleic Acids Research}, 43(4):e27, 2015.
 
-\bibitem{doi:10.1093/bioinformatics/btr189}
-Philip Machanick and Timothy~L. Bailey.
-\newblock Meme-chip: motif analysis of large dna datasets.
-\newblock {\em Bioinformatics}, 27(12):1696--1697, 2011.
+\bibitem{10.1038/nmeth.1906}
+Jason Ernst and Manolis Kellis.
+\newblock Chromhmm: automating chromatin-state discovery and characterization.
+\newblock {\em Nature Methods}, 9:215 EP --, Feb 2012.
+\newblock Correspondence.
 
-\bibitem{doi:10.1093/bioinformatics/btr064}
-Charles~E. Grant, Timothy~L. Bailey, and William~Stafford Noble.
-\newblock Fimo: scanning for occurrences of a given motif.
-\newblock {\em Bioinformatics}, 27(7):1017--1018, 2011.
+\bibitem{10.1371/journal.pcbi.1003118}
+Michael Lawrence, Wolfgang Huber, Herv\'e Pag\`es, Patrick Aboyoun, Marc
+  Carlson, Robert Gentleman, Martin Morgan, and Vincent Carey.
+\newblock Software for computing and annotating genomic ranges.
+\newblock {\em {PLoS} Computational Biology}, 9, 2013.
 
 \end{thebibliography}

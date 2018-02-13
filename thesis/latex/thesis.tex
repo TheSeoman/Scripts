@@ -94,12 +94,13 @@
 
 \end{titlepage}
 
-
 \pagenumbering{gobble}
 
 \tableofcontents
 \newpage
 
+\pagestyle{plain}
+\pagenumbering{arabic}
 \section{Introduction}
 
 \subsection{Regulation of cell functions and Epigenetics}
@@ -154,7 +155,7 @@ The objective of KORA is to track changes in health conditions over a long perio
 
 The data comes from the Survey F4, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. F4 is a follow up study to the survey S4 performed from 1999 to 2001 and containing 4261 individuals. 
 
-All measurements were performed on whole blood samples. Houseman blood counts describing the composition of different cell types for each individual are available.
+All measurements were performed on whole blood samples. Houseman blood counts\cite{} describing the composition of different cell types for each individual are available.
 
 Not all essays are available for all samples. Therefore different analyses were performed on varying sets of indiviudals according to availability of the required data types.
 
@@ -177,9 +178,9 @@ DNA methylation was measured using the Infinium HumanMethylation450K BeadChip, w
 Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes.
  
 \subsubsection{Genotypes}
-Genotyping was performed with the Affymetrix Axiom array. The Iluminus calling algorithm was used for genotype calling and missing values imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. SNPs were filtered at IMPUTE value of 0.4. 
+Genotyping was performed with the Affymetrix Axiom array. The Iluminus calling algorithm was used for genotype calling and missing values were imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. SNPs were filtered at IMPUTE value of 0.4. 
 
-After excluding all SNPs with a minor allele frequency of less than one percent measurements of 9533127 SNPs for xxxx individuals were available. 
+After excluding all SNPs with a minor allele frequency of less than one percent measurements of 9533127 SNPs for 3788 individuals were available. 
 
 \subsubsection{Covariates}
 Several covariates were known for each sample. These were age, sex, body mass index (BMI) and wide blood cell count, as well as experimental factors like storage time and RNA integrity number (RIN).
@@ -193,33 +194,35 @@ Transcription factor binding sites were obtained from two publicy available sour
 
 First was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
 
-It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{doi:10.1093/nar/gku1280}. The pipeline uses the tools MEME-ChIP\cite{doi:10.1093/bioinformatics/btr189} and FIMO\cite{doi:10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifes with known motifs from Jaspar\cite{} and TransFac\cite{} using machine learning methods and manual curation. 
+It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{10.1101/gr.139105.112}. The pipeline uses the tools MEME-ChIP\cite{10.1093/bioinformatics/btr189} and FIMO\cite{10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifs with known motifs from Jaspar\cite{10.1093/nar/gkx1126} and TransFac\cite{10.1093/nar/gkj143} using machine learning methods and manual curation. 
 
 The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2173371 peaks for 125 transcription factors.  
 
-The second source was the ReMap project\cite{doi:10.1093/nar/gku1280}. It combines 395 publicy available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicy available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
 
 It contains xxxxx peaks. After filtering for 19 blood related cell types a of xxxx peaks of xxx different transcription factors remained. 
 
 Combining both filtered data sets lead to a total of xxxxx peaks of xxx transcription factors.
 
 
-\subsection{chromHMM}
-\begin{itemize}
-\item chromatin modification as interesting/highly invested epigenetics mark
-\item HMM used to predict 15 state model
-\item use data for 27 blood cell types
-\item sum up with houseman counts as weights for joint analysis
-\end{itemize}
+\subsection{Chromatin states}
+Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}. The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
+
+It was generated using ChromHMM v1.10\cite{10.1038/nmeth.1906} on the chromatin marks H3K4me1, H3K4me3, H3K27me3, H3K9me3, and H3K36me3. ChromHMM is based on a multivarate Hidden Markov Model. 
+
+In this work the annotations for 27 blood related cell lines were used. To get the distribution of states for a single feature or a set of features the different annotations for the different cell lines were weighted according to the houseman counts and summed up.
 
 \section{Methods}
 \subsection{Overlaps}
-\begin{itemize}
-\item R GenomicRanges package
-\item overlap = at least 1 bp of either element overlapping
-\item direct and +1/2kb flanking region
-\end{itemize}
+The task of whether HERV elements contained any annotated elements like expression probes, genes, cpg sites and transcription factor binding sites (tfbs) was performed using funtion "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. 
+
+Features were considered to be of interest for the analysis of an HERV element, if they overlapped by at least one base pair.
+
+ were also generated for the herv elements plus 1kb and 2kb flanking regions. 
+
 \subsection{Data normalization}
+
+
 \begin{itemize}
 \item calculate residuals with linear regression to select covariates
 \item expression: 
@@ -260,7 +263,7 @@ Combining both filtered data sets lead to a total of xxxxx peaks of xxx transcri
 \item raw var vs residual var
 \item 
 \end{itemize}
-\subsection{hERV region features}
+\subsection{HERV region features}
 \subsubsection{Expression}
 Using hERV set 1 there are a total of 191 overlaps of at least 1 bp between a hERV element and a region measured in the expression array. 174 hERV elements overlap with 188 different expression probes. 
 
