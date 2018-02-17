@@ -8,18 +8,21 @@ set <- 'hervS1'
 filter <- 'snp'
 seed <- 'meqtl'
 flanking <- 2.5e5
-string  <- F
+string  <- T
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
 load(PATHS$HERV.METH.OVERLAP.DATA)
 load(PATHS$HERV.EXPR.OVERLAP.DATA)
-load(PATHS$EQTM.COV.ME.DATA)
+load(PATHS$EQTM.ME.DATA)
 
 GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
-load(paste0(GGM.DIR, 'snps.RData'))
+if (string) {
+  load(paste0(GGM.DIR, 'path.snps.RData'))
+} else {
+  load(paste0(GGM.DIR, 'snps.RData'))
+}
 load(paste0(GGM.DIR, 'data.meta.RData'))
 load(paste0(GGM.DIR, 'data.overview.RData'))
-
 
 cis.eqtl.pairs <- get(paste0(set, '.eqtl.overlap'))[[paste0('cis.', filter)]][, 1:2]
 trans.eqtl.pairs <- get(paste0(set, '.eqtl.overlap'))[[paste0('trans.', filter)]][, 1:2]
@@ -39,7 +42,9 @@ colnames(all.eqtm.pairs) <- c('cpg', 'expr.id')
 all.eqtm.pairs$cpg <- as.character(all.eqtm.pairs$cpg)
 all.eqtm.pairs$expr.id <- as.character(all.eqtm.pairs$expr.id)
 
-cutoff <- 0.6
+cutoff <- 0.9
+
+analyse.ggm <- function()
 
 ggm.meta <- list()
 ggm.overview <- data.frame(matrix(nrow = length(snps), ncol = 26))

@@ -4,8 +4,8 @@ require(BDgraph)
 
 
 
-set <- 'hervS1'
-filter <- 'snp'
+set <- 'hervS1.2kb'
+filter <- 'meth'
 seed <- 'meqtl'
 flanking <- 2.5e5
 string <- F
@@ -14,13 +14,21 @@ GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flan
 dir.create(paste0(GGM.DIR, 'ggm/'), showWarnings = F, recursive = T)
 
 args <- commandArgs(TRUE)
-snp.index <- as.integer(args[1])
+index <- as.integer(args[1])
 
-load(paste0(GGM.DIR, 'snps.RData'))
-snp <- snps[snp.index]
+if (filter == 'snp') {
+  if(string) {
+    load(paste0(GGM.DIR, 'path.snps.RData'))
+  } else {
+    load(paste0(GGM.DIR, 'snps.RData'))
+  }
+  id <- snps[index]
+} else {
+  load(paste0(GGM.DIR, 'cpgs.RData'))
+  id <- paste(cpg.sets[[index]], collapse = '|')
+}
 
-
-load(paste0(GGM.DIR, 'data/', snp, '.RData'))
+load(paste0(GGM.DIR, 'data/', id, '.RData'))
 
 iter <- 50000
 burnin <- iter/2

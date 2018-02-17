@@ -17,7 +17,7 @@ enrich.ggm.data.with.string <- function(set = 'hervS1', filter = 'snp', seed = '
   if(is.null(batch) | is.null(batch.size)) {
     range <- c(1:length(snps))
   } else {
-    range <- c(((batch-1)*batch.size+1):(batch*batch.size))    
+    range <- c(((batch-1)*batch.size+1):min(batch*batch.size, length(snps)))    
   }
   
   load.string.db()
@@ -30,20 +30,28 @@ enrich.ggm.data.with.string <- function(set = 'hervS1', filter = 'snp', seed = '
     
     tfbs.ann <- get.chipseq.context(meth.ids)
     cpgs.with.tfbs <- meth.ids[meth.ids %in% rownames(tfbs.ann[rowSums(tfbs.ann)>0,])]
-    snp.genes.in.string <- snp.genes[snp.genes %in% nodes(STRING.DB)]
     
-    string.db <- STRING.DB
-    string.db <- add.to.graphs(list(string.db), snp, snp.genes, cpgs.with.tfbs, tfbs.ann)[[1]]
+    if(length(cpgs.with.tfbs) > 0) {
+      snp.genes.in.string <- snp.genes[snp.genes %in% nodes(STRING.DB)]
+      
+      string.db <- STRING.DB
+      string.db <- add.to.graphs(list(string.db), snp, snp.genes, cpgs.with.tfbs, tfbs.ann)[[1]]
+      
+      tfs = unique(unlist(adj(string.db, cpgs.with.tfbs)))
+      
+      nodeset = c(nodes(STRING.DB), setdiff(tfs, "KAP1"), snp.genes.in.string, cpgs.with.tfbs)
+      string.db = subGraph(intersect(nodes(string.db), nodeset), string.db)
+      
+      path.genes <- get.string.shortest.paths(cis = cpgs.with.tfbs, 
+                                              trans=unique(c(snp.genes.in.string, tfs)), 
+                                              snp.genes=snp.genes.in.string,
+                                              string.db)
+      cat(paste(path.genes, collapse = ', '), fill = T)
+    } else {
+      cat('No cpgs.with.tfbs', fill = T)
+      path.genes <- character(0)
+    }
     
-    tfs = unique(unlist(adj(string.db, cpgs.with.tfbs)))
-    
-    nodeset = c(nodes(STRING.DB), setdiff(tfs, "KAP1"), snp.genes.in.string, cpgs.with.tfbs)
-    string.db = subGraph(intersect(nodes(string.db), nodeset), string.db)
-    
-    path.genes <- get.string.shortest.paths(cis = cpgs.with.tfbs, 
-                                            trans=unique(c(snp.genes.in.string, tfs)), 
-                                            snp.genes=snp.genes.in.string,
-                                            string.db)
     
     extra.genes <- path.genes[!path.genes %in% c(snp.genes, data.meta[[snp]]$meth.genes, data.meta[[snp]]$tfbs.genes)]
     
