@@ -6,15 +6,24 @@ load(PATHS$HERV.EXPR.OVERLAP.DATA)
 cat('Loading herv snp overlap data')
 load(PATHS$HERV.SNP.OVERLAP.DATA)
 
-cat('Loading chromhmm data for expression probes', fill = TRUE)
-load(PATHS$EXPR.CHROMHMM.DATA)
-cat('Loading chromhmm data for snps', fill = TRUE)
-load(PATHS$SNP.CHROMHMM.DATA)
+# cat('Loading chromhmm data for expression probes', fill = TRUE)
+# load(PATHS$EXPR.CHROMHMM.DATA)
+# cat('Loading chromhmm data for snps', fill = TRUE)
+# load(PATHS$SNP.CHROMHMM.DATA)
 
 cat('Loading matrix-eqtl result', fill = TRUE)
 
 load(PATHS$MAF001.RES.ME.DATA)
 
+get.eqtl.overview <- function(eqtl.table) {
+  out <- list()
+  out$pairs <- dim(eqtl.table)[1]
+  out$snps <- length(unique(eqtl.table$snps))
+  out$probes <- length(unique(eqtl.table$gene))
+  genes <- unique(eqtl.genes[as.character(unique(eqtl.table$gene))])
+  out$genes <- length(genes[!is.na(genes)])
+  return(out)
+}
 
 get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp.ids, expr.ids) {
   out <- list()
@@ -43,7 +52,6 @@ get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.genes) {
     } else {
       enrichment <- NULL
     }
-    return(genes)
     return(enrichment)
   })
   names(out) <- names(herv.eqtl.overlap)
@@ -89,6 +97,7 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, e
 cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
 require(illuminaHumanv3.db)
 eqtl.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtl.me$cis$eqtls$gene), as.character(eqtl.me$trans$eqtls$gene)))]
+eqtl.genes <- eqtl.genes[!is.na(eqtl.genes)]
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
 
@@ -96,9 +105,9 @@ for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
-    assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
+    # assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
     assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
-    assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.overlap.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
+    # assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.overlap.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }
 
@@ -109,8 +118,8 @@ cat('Saving results...', fill = TRUE)
 save(hervS1.eqtl.enrichment, hervS2.eqtl.enrichment, hervS3.eqtl.enrichment, hervS1.1kb.eqtl.enrichment, hervS2.1kb.eqtl.enrichment, hervS3.1kb.eqtl.enrichment,
      hervS1.2kb.eqtl.enrichment, hervS2.2kb.eqtl.enrichment, hervS3.2kb.eqtl.enrichment, file = PATHS$HERV.EQTL.ENRICHMENT.DATA)
 
-save(hervS1.eqtl.annotation, hervS2.eqtl.annotation, hervS3.eqtl.annotation, hervS1.1kb.eqtl.annotation, hervS2.1kb.eqtl.annotation, hervS3.1kb.eqtl.annotation,
-     hervS1.2kb.eqtl.annotation, hervS2.2kb.eqtl.annotation, hervS3.2kb.eqtl.annotation, file = PATHS$HERV.EQTL.CHROMHMM.ANNOTATION.DATA)
+# save(hervS1.eqtl.annotation, hervS2.eqtl.annotation, hervS3.eqtl.annotation, hervS1.1kb.eqtl.annotation, hervS2.1kb.eqtl.annotation, hervS3.1kb.eqtl.annotation,
+     # hervS1.2kb.eqtl.annotation, condition, hervS3.2kb.eqtl.annotation, file = PATHS$HERV.EQTL.CHROMHMM.ANNOTATION.DATA)
 
 cat('Extracting significant enrichment results', fill = TRUE)
 total.significant.enrichment <- data.frame(matrix(ncol = 11, nrow = 0))
@@ -119,9 +128,9 @@ for (set in c('S1', 'S2', 'S3')) {
     eqtl.enrichment <- paste0('herv', set, flanking, '.eqtl.enrichment')
     for (condition in names(get(eqtl.enrichment))) {
       significant <- extract.significant(paste0('herv', set, flanking), condition, get(eqtl.enrichment)[[condition]])
-      total.significant.enrichment <- rbind(total.significant, significant)
+      total.significant.enrichment <- rbind(total.significant.enrichment, significant)
     }
   }
 }
 
-write.table(total.significant, file = paste0(PATHS$DATA.DIR, 'eQTL/BP.enrichment.summary.tsv'), sep = '\t', quote = FALSE, row.names = FALSE)
+write.table(total.significant.enrichment, file = paste0(PATHS$DATA.DIR, 'eQTL/BP.enrichment.summary.tsv'), sep = '\t', quote = FALSE, row.names = FALSE)

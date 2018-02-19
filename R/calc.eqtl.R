@@ -48,8 +48,6 @@ cisDist = 5e5
 # Set to numeric() for identity.
 errorCovariance = numeric()
 
-
-
 ## Load genotype data
 
 snps = SlicedData$new()

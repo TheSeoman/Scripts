@@ -115,15 +115,15 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtm.overlap, meth.annotation, 
 
 cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
 require(illuminaHumanv3.db)
-eqtm.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtm$cis$eqtls$gene), as.character(eqtm$trans$eqtls$gene)))]
+eqtm.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtm.me$cis$eqtls$gene), as.character(eqtm.me$trans$eqtls$gene)))]
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtm.overlap')
     assign(overlap.name, get.herv.eqtm.overlap(eqtm.me$cis$eqtls, eqtm.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges), names(get(paste0('herv', set, flanking, '.meth.overlap'))$meth.ranges)))
-    assign(paste0('herv', set, flanking, '.eqtm.enrichment'), get.eqtm.overlap.go.enrichment(get(overlap.name), eqtm.genes))
-    assign(paste0('herv', set, flanking, '.eqtm.annotation'), get.eqtm.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
+    # assign(paste0('herv', set, flanking, '.eqtm.enrichment'), get.eqtm.overlap.go.enrichment(get(overlap.name), eqtm.genes))
+    # assign(paste0('herv', set, flanking, '.eqtm.annotation'), get.eqtm.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }
 
@@ -134,8 +134,8 @@ save(hervS1.eqtm.overlap, hervS2.eqtm.overlap, hervS3.eqtm.overlap, hervS1.1kb.e
 save(hervS1.eqtm.enrichment, hervS2.eqtm.enrichment, hervS3.eqtm.enrichment, hervS1.1kb.eqtm.enrichment, hervS2.1kb.eqtm.enrichment, hervS3.1kb.eqtm.enrichment,
      hervS1.2kb.eqtm.enrichment, hervS2.2kb.eqtm.enrichment, hervS3.2kb.eqtm.enrichment, file = PATHS$HERV.EQTM.ENRICHMENT.DATA)
 
-save(hervS1.eqtm.annotation, hervS2.eqtm.annotation, hervS3.eqtm.annotation, hervS1.1kb.eqtm.annotation, hervS2.1kb.eqtm.annotation, hervS3.1kb.eqtm.annotation,
-     hervS1.2kb.eqtm.annotation, hervS2.2kb.eqtm.annotation, hervS3.2kb.eqtm.annotation, file = PATHS$HERV.EQTM.ANNOTATION.DATA)
+# save(hervS1.eqtm.annotation, hervS2.eqtm.annotation, hervS3.eqtm.annotation, hervS1.1kb.eqtm.annotation, hervS2.1kb.eqtm.annotation, hervS3.1kb.eqtm.annotation,
+     # hervS1.2kb.eqtm.annotation, hervS2.2kb.eqtm.annotation, hervS3.2kb.eqtm.annotation, file = PATHS$HERV.EQTM.ANNOTATION.DATA)
 
 cat('Extracting significant enrichment results', fill = TRUE)
 total.significant.enrichment <- data.frame(matrix(ncol = 11, nrow = 0))
@@ -149,6 +149,6 @@ for (set in c('S1', 'S2', 'S3')) {
   }
 }
 
-write.table(total.significant, file = paste0(PATHS$DATA.DIR, 'eQTM/BP.enrichment.summary.tsv'), sep = '\t', quote = FALSE, row.names = FALSE)
+write.table(total.significant.enrichment, file = paste0(PATHS$DATA.DIR, 'eQTM/BP.enrichment.summary.tsv'), sep = '\t', quote = FALSE, row.names = FALSE)
 
 

@@ -34,10 +34,10 @@ iter <- 50000
 burnin <- iter/2
 cores <- 4
 
-cat(paste0('Calculating ggm for ', snp), fill = T)
+cat(paste0('Calculating ggm for ', id), fill = T)
 
 ggm <- bdgraph(ggm.data, n = dim(ggm.data)[1], method = "gcgm", algorithm = "bdmcmc", iter = iter, 
                 burnin = burnin, g.start = "empty", prior.df = 3, g.prior = 0.5,
                 multi.update = NULL, save.all = T, cores = cores )
 
-save(ggm, file = paste0(GGM.DIR, 'ggm/', snp, '.RData'))
+save(ggm, file = paste0(GGM.DIR, 'ggm/', id, '.RData'))
