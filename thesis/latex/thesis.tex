@@ -142,17 +142,40 @@
 
 
 \subsection{HERV annotation}
-HERV annotation was pertained from RepeatMasker repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and the query sequence with all repeats replaced by 'N's.
+HERV annotation was pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
 
-The track representing the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}.
+The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. Not in order these are repeat name the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurence. Furthermore it contains the position in the whole sequence, that is known for the identified repeat, that is covered by the occurrence. It also describes the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally there is an indexing field used to speed aup chromosme range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{}.
 
-To extract HERV elements the annotation was filtered on different columns generating three sets variable size.
+\begin{table}[]
+\centering
+\label{my-label}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lllllllllllllllll}
+bin & swScore & milliDiv & milliDel & milliIns & genoName & genoStart & genoEnd & genoLeft   & strand & repName   & repClass       & repFamily      & repStart & repEnd & repLeft & id \\
+585 & 1504    & 13       & 4        & 13       & chr1     & 10000     & 10468   & -249240153 & +      & (CCCTAA)n & Simple\_repeat & Simple\_repeat & 1        & 463    & 0       & 1  \\
+585 & 3612    & 114      & 270      & 13       & chr1     & 10468     & 11447   & -249239174 & -      & TAR1      & Satellite      & telo           & -399     & 1712   & 483     & 2  \\
+585 & 437     & 235      & 186      & 35       & chr1     & 11503     & 11675   & -249238946 & -      & L1MC      & LINE           & L1             & -2236    & 5646   & 5449    & 3  \\
+585 & 239     & 294      & 19       & 10       & chr1     & 11677     & 11780   & -249238841 & -      & MER5B     & DNA            & hAT-Charlie    & -74      & 104    & 1       & 4  \\
+585 & 318     & 230      & 38       & 0        & chr1     & 15264     & 15355   & -249235266 & -      & MIR3      & SINE           & MIR            & -119     & 143    & 49      & 5  \\
+585 & 203     & 162      & 0        & 0        & chr1     & 16712     & 16749   & -249233872 & +      & (TGG)n    & Simple\_repeat & Simple\_repeat & 1        & 37     & 0       & 6  \\
+585 & 239     & 338      & 148      & 0        & chr1     & 18906     & 19048   & -249231573 & +      & L2a       & LINE           & L2             & 2942     & 3104   & -322    & 7  \\
+585 & 652     & 346      & 85       & 42       & chr1     & 19947     & 20405   & -249230216 & +      & L3        & LINE           & CR1            & 3042     & 3519   & -970    & 8  \\
+585 & 270     & 331      & 7        & 27       & chr1     & 20530     & 20679   & -249229942 & +      & Plat\_L3  & LINE           & CR1            & 2802     & 2947   & -639    & 9  \\
+585 & 254     & 279      & 47       & 39       & chr1     & 21948     & 22075   & -249228546 & +      & MLT1K     & LTR            & ERVL-MaLR      & 15       & 142    & -453    & 1 
+\end{tabular}}
+\caption{First ten rows of the RepeatMasker annotation on hg19}
+\end{table}
 
-HERV set 1 (HERV S1) consists of all 42508 elements that contain "ERV" in the repeat name column. They have a mean width of 796 bp and cover a total of 33.9 MB, which is ca 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
+To extract HERV elements the annotation was filtered on different columns generating three sets variable size. Multiple HERV sets was created as an atempt to cover different possible definitions of what exactly a HERV element is.
 
-Alternatively filtering the annotation for "ERV" in the superfamily column leads to 696689 elements (HERV set 2/HERV S2). Their mean width is 379 bp and they make up to 263.7 MB or ca 8.13\% of the human genome. 
+This work only discerned between different HERV element types by defining different HERV sets. Therefore, within each set annotations, whose genomic positions overlap or are directly adjacent, were merged into one element.
 
-A third set "HERV set 3" (JERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 elements. They average 1060 bp and a have a combined length of 22.6 MB.
+A first set, HERV set 1 (HERV S1) was constructed by extracting all elements that contained "ERV" in the repeat name column. This set
+The resulting 42508 annotations condensed to 35589 elements after merging. The elements have a mean width of 949 bp and cover a total of 33.8 MB, which is ca 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
+
+Alternatively filtering the annotation for "ERV" in the superfamily column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. After merging overlapping and adjacent annotations this led to 633323 elements. Their mean width is 415 bp and they make up to 262.8 MB or ca 8.13\% of the human genome. 
+
+A third set "HERV set 3" (JERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitely named "HERV", it is my hope that might contain only endogenous retroviral elements, that were inserted directly into the human genome. After merging overlapping and adjacent annotations there were 15403 element with an average width of 1468 bp and a combined length of 22.6 MB.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS1_lengths_hist}  
@@ -224,13 +247,14 @@ It was generated using ChromHMM v1.10\cite{10.1038/nmeth.1906} on the chromatin 
 
 In this work the annotations for 27 blood related cell lines were used. To get the distribution of states for a single feature or a set of features the different annotations for the different cell lines were weighted according to the houseman counts and summed up.
 
+\newpage
 \section{Methods}
 \subsection{Overlaps}
 The task of whether HERV elements contained any annotated elements like expression probes, genes, cpg sites and transcription factor binding sites (tfbs) was performed using funtion "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. 
 
 Features were considered to be of interest for the analysis of an HERV element, if they overlapped by at least one base pair.
 
-Features were also filterd for the herv elements and their 1kb or 2kb up- and downstream regions.
+Features were also filtered for the HERV elements and their 1kb or 2kb up- and downstream regions.
 
 \subsection{Data normalization}
 Expression and methylation values were corrected for available covariates by calculating the residual matrix. 
@@ -256,23 +280,20 @@ The threshold for significant cis-QTLs during calculation was set to 10e-6 and 1
 \subsection{Functional Analysis of Gene Sets}
 In multiple analyses functional Gene Ontology enrichments were performed.
 
-First a set of 
-\begin{itemize}
-\item packages GSEABase, GOstats
-\item generate GeneSetCollection for Gene Symbol -> GO term, for all pairs with evidence
-\item test vor overrepresentation of terms in set of genes against background set using Hypergeometric test (hyperGTest)
-\end{itemize}
-\subsection{Gaussian Graphical Models}
-\begin{itemize}
-\item I'm fucking afraid of writing this part...
-\end{itemize}
+First a set of all GO annotations with any evidence code for gene symbols  was retrieved from the Bioconductor package AnnotationDbi\cite{AnnotationDbi}. 
 
-\subsubsection{Data collection}
+Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom backround set of genes specific to the analysis is given. Finally the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}.
+
+\subsection{Gaussian Graphical Models}
+
+
 
 
 \newpage
 \section{Results}
 \subsection{Normalized Data}
+
+The distribution of the quantile normalized expression values and the expression residuals can be seen in figure \ref{fig:}. As expected it follows a normal distribution. This is important for the calculation of the Gaussian graphical models, as it's one of base assumptions. 
 \begin{itemize}
 \item raw var vs residual var
 \item 
@@ -310,6 +331,8 @@ Measurements for a total of 80754 SNPs within hERV set 1, that occurr in at leas
 \subsection{eQTMs}
 
 \subsection{hERV realated regulatory networks}
+\subsubsection{Data collection}
+
 
 \newpage
 \section{Discussion}

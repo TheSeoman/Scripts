@@ -1,4 +1,14 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{RepeatMasker}
+Hubley~R Smit, AFA and Green P.
+\newblock Repeatmasker open-4.0.
+\newblock 2013-2015.
+
+\bibitem{SMITH1981195}
+T.F. Smith and M.S. Waterman.
+\newblock Identification of common molecular subsequences.
+\newblock {\em Journal of Molecular Biology}, 147(1):195 -- 197, 1981.
 
 \bibitem{10.1371/journal.pgen.1000529}
 Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
@@ -62,5 +72,25 @@ Michael Lawrence, Wolfgang Huber, Herv\'e Pag\`es, Patrick Aboyoun, Marc
   Carlson, Robert Gentleman, Martin Morgan, and Vincent Carey.
 \newblock Software for computing and annotating genomic ranges.
 \newblock {\em {PLoS} Computational Biology}, 9, 2013.
+
+\bibitem{10.1093/bioinformatics/bts163}
+Andrey~A. Shabalin.
+\newblock Matrix eqtl: ultra fast eqtl analysis via large matrix operations.
+\newblock {\em Bioinformatics}, 28(10):1353--1358, 2012.
+
+\bibitem{AnnotationDbi}
+Hervé Pagès, Marc Carlson, Seth Falcon, and Nianhua Li.
+\newblock {\em AnnotationDbi: Annotation Database Interface}, 2017.
+\newblock R package version 1.38.1.
+
+\bibitem{GOstats}
+S~Falcon and R~Gentleman.
+\newblock Using {G}{O}stats to test gene lists for {G}{O} term association.
+\newblock {\em Bioinformatics}, 23(2):257--8, 2007.
+
+\bibitem{10.2307/4615733}
+Sture Holm.
+\newblock A simple sequentially rejective multiple test procedure.
+\newblock {\em Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
 
 \end{thebibliography}
