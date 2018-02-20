@@ -4,6 +4,7 @@ require(GenomicRanges)
 require(illuminaHumanv3.db)
 require(FDb.InfiniumMethylation.hg19)
 require(rtracklayer)
+require(data.table)
 
 if(!file.exists(PATHS$EXPR.RANGES.DATA)) {
   get.expression.ranges <- function () {
@@ -41,7 +42,7 @@ if (!file.exists(PATHS$METH.RANGES.DATA)) {
 load(PATHS$SNP.RANGES.DATA)
 load(PATHS$TFBS.RANGES.DATA)
 
-calc.overlap.data <- function (herv.ranges, essay.ranges, essay.data, data.type) {
+calc.overlap.data <- function (herv.ranges, essay.ranges, data.type) {
   overlap.hits <- findOverlaps(herv.ranges, essay.ranges, type = 'any')
   herv.overlap.ranges <- herv.ranges[unique(queryHits(overlap.hits))]
   essay.overlap.ranges <- essay.ranges[unique(subjectHits(overlap.hits))]
@@ -50,11 +51,6 @@ calc.overlap.data <- function (herv.ranges, essay.ranges, essay.data, data.type)
   colnames(out$pairs) <- c('herv.id', paste0(data.type, '.id'))
   out$herv.ranges <- herv.overlap.ranges
   out[[paste0(data.type, '.ranges')]] <- essay.overlap.ranges
-  if(!is.null(essay.data)) {
-    essay.overlap.ids <- unique(intersect(names(essay.overlap.ranges), rownames(essay.data)))
-    essay.overlap.data <- essay.data[essay.overlap.ids,]
-    out[[paste0(data.type, '.data')]] <- essay.overlap.data
-  }
   return(out)
 }
 
@@ -76,34 +72,51 @@ combine.overlaps <- function (overlap1, overlap2, overlap1.type, overlap2.type) 
   
   out[[paste0(overlap1.type, '.ranges')]] <- overlap1[[paste0(overlap1.type, '.ranges')]][unique(overlap1.pairs[, 2])]
   out[[paste0(overlap2.type, '.ranges')]] <- overlap1[[paste0(overlap1.type, '.ranges')]][unique(overlap1.pairs[, 2])]
-  out[[paste0(overlap1.type, '.data')]] <- overlap1[[paste0(overlap1.type, '.data')]][unique(overlap1.pairs[, 2]),]
-  out[[paste0(overlap2.type, '.data')]] <- overlap1[[paste0(overlap1.type, '.data')]][unique(overlap1.pairs[, 2]),]
   return (out)
 }
 
-print.overlap.info <- function(overlap) {
-  message(paste0("Overlap info:\n# Overlaps: ", length(overlap$hits), 
+print.overlap.info <- function(overlap, overlap.type) {
+  cat(paste0("Overlap info:\n# Overlaps: ", dim(overlap$pairs)[2], 
                  "\n# hERVs: ", length(overlap$herv.ranges),
-                 "\n# probes: ", dim(overlap$essay.data)[1]))
+                 "\n# probes: ", length(overlap[[paste0(overlap.type, '.ranges')]])), fill = T)
 }
 
 
 enlarge.ranges <- function(ranges, flanking) {
-    enlarged.ranges <- GRanges(
-        seqnames = seqnames(ranges),
-        ranges = IRanges(start = start(ranges) - flanking, end = end(ranges) + flanking),
-        strand = strand(ranges),
-        name = ranges$name,
-        score = ranges$score
-    )
-    names(enlarged.ranges) <- names(ranges)
-    return (enlarged.ranges)
+  enlarged.ranges <- GRanges(
+    seqnames = seqnames(ranges),
+    ranges = IRanges(start = start(ranges) - flanking, end = end(ranges) + flanking),
+    strand = strand(ranges),
+    name = ranges$name,
+    score = ranges$score
+  )
+  names(enlarged.ranges) <- names(ranges)
+  return (enlarged.ranges)
 }
 
 name.ranges.by.coordinates <- function(ranges) {
   names <- paste0(as.character(seqnames(ranges)), ':', start(ranges), '-', end(ranges))
   names(ranges) <- names
   return (ranges)
+}
+
+merge.overlapping.ranges <- function(ranges) {
+  merged.ranges <- reduce(ranges)
+  merged.ranges <- name.ranges.by.coordinates(merged.ranges)
+  merged.ranges <- sort(merged.ranges, ignore.strand = T)
+  
+  overlaps <- findOverlaps(merged.ranges, ranges)
+  
+  df <- cbind.data.frame(queryHits(overlaps), ranges$name, ranges$score, stringsAsFactors = F)
+  colnames(df) <- c('index', 'name', 'score')
+  dt <- data.table(df, key='index')
+  dt2 <- dt[, list(name=paste(unique(name), collapse='|'),
+                   score=sum(score)), by=key(dt)]
+  
+  merged.ranges$name <- dt2[, name]
+  merged.ranges$score <- dt2[, score]
+  
+  return(merged.ranges)
 }
 
 if(!file.exists(PATHS$HERV.RANGES.DATA)) {
@@ -113,6 +126,16 @@ if(!file.exists(PATHS$HERV.RANGES.DATA)) {
   hervS2.ranges <- name.ranges.by.coordinates(hervS2.ranges)
   hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
   hervS3.ranges <- name.ranges.by.coordinates(hervS3.ranges)
+  
+  save(
+    hervS1.ranges,
+    hervS2.ranges,
+    hervS3.ranges,
+    file = PATHS$HERV.RAW.RANGES.DATA)
+  
+  hervS1.ranges <- merge.overlapping.ranges(hervS1.ranges)
+  hervS2.ranges <- merge.overlapping.ranges(hervS2.ranges)
+  hervS3.ranges <- merge.overlapping.ranges(hervS3.ranges)
   
   hervS1.1kb.ranges <- enlarge.ranges(hervS1.ranges, 1000)
   hervS2.1kb.ranges <- enlarge.ranges(hervS2.ranges, 1000)
@@ -149,14 +172,24 @@ rm(beta)
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
-    # expr.overlap.name <- paste0('herv', set, flanking, '.expr.overlap')
-    # assign(expr.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), expr.ranges, expr.data, 'expr')) 
-    # meth.overlap.name <- paste0('herv', set, flanking, '.meth.overlap')
-    # assign(meth.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), meth.ranges, meth.data, 'meth'))
-    # snp.overlap.name <- paste0('herv', set, flanking, '.snp.overlap')
-    # assign(snp.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), snp.ranges, NULL, 'snp'))
+    expr.overlap.name <- paste0('herv', set, flanking, '.expr.overlap')
+    assign(expr.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), expr.ranges, 'expr'))
+    meth.overlap.name <- paste0('herv', set, flanking, '.meth.overlap')
+    assign(meth.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), meth.ranges, 'meth'))
+    snp.overlap.name <- paste0('herv', set, flanking, '.snp.overlap')
+    assign(snp.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), snp.ranges, 'snp'))
     tfbs.overlap.name <- paste0('herv', set, flanking, '.tfbs.overlap')
-    assign(tfbs.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), blood.tfbs.ranges, NULL, 'tfbs'))
+    assign(tfbs.overlap.name, calc.overlap.data(get(paste0('herv', set, flanking, '.ranges')), blood.tfbs.ranges, 'tfbs'))
+  }
+}
+
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+      for (type in c('expr', 'meth', 'snp', 'tfbs')) {
+          overlap.name <- paste0('herv', set, flanking, '.', type, '.overlap')
+          cat(overlap.name, fill = T)
+          print.overlap.info(overlap.name, type)
+      }
   }
 }
 
