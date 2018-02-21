@@ -1,4 +1,5 @@
 source('Scripts/R/paths.R')
+source('Scripts/R/go.enrichment.R')
 
 require(GenomicRanges)
 require(illuminaHumanv3.db)
@@ -76,9 +77,9 @@ combine.overlaps <- function (overlap1, overlap2, overlap1.type, overlap2.type) 
 }
 
 print.overlap.info <- function(overlap, overlap.type) {
-  cat(paste0("Overlap info:\n# Overlaps: ", dim(overlap$pairs)[2], 
-                 "\n# hERVs: ", length(overlap$herv.ranges),
-                 "\n# probes: ", length(overlap[[paste0(overlap.type, '.ranges')]])), fill = T)
+  cat(paste0("Overlap info:\n# Overlaps: ", dim(overlap$pairs)[1], 
+             "\n# hERVs: ", length(overlap$herv.ranges),
+             "\n# probes: ", length(overlap[[paste0(overlap.type, '.ranges')]])), fill = T)
 }
 
 
@@ -121,10 +122,13 @@ merge.overlapping.ranges <- function(ranges) {
 
 if(!file.exists(PATHS$HERV.RANGES.DATA)) {
   hervS1.ranges <- import(PATHS$HERVS1.ANNOT, format = 'BED')
+  strand(hervS1.ranges) <- '*'
   hervS1.ranges <- name.ranges.by.coordinates(hervS1.ranges)
   hervS2.ranges <- import(PATHS$HERVS2.ANNOT, format = 'BED')
+  strand(hervS2.ranges) <- '*'
   hervS2.ranges <- name.ranges.by.coordinates(hervS2.ranges)
   hervS3.ranges <- import(PATHS$HERVS3.ANNOT, format = 'BED')
+  strand(hervS3.ranges) <- '*'
   hervS3.ranges <- name.ranges.by.coordinates(hervS3.ranges)
   
   save(
@@ -183,13 +187,105 @@ for (set in c('S1', 'S2', 'S3')) {
   }
 }
 
+probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
+probe2gene <- probe2gene[names(expr.ranges)]
+probe2gene <- probe2gene[!is.na(probe2gene)]
+gene.universe <- unique(probe2gene)
+
+expr.overlap.overview <- data.frame(matrix(nrow = 4, ncol = 10))
+rownames(expr.overlap.overview) <- c('Pairs', 'HERVs', 'Probes', 'Genes')
+sets <- c('S1', 'S2', 'S3')
+flanking.distances <- c('', '.1kb', '.2kb')
+colnames(expr.overlap.overview) <- c('Set', as.vector(t(outer(sets, flanking.distances, paste0))))
+expr.overlap.overview$Set <- rownames(expr.overlap.overview)
+
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
-      for (type in c('expr', 'meth', 'snp', 'tfbs')) {
-          overlap.name <- paste0('herv', set, flanking, '.', type, '.overlap')
-          cat(overlap.name, fill = T)
-          print.overlap.info(overlap.name, type)
-      }
+    expr.overlap.name <- paste0('herv', set, flanking, '.expr.overlap')
+    cat(paste0('Processing ', expr.overlap.name), fill = T)
+    expr.overlap <- get(expr.overlap.name)
+    expr.overlap.overview['Pairs', paste0(set, flanking)] <- dim(expr.overlap$pairs)[1]
+    expr.overlap.overview['HERVs', paste0(set, flanking)] <- length(expr.overlap$herv.ranges)
+    expr.overlap.overview['Probes', paste0(set, flanking)] <- length(expr.overlap$expr.ranges)
+    expr.overlap.genes <- unique(probe2gene[names(expr.overlap$expr.ranges)[names(expr.overlap$expr.ranges) %in% names(probe2gene)]])
+    expr.overlap.overview['Genes', paste0(set, flanking)] <- length(expr.overlap.genes)
+    assign(paste0('herv', set, flanking, 'expr.enrichment'), go.enrichment(expr.overlap.genes, gene.universe, gsc, c('BP')))
+  }
+}
+
+write.table(expr.overlap.overview, file = paste0(PATHS$TABLE.DIR, 'expr.overlap.overview.tsv'), 
+            quote = F, sep = '\t', row.names = F, col.names = T)
+
+hervS2.2kb.expr.enrichment.signigicant <- hervS2.2kb.expr.enrichment[1:11, c(2, 8, 3, 9)]
+colnames(hervS2.2kb.expr.enrichment.signigicant) <- c('Term ID', 'Term', 'p', 'fdr')
+write.table(hervS2.2kb.expr.enrichment.signigicant, file = paste0(PATHS$TABLE.DIR, 'hervS2.2kb.expr.enrichment.tsv'), 
+              quote = F, sep = '\t', row.names = F, col.names = T)
+
+save(
+  hervS1.expr.enrichment,
+  hervS2.expr.enrichment,
+  hervS3.expr.enrichment,
+  hervS1.1kb.expr.enrichment,
+  hervS2.1kb.expr.enrichment,
+  hervS3.1kb.expr.enrichment,
+  hervS1.2kb.expr.enrichment,
+  hervS2.2kb.expr.enrichment,
+  hervS3.2kb.expr.enrichment,
+  file = PATHS$HERV.EXPR.ENRICHMENT.DATA
+)
+
+meth.overlap.overview <- data.frame(matrix(nrow = 3, ncol = 10))
+rownames(meth.overlap.overview) <- c('Pairs', 'HERVs', 'CpGs')
+sets <- c('S1', 'S2', 'S3')
+flanking.distances <- c('', '.1kb', '.2kb')
+colnames(meth.overlap.overview) <- c('Set', as.vector(t(outer(sets, flanking.distances, paste0))))
+meth.overlap.overview$Set <- rownames(meth.overlap.overview)
+
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    meth.overlap.name <- paste0('herv', set, flanking, '.meth.overlap')
+    cat(paste0('Processing ', meth.overlap.name), fill = T)
+    meth.overlap <- get(meth.overlap.name)
+    meth.overlap.overview['Pairs', paste0(set, flanking)] <- dim(meth.overlap$pairs)[1]
+    meth.overlap.overview['HERVs', paste0(set, flanking)] <- length(meth.overlap$herv.ranges)
+    meth.overlap.overview['CpGs', paste0(set, flanking)] <- length(meth.overlap$meth.ranges)
+  }
+}
+
+write.table(meth.overlap.overview, file = paste0(PATHS$TABLE.DIR, 'meth.overlap.overview.tsv'), 
+            quote = F, sep = '\t', row.names = F, col.names = T)
+
+snp.overlap.overview <- data.frame(matrix(nrow = 3, ncol = 10))
+rownames(snp.overlap.overview) <- c('Pairs', 'HERVs', 'SNPs')
+sets <- c('S1', 'S2', 'S3')
+flanking.distances <- c('', '.1kb', '.2kb')
+colnames(snp.overlap.overview) <- c('Set', as.vector(t(outer(sets, flanking.distances, paste0))))
+snp.overlap.overview$Set <- rownames(snp.overlap.overview)
+
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    snp.overlap.name <- paste0('herv', set, flanking, '.snp.overlap')
+    cat(paste0('Processing ', snp.overlap.name), fill = T)
+    snp.overlap <- get(snp.overlap.name)
+    snp.overlap.overview['Pairs', paste0(set, flanking)] <- dim(snp.overlap$pairs)[1]
+    snp.overlap.overview['HERVs', paste0(set, flanking)] <- length(snp.overlap$herv.ranges)
+    snp.overlap.overview['SNPs', paste0(set, flanking)] <- length(snp.overlap$snp.ranges)
+  }
+}
+
+write.table(snp.overlap.overview, file = paste0(PATHS$TABLE.DIR, 'snp.overlap.overview.tsv'), 
+            quote = F, sep = '\t', row.names = F, col.names = T)
+
+
+
+
+for (set in c('S1', 'S2', 'S3')) {
+  for (flanking in c('', '.1kb', '.2kb')) {
+    for (type in c('expr', 'meth', 'snp', 'tfbs')) {
+      overlap.name <- paste0('herv', set, flanking, '.', type, '.overlap')
+      cat(overlap.name, fill = T)
+      print.overlap.info(get(overlap.name), type)
+    }
   }
 }
 

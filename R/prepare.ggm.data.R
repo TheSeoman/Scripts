@@ -76,7 +76,7 @@ collect.pair.overlaps <- function(pairs) {
 covariates.all <- read.table(PATHS$F.COVARIATES, sep = ";", header = TRUE)
 id.map <- covariates.all[covariates.all$expr_s4f4ogtt %in% rownames(expr.residuals) 
                          & covariates.all$axio_s4f4 %in% snp.samples 
-                         & covariates.all$meth_f4 %in% rownames(meth.matrix), c('expr_s4f4ogtt', 'axio_s4f4', 'meth_f4')]
+                         & covariates.all$meth_f4 %in% rownames(meth.residuals), c('expr_s4f4ogtt', 'axio_s4f4', 'meth_f4')]
 id.map <- id.map[order(id.map$expr_s4f4ogtt),]
 id.map$expr_s4f4ogtt <- as.character(id.map$expr_s4f4ogtt)
 id.map$axio_s4f4 <- as.character(id.map$axio_s4f4)
