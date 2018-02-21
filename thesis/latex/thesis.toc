@@ -12,7 +12,7 @@
 \contentsline {subsubsection}{\numberline {2.2.4}Covariates}{5}
 \contentsline {subsubsection}{\numberline {2.2.5}Methylation quantitative trait loci}{5}
 \contentsline {subsection}{\numberline {2.3}Transcription factor binding}{5}
-\contentsline {subsection}{\numberline {2.4}Chromatin states}{5}
+\contentsline {subsection}{\numberline {2.4}Chromatin states}{6}
 \contentsline {section}{\numberline {3}Methods}{7}
 \contentsline {subsection}{\numberline {3.1}Overlaps}{7}
 \contentsline {subsection}{\numberline {3.2}Data normalization}{7}
@@ -24,11 +24,12 @@
 \contentsline {subsection}{\numberline {4.2}HERV region features}{9}
 \contentsline {subsubsection}{\numberline {4.2.1}Expression}{9}
 \contentsline {subsubsection}{\numberline {4.2.2}Methylation}{9}
-\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{9}
-\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{10}
-\contentsline {subsection}{\numberline {4.3}eQTLs}{10}
-\contentsline {subsection}{\numberline {4.4}eQTMs}{10}
-\contentsline {subsection}{\numberline {4.5}hERV realated regulatory networks}{10}
-\contentsline {subsubsection}{\numberline {4.5.1}Data collection}{10}
-\contentsline {section}{\numberline {5}Discussion}{11}
-\contentsline {section}{\numberline {6}Conclusion}{12}
+\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{10}
+\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{11}
+\contentsline {subsection}{\numberline {4.3}eQTLs}{11}
+\contentsline {subsection}{\numberline {4.4}eQTMs}{11}
+\contentsline {subsection}{\numberline {4.5}meQTLs}{11}
+\contentsline {subsection}{\numberline {4.6}HERV realated regulatory networks}{11}
+\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{11}
+\contentsline {section}{\numberline {5}Discussion}{12}
+\contentsline {section}{\numberline {6}Conclusion}{13}

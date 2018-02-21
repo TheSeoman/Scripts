@@ -144,38 +144,36 @@
 \subsection{HERV annotation}
 HERV annotation was pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
 
-The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. Not in order these are repeat name the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurence. Furthermore it contains the position in the whole sequence, that is known for the identified repeat, that is covered by the occurrence. It also describes the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally there is an indexing field used to speed aup chromosme range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{}.
+The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. Not in order these are repeat name the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurence. Furthermore it contains the position in the whole sequence, that is known for the identified repeat, that is covered by the occurrence. It also describes the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally there is an indexing field used to speed aup chromosme range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
 
-\begin{table}[]
+\begin{table}[b]
 \centering
-\label{my-label}
+\label{tab:RepeatMaskerTrack}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{lllllllllllllllll}
-bin & swScore & milliDiv & milliDel & milliIns & genoName & genoStart & genoEnd & genoLeft   & strand & repName   & repClass       & repFamily      & repStart & repEnd & repLeft & id \\
-585 & 1504    & 13       & 4        & 13       & chr1     & 10000     & 10468   & -249240153 & +      & (CCCTAA)n & Simple\_repeat & Simple\_repeat & 1        & 463    & 0       & 1  \\
-585 & 3612    & 114      & 270      & 13       & chr1     & 10468     & 11447   & -249239174 & -      & TAR1      & Satellite      & telo           & -399     & 1712   & 483     & 2  \\
-585 & 437     & 235      & 186      & 35       & chr1     & 11503     & 11675   & -249238946 & -      & L1MC      & LINE           & L1             & -2236    & 5646   & 5449    & 3  \\
-585 & 239     & 294      & 19       & 10       & chr1     & 11677     & 11780   & -249238841 & -      & MER5B     & DNA            & hAT-Charlie    & -74      & 104    & 1       & 4  \\
-585 & 318     & 230      & 38       & 0        & chr1     & 15264     & 15355   & -249235266 & -      & MIR3      & SINE           & MIR            & -119     & 143    & 49      & 5  \\
-585 & 203     & 162      & 0        & 0        & chr1     & 16712     & 16749   & -249233872 & +      & (TGG)n    & Simple\_repeat & Simple\_repeat & 1        & 37     & 0       & 6  \\
-585 & 239     & 338      & 148      & 0        & chr1     & 18906     & 19048   & -249231573 & +      & L2a       & LINE           & L2             & 2942     & 3104   & -322    & 7  \\
-585 & 652     & 346      & 85       & 42       & chr1     & 19947     & 20405   & -249230216 & +      & L3        & LINE           & CR1            & 3042     & 3519   & -970    & 8  \\
-585 & 270     & 331      & 7        & 27       & chr1     & 20530     & 20679   & -249229942 & +      & Plat\_L3  & LINE           & CR1            & 2802     & 2947   & -639    & 9  \\
-585 & 254     & 279      & 47       & 39       & chr1     & 21948     & 22075   & -249228546 & +      & MLT1K     & LTR            & ERVL-MaLR      & 15       & 142    & -453    & 1 
-\end{tabular}}
+\pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={bin, swScore, milliDiv, milliDel, milliIns, genoName, genoStart, genoEnd, genoLeft, strand, repName, repClass, repFamily, repStart, repEnd, repLeft, id},
+	columns/genoName/.style={column type=l,string type},
+	columns/strand/.style={column type=l,string type},
+	columns/repName/.style={column type=l,string type, string replace*={_}{\textunderscore}},
+	columns/repClass/.style={column type=l,string type, string replace*={_}{\textunderscore}},
+	columns/repFamily/.style={column type=l,string type, string replace*={_}{\textunderscore}},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]{../tables/head.repeatmasker.track.tsv}}
 \caption{First ten rows of the RepeatMasker annotation on hg19}
 \end{table}
 
-To extract HERV elements the annotation was filtered on different columns generating three sets variable size. Multiple HERV sets was created as an atempt to cover different possible definitions of what exactly a HERV element is.
+To extract HERV elements the annotation was filtered on different columns generating three sets variable size. Multiple HERV sets were created as an atempt to cover different possible definitions of HERV elements.
 
 This work only discerned between different HERV element types by defining different HERV sets. Therefore, within each set annotations, whose genomic positions overlap or are directly adjacent, were merged into one element.
 
 A first set, HERV set 1 (HERV S1) was constructed by extracting all elements that contained "ERV" in the repeat name column. This set
-The resulting 42508 annotations condensed to 35589 elements after merging. The elements have a mean width of 949 bp and cover a total of 33.8 MB, which is ca 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
+The resulting 42508 annotations condensed to 35589 elements after merging. The elements have a mean width of 949 bp and cover a total of 33.8 Mbp, which is ca 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
 
-Alternatively filtering the annotation for "ERV" in the superfamily column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. After merging overlapping and adjacent annotations this led to 633323 elements. Their mean width is 415 bp and they make up to 262.8 MB or ca 8.13\% of the human genome. 
+Alternatively filtering the annotation for "ERV" in the superfamily column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. After merging overlapping and adjacent annotations this led to 633323 elements. Their mean width is 415 bp and they make up to 262.8 Mbp or ca 8.13\% of the human genome. 
 
-A third set "HERV set 3" (JERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitely named "HERV", it is my hope that might contain only endogenous retroviral elements, that were inserted directly into the human genome. After merging overlapping and adjacent annotations there were 15403 element with an average width of 1468 bp and a combined length of 22.6 MB.
+A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitely named "HERV", it is my hope that might contain only endogenous retroviral elements, that were inserted directly into the human genome. Merging overlapping and adjacent annotations resulted in 15403 elements with an average width of 1468 bp and a combined length of 22.6 Mbp.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS1_lengths_hist}  
@@ -185,14 +183,20 @@ A third set "HERV set 3" (JERV S3) was constructed by filtering the repeat name 
 
 
 \subsection{KORA}
-The Expression, Methylation and Genotype data used in this work were generated by the platform for Cooperative Health Research in the Region of Augsburg - short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
+The expression, methylation and genotype data used in this work were generated by the platform for Cooperative Health Research in the Region of Augsburg - short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
 The objective of KORA is to track changes in health conditions over a long period in order to identify and examine the causes, effects and development of chronical diseases.
 
-The data comes from the Survey F4, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. F4 is a follow up study to the survey S4 performed from 1999 to 2001 and containing 4261 individuals. 
+The data comes from the KORA F4 Survey, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. F4 is a follow up study to the survey S4 performed from 1999 to 2001 and containing 4261 individuals. 
 
 All measurements were performed on whole blood samples. Houseman blood counts\cite{} describing the composition of different cell types for each individual are available.
 
-Not all essays are available for all samples. Therefore different analyses were performed on varying sets of indiviudals according to availability of the required data types.
+Not all essays are available for all samples. Therefore different analyses were performed on varying sets of indiviudals according to availability of the required data types. A diagram of the which samples were available for each essay can be seen in figure \ref{fig:samples.venn}.
+
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/samples_venn}  
+	\caption{Number of samples with genotype, expression and methylation measurements in KORA F4 Survey}
+    \label{fig:samples.venn}
+\end{figure}
 
 \subsubsection{Expression}
 The expression data was generated using the HumanHT-12 v3.0 Gene Expression BeadChip. The chip can measure expression values for 49576 probes. However only 47864 probes represent an actual genomic location. 
@@ -292,45 +296,97 @@ Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on
 \newpage
 \section{Results}
 \subsection{Normalized Data}
+The distribution of the quantile normalized expression values and the expression residuals over all probes and samples can be seen in figure \ref{fig:expr.raw.res}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions\cite{}.
 
-The distribution of the quantile normalized expression values and the expression residuals can be seen in figure \ref{fig:}. As expected it follows a normal distribution. This is important for the calculation of the Gaussian graphical models, as it's one of base assumptions. 
-\begin{itemize}
-\item raw var vs residual var
-\item 
-\end{itemize}
 \subsection{HERV region features}
+In this section I will describe the expression probes that overlap with any HERV element and the cpgs and SNPs that lie within any HERV element and/or their flanking regions. The results for the set of all endogenous retroviral elements, HERV set 2, without flanking regions are described in detail. The results for the other sets and including flanking regions will be shown in tables or in the supplementary data.
+
 \subsubsection{Expression}
-Using hERV set 1 there are a total of 191 overlaps of at least 1 bp between a hERV element and a region measured in the expression array. 174 hERV elements overlap with 188 different expression probes. 
+A total of 2343 expression probes overlap directly with at least one of 2271 HERV elements from HERV S2. This means ca 4.50\% of all expression probes overlap with HERV elements and expression measurements are known for parts of ca 0.37\% of all HERV elements.
 
-The expression probes have 1338 overlaps with the annotated elements in hERV set 2. 1274 hERV elements overlap with 1317 different expression probes.
+The mean expression of the probes overlapping with HERV elements, as shown in figure \ref{fig:hervS2.expr.var} is on average lower than for all probes (figure \ref{fig:expr.var}). The coefficent of variance, however, shows a very similar pattern for the whole set of probes and the considered subset.
 
-The coefficents of variance for the expression probes that overlap with the hERV sets are shown in Figure \ref{fig:herv.expr.var}
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_expr_var}  
+	\caption{Coefficient of expression variance over 993 individuals and 2343 expression probes overlapping with HERV S2.}
+    \label{fig:hervS2.expr.var}
+\end{figure}
 
-When inspecting not only direct overlaps, but the region of +/- 1kb around the hERV elements, there are 517 overlaps (476 hERV elements, 349 probes) for set 1 and 6812 overlaps (6336 hERV elements, 4712 probes) for set 2.
+Of these 2343 probes 510 were annotated to one of 449 different genes. I performed a GO enrichment for the biological process ontology on these genes with the set of all genes with available expression data as background. The two most significantly enriched terms are defense response (GO:0006952, $p=6.17e-05$) and innate immune response (GO:0045087, $p-value=	
+2.97e-04$), but after correcting for multiple testing no terms are significantly enriched.
 
-Enlarging the flanking regions to 2kb leads to 973 (870 hERV elements, 548 probes) and 13398 (12201 hERV elements, 8044 probes) overlaps for set 1/2 respectively.
+However, when including the 2kb flanking regions of HERV S2 and performing the GO enrichment on the 2400 identified genes, the 11 GO terms shown in table \ref{tab:hervS2.2kb.enrichment} are significantly overrepresented. They are all connected to immune response and the detection of stimuli.
+
+\begin{table}[h!]
+  \begin{center}
+  \resizebox{\textwidth}{!}{
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Term ID, Term, p, fdr},
+	columns/Term ID/.style={column type=l,string type},
+	columns/Term/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]
+    {../tables/hervS2.2kb.expr.enrichment.tsv}}
+  \end{center}        
+	\caption{Significantly enriched GO biological process terms among genes overlapping with HERV S2.}
+	\label{tab:expr.overlap.counts}
+\end{table}
+
+The results for all HERV sets and including flanking regions is shown in table \ref{tab:expr.overlap.counts}.
 
 
+
+\begin{table}[h!]
+  \begin{center}
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Set,S1,S1.1kb,S1.2kb,S2,S2.1kb,S2.2kb,S3,S3.1kb,S3.2kb},
+	columns/Set/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]
+    {../tables/expr.overlap.overview.tsv}
+  \end{center}        
+	\caption{Number of expression probes overlapping with different HERV sets and flanking regions. "Pairs" is the total number of overlaps occurring, "HERVs" is the number of distinct HERV elements that have an overlap with any of the expression probes, Probes describes the number of distinct expression probes that overlap with the HERV elements or their flanking regions, "Genes" is the number of distinct Genes that are annotated to these probes.}
+	\label{tab:expr.overlap.counts}
+\end{table}
 
 \subsubsection{Methylation}
-Using hERV set 1 there are a total of 1602 overlaps of hERV elements and measured methylation sites. 1021 hERV elements overlap with 1595 different methylation sites.
+17077 CpG sites, equaling 3.52\% of all measured CpGs, were found within HERV S2 and 12871 distinct HERV elements (2.10\%) contain at least one interogated CpG site.
 
-hERV set 2 has 17162 overlaps. These are constituted by 13141 hERV elements and 17137 methylation sites.
 
-Including the 1kb flanking regions of the hERV elements leads to 6785 overlaps (3470 hERV elements, 4497 methylation probes) for set 1 and 119763 overlaps (66249 hERV elements, 78501 methylation probes) for set 2.
+The variance of the measurements of these sites, which is shown in figure \ref{fig:}, is lower on average.
 
-With a flanking region of 2k this increases to 13559 overlaps (5645 hERV elements, 7792 methylation probes) for set 1 and 259739 overlaps (110524 hERV elements, 139036 methylation probes) for set 2. 
+The number of CpG sites within all HERV sets and including flanking regions is shown in table \ref{tab:meth.overlap.counts}
+
+\begin{table}[h!]
+  \begin{center}
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Set,S1,S1.1kb,S1.2kb,S2,S2.1kb,S2.2kb,S3,S3.1kb,S3.2kb},
+	columns/Set/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]
+    {../tables/meth.overlap.overview.tsv}
+  \end{center}        
+	\caption{Number of CpGs overlapping with different HERV sets and flanking regions. "Pairs" is the total number of overlaps occurring, "HERVs" is the number of distinct HERV elements that have an overlap with any of the expression probes, "CpGs" is the number of distinct CpG sites that lie within the HERV elements or their flanking regions.}
+	\label{tab:meth.overlap.counts}
+\end{table} 
 
 \subsubsection{Genotypes}
-Measurements for a total of 80754 SNPs within hERV set 1, that occurr in at least one sample, are available.
-
+A total of 890780 SNPs that were measured are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
 \subsubsection{Chromatin states}
 
 \subsection{eQTLs}
 
 \subsection{eQTMs}
 
-\subsection{hERV realated regulatory networks}
+\subsection{meQTLs}
+
+\subsection{HERV realated regulatory networks}
 \subsubsection{Data collection}
 
 

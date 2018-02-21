@@ -3,12 +3,10 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
-Too many commas in name 1 of "Smit, AFA, Hubley, R and Green P." for entry RepeatMasker
-while executing---line 944 of file unsrt.bst
 Warning--empty journal in RepeatMasker
 You've used 15 entries,
             1791 wiz_defined-function locations,
-            556 strings with 7174 characters,
+            556 strings with 7173 characters,
 and the built_in function-call counts, 4004 in all, are:
 = -- 292
 > -- 289
@@ -47,4 +45,4 @@ warning$ -- 1
 while$ -- 27
 width$ -- 17
 write$ -- 168
-(There was 1 error message)
+(There was 1 warning)
