@@ -315,7 +315,8 @@ The mean expression of the probes overlapping with HERV elements, as shown in fi
 Of these 2343 probes 510 were annotated to one of 449 different genes. I performed a GO enrichment for the biological process ontology on these genes with the set of all genes with available expression data as background. The two most significantly enriched terms are defense response (GO:0006952, $p=6.17e-05$) and innate immune response (GO:0045087, $p-value=	
 2.97e-04$), but after correcting for multiple testing no terms are significantly enriched.
 
-However, when including the 2kb flanking regions of HERV S2 and performing the GO enrichment on the 2400 identified genes, the 11 GO terms shown in table \ref{tab:hervS2.2kb.enrichment} are significantly overrepresented. They are all connected to immune response and the detection of stimuli.
+%%Wrong hervS2.2kb
+%However, when including the 2kb flanking regions of HERV S2 and performing the GO enrichment on the 2400 identified genes, the 11 GO terms shown in table \ref{tab:hervS2.2kb.enrichment} are significantly overrepresented. They are all connected to immune response and the detection of stimuli.
 
 \begin{table}[h!]
   \begin{center}
@@ -333,10 +334,10 @@ However, when including the 2kb flanking regions of HERV S2 and performing the G
 	\caption{Significantly enriched GO biological process terms among genes overlapping with HERV S2.}
 	\label{tab:expr.overlap.counts}
 \end{table}
+%Wrong hervS2.2kb
 
-The results for all HERV sets and including flanking regions is shown in table \ref{tab:expr.overlap.counts}.
 
-
+%The results for all HERV sets and including flanking regions is shown in table \ref{tab:expr.overlap.counts}.
 
 \begin{table}[h!]
   \begin{center}
@@ -363,6 +364,7 @@ The number of CpG sites within all HERV sets and including flanking regions is s
 
 \begin{table}[h!]
   \begin{center}
+    \resizebox{\textwidth}{!}{
     \pgfplotstabletypeset[
     col sep=tab, 
     header=true,    
@@ -370,17 +372,45 @@ The number of CpG sites within all HERV sets and including flanking regions is s
 	columns/Set/.style={column type=l,string type},
 	every head row/.style={before row=\hline, after row=\hline},
 	every last row/.style={after row=\hline}]
-    {../tables/meth.overlap.overview.tsv}
+    {../tables/meth.overlap.overview.tsv}}
   \end{center}        
 	\caption{Number of CpGs overlapping with different HERV sets and flanking regions. "Pairs" is the total number of overlaps occurring, "HERVs" is the number of distinct HERV elements that have an overlap with any of the expression probes, "CpGs" is the number of distinct CpG sites that lie within the HERV elements or their flanking regions.}
 	\label{tab:meth.overlap.counts}
 \end{table} 
 
 \subsubsection{Genotypes}
-A total of 890780 SNPs that were measured are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
+A total of 890780 the considered SNPs are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
+
+The results for all sets and flanking regions are shown in table \ref{tab:snp.overlap.counts}
+
+\begin{table}[h!]
+  \begin{center}
+    \resizebox{\textwidth}{!}{
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Set,S1,S1.1kb,S1.2kb,S2,S2.1kb,S2.2kb,S3,S3.1kb,S3.2kb},
+	columns/Set/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]
+    {../tables/snp.overlap.overview.tsv}}
+  \end{center}        
+	\caption{Number of SNPs overlapping with different HERV sets and flanking regions. "Pairs" is the total number of overlaps occurring, "HERVs" is the number of distinct HERV elements that have an overlap with any of the expression probes, "SNPs" is the number of distinct considered SNPs that lie within the HERV elements or their flanking regions.}
+	\label{tab:snp.overlap.counts}
+\end{table} 
+
 \subsubsection{Chromatin states}
+Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
 
 \subsection{eQTLs}
+Associations were calculated for 156.4 millions cis acting SNP-expression probe pairs and 456.1 billion possible pairs in trans. 
+
+812147 of cis-pairs were significantly associated with p-values of 1e-6 or less. These significant eQTLs have a false discovery rate of less than 1.93e-4. A total of 551728 distinct SNPs and 4903 expression probes were part of at least one cis-eQTL. 4145 of these probes are annotated to 3552 different genes. The remaining 
+758 can not be assigned to a specific gene.
+
+There were a total of 1511235 significant trans-eQTL with an p-value of less than 1e-8 and a FDR of less than 3.02e-4. These are made up by 229332 distinct SNPs and 21338 expression probes. 11505 of the probes found in at least one trans-eQTL are annotated to 9389 different genes, while 9767 probes are not assigned to a gene.
+
+In a previous work Schramm et al. \cite{} calculated eQTLs on expression and genotype data from 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
 
 \subsection{eQTMs}
 
