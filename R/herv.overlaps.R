@@ -40,7 +40,14 @@ if (!file.exists(PATHS$METH.RANGES.DATA)) {
   load(PATHS$METH.RANGES.DATA)
 }
 
-load(PATHS$SNP.RANGES.DATA)
+if(!file.exists(PATHS$SNP.RANGES.DATA)) {
+  snp.info <- fread(PATHS$F.SNP.POS, sep = '\t', header = T)
+  snp.ranges <- GRanges(seqnames=snp.info$chr, ranges=IRanges(start=snp.info$pos, width=1), from=snp.info$from, to=snp.info$to)
+  names(snp.ranges) <- snp.info$snp
+  save(snp.ranges, file = PATHS$SNP.RANGES.DATA)
+} else {
+  load(PATHS$SNP.RANGES.DATA)
+}
 load(PATHS$TFBS.RANGES.DATA)
 
 calc.overlap.data <- function (herv.ranges, essay.ranges, data.type) {
@@ -187,9 +194,15 @@ for (set in c('S1', 'S2', 'S3')) {
   }
 }
 
-probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
-probe2gene <- probe2gene[names(expr.ranges)]
-probe2gene <- probe2gene[!is.na(probe2gene)]
+if(!file.exists(PATHS$EXPR.GENE.ANNOT.DATA)) {
+  probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
+  probe2gene <- probe2gene[names(expr.ranges)]
+  probe2gene <- probe2gene[!is.na(probe2gene)]
+  save(probe2gene, file = PATHS$EXPR.GENE.ANNOT.DATA)
+} else {
+  load(PATHS$EXPR.GENE.ANNOT.DATA)
+}
+
 gene.universe <- unique(probe2gene)
 
 expr.overlap.overview <- data.frame(matrix(nrow = 4, ncol = 10))
@@ -209,14 +222,14 @@ for (set in c('S1', 'S2', 'S3')) {
     expr.overlap.overview['Probes', paste0(set, flanking)] <- length(expr.overlap$expr.ranges)
     expr.overlap.genes <- unique(probe2gene[names(expr.overlap$expr.ranges)[names(expr.overlap$expr.ranges) %in% names(probe2gene)]])
     expr.overlap.overview['Genes', paste0(set, flanking)] <- length(expr.overlap.genes)
-    assign(paste0('herv', set, flanking, 'expr.enrichment'), go.enrichment(expr.overlap.genes, gene.universe, gsc, c('BP')))
+    assign(paste0('herv', set, flanking, '.expr.enrichment'), go.enrichment(expr.overlap.genes, gene.universe, gsc, c('BP')))
   }
 }
 
 write.table(expr.overlap.overview, file = paste0(PATHS$TABLE.DIR, 'expr.overlap.overview.tsv'), 
             quote = F, sep = '\t', row.names = F, col.names = T)
 
-hervS2.2kb.expr.enrichment.signigicant <- hervS2.2kb.expr.enrichment[1:11, c(2, 8, 3, 9)]
+hervS2.2kb.expr.enrichment.signigicant <- hervS2.2kb.expr.enrichment[1:6, c(2, 8, 3, 9)]
 colnames(hervS2.2kb.expr.enrichment.signigicant) <- c('Term ID', 'Term', 'p', 'fdr')
 write.table(hervS2.2kb.expr.enrichment.signigicant, file = paste0(PATHS$TABLE.DIR, 'hervS2.2kb.expr.enrichment.tsv'), 
               quote = F, sep = '\t', row.names = F, col.names = T)

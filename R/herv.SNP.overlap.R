@@ -1,6 +1,5 @@
 source('Scripts/R/paths.R')
 
-
 create.granges.from.snpinfo <- function(snpinfo) {
   return (
     GRanges(seqnames = snpinfo$chr,

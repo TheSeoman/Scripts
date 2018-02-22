@@ -14,6 +14,10 @@ load(PATHS$HERV.SNP.OVERLAP.DATA)
 cat('Loading matrix-eqtl result', fill = TRUE)
 
 load(PATHS$MAF001.RES.ME.DATA)
+load(PATHS$EXPR.GENE.ANNOT.DATA)
+# MAFOO1 snps set eqtl
+cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
+eqtl.genes <- unique(na.omit(probe2gene[unique(c(as.character(eqtl.me$cis$eqtls$gene), as.character(eqtl.me$trans$eqtls$gene)))]))
 
 get.eqtl.overview <- function(eqtl.table) {
   out <- list()
@@ -42,8 +46,10 @@ get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp.ids, expr.ids) {
   return(out)
 }
 
-get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, expr.genes) {
-  universe <- unique(expr.genes[!is.na(expr.genes)])
+get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, eqtl.genes) {
+  snp.eqtl.genes <- unique(na.omit(probe2gene[unique(c(herv.eqtl.overlap$cis.snp$gene, herv.eqtl.overlap$trans.snp$gene))]))
+  out$cis <- go.enrichment(genes, universe, gsc, c('BP'))
+  
   out <- lapply(herv.eqtl.overlap, function(eqtls) {
     genes <- unique(expr.genes[eqtls$gene])
     genes <- genes[!is.na(genes)]
@@ -93,20 +99,12 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtl.overlap, snp.annotation, e
   return(out)
 }
 
-# MAFOO1 snps set eqtl
-cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
-require(illuminaHumanv3.db)
-eqtl.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtl.me$cis$eqtls$gene), as.character(eqtl.me$trans$eqtls$gene)))]
-eqtl.genes <- eqtl.genes[!is.na(eqtl.genes)]
-
-load(PATHS$HERV.EQTL.OVERLAP.DATA)
-
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
-    # assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
-    assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
+    assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
+    # assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
     # assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.overlap.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }

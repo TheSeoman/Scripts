@@ -30,19 +30,20 @@ probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
 probe2gene <- probe2gene[names(expr.ranges)]
 probe2gene <- probe2gene[!is.na(probe2gene)]
 
-plot.coefficient.variance(data, type) {
-  mean <- apply(data, 1, mean)
-  sd <- apply(data, 1, sd)
-  var <- apply(data, 1, var)
-  
-  
+plot.coefficient.variation <- function(data, type) {
+  mean <- apply(data, 1, mean, na.rm = T)
+  sd <- apply(data, 1, sd, na.rm = T)
+  df <- data.frame(mean = mean, coef.var = sd/mean * 100)
+  g <- ggplot(df, aes(mean, coef.var)) + geom_point()  
+  g <- g + xlab(paste0('Mean ', type)) + ylab('Coefficient of variation')
+  return(g)
 }
 
+meth.coef.var.plot <- plot.coefficient.variation(meth.data)
 
-
-expr.mean <- apply(hervS2.expr.data, 1, mean)
-expr.sd <- apply(hervS2.expr.data, 1, sd)
-expr.var <- apply(hervS2.expr.data, 1, var)
+expr.mean <- apply(expr.data, 1, mean, na.rm = T)
+expr.sd <- apply(expr.data, 1, sd)
+expr.var <- apply(expr.data, 1, var)
 
 pdf(paste0(PATHS$PLOT.DIR, 'expr_var_pdf'), width = 7, height = 4)
 layout(matrix(c(1:2), 1, 2, byrow = T))
@@ -55,3 +56,5 @@ dev.off()
 load(PATHS$METH.RANGES)
 
 load()
+
+

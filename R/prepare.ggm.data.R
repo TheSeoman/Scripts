@@ -82,6 +82,8 @@ id.map$expr_s4f4ogtt <- as.character(id.map$expr_s4f4ogtt)
 id.map$axio_s4f4 <- as.character(id.map$axio_s4f4)
 id.map$meth_f4 <- as.character(id.map$meth_f4)
 
+save(id.map, file = PATHS$FULL.ID.MAP.DATA)
+
 probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
 probe2gene <- probe2gene[!is.na(probe2gene)]
 
