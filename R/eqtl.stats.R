@@ -9,6 +9,8 @@ load(PATHS$EXPR.GENE.ANNOT.DATA)
 load(PATHS$EXPR.RANGES.DATA)
 load(PATHS$SNP.RANGES.DATA)
 
+load(PATHS$HERV.EQTL.OVERLAP.DATA)
+
 cis.pos.pairs <- eqtl.me$cis$ntest
 trans.pos.pairs <- eqtl.me$trans$ntests
 

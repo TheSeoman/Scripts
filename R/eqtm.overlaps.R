@@ -15,6 +15,10 @@ load(PATHS$HERV.METH.OVERLAP.DATA)
 cat('Loading matrix-eqtl result', fill = TRUE)
 load(PATHS$EQTM.ME.DATA)
 
+load(PATHS$EXPR.GENE.ANNOT.DATA)
+# MAFOO1 snps set eqtl
+cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
+eqtm.genes <- unique(na.omit(probe2gene[unique(c(as.character(eqtm.me$cis$eqtls$gene), as.character(eqtm.me$trans$eqtls$gene)))]))
 
 
 get.herv.eqtm.overlap <- function(cis.eqtm, trans.eqtm, expr.ids, meth.ids) {
@@ -33,57 +37,18 @@ get.herv.eqtm.overlap <- function(cis.eqtm, trans.eqtm, expr.ids, meth.ids) {
   return(out)
 }
 
-get.eqtm.overlap.go.enrichment <- function (herv.eqtm.overlap, expr.annotation) {
-  universe <- unique(expr.annotation[!is.na(expr.annotation)])
+get.eqtm.overlap.go.enrichment <- function (herv.eqtm.overlap, eqtm.genes) {
   out <- list()
-  meth.trans.genes <- unique(expr.annotation[herv.eqtm.overlap$trans.meth$gene])
-  meth.trans.genes <- meth.trans.genes[!is.na(meth.trans.genes)]
-  if (length(meth.trans.genes) > 0) {
-    out$meth.trans <- go.enrichment(meth.trans.genes, universe, gsc, c('BP'))
+  for(type in c('meth', 'expr', 'both', 'either')) {
+    type.eqtm.genes <- unique(na.omit(probe2gene[unique(c(as.character(herv.eqtm.overlap[[paste0('cis.', type)]]$gene), 
+                                                          as.character(herv.eqtm.overlap[[paste0('trans.', type)]]$gene)))]))
+    if(length(type.eqtm.genes) > 0) {
+      out[[type]] <- go.enrichment(type.eqtm.genes, eqtm.genes, gsc, c('BP'))
+    } else {
+      out[[type]] <- NULL
+    }
   }
-  
-  expr.trans.genes <- unique(expr.annotation[herv.eqtm.overlap$trans.expr$gene])
-  expr.trans.genes <- expr.trans.genes[!is.na(expr.trans.genes)]
-  if (length(expr.trans.genes) > 0) {
-    out$expr.trans <- go.enrichment(expr.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  both.trans.genes <- unique(expr.annotation[herv.eqtm.overlap$trans.both$gene])
-  both.trans.genes <- both.trans.genes[!is.na(both.trans.genes)]
-  if (length(both.trans.genes) > 0) {
-    out$both.trans <- go.enrichment(both.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  either.trans.genes <- unique(expr.annotation[herv.eqtm.overlap$trans.either$gene])
-  either.trans.genes <- either.trans.genes[!is.na(either.trans.genes)]
-  if (length(either.trans.genes) > 0) {
-    out$either.trans <- go.enrichment(either.trans.genes, universe, gsc, c('BP'))
-  }
-  
-  meth.cis.genes <- unique(expr.annotation[herv.eqtm.overlap$cis.meth$gene])
-  meth.cis.genes <- meth.cis.genes[!is.na(meth.cis.genes)]
-  if (length(meth.cis.genes) > 0) {
-    out$meth.cis <- go.enrichment(meth.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  expr.cis.genes <- unique(expr.annotation[herv.eqtm.overlap$cis.expr$gene])
-  expr.cis.genes <- expr.cis.genes[!is.na(expr.cis.genes)]
-  if (length(expr.cis.genes) > 0) {
-    out$expr.cis <- go.enrichment(expr.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  both.cis.genes <- unique(expr.annotation[herv.eqtm.overlap$cis.both$gene])
-  both.cis.genes <- both.cis.genes[!is.na(both.cis.genes)]
-  if (length(both.cis.genes) > 0) {
-    out$both.cis <- go.enrichment(both.cis.genes, universe, gsc, c('BP'))
-  }
-  
-  either.cis.genes <- unique(expr.annotation[herv.eqtm.overlap$cis.either$gene])
-  either.cis.genes <- either.cis.genes[!is.na(either.cis.genes)]
-  if (length(either.cis.genes) > 0) {
-    out$either.cis <- go.enrichment(either.cis.genes, universe, gsc, c('BP'))
-  }
-  return(out)    
+  return(out)
 }
 
 get.eqtl.overlap.chromhmm.annotation <- function(eqtm.overlap, meth.annotation, expr.annotation) {
@@ -112,10 +77,6 @@ get.eqtl.overlap.chromhmm.annotation <- function(eqtm.overlap, meth.annotation, 
   
   return(out)
 }
-
-cat('Generating expression probes gene annotations for eqtl-probes...', fill = TRUE)
-require(illuminaHumanv3.db)
-eqtm.genes <- unlist(as.list(illuminaHumanv3SYMBOL))[unique(c(as.character(eqtm.me$cis$eqtls$gene), as.character(eqtm.me$trans$eqtls$gene)))]
 
 for (set in c('S1', 'S2', 'S3')) {
   for (flanking in c('', '.1kb', '.2kb')) {

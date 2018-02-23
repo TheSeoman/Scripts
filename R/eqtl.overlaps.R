@@ -47,20 +47,17 @@ get.herv.eqtl.overlap <- function (cis.eqtl, trans.eqtl, snp.ids, expr.ids) {
 }
 
 get.eqtl.overlap.go.enrichment <- function (herv.eqtl.overlap, eqtl.genes) {
-  snp.eqtl.genes <- unique(na.omit(probe2gene[unique(c(herv.eqtl.overlap$cis.snp$gene, herv.eqtl.overlap$trans.snp$gene))]))
-  out$cis <- go.enrichment(genes, universe, gsc, c('BP'))
-  
-  out <- lapply(herv.eqtl.overlap, function(eqtls) {
-    genes <- unique(expr.genes[eqtls$gene])
-    genes <- genes[!is.na(genes)]
-    if (length(genes) > 1){
-      enrichment <- go.enrichment(genes, universe, gsc, c('BP'))
+  out <- list()
+  for(type in c('snp', 'expr', 'both', 'either')) {
+    type.eqtl.genes <- unique(na.omit(probe2gene[unique(c(as.character(herv.eqtl.overlap[[paste0('cis.', type)]]$gene), 
+                                                          as.character(herv.eqtl.overlap[[paste0('trans.', type)]]$gene)))]))
+    cat(paste0('Calculating GO enrichment for HERV ', type, ' eQTLs on ', length(type.eqtl.genes), ' genes.'), fill = T)
+    if(length(type.eqtl.genes) > 0) {
+      out[[type]] <- go.enrichment(type.eqtl.genes, eqtl.genes, gsc, c('BP'))
     } else {
-      enrichment <- NULL
+      out[[type]] <- NULL
     }
-    return(enrichment)
-  })
-  names(out) <- names(herv.eqtl.overlap)
+  }
   return(out)
 }
 
@@ -104,14 +101,14 @@ for (set in c('S1', 'S2', 'S3')) {
     cat(paste0('Processing: herv', set, flanking), fill = TRUE)
     overlap.name <- paste0('herv', set, flanking, '.eqtl.overlap')
     assign(overlap.name, get.herv.eqtl.overlap(eqtl.me$cis$eqtls, eqtl.me$trans$eqtls, names(get(paste0('herv', set, flanking, '.snp.overlap'))$snp.ranges), names(get(paste0('herv', set, flanking, '.expr.overlap'))$expr.ranges)))
-    # assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
+    assign(paste0('herv', set, flanking, '.eqtl.enrichment'), get.eqtl.overlap.go.enrichment(get(overlap.name), eqtl.genes))
     # assign(paste0('herv', set, flanking, '.eqtl.annotation'), get.eqtl.overlap.chromhmm.annotation(get(overlap.name), snp.chromhmm.states, expr.chromhmm.annotation))
   }
 }
 
 cat('Saving results...', fill = TRUE)
-# save(hervS1.eqtl.overlap, hervS2.eqtl.overlap, hervS3.eqtl.overlap, hervS1.1kb.eqtl.overlap, hervS2.1kb.eqtl.overlap, hervS3.1kb.eqtl.overlap,
-     # hervS1.2kb.eqtl.overlap, hervS2.2kb.eqtl.overlap, hervS3.2kb.eqtl.overlap, file = PATHS$HERV.EQTL.OVERLAP.DATA)
+save(hervS1.eqtl.overlap, hervS2.eqtl.overlap, hervS3.eqtl.overlap, hervS1.1kb.eqtl.overlap, hervS2.1kb.eqtl.overlap, hervS3.1kb.eqtl.overlap,
+     hervS1.2kb.eqtl.overlap, hervS2.2kb.eqtl.overlap, hervS3.2kb.eqtl.overlap, file = PATHS$HERV.EQTL.OVERLAP.DATA)
 
 save(hervS1.eqtl.enrichment, hervS2.eqtl.enrichment, hervS3.eqtl.enrichment, hervS1.1kb.eqtl.enrichment, hervS2.1kb.eqtl.enrichment, hervS3.1kb.eqtl.enrichment,
      hervS1.2kb.eqtl.enrichment, hervS2.2kb.eqtl.enrichment, hervS3.2kb.eqtl.enrichment, file = PATHS$HERV.EQTL.ENRICHMENT.DATA)

@@ -34,10 +34,12 @@ go.enrichment <- function(genes, universe, gsc, ontologies=c("MF", "BP", "CC")) 
   for (ontology in ontologies) {
     params = GSEAGOHyperGParams(name="GO", ontology=ontology, geneIds=genes, universeGeneIds=universe, pvalueCutoff=1, testDirection="over", geneSetCollection=gsc, conditional=FALSE)
     hgt = hyperGTest(params)
-    res = data.frame(ontology, summary(hgt, pvalue=1))
-    res = data.frame(res, q=p.adjust(res[,"Pvalue"]))
-    colnames(res) = gsub("^GO.*ID$", "GOID", colnames(res))
-    go.tab = rbind(go.tab, res)
+    if(dim(summary(hgt, pvalue=1))[1] > 0) {
+      res = data.frame(ontology, summary(hgt, pvalue=1))
+      res = data.frame(res, q=p.adjust(res[,"Pvalue"]))
+      colnames(res) = gsub("^GO.*ID$", "GOID", colnames(res))
+      go.tab = rbind(go.tab, res)
+    }
   }
   return(go.tab)
 }
