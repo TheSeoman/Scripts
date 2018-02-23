@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  22 FEB 2018 15:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  23 FEB 2018 16:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1000,23 +1000,54 @@ Overfull \hbox (50.64464pt too wide) in paragraph at lines 310--311
 [][] 
  []
 
+
+LaTeX Warning: Reference `tab:hervS2.2kb.enrichment' on page 9 undefined on inp
+ut line 317.
+
 PGFPlots: reading {../tables/hervS2.2kb.expr.enrichment.tsv}
-PGFPlots: reading {../tables/expr.overlap.overview.tsv}
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[9]
+PGFPlots: reading {../tables/expr.overlap.overview.tsv}
 
-LaTeX Warning: Reference `fig:' on page 10 undefined on input line 361.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 PGFPlots: reading {../tables/meth.overlap.overview.tsv}
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[10 <../figures/hervS2_expr_var.pdf>]
+[9]
 PGFPlots: reading {../tables/snp.overlap.overview.tsv}
- [11] [12] [13] [14] (./thesis.bbl
-[15]) [16] (./thesis.aux)
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <../figures/hervS2_expr_var.pdf>] [11]
+
+LaTeX Warning: Reference `fig:global.eqtl.heatmap' on page 12 undefined on inpu
+t line 412.
+
+
+LaTeX Warning: Reference `fig:best.worst.eqtl.boxplot' on page 12 undefined on 
+input line 414.
+
+
+LaTeX Warning: Reference `fig:global.eqtl.heatmap' on page 12 undefined on inpu
+t line 420.
+
+
+LaTeX Warning: Reference `tab:HERVS2.eqtl.enrichment' on page 12 undefined on i
+nput line 422.
+
+
+LaTeX Warning: Reference `fig:global.eqtm.heatmap' on page 12 undefined on inpu
+t line 431.
+
+
+LaTeX Warning: Reference `fig:hervS2.eqtm.enrichment' on page 12 undefined on i
+nput line 437.
+
+[12] [13] [14] [15] (./thesis.bbl [16]) [17] (./thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1025,13 +1056,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25335 strings out of 494910
- 633477 string characters out of 6179836
- 781290 words of memory out of 5000000
- 28139 multiletter control sequences out of 15000+600000
+ 25340 strings out of 494910
+ 633633 string characters out of 6179836
+ 781293 words of memory out of 5000000
+ 28144 multiletter control sequences out of 15000+600000
  12674 words of font info for 45 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 68i,11n,80p,1128b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,11n,80p,1129b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/seoman/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/
@@ -1044,10 +1075,10 @@ msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.p
 fb>
-Output written on thesis.pdf (19 pages, 1303320 bytes).
+Output written on thesis.pdf (20 pages, 1306046 bytes).
 PDF statistics:
- 154 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
+ 157 PDF objects out of 1000 (max. 8388607)
+ 107 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  43 words of extra memory for PDF output out of 10000 (max. 10000000)
 

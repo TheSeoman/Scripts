@@ -144,7 +144,7 @@
 \subsection{HERV annotation}
 HERV annotation was pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
 
-The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. Not in order these are repeat name the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurence. Furthermore it contains the position in the whole sequence, that is known for the identified repeat, that is covered by the occurrence. It also describes the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally there is an indexing field used to speed aup chromosme range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
+The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. Not in order these are repeat name the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurrence. Furthermore it contains the position in the whole sequence, that is known for the identified repeat, that is covered by the occurrence. It also describes the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally there is an indexing field used to speed up chromosome range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
 
 \begin{table}[b]
 \centering
@@ -164,16 +164,16 @@ The track representing all identified elements from the RepeatMasker library for
 \caption{First ten rows of the RepeatMasker annotation on hg19}
 \end{table}
 
-To extract HERV elements the annotation was filtered on different columns generating three sets variable size. Multiple HERV sets were created as an atempt to cover different possible definitions of HERV elements.
+To extract HERV elements the annotation was filtered on different columns generating three sets variable size. Multiple HERV sets were created as an attempt to cover different possible definitions of HERV elements.
 
 This work only discerned between different HERV element types by defining different HERV sets. Therefore, within each set annotations, whose genomic positions overlap or are directly adjacent, were merged into one element.
 
 A first set, HERV set 1 (HERV S1) was constructed by extracting all elements that contained "ERV" in the repeat name column. This set
 The resulting 42508 annotations condensed to 35589 elements after merging. The elements have a mean width of 949 bp and cover a total of 33.8 Mbp, which is ca 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
 
-Alternatively filtering the annotation for "ERV" in the superfamily column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. After merging overlapping and adjacent annotations this led to 633323 elements. Their mean width is 415 bp and they make up to 262.8 Mbp or ca 8.13\% of the human genome. 
+Alternatively filtering the annotation for "ERV" in the super family column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. After merging overlapping and adjacent annotations this led to 633323 elements. Their mean width is 415 bp and they make up to 262.8 Mbp or ca 8.13\% of the human genome. 
 
-A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitely named "HERV", it is my hope that might contain only endogenous retroviral elements, that were inserted directly into the human genome. Merging overlapping and adjacent annotations resulted in 15403 elements with an average width of 1468 bp and a combined length of 22.6 Mbp.
+A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitly named "HERV", it is my hope that might contain only endogenous retroviral elements, that were inserted directly into the human genome. Merging overlapping and adjacent annotations resulted in 15403 elements with an average width of 1468 bp and a combined length of 22.6 Mbp.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS1_lengths_hist}  
@@ -190,7 +190,7 @@ The data comes from the KORA F4 Survey, which was conducted from 2006 to 2008 an
 
 All measurements were performed on whole blood samples. Houseman blood counts\cite{} describing the composition of different cell types for each individual are available.
 
-Not all essays are available for all samples. Therefore different analyses were performed on varying sets of indiviudals according to availability of the required data types. A diagram of the which samples were available for each essay can be seen in figure \ref{fig:samples.venn}.
+Not all essays are available for all samples. Therefore different analyses were performed on varying sets of individuals according to availability of the required data types. A diagram of the which samples were available for each essay can be seen in figure \ref{fig:samples.venn}.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/samples_venn}  
@@ -203,7 +203,7 @@ The expression data was generated using the HumanHT-12 v3.0 Gene Expression Bead
 
 Measurements for 993 individuals are available from the KORA F4 survey. The comprise values for a total of 48803 probes per sample. Probes that do not map to a genomic location were excluded in all analyses, leaving 47864 probes. Of these 29521 are annotated to total of 19288 genes. 
 
-To not lose information, especially in hERV regions that are usuallly sparesly annotated with genes, probes without genes were not discarded and most analyses were performed on probe level or only partially abstracting to gene level. 
+To not lose information, especially in hERV regions that are usually sparsely annotated with genes, probes without genes were not discarded and most analyses were performed on probe level or only partially abstracting to gene level. 
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/expr_var}  
@@ -229,7 +229,7 @@ Previously process methylation quantitative trait loci (meQTL) data was used. Th
 xxxx distinct cpg-sites and xxxxxx snps were part of at least one meQTL. xxxx pairs consisted of cpgs and snps on the same chromosome, while xxxxx association were between different chromosomes. 
 
 \subsection{Transcription factor binding}
-Transcription factor binding sites were obtained from two publicy available sources: 
+Transcription factor binding sites were obtained from two publicly available sources: 
 
 First was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
 
@@ -237,7 +237,7 @@ It combines 690 high quality ENCODE ChIP-seq data sets, which were processed wit
 
 The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2173371 peaks for 125 transcription factors.  
 
-The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicy available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
 
 It contains xxxxx peaks. After filtering for 19 blood related cell types a of xxxx peaks of xxx different transcription factors remained. 
 
@@ -254,7 +254,7 @@ In this work the annotations for 27 blood related cell lines were used. To get t
 \newpage
 \section{Methods}
 \subsection{Overlaps}
-The task of whether HERV elements contained any annotated elements like expression probes, genes, cpg sites and transcription factor binding sites (tfbs) was performed using funtion "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. 
+The task of whether HERV elements contained any annotated elements like expression probes, genes, cpg sites and transcription factor binding sites (tfbs) was performed using function "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. 
 
 Features were considered to be of interest for the analysis of an HERV element, if they overlapped by at least one base pair.
 
@@ -271,7 +271,7 @@ Expression quantitative trait loci (eQTL) and expression quantitative trait meth
 
 When setting the parameter "$useModel = modelLINEAR$", as was done in this work, an additive linear model is used. The association ism modeled as simple linear regression and the absolute value of the sample correlation is used as test statistic.
  
-Alternatively when choosing "$modelAnova$" for the paramter, the effect is modeled with ANOVA model. In this case the test statistic is the squared sample correlation.
+Alternatively when choosing "$modelAnova$" for the parameter, the effect is modeled with ANOVA model. In this case the test statistic is the squared sample correlation.
 
 After calculating the test statistics the p-values for the all pairs that pass a defined significance threshold are calculated. These are corrected multiple testing using a Benjamini- Hochberg procedure, adapted for not recording all p-values.
 
@@ -286,7 +286,7 @@ In multiple analyses functional Gene Ontology enrichments were performed.
 
 First a set of all GO annotations with any evidence code for gene symbols  was retrieved from the Bioconductor package AnnotationDbi\cite{AnnotationDbi}. 
 
-Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom backround set of genes specific to the analysis is given. Finally the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}.
+Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom background set of genes specific to the analysis is given. Finally the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
 
 \subsection{Gaussian Graphical Models}
 
@@ -304,7 +304,7 @@ In this section I will describe the expression probes that overlap with any HERV
 \subsubsection{Expression}
 A total of 2343 expression probes overlap directly with at least one of 2271 HERV elements from HERV S2. This means ca 4.50\% of all expression probes overlap with HERV elements and expression measurements are known for parts of ca 0.37\% of all HERV elements.
 
-The mean expression of the probes overlapping with HERV elements, as shown in figure \ref{fig:hervS2.expr.var} is on average lower than for all probes (figure \ref{fig:expr.var}). The coefficent of variance, however, shows a very similar pattern for the whole set of probes and the considered subset.
+The mean expression of the probes overlapping with HERV elements, as shown in figure \ref{fig:hervS2.expr.var} is on average lower than for all probes (figure \ref{fig:expr.var}). The coefficient of variance, however, shows a very similar pattern for the whole set of probes and the considered subset.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_expr_var}  
@@ -312,11 +312,9 @@ The mean expression of the probes overlapping with HERV elements, as shown in fi
     \label{fig:hervS2.expr.var}
 \end{figure}
 
-Of these 2343 probes 510 were annotated to one of 449 different genes. I performed a GO enrichment for the biological process ontology on these genes with the set of all genes with available expression data as background. The two most significantly enriched terms are defense response (GO:0006952, $p=6.17e-05$) and innate immune response (GO:0045087, $p-value=	
-2.97e-04$), but after correcting for multiple testing no terms are significantly enriched.
+Of these 2343 probes 510 were annotated to one of 449 different genes. I performed a GO enrichment for the biological process ontology on these genes with the set of all genes with available expression data as background. After correcting for multiple testing only the term defense response (GO:0006952, p-value=1.37e-5, fdr=0.047) was significantly enriched.
 
-%%Wrong hervS2.2kb
-%However, when including the 2kb flanking regions of HERV S2 and performing the GO enrichment on the 2400 identified genes, the 11 GO terms shown in table \ref{tab:hervS2.2kb.enrichment} are significantly overrepresented. They are all connected to immune response and the detection of stimuli.
+However, when including the 2kb flanking regions of HERV S2 and performing the GO enrichment on the 5518 identified genes, the six GO terms shown in table \ref{tab:hervS2.2kb.enrichment} are significantly overrepresented. They are all connected to defense response, especially against viruses.
 
 \begin{table}[h!]
   \begin{center}
@@ -337,7 +335,7 @@ Of these 2343 probes 510 were annotated to one of 449 different genes. I perform
 %Wrong hervS2.2kb
 
 
-%The results for all HERV sets and including flanking regions is shown in table \ref{tab:expr.overlap.counts}.
+The results for all HERV sets and including flanking regions is shown in table \ref{tab:expr.overlap.counts}.
 
 \begin{table}[h!]
   \begin{center}
@@ -358,7 +356,7 @@ Of these 2343 probes 510 were annotated to one of 449 different genes. I perform
 17077 CpG sites, equaling 3.52\% of all measured CpGs, were found within HERV S2 and 12871 distinct HERV elements (2.10\%) contain at least one interogated CpG site.
 
 
-The variance of the measurements of these sites, which is shown in figure \ref{fig:}, is lower on average.
+%The variance of the measurements of these sites, which is shown in figure \ref{fig:}, is lower on average.
 
 The number of CpG sites within all HERV sets and including flanking regions is shown in table \ref{tab:meth.overlap.counts}
 
@@ -377,7 +375,6 @@ The number of CpG sites within all HERV sets and including flanking regions is s
 	\caption{Number of CpGs overlapping with different HERV sets and flanking regions. "Pairs" is the total number of overlaps occurring, "HERVs" is the number of distinct HERV elements that have an overlap with any of the expression probes, "CpGs" is the number of distinct CpG sites that lie within the HERV elements or their flanking regions.}
 	\label{tab:meth.overlap.counts}
 \end{table} 
-
 \subsubsection{Genotypes}
 A total of 890780 the considered SNPs are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
 
@@ -412,11 +409,38 @@ There were a total of 1511235 significant trans-eQTL with an p-value of less tha
 
 In a previous work Schramm et al. \cite{} calculated eQTLs on expression and genotype data from 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
 
+Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
+
+The signatures of wildtype, heterogenous and homogenous mutated SNP site for the two eQTLs with the best and worst p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. All eQTLs show clear differences in expression between different genotypic variants. 
+
+45862 of the SNPs and 166 of the expression probes found in at least one cis-eQTL are located within HERV S2. When considering all significant associations, where either the SNP or the expression probe lie within a HERV element, a total of 112604 pairs remain. There are 5855 cis-eQTLs constituting one of 4748 SNPs within a HERV element controlling one of 128 expression probes, that overlap with a HERV element. 
+
+When limiting trans-eQTLs to the ones that contain a HERV S2 SNP (23396) and/or expression probe (1227), 240301 remain. In 9177 of these pairs both are HERV related. 
+
+The fraction of HERV S2 related SNP-expression probe pairs that proved to be significantly associated, respective to their genomic locations is shown in figure \ref{fig:global.eqtl.heatmap}B. 
+
+A GO enrichment was performed on all 8211 genes associated to HERV related eQTLs using the set of all genes found in eQTLs as background. However, there were no significantly enriched genes. 
+
 \subsection{eQTMs}
+When calculating expression quantitative trait methylation there were a total of 13.88 millions CpG-expression probe pairs within a distance of 50 Kpb or less of each other. The number of potential trans-acting pairs equaled around 23.22 billions. 
+
+Calculating eQTMs with a significance threshold of 10e-6 for cis resulted in 8187 significant associations (fdr<1.7e-3) consisting of 5957 distinct CpG sites and 1959 different expression probes. 1658 of these probes are annotated to 1461 genes, while there are no gene annotations for the remainder. 
+
+361485 of the potential trans-action CpG-expression probe pairs proved to be significant at a p-value threshold of 10e-8 (fdr<6.5e-4). These trans-eQTLs are made up by 48206 CpGs and 11673 expression probes, for which 5738 gene annotations are available. 
+
+The fractions of potential CpG-expression probe pairs that were significantly associated between their genomic locations are shown in figure \ref{fig:global.eqtm.heatmap}A. 
+
+HERV S2 contains 311 CpG sites and 420 expression probes, that were present in cis-eQTMs. A total of 738 cis-eQTMs are related to the set. 33 of these are associations between one of 33 CpG sites within a HERV element and one of 14 expression probes. 
+
+Considering trans-eQTMs, 1109 significantly associated CpGs lie within HERV S2 and 5422 expression probes overlapping a HERV element are part of a trans-eQTM.
+
+The results of GO biological process enrichment performed on the xxxx genes that the expression probes found in HERV S2 related eQTMs are shown in table \ref{fig:hervS2.eqtm.enrichment}. 
+%whatever is in that fricking table
+
 
 \subsection{meQTLs}
 
-\subsection{HERV realated regulatory networks}
+\subsection{HERV related regulatory networks}
 \subsubsection{Data collection}
 
 
@@ -424,7 +448,7 @@ In a previous work Schramm et al. \cite{} calculated eQTLs on expression and gen
 \section{Discussion}
 
 \newpage
-\section{Conclusion}
+\section{Conclusion and Outlook}
 
 \newpage
 \bibliography{mybib}{}
