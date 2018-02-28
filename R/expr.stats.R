@@ -11,50 +11,56 @@ load(PATHS$EXPR.RANGES)
 load(PATHS$EXPR.RESIDUALS.DATA)
 load(PATHS$HERV.EXPR.OVERLAP.DATA)
 
-expr.data <- f4.norm[names(expr.ranges), ]
+load(PATHS$METH.DATA)
+load(PATHS$METH.RANGES.DATA)
 
-expr.flat <- melt(expr.data)
-g <- ggplot(expr.flat, aes(value)) + geom_histogram(breaks = seq(5, 14, by = 0.1)) + xlab("expression value")
-g <- g + theme(text = element_text(size=14))
-
-expr.residuals.flat <- melt(expr.residuals)
-expr.residuals.flat[expr.residuals.flat$value <= 1 & expr.esiduals.flat$value >= -1, ]
-g2 <- ggplot(expr.residuals.flat, aes(value)) + geom_histogram(breaks = seq(-1.5, 1.5, by = 0.05)) + xlab("expression residual")
-
-pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_res.pdf'), width = 7, height = 4)
-expr.raw.res.dist <- grid.arrange(g, g2, ncol = 2)
-dev.off()
-
-hervS2.expr.data <- expr.data[names(hervS2.expr.overlap$expr.ranges),]
-probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
-probe2gene <- probe2gene[names(expr.ranges)]
-probe2gene <- probe2gene[!is.na(probe2gene)]
-
-plot.coefficient.variation <- function(data, type) {
+plot.cov <- function(data, type, title) {
   mean <- apply(data, 1, mean, na.rm = T)
   sd <- apply(data, 1, sd, na.rm = T)
   df <- data.frame(mean = mean, coef.var = sd/mean * 100)
-  g <- ggplot(df, aes(mean, coef.var)) + geom_point()  
-  g <- g + xlab(paste0('Mean ', type)) + ylab('Coefficient of variation')
+  g <- ggplot(df, aes(mean, coef.var)) + geom_point() + theme(text = element_text(size=10)) +
+    labs(title=title, x = paste0('Mean ', type), y = 'Coefficient of variation')
   return(g)
 }
 
-meth.coef.var.plot <- plot.coefficient.variation(meth.data)
+plot.var <- function(data, type, title) {
+  mean <- apply(data, 1, mean, na.rm = T)
+  var <- apply(data, 1, var, na.rm = T)
+  df <- data.frame(mean = mean, var = var)
+  g <- ggplot(df, aes(mean,var)) + geom_point() + theme(text = element_text(size=10)) +
+    labs(title=title, x = paste0('Mean ', type), y = 'Variance')
+  return(g)
+}
 
-expr.mean <- apply(expr.data, 1, mean, na.rm = T)
-expr.sd <- apply(expr.data, 1, sd)
-expr.var <- apply(expr.data, 1, var)
 
-pdf(paste0(PATHS$PLOT.DIR, 'expr_var_pdf'), width = 7, height = 4)
-layout(matrix(c(1:2), 1, 2, byrow = T))
-plot(expr.mean, expr.sd/expr.mean * 100, pch = 3, xlab = 'mean expression', ylab = 'coefficent of variation')
-hist(expr.sd/expr.mean * 100, breaks = seq(0, 35, 0.25), xlab = 'coefficent of variation', main = '')
+plot.hist <- function(data, xlab, title, breaks) {
+  data.flat <- melt(data)
+  hist <- ggplot(data.flat, aes(value)) + geom_histogram(breaks = breaks) + 
+    theme(text = element_text(size=10)) + labs(title=title, x = xlab, y = 'Count')
+  return(hist)
+}
+
+expr.data <- f4.norm[names(expr.ranges), ]
+
+expr.hist <- plot.hist(expr.data, 'Expression', 'A', seq(5, 15.5, by = 0.1))
+expr.cov.scatter <- plot.cov(expr.data, 'expression', 'B')
+
+pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_hist_cov.pdf'), width = 6.3, height = 3)
+grid.arrange(expr.hist, expr.cov.scatter, ncol = 2)
 dev.off()
 
+expr.res.hist <- plot.hist(expr.residuals, )
 
+hervS2.expr.data <- expr.data[names(hervS2.expr.overlap$expr.ranges),]
 
-load(PATHS$METH.RANGES)
+pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_res.pdf'), width = 6.3, height = 3)
+grid.arrange(expr.hist, expr.res.hist, ncol = 2)
+dev.off()
 
-load()
+meth.data <- beta[names(meth.ranges),]
+meth.hist <- plot.hist(meth.data, 'Methylation', 'A', seq(0, 1, by = 0.01))
+meth.var.scatter <- plot.var(meth.data, 'methylation', 'B')
 
-
+pdf(file = paste0(PATHS$PLOT.DIR, 'meth_raw_hist_var.pdf'), width = 6.3, height = 3)
+grid.arrange(meth.hist, meth.var.scatter, nocl = 2)
+dev.off()

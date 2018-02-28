@@ -35,7 +35,7 @@ get.snp.data <- function(snp.range, snp.samples) {
   snp.data.table <- data.frame(matrix(unlist(snp.data.list), nrow=length(snp.samples)+5, byrow=F), stringsAsFactors = FALSE)
   colnames(snp.data.table) <- snp.data.table[2, ]
   snp.data.table <- snp.data.table[-(1:5), names(snp.range), drop = FALSE]
-  snp.data.table[, names(snp.range)] <- as.numeric(snp.data.table[, names(snp.range)])
+  snp.data.table <- data.frame(data.matrix(snp.data.table))
   rownames(snp.data.table) <- snp.samples
   return(snp.data.table)
 }
@@ -43,7 +43,7 @@ get.snp.data <- function(snp.range, snp.samples) {
 get.nearby.probes <- function(snp.range, expr.ranges, distance = 5e5, overlap.type = 'any') {
   area.range <- enlarge.ranges(snp.range, distance)
   overlap.hits <- findOverlaps(area.range, expr.ranges, type = overlap.type)
-  expr.ids <- names(expr.ranges[subjectHits(overlap.hits)])
+  expr.ids <- names(expr.ranges[unique(subjectHits(overlap.hits))])
   return(expr.ids)
 }
 
@@ -71,89 +71,82 @@ collect.pair.overlaps <- function(pairs) {
     herv.set <- cc[grep('chr', cc)]
     return(cpg.set)
   })  
+  return(pair.overlaps)
 }
 
 covariates.all <- read.table(PATHS$F.COVARIATES, sep = ";", header = TRUE)
 id.map <- covariates.all[covariates.all$expr_s4f4ogtt %in% rownames(expr.residuals) 
                          & covariates.all$axio_s4f4 %in% snp.samples 
                          & covariates.all$meth_f4 %in% rownames(meth.residuals), c('expr_s4f4ogtt', 'axio_s4f4', 'meth_f4')]
-id.map <- id.map[order(id.map$expr_s4f4ogtt),]
 id.map$expr_s4f4ogtt <- as.character(id.map$expr_s4f4ogtt)
+id.map <- id.map[order(id.map$expr_s4f4ogtt),]
 id.map$axio_s4f4 <- as.character(id.map$axio_s4f4)
 id.map$meth_f4 <- as.character(id.map$meth_f4)
 
-save(id.map, file = PATHS$FULL.ID.MAP.DATA)
-
-probe2gene <- unlist(as.list(illuminaHumanv3SYMBOL))
-probe2gene <- probe2gene[!is.na(probe2gene)]
-
 if(F){
-  set <- 'hervS1.2kb'
+  set <- 'hervS2'
   filter <- 'meth'
   seed <- 'meqtl'
   snp.count.threshold = 5
   flanking <- 2.5e5
-  string <- F
+  string <- T
 }
 
 load(PATHS$HERV.METH.OVERLAP.DATA)
 
-prepare.ggm.data <- function(set = 'hervS1.2kb', filter = 'meth', seed = 'meqtl', string = F, snp.count.threshold = 5, flanking = 5e5, batch = NULL, batch.size = NULL) {
+prepare.ggm.data.cpg.herv <- function(set = 'hervS2', filter = 'meth', seed = 'meqtl', string = F, flanking = 2.5e5, batch = NULL, batch.size = NULL) {
   GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
   dir.create(paste0(GGM.DIR, 'data/'), showWarnings = F, recursive = T)
   data <- list()
   data.meta <- list()
   meqtl.pairs <- get(paste0(set, '.meqtl.trans.overlap'))[[filter]]
   
-  cpgs <- as.character(unique(meqtl.pairs$cpg))
-  
-  herv.meth.pairs <- get(paste0(set, '.meth.overlap'))$pairs
-  herv.meth.pairs <- herv.meth.pairs[herv.meth.pairs$meth.id %in% cpgs, ]
-  herv.meth.pairs <- herv.meth.pairs[order(herv.meth.pairs$meth.id), ]
-  
-  herv.meth.map <- lapply(unique(herv.meth.pairs$herv.id), function(herv.id) {
-    return(herv.meth.pairs[herv.meth.pairs$herv.id == herv.id, 'meth.id'])
-  })
-  
-  meth.herv.map <- lapply(unique(herv.meth.pairs$meth.id), function(meth.id) {
-    return(herv.meth.pairs[herv.meth.pairs$meth.id == meth.id, 'herv.id'])
-  })
-  
-  if(!file.exists(paste0(GGM.DIR, 'snps.RData'))) {
-    meqtl.count <- table(meqtl.pairs$snp)[table(meqtl.pairs$snp) > 0]
-    snps <- names(meqtl.count[meqtl.count >= snp.count.threshold])
+  if(!file.exists(paste0(GGM.DIR, 'cpgs.RData'))) {
+    cpgs <- as.character(unique(meqtl.pairs$cpg))
     
-    data.overview <- data.frame(matrix(ncol = ifelse(string, 8, 7), nrow = length(snps)))
-    if (string) {
-      colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'path.genes', 'total.entities')
-    } else {
-      colnames(data.overview) <- c('cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'total.entities')
-    }
-    rownames(data.overview) <- snps
-    save(snps, file = paste0(GGM.DIR, 'snps.RData'))
+    herv.meth.pairs <- get(paste0(set, '.meth.overlap'))$pairs
+    herv.meth.pairs <- herv.meth.pairs[herv.meth.pairs$meth.id %in% cpgs, ]
+    cpg.sets <- collect.pair.overlaps(herv.meth.pairs)
+    save(cpg.sets, file = paste0(GGM.DIR, 'cpgs.RData'))
   } else {
-    load(paste0(GGM.DIR, 'snps.RData'))
+    load(paste0(GGM.DIR, 'cpgs.RData'))
   }
+  
+  data.overview <- data.frame(matrix(ncol = ifelse(string, 9, 8), nrow = length(cpg.sets)))
+  if (string) {
+    colnames(data.overview) <- c('snps', 'cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'path.genes', 'total.entities')
+  } else {
+    colnames(data.overview) <- c('snps', 'cpgs', 'TFs', 'snp.genes', 'snp.no.gene.probes', 'meth.genes', 'meth.no.gene.probes', 'total.entities')
+  }
+  rownames(data.overview) <- unlist(lapply(cpg.sets, paste, collapse = '|')) 
+  
   
   if(string) {
     load.string.db()
   }
   
   if(is.null(batch) | is.null(batch.size)) {
-    range <- c(1:length(snps))
+    range <- c(1:length(cpg.sets))
   } else {
-    range <- c(((batch-1)*batch.size+1):(batch*batch.size))    
+    range <- c(((batch-1)*batch.size+1):min(batch*batch.size, length(cpgs.sets)))    
   }
   
-  for (snp in snps[range]) {
-    cat(paste0('Processing snp: ', snp), fill = T)
-    snp.range <- snp.ranges[snp]
+  for (meth.ids in cpg.sets) {
+    set.name <- paste(meth.ids, collapse = '|')
+    cat(paste0('Processing cpg-set: ', set.name), fill = T)
+    snps <- sapply(meth.ids, function(meth.id) {
+      pairs <- meqtl.pairs[meqtl.pairs$cpg == meth.id, ]
+      return(as.character(pairs[which.min(pairs$p.comb)[1], 'snp']))  
+    })
+    snp.range <- snp.ranges[snps]
+    
+    snp.data <- get.snp.data(snp.range, snp.samples)
+    
     snp.expr.ids <- get.nearby.probes(snp.range, expr.ranges, flanking)
     snp.expr.no.gene.ids <- snp.expr.ids[!snp.expr.ids %in% names(probe2gene)]
     snp.expr.with.gene.ids <- snp.expr.ids[snp.expr.ids %in% names(probe2gene)]
     snp.genes <- unique(probe2gene[snp.expr.with.gene.ids])
     
-    meth.ids <- as.character(meqtl.pairs[meqtl.pairs$snp == snp, 'cpg'])
     meth.expr.ids <- get.neighbour.probes(meth.ranges[meth.ids], expr.ranges, flanking)
     meth.expr.no.gene.ids <- meth.expr.ids[!meth.expr.ids %in% names(probe2gene)]
     meth.expr.with.gene.ids <- meth.expr.ids[meth.expr.ids %in% names(probe2gene)]
@@ -161,16 +154,16 @@ prepare.ggm.data <- function(set = 'hervS1.2kb', filter = 'meth', seed = 'meqtl'
     
     expr.no.gene.data <- expr.residuals[, unique(c(snp.expr.no.gene.ids, meth.expr.no.gene.ids)), drop = F]
     
-    meth.data <- meth.residuals[, meth.ids]
+    meth.data <- meth.residuals[, meth.ids, drop = F]
     tfbs.ids <- unique(meth.tfbs.overlap$pairs[meth.tfbs.overlap$pairs$meth.id %in% meth.ids, 'tfbs.id'])
     tfbs.genes <- unique(meth.tfbs.overlap$tfbs.ranges[tfbs.ids]$TF)
     
-    data.meta[[snp]] <- list(meth.ids = meth.ids, tfbs.genes = tfbs.genes, snp.genes = snp.genes, snp.no.gene.probes = snp.expr.no.gene.ids, 
-                             meth.genes = meth.genes, meth.no.gene.probes = meth.expr.no.gene.ids)
+    data.meta[[set.name]] <- list(snps = snps, meth.ids = meth.ids, tfbs.genes = tfbs.genes, snps = snps, snp.genes = snp.genes, snp.no.gene.probes = snp.expr.no.gene.ids, 
+                                  meth.genes = meth.genes, meth.no.gene.probes = meth.expr.no.gene.ids)
     
     total.genes <- unique(c(snp.genes, meth.genes, tfbs.genes))
     
-    overview <-  c(length(meth.ids), length(tfbs.genes), length(snp.genes), length(snp.expr.no.gene.ids), 
+    overview <-  c(length(snps), length(meth.ids), length(tfbs.genes), length(snp.genes), length(snp.expr.no.gene.ids), 
                    length(meth.genes), length(meth.expr.no.gene.ids))
     
     if(string) {
@@ -193,37 +186,41 @@ prepare.ggm.data <- function(set = 'hervS1.2kb', filter = 'meth', seed = 'meqtl'
       
       total.genes <- unique(c(total.genes, path.genes))
       
-      data.meta[[snp]][['path.genes']] <- path.genes
+      data.meta[[set.name]][['path.genes']] <- path.genes
       overview <- c(overview, length(path.genes))
     }
     
-    expr.gene.data.list <- lapply(total.genes, function(gene) {
-      probe.ids <- unique(names(probe2gene[probe2gene == gene]))
-      if (length(probe.ids) == 1) {
-        expr <- expr.residuals[, probe.ids[1]]
-      } else {
-        expr <- apply(expr.residuals[, probe.ids], 1, function(x) mean(x))
-      }
-      return(expr)
-    } )
-    expr.gene.data <- data.frame(matrix(unlist(expr.gene.data.list), byrow=FALSE, ncol = length(expr.gene.data.list)))
-    colnames(expr.gene.data) <- total.genes
-    rownames(expr.gene.data) <- rownames(expr.residuals)
-    
-    snp.data <- get.snp.data(snp.range, snp.samples)
+    if(length(total.genes) > 0 ){
+      expr.gene.data.list <- lapply(total.genes, function(gene) {
+        probe.ids <- unique(names(probe2gene[probe2gene == gene]))
+        if (length(probe.ids) == 1) {
+          expr <- expr.residuals[, probe.ids[1]]
+        } else {
+          expr <- apply(expr.residuals[, probe.ids], 1, function(x) mean(x))
+        }
+        return(expr)
+      } )
+      expr.gene.data <- data.frame(matrix(unlist(expr.gene.data.list), byrow=FALSE, ncol = length(expr.gene.data.list)))
+      colnames(expr.gene.data) <- total.genes
+      rownames(expr.gene.data) <- rownames(expr.residuals)
+    } else {
+      expr.gene.data <- data.frame(matrix(ncol = 0, nrow = nrow(expr.residuals)))
+    }
     
     ggm.data <- cbind.data.frame(snp.data[id.map$axio_s4f4, , drop=F], meth.data[id.map$meth_f4, , drop=F], expr.no.gene.data[id.map$expr_s4f4ogtt, , drop=F], expr.gene.data[id.map$expr_s4f4ogtt,])
     rownames(ggm.data) <- id.map$expr_s4f4ogtt
     
     overview <- c(overview, dim(ggm.data)[2])
     
-    data.overview[snp,] <- overview
+    data.overview[set.name,] <- overview
     
-    save(ggm.data, file = paste0(GGM.DIR, 'data/', snp, '.RData'))
+    save(ggm.data, file = paste0(GGM.DIR, 'data/', set.name, '.RData'))
   }
   save(data.overview, file = paste0(GGM.DIR, 'data.overview', batch, '.RData'))
   save(data.meta, file = paste0(GGM.DIR, 'data.meta', batch, '.RData'))
 }
+
+prepare.ggm.data.cpg.herv()
 
 
 
@@ -339,5 +336,3 @@ prepare.ggm.data <- function(set = 'hervS1', filter = 'snp', seed = 'meqtl', str
   save(data.overview, file = paste0(GGM.DIR, 'data.overview', batch, '.RData'))
   save(data.meta, file = paste0(GGM.DIR, 'data.meta', batch, '.RData'))
 }
-
-

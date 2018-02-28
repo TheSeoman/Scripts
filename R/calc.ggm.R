@@ -2,8 +2,6 @@ source('Scripts/R/paths.R')
 
 require(BDgraph)
 
-
-
 set <- 'hervS1.2kb'
 filter <- 'meth'
 seed <- 'meqtl'

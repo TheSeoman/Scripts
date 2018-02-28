@@ -44,20 +44,19 @@ all.eqtm.pairs$expr.id <- as.character(all.eqtm.pairs$expr.id)
 
 cutoff <- 0.9
 
-analyse.ggm <- function()
-
-ggm.meta <- list()
-ggm.overview <- data.frame(matrix(nrow = length(snps), ncol = 26))
-rownames(ggm.overview) <- snps
-colnames(ggm.overview) <- c('entities', 'edges', 'ccs', 'cc.sizes', 'snp.cc.size',
-                            'cpgs', 'con.cpgs', 'direct.cpgs', 
-                            'herv.cpgs', 'con.herv.cpgs', 'cpg.genes', 'con.cpg.genes', 'direct.cpg.genes', 'con.direct.cpg.genes' ,'herv.cpg.genes',
-                            'snp.genes', 'con.snp.genes', 'direct.snp.genes', 'herv.snp.genes', 'con.herv.snp.genes', 
-                            'pos.eqtl', 'con.eqtl', 'direct.eqtl', 
-                            'pos.eqtm', 'con.eqtm', 'direct.eqtm')
-
-ggms <- list()
-for (snp in snps) {
+analyse.snp.ggms <- function(snps) {
+  ggm.meta <- list()
+  ggm.overview <- data.frame(matrix(nrow = length(snps), ncol = 26))
+  rownames(ggm.overview) <- snps
+  colnames(ggm.overview) <- c('entities', 'edges', 'ccs', 'cc.sizes', 'snp.cc.size',
+                              'cpgs', 'con.cpgs', 'direct.cpgs', 
+                              'herv.cpgs', 'con.herv.cpgs', 'cpg.genes', 'con.cpg.genes', 'direct.cpg.genes', 'con.direct.cpg.genes' ,'herv.cpg.genes',
+                              'snp.genes', 'con.snp.genes', 'direct.snp.genes', 'herv.snp.genes', 'con.herv.snp.genes', 
+                              'pos.eqtl', 'con.eqtl', 'direct.eqtl', 
+                              'pos.eqtm', 'con.eqtm', 'direct.eqtm')
+  
+  ggms <- list()
+  for (snp in snps) {
     cat(paste0('Processing snp: ', snp), fill = T)
     load(paste0(GGM.DIR, 'ggm/', snp, '.RData'))
     ggms[[snp]] <- ggm
@@ -95,7 +94,7 @@ for (snp in snps) {
     eqtls <- data.frame(row.names = rownames(snp.genes)[rownames(snp.genes) %in% eqtl.genes | rownames(snp.genes) %in% eqtl.expr.ids])
     eqtls$con <- rownames(eqtls) %in% snp.cc
     eqtls$direct <- rownames(eqtls) %in% adj(ggm.res, snp)[[1]]
-
+    
     all.expr.ids <- unique(c(names(probe2gene[probe2gene %in% c(meta$tfbs.genes, meta$snp.genes, meta$meth.genes)]), meta$snp.no.gene.probes, meta$meth.no.gene.probes))
     
     eqtm.pairs <- all.eqtm.pairs[all.eqtm.pairs$cpg %in% rownames(cpgs) & all.eqtm.pairs$expr.id %in% all.expr.ids, ]
@@ -116,10 +115,16 @@ for (snp in snps) {
     
     ggm.meta[[snp]] <- list(ccs = ccs, cpgs = cpgs, cpg.genes = cpg.genes, snp.genes = snp.genes, eqtls = eqtls, eqtm.pairs = eqtm.pairs)
     
-}
-for(i in c(1:3, 5:26)) {
-  ggm.overview[, i] <- as.integer(ggm.overview[, i])
+  }
+  for(i in c(1:3, 5:26)) {
+    ggm.overview[, i] <- as.integer(ggm.overview[, i])
+  }
+  
+  save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.', cutoff,'.RData'))
+  save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta', cutoff, '.RData'))
 }
 
-save(ggm.overview, file = paste0(GGM.DIR, 'ggm.overview.', cutoff,'.RData'))
-save(ggm.meta, file = paste0(GGM.DIR, 'ggm.meta', cutoff, '.RData'))
+analyse.cpg.ggms <- function(cpg.sets) {
+  
+}
+
