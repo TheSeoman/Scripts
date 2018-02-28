@@ -10,6 +10,8 @@ load(PATHS$EXPR.RANGES.DATA)
 load(PATHS$SNP.RANGES.DATA)
 
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
+load(PATHS$EXPR.RESIDUALS.DATA)
+
 
 cis.pos.pairs <- eqtl.me$cis$ntest
 trans.pos.pairs <- eqtl.me$trans$ntests
@@ -71,14 +73,14 @@ get.snp.data <- function(snp.range, snp.samples) {
   snp.data.table <- data.frame(matrix(unlist(snp.data.list), nrow=length(snp.samples)+5, byrow=F), stringsAsFactors = FALSE)
   colnames(snp.data.table) <- snp.data.table[2, ]
   snp.data.table <- snp.data.table[-(1:5), names(snp.range), drop = FALSE]
-  snp.data.table[, names(snp.range)] <- as.numeric(snp.data.table[, names(snp.range)])
+  snp.data.table <- data.frame(data.matrix(snp.data.table))
   rownames(snp.data.table) <- snp.samples
   return(snp.data.table)
 }
 
 plot.single.eqtl <- function(eqtl.pair) {
-  snp.id <- eqtl.pair$snps
-  expr.id <- eqtl.pair$gene
+  snp.id <- as.character(eqtl.pair$snps)
+  expr.id <- as.character(eqtl.pair$gene)
   snp.range <- snp.ranges[snp.id]
   cat(paste0('Generating boxplot for ', snp.id, '-', expr.id), fill=T)
   snp.data <- get.snp.data(snp.range, snp.samples)[id.map$axio_s4f4, ]
@@ -87,6 +89,20 @@ plot.single.eqtl <- function(eqtl.pair) {
   expr.data <- expr.residuals[id.map$expr_s4f4ogtt, expr.id]
   p <- ggplot(data.frame(snp.data=snp.data, expr.data=expr.data), aes(snp.data,expr.data))
   p <- p + geom_boxplot() + geom_jitter(width=0.2)
-  p <- p + scale_x_discrete(name = 'Genotype') + scale_y_continuous(name = 'Expression residual')
+  p <- p + scale_x_discrete(name = 'Genotype') + scale_y_continuous(name = 'Expression residual') + lab(title=paste(snp.id, expr.id))
   return(p)
 }
+
+
+eqtl.pair <- eqtl.me$cis$eqtls[1, ]
+
+best.cis.box <- plot.single.eqtl(cis.pairs[1,])
+worst.cis.box <- plot.single.eqtl(cis.pairs[dim(cis.pairs)[1],])
+
+best.trans.box <- plot.single.eqtl(trans.pairs[1,])
+worst.trans.box <- plot.single.eqtl(trans.pairs[dim(trans.pairs)[1]-1,])
+
+
+eqtl.snps <- unique(trans.snps, cis.snps)
+eqtl.snp.ranges <- snp.ranges[eqtl.snps]
+eqtl.snp.data <- get.snp.data(eqtl.snp.ranges, snp.samples)

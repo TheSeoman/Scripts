@@ -12,6 +12,7 @@ load(PATHS$HERV.EQTM.OVERLAP.DATA)
 
 load(PATHS$HERV.EXPR.OVERLAP.DATA)
 load(PATHS$HERV.SNP.OVERLAP.DATA)
+load(PATHS$HERV.METH.OVERLAP.DATA)
 
 library(ggplot2)
 library(BSgenome.Hsapiens.UCSC.hg19)
@@ -92,7 +93,7 @@ get.potential.pair.bins <- function(all.e1.bins, all.e2.bins, herv.e1.bins = NUL
     for( i in 1:dim(potential.pair.bins)[1]) {
       e1.bin <- potential.pair.bins[i, 1]
       e2.bin <- potential.pair.bins[i, 2]
-      potential.pair.bins[i, 3] <- ((all.e1.bins[e1.bin] - herv.e1.bins[e1.bin]) * all.e2.bins[e2.bin]) + (all.e1.bins[e1.bin] * (all.e2.bins[e2.bin] - herv.e2.bins[e2.bin]))
+      potential.pair.bins[i, 3] <- (herv.e1.bins[e1.bin] * all.e2.bins[e2.bin]) + ((all.e1.bins[e1.bin] - herv.e1.bins[e1.bin]) * herv.e2.bins[e2.bin])
     }
   } else {
     for( i in 1:dim(potential.pair.bins)[1]) {
@@ -104,49 +105,37 @@ get.potential.pair.bins <- function(all.e1.bins, all.e2.bins, herv.e1.bins = NUL
   return(potential.pair.bins)
 }
 
-normalize.pair.bins <- function(pair.bins, potential.pair.bins) {
-  for(i in 1:dim(pair.bins)[1]) {
-    if(pair.bins[i, 3] != 0){
-      pair.bins[i, 3] <- pair.bins[i, 3] / potential.pair.bins[i, 3]
-    }
-  }
-  pair.bins$Freq <- log10(pair.bins$Freq)
-  return(pair.bins)
-}
+#axis.text.x = element_text(angle = 90, hjust = 1, vjust = -0.5, size = 7), axis.text.y = element_text(hjust = -0.5, vjust = 1, size = 7)
 
-plot.pair.bins <- function(pair.bins, e1.name, e2.name, title) {
-  g <- ggplot(pair.bins, aes(e1.bin, e2.bin)) + geom_tile(aes(fill = Freq)) + theme(axis.text=element_blank(), text = element_text(size=14), legend.text = element_text(size=10), legend.title = element_text(size=12)) + xlab(e1.name) + ylab(e2.name)
-  g <- g + scale_fill_gradient(low = 'white', high = 'red', na.value = 'lightgrey')
-  g <- g + ggtitle(title) + labs(fill = expression(log[10](Frac)))
+plot.pair.bins <- function(pair.bins, bin.breaks, limits, e1.name, e2.name, title, show.legend = T) {
+  g <- ggplot(pair.bins, aes(e1.bin, e2.bin)) + geom_tile(aes(fill = Freq)) +
+      theme(text = element_text(size=11), legend.text = element_text(size=8), legend.title = element_text(size=10)) + 
+      xlab(e1.name) + ylab(e2.name) +
+      scale_x_continuous(breaks=bin.breaks, labels=NULL) +
+      scale_y_continuous(breaks=bin.breaks, labels=NULL) +
+      scale_fill_continuous(low = 'white', high = 'red', na.value = 'lightgrey', limits=limits, guide=ifelse(show.legend, "colourbar", FALSE)) +
+      ggtitle(title) + labs(fill = expression(log[10](Frac)))
   return(g)
 }
 
 bin.ranges <- get.chr.bin.ranges(1e7)
 
+bin.breaks <- table(seqnames(bin.ranges))
+for( i in 2:length(bin.breaks)) {
+  bin.breaks[i] <- bin.breaks[i-1] + bin.breaks[i]
+}
+
 eqtl.pairs <- rbind.data.frame(eqtl.me$cis$eqtls[, 2:1], eqtl.me$trans$eqtls[, 2:1], stringsAsFactors = F)
 eqtl.bins <- get.pair.bins(bin.ranges, eqtl.pairs, expr.ranges, snp.ranges)
-eqtl.potential.bins <- get.potential.pair.bins(expr.bins, snp.bins)
-
-norm.eqtl.bins <- eqtl.bins
-norm.eqtl.bins$Freq <- eqtl.bins$Freq/eqtl.potential.bins$Freq
 
 expr.bins <- get.single.bins(bin.ranges, expr.ranges)
 snp.bins <- get.single.bins(bin.ranges, snp.ranges)
+eqtl.potential.bins <- get.potential.pair.bins(expr.bins, snp.bins)
 
-norm.eqtl.bins <- normalize.pair.bins(eqtl.bins, expr.bins, snp.bins)
+norm.eqtl.bins <- eqtl.bins
+norm.eqtl.bins$Freq <- log10(eqtl.bins$Freq/eqtl.potential.bins$Freq)
+norm.eqtl.bins$Freq[!is.finite(norm.eqtl.bins$Freq)] <- NA
 
-pdf(file=paste0(PATHS$PLOT.DIR, 'all.norm.eqtl.heatmap.pdf'), width = 5, height = 4.5)
-png(file=paste0(PATHS$PLOT.DIR, 'all.norm.eqtl.heatmap.png'), width = 500, height = 450)
-plot.pair.bins(eqtl.bins, 'Expression', 'Genotype', 'Fractions of significant SNP-expression probe pairs')
-dev.off()
-
-eqtm.expr.ids <- c(as.character(eqtm.me$cis$eqtls$gene), as.character(eqtm.me$trans$eqtls$gene))
-eqtm.meth.ids <- c(as.character(eqtm.me$cis$eqtls$snps), as.character(eqtm.me$trans$eqtls$snps))
-eqtm.pairs <- cbind.data.frame(eqtm.expr.ids, eqtm.meth.ids, stringsAsFactors = F)
-eqtm.bins <- get.pair.bins(bin.ranges, eqtm.pairs, expr.ranges, meth.ranges)
-png(file=paste0(PATHS$PLOT.DIR, 'all.eqtm.heatmap.png'), width = 700, height = 650)
-plot.pair.bins(eqtm.bins, 'Expression', 'Methylation', 'Global eQTM pair positions')
-dev.off()
 
 hervS2.eqtl.either.pairs <- rbind.data.frame(hervS2.eqtl.overlap$cis.either[, 2:1], hervS2.eqtl.overlap$trans.either[, 2:1], stringsAsFactors = F)
 hervS2.eqtl.either.bins <- get.pair.bins(bin.ranges, hervS2.eqtl.either.pairs, expr.ranges, snp.ranges)
@@ -157,18 +146,51 @@ hervS2.snp.bins <- get.single.bins(bin.ranges, hervS2.snp.overlap$snp.ranges)
 hervS2.eqtl.potential.bins <- get.potential.pair.bins(expr.bins, snp.bins, hervS2.expr.bins, hervS2.snp.bins)
 
 norm.hervS2.eqtl.either.bins <- hervS2.eqtl.either.bins
-norm.hervS2.eqtl.either.bins$Freq <- hervS2.eqtl.either.bins$Freq/hervS2.eqtl.potential.bins$Freq
-norm.hervS2.eqtl.either.bins[is.na(norm.hervS2.eqtl.either.bins$Freq), 'Freq'] <- NA
-norm.hervS2.eqtl.either.bins$Freq <- log10(norm.hervS2.eqtl.either.bins$Freq)
+norm.hervS2.eqtl.either.bins$Freq <- log10(hervS2.eqtl.either.bins$Freq/hervS2.eqtl.potential.bins$Freq)
+norm.hervS2.eqtl.either.bins$Freq[!is.finite(norm.hervS2.eqtl.either.bins$Freq)] <- NA
 
-png(file=paste0(PATHS$PLOT.DIR, 'hervS1.either.eqtl.heatmap.png'), width = 700, height = 650)
-plot.pair.bins(norm.hervS2.eqtl.either.bins, 'Expression', 'Genotype', 'B')
+
+all.eqtl.heat <- plot.pair.bins(norm.eqtl.bins, bin.breaks, c(-7.5, -1.4), 'Expression', 'Genotype', 'A', F)
+hervS2.eqtl.heat <- plot.pair.bins(norm.hervS2.eqtl.either.bins, bin.breaks, c(-7.5, -1.4), 'Expression', 'Genotype', 'B', T)
+
+
+pdf(file=paste0(PATHS$PLOT.DIR, 'eqtl.all.herv.heatmap.pdf'), width = 7, height = 3.3)
+grid.arrange(all.eqtl.heat, hervS2.eqtl.heat, ncol=2, widths=c(6, 8))
 dev.off()
 
 
-png(file=paste0(PATHS$PLOT.DIR, 'hervS1.either.eqtm.heatmap.png'), width = 700, height = 650)
-plot.pair.bins(bin.table, 'Expression', 'Genotype', 'hervS1 eQTM pair positions')
+eqtm.expr.ids <- c(as.character(eqtm.me$cis$eqtls$gene), as.character(eqtm.me$trans$eqtls$gene))
+eqtm.meth.ids <- c(as.character(eqtm.me$cis$eqtls$snps), as.character(eqtm.me$trans$eqtls$snps))
+eqtm.pairs <- cbind.data.frame(eqtm.expr.ids, eqtm.meth.ids, stringsAsFactors = F)
+eqtm.bins <- get.pair.bins(bin.ranges, eqtm.pairs, expr.ranges, meth.ranges)
+#expr.bins already calculated
+meth.bins <- get.single.bins(bin.ranges, meth.ranges)
+
+eqtm.potential.bins <- get.potential.pair.bins(expr.bins, meth.bins)
+norm.eqtm.bins <- eqtm.bins
+norm.eqtm.bins$Freq <- log10(eqtm.bins$Freq/eqtm.potential.bins$Freq)
+norm.eqtm.bins$Freq[!is.finite(norm.eqtm.bins$Freq)] <- NA
+
+hervS2.eqtm.either.pairs <- rbind.data.frame(hervS2.eqtm.overlap$cis.either[, 2:1], hervS2.eqtm.overlap$trans.either[, 2:1], stringsAsFactors = F)
+hervS2.eqtm.either.bins <- get.pair.bins(bin.ranges, hervS2.eqtm.either.pairs, expr.ranges, meth.ranges)
+
+hervS2.expr.bins <- get.single.bins(bin.ranges, hervS2.expr.overlap$expr.ranges)
+hervS2.meth.bins <- get.single.bins(bin.ranges, hervS2.meth.overlap$meth.ranges)
+
+hervS2.eqtm.potential.bins <- get.potential.pair.bins(expr.bins, snp.bins, hervS2.expr.bins, hervS2.snp.bins)
+
+norm.hervS2.eqtm.either.bins <- hervS2.eqtm.either.bins
+norm.hervS2.eqtm.either.bins$Freq <- log10(hervS2.eqtm.either.bins$Freq/hervS2.eqtm.potential.bins$Freq)
+norm.hervS2.eqtm.either.bins$Freq[!is.finite(norm.hervS2.eqtm.either.bins$Freq)] <- NA
+
+eqtm.limits <- c(min(c(na.omit(norm.eqtm.bins$Freq), na.omit(norm.hervS2.eqtm.either.bins$Freq))), max(c(na.omit(norm.eqtm.bins$Freq), na.omit(norm.hervS2.eqtm.either.bins$Freq))))
+all.eqtm.heat <- plot.pair.bins(norm.eqtm.bins, bin.breaks, eqtm.limits, 'Expression', 'Methylation', 'A', F)
+hervS2.eqtm.heat <- plot.pair.bins(norm.hervS2.eqtm.either.bins, bin.breaks, eqtm.limits, 'Expression', 'Methylation', 'B', T)
+
+pdf(file=paste0(PATHS$PLOT.DIR, 'eqtm_all_herv_heatmap.pdf'), width = 7, height = 3.3)
+grid.arrange(all.eqtm.heat, hervS2.eqtm.heat, ncol=2, widths=c(6, 8))
 dev.off()
 
 
-g + scale_x_discrete(limits = c('1', '300'))
+
+
