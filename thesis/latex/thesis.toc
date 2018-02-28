@@ -23,13 +23,13 @@
 \contentsline {subsection}{\numberline {4.1}Normalized Data}{9}
 \contentsline {subsection}{\numberline {4.2}HERV region features}{9}
 \contentsline {subsubsection}{\numberline {4.2.1}Expression}{9}
-\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{10}
-\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{11}
-\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{11}
+\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{9}
+\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{10}
+\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{10}
 \contentsline {subsection}{\numberline {4.3}eQTLs}{11}
 \contentsline {subsection}{\numberline {4.4}eQTMs}{12}
-\contentsline {subsection}{\numberline {4.5}meQTLs}{12}
-\contentsline {subsection}{\numberline {4.6}HERV realated regulatory networks}{12}
-\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{12}
-\contentsline {section}{\numberline {5}Discussion}{13}
-\contentsline {section}{\numberline {6}Conclusion}{14}
+\contentsline {subsection}{\numberline {4.5}meQTLs}{13}
+\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{13}
+\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{13}
+\contentsline {section}{\numberline {5}Discussion}{14}
+\contentsline {section}{\numberline {6}Conclusion and Outlook}{15}
