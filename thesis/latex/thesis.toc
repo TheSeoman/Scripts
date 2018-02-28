@@ -27,9 +27,9 @@
 \contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{10}
 \contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{10}
 \contentsline {subsection}{\numberline {4.3}eQTLs}{11}
-\contentsline {subsection}{\numberline {4.4}eQTMs}{12}
-\contentsline {subsection}{\numberline {4.5}meQTLs}{13}
-\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{13}
-\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{13}
-\contentsline {section}{\numberline {5}Discussion}{14}
-\contentsline {section}{\numberline {6}Conclusion and Outlook}{15}
+\contentsline {subsection}{\numberline {4.4}eQTMs}{13}
+\contentsline {subsection}{\numberline {4.5}meQTLs}{14}
+\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{14}
+\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{14}
+\contentsline {section}{\numberline {5}Discussion}{15}
+\contentsline {section}{\numberline {6}Conclusion and Outlook}{16}

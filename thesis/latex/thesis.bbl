@@ -10,6 +10,14 @@ T.F. Smith and M.S. Waterman.
 \newblock Identification of common molecular subsequences.
 \newblock {\em Journal of Molecular Biology}, 147(1):195 -- 197, 1981.
 
+\bibitem{10.3389/fgene.2016.00023}
+Lindsay~L. Waite, Benjamin Weaver, Kenneth Day, Xinrui Li, Kevin Roberts,
+  Andrew~W. Gibson, Jeffrey~C. Edberg, Robert~P. Kimberly, Devin~M. Absher, and
+  Hemant~K. Tiwari.
+\newblock Estimation of cell-type composition including t and b cell subtypes
+  for whole blood methylation microarray data.
+\newblock {\em Frontiers in Genetics}, 7:23, 2016.
+
 \bibitem{10.1371/journal.pgen.1000529}
 Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
 \newblock A flexible and accurate genotype imputation method for the next

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  23 FEB 2018 16:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  28 FEB 2018 15:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -959,50 +959,53 @@ Package pdftex.def Info: ../figures/hervS1_lengths_hist.pdf used on input line
 179.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 
-<../figures/samples_venn.pdf, id=34, 433.62pt x 216.81pt>
+<../figures/samples_venn.pdf, id=34, 325.215pt x 144.54pt>
 File: ../figures/samples_venn.pdf Graphic file (type pdf)
 
 <use ../figures/samples_venn.pdf>
-Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 196.
-(pdftex.def)             Requested size: 433.61894pt x 216.80946pt.
+Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 199.
+(pdftex.def)             Requested size: 325.2142pt x 144.53963pt.
  [3 <../figures/hervS1_lengths_hist.pdf>]
-<../figures/expr_var.pdf, id=43, 505.89pt x 289.08pt>
-File: ../figures/expr_var.pdf Graphic file (type pdf)
 
-<use ../figures/expr_var.pdf>
-Package pdftex.def Info: ../figures/expr_var.pdf used on input line 209.
-(pdftex.def)             Requested size: 505.88875pt x 289.07928pt.
+LaTeX Warning: Reference `fig:expr.var' on page 4 undefined on input line 212.
 
-Overfull \hbox (50.64464pt too wide) in paragraph at lines 209--210
-[][] 
- []
+<../figures/expr_raw_hist_cov.pdf, id=43, 454.69875pt x 252.945pt>
+File: ../figures/expr_raw_hist_cov.pdf Graphic file (type pdf)
 
-[4 <../figures/samples_venn.pdf>] [5 <../figures/expr_var.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 248--249
+<use ../figures/expr_raw_hist_cov.pdf>
+Package pdftex.def Info: ../figures/expr_raw_hist_cov.pdf used on input line 21
+5.
+(pdftex.def)             Requested size: 454.69763pt x 252.94438pt.
+ [4 <../figures/samples_venn.pdf>]
+[5 <../figures/expr_raw_hist_cov.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 258--259
 \OT1/cmr/m/n/12 model$\OT1/cmtt/m/n/12 http : / / egg2 . wustl . edu / roadmap 
 / data / byFileType / chromhmmSegmentations /
  []
 
 [6] [7] [8]
 
-LaTeX Warning: Reference `fig:expr.raw.res' on page 9 undefined on input line 2
-99.
+LaTeX Warning: Reference `fig:expr.raw.res' on page 9 undefined on input line 3
+09.
+
+
+LaTeX Warning: Reference `fig:expr.var' on page 9 undefined on input line 317.
 
 <../figures/hervS2_expr_var.pdf, id=74, 505.89pt x 289.08pt>
 File: ../figures/hervS2_expr_var.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_expr_var.pdf>
-Package pdftex.def Info: ../figures/hervS2_expr_var.pdf used on input line 310.
+Package pdftex.def Info: ../figures/hervS2_expr_var.pdf used on input line 320.
 
 (pdftex.def)             Requested size: 505.88875pt x 289.07928pt.
 
-Overfull \hbox (50.64464pt too wide) in paragraph at lines 310--311
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 320--321
 [][] 
  []
 
 
 LaTeX Warning: Reference `tab:hervS2.2kb.enrichment' on page 9 undefined on inp
-ut line 317.
+ut line 327.
 
 PGFPlots: reading {../tables/hervS2.2kb.expr.enrichment.tsv}
 
@@ -1024,30 +1027,40 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [10 <../figures/hervS2_expr_var.pdf>] [11]
 
-LaTeX Warning: Reference `fig:global.eqtl.heatmap' on page 12 undefined on inpu
-t line 412.
-
-
 LaTeX Warning: Reference `fig:best.worst.eqtl.boxplot' on page 12 undefined on 
-input line 414.
+input line 424.
+
+<../figures/eqtl_all_herv_heatmap.pdf, id=92, 505.89pt x 237.88875pt>
+File: ../figures/eqtl_all_herv_heatmap.pdf Graphic file (type pdf)
+
+<use ../figures/eqtl_all_herv_heatmap.pdf>
+Package pdftex.def Info: ../figures/eqtl_all_herv_heatmap.pdf used on input lin
+e 433.
+(pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
+
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 433--434
+[][] 
+ []
+
+[12 <../figures/eqtl_all_herv_heatmap.pdf>]
+<../figures/eqtm_all_herv_heatmap.pdf, id=103, 505.89pt x 237.88875pt>
+File: ../figures/eqtm_all_herv_heatmap.pdf Graphic file (type pdf)
+
+<use ../figures/eqtm_all_herv_heatmap.pdf>
+Package pdftex.def Info: ../figures/eqtm_all_herv_heatmap.pdf used on input lin
+e 454.
+(pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
+
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 454--455
+[][] 
+ []
 
 
-LaTeX Warning: Reference `fig:global.eqtl.heatmap' on page 12 undefined on inpu
-t line 420.
+LaTeX Warning: Reference `tab:hervS2.eqtm.enrichment' on page 13 undefined on i
+nput line 459.
 
-
-LaTeX Warning: Reference `tab:HERVS2.eqtl.enrichment' on page 12 undefined on i
-nput line 422.
-
-
-LaTeX Warning: Reference `fig:global.eqtm.heatmap' on page 12 undefined on inpu
-t line 431.
-
-
-LaTeX Warning: Reference `fig:hervS2.eqtm.enrichment' on page 12 undefined on i
-nput line 437.
-
-[12] [13] [14] [15] (./thesis.bbl [16]) [17] (./thesis.aux)
+[13 <../figures/eqtm_all_herv_heatmap.pdf>] [14] [15] [16] (./thesis.bbl
+[17]) [18] (./thesis.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1056,13 +1069,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 25340 strings out of 494910
- 633633 string characters out of 6179836
- 781293 words of memory out of 5000000
- 28144 multiletter control sequences out of 15000+600000
+ 25351 strings out of 494910
+ 634075 string characters out of 6179836
+ 781274 words of memory out of 5000000
+ 28153 multiletter control sequences out of 15000+600000
  12674 words of font info for 45 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 68i,11n,80p,1129b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,11n,80p,1079b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/seoman/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/
@@ -1075,10 +1088,10 @@ msfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 ti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.p
 fb>
-Output written on thesis.pdf (20 pages, 1306046 bytes).
+Output written on thesis.pdf (21 pages, 2394698 bytes).
 PDF statistics:
- 157 PDF objects out of 1000 (max. 8388607)
- 107 compressed objects within 2 object streams
+ 176 PDF objects out of 1000 (max. 8388607)
+ 119 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 
