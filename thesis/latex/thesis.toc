@@ -8,28 +8,28 @@
 \contentsline {subsection}{\numberline {2.2}KORA}{3}
 \contentsline {subsubsection}{\numberline {2.2.1}Expression}{4}
 \contentsline {subsubsection}{\numberline {2.2.2}Methylation}{4}
-\contentsline {subsubsection}{\numberline {2.2.3}Genotypes}{4}
-\contentsline {subsubsection}{\numberline {2.2.4}Covariates}{5}
-\contentsline {subsubsection}{\numberline {2.2.5}Methylation quantitative trait loci}{5}
-\contentsline {subsection}{\numberline {2.3}Transcription factor binding}{5}
-\contentsline {subsection}{\numberline {2.4}Chromatin states}{6}
-\contentsline {section}{\numberline {3}Methods}{7}
-\contentsline {subsection}{\numberline {3.1}Overlaps}{7}
-\contentsline {subsection}{\numberline {3.2}Data normalization}{7}
-\contentsline {subsection}{\numberline {3.3}eQTL/eQTM calculation}{7}
-\contentsline {subsection}{\numberline {3.4}Functional Analysis of Gene Sets}{8}
-\contentsline {subsection}{\numberline {3.5}Gaussian Graphical Models}{8}
-\contentsline {section}{\numberline {4}Results}{9}
-\contentsline {subsection}{\numberline {4.1}Normalized Data}{9}
-\contentsline {subsection}{\numberline {4.2}HERV region features}{9}
-\contentsline {subsubsection}{\numberline {4.2.1}Expression}{9}
-\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{9}
-\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{10}
-\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{10}
-\contentsline {subsection}{\numberline {4.3}eQTLs}{11}
-\contentsline {subsection}{\numberline {4.4}eQTMs}{13}
-\contentsline {subsection}{\numberline {4.5}meQTLs}{14}
-\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{14}
-\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{14}
-\contentsline {section}{\numberline {5}Discussion}{15}
-\contentsline {section}{\numberline {6}Conclusion and Outlook}{16}
+\contentsline {subsubsection}{\numberline {2.2.3}Genotypes}{5}
+\contentsline {subsubsection}{\numberline {2.2.4}Covariates}{6}
+\contentsline {subsubsection}{\numberline {2.2.5}Methylation quantitative trait loci}{6}
+\contentsline {subsection}{\numberline {2.3}Transcription factor binding}{7}
+\contentsline {subsection}{\numberline {2.4}Chromatin states}{7}
+\contentsline {section}{\numberline {3}Methods}{9}
+\contentsline {subsection}{\numberline {3.1}Overlaps}{9}
+\contentsline {subsection}{\numberline {3.2}Data normalization}{9}
+\contentsline {subsection}{\numberline {3.3}eQTL/eQTM calculation}{9}
+\contentsline {subsection}{\numberline {3.4}Functional Analysis of Gene Sets}{10}
+\contentsline {subsection}{\numberline {3.5}Gaussian Graphical Models}{10}
+\contentsline {section}{\numberline {4}Results}{11}
+\contentsline {subsection}{\numberline {4.1}Normalized Data}{11}
+\contentsline {subsection}{\numberline {4.2}HERV region features}{11}
+\contentsline {subsubsection}{\numberline {4.2.1}Expression}{11}
+\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{11}
+\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{12}
+\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{12}
+\contentsline {subsection}{\numberline {4.3}eQTLs}{13}
+\contentsline {subsection}{\numberline {4.4}eQTMs}{15}
+\contentsline {subsection}{\numberline {4.5}meQTLs}{16}
+\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{16}
+\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{16}
+\contentsline {section}{\numberline {5}Discussion}{17}
+\contentsline {section}{\numberline {6}Conclusion and Outlook}{18}

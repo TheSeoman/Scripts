@@ -24,6 +24,15 @@ Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
   generation of genome-wide association studies.
 \newblock {\em PLOS Genetics}, 5(6):1--15, 06 2009.
 
+\bibitem{Yineaaj2239}
+Yimeng Yin, Ekaterina Morgunova, Arttu Jolma, Eevi Kaasinen, Biswajyoti Sahu,
+  Syed Khund-Sayeed, Pratyush~K. Das, Teemu Kivioja, Kashyap Dave, Fan Zhong,
+  Kazuhiro~R. Nitta, Minna Taipale, Alexander Popov, Paul~A. Ginno, Silvia
+  Domcke, Jian Yan, Dirk Sch{\"u}beler, Charles Vinson, and Jussi Taipale.
+\newblock Impact of cytosine methylation on dna binding specificities of human
+  transcription factors.
+\newblock {\em Science}, 356(6337), 2017.
+
 \bibitem{10.1101/gr.139105.112}
 Jie Wang, Jiali Zhuang, Sowmya Iyer, XinYing Lin, Troy~W. Whitfield, Melissa~C.
   Greven, Brian~G. Pierce, Xianjun Dong, Anshul Kundaje, Yong Cheng, Oliver~J.
@@ -75,16 +84,40 @@ Jason Ernst and Manolis Kellis.
 \newblock {\em Nature Methods}, 9:215 EP --, Feb 2012.
 \newblock Correspondence.
 
+\bibitem{Rlanguage}
+{R Core Team}.
+\newblock {\em R: A Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria, 2017.
+
 \bibitem{10.1371/journal.pcbi.1003118}
 Michael Lawrence, Wolfgang Huber, Herv\'e Pag\`es, Patrick Aboyoun, Marc
   Carlson, Robert Gentleman, Martin Morgan, and Vincent Carey.
 \newblock Software for computing and annotating genomic ranges.
 \newblock {\em {PLoS} Computational Biology}, 9, 2013.
 
+\bibitem{illuminaHumanv3.db}
+Mark Dunning, Andy Lynch, and Matthew Eldridge.
+\newblock {\em illuminaHumanv3.db: Illumina HumanHT12v3 annotation data (chip
+  illuminaHumanv3)}, 2015.
+\newblock R package version 1.26.0.
+
+\bibitem{FDb.InfiniumMethylation.hg19}
+Tim {Triche, Jr.}
+\newblock {\em FDb.InfiniumMethylation.hg19: Annotation package for Illumina
+  Infinium DNA methylation probes}, 2014.
+\newblock R package version 2.2.0.
+
 \bibitem{10.1093/bioinformatics/bts163}
 Andrey~A. Shabalin.
 \newblock Matrix eqtl: ultra fast eqtl analysis via large matrix operations.
 \newblock {\em Bioinformatics}, 28(10):1353--1358, 2012.
+
+\bibitem{10.2307/2346101}
+Yoav Benjamini and Yosef Hochberg.
+\newblock Controlling the false discovery rate: A practical and powerful
+  approach to multiple testing.
+\newblock {\em Journal of the Royal Statistical Society. Series B
+  (Methodological)}, 57(1):289--300, 1995.
 
 \bibitem{AnnotationDbi}
 Hervé Pagès, Marc Carlson, Seth Falcon, and Nianhua Li.

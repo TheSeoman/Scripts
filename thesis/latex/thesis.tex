@@ -186,11 +186,11 @@ A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name 
 The functional data for our analysis of gene regulatory mechanisms are made up up expression, methylation and genotype data. These were collected in the light of the platform for Cooperative Health Research in the Region of Augsburg, short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
 The objective of KORA is to track changes in health conditions over a long period in order to identify and examine the causes, effects and development of chronical diseases.
 
-The data originates from the KORA F4 Survey, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. F4 is a follow up study to the KORA S4 Survey performed from 1999 to 2001. It contains 4261 individuals. 
+The data used in this work originates from the KORA F4 Survey, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. Of these data was available for 3020 individuals. F4 is a follow up study to the KORA S4 Survey performed from 1999 to 2001. It contains 4261 individuals. 
 
-All measurements were performed on whole blood samples. Houseman blood counts\cite{10.3389/fgene.2016.00023} describing the composition of different cell types for each individual had previously been calculated from the methylation data. They were available to weight cell type specific data. 
+All measurements were performed on whole blood samples. Houseman blood counts\cite{10.3389/fgene.2016.00023} describing the composition of different cell types for each individual had previously been calculated from the methylation data. They were used to weight certain cell type specific data. 
 
-Not all essays are available for all samples. Therefore different analyses were performed on varying sets of individuals according to availability of the required data types. A diagram of the samples available for each essay can be seen in figure \ref{fig:samples.venn}. The 
+Not all essays are available for all samples. Therefore different analyses were performed on varying sets of individuals according to availability of the required data types. A diagram of the samples available for each essay can be seen in figure \ref{fig:samples.venn}. 
 
 \begin{figure}[tb]
 \begin{center}
@@ -207,7 +207,7 @@ Measurements for 993 individuals are available from the KORA F4 survey. The comp
 
 The available data had already been quantile normalized, corrected for the background and log-transformed. 
 
-Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of variation over all probes and samples. Apart from a tail of some probes with very high expression values figure \ref{fig:expr.var}A roughly resembles a standard distribution. 
+Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of variation over all probes and samples. Apart from a tail of some probes with very high expression values figure \ref{fig:expr.raw.hist.cov}A roughly resembles a standard distribution. 
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/expr_raw_hist_cov}  
@@ -216,95 +216,155 @@ Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of var
 \end{figure}
 
 
-Probes that could not be mapped to genes were not discarded to avoid losing data for HERV regions are only sparsely annotated with genes and were the focus of this work and. Therefore, most analyses were performed on probe level or a mix of probes and genes.
+Probes that could not be mapped to genes were not discarded to avoid losing data for HERV regions, which are only sparsely annotated with genes and were the focus of this work and. Therefore, most analyses were performed on probe level or a mix of probes and genes.
 
 
 \subsubsection{Methylation}
 DNA methylation was measured using the Infinium HumanMethylation450K BeadChip, which interrogates methylation levels at 485577 genomic locations. Methylation intensities had already been corrected and transformed to beta values. Beta values have a range from 0 to 1 and represent the fraction of copies of a CpG site that are methylated in a sample.
 
-Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes. The distribution of beta values and the variation over all samples and probes is shown in figure \ref{fig:meth.raw.hist.var}.
+No imputation of missing measurements was performed for the methylation data. Therefore, only 44335 probes have measurements in all samples available. Overall there are about 11.2 million missing values, which makes up 1.3\% of all measurements and on average 23 samples missing per probe. 
 
+Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes. The distribution of beta values and the variances over all samples and probes is shown in figure \ref{fig:meth.raw.hist.var}. As seen in figure \ref{fig:meth.raw.hist.var}A, the interrogated CpG sites tend to be either entirely methylated or unmetylated within single samples. However, as B shows there is some variance between individuals in most CpG-sites. The low variance for very low and very high betas is explained by the fact that for a CpG site to have a mean close to 0 all samples have to have a value close to 0. Therefore, the variance also is very low.
+
+ 
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/expr_raw_hist_var}  
-	\caption{Distribution of methylation beta values (A) and variance of (B) of 485577 CpGs in 1727 individuals.}
-    \label{fig:expr.raw.hist.cov}
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/meth_raw_hist_var}  
+	\caption{Distribution of all methylation beta values (A) and variance (B) of 485577 CpGs between 1727 individuals.}
+    \label{fig:meth.raw.hist.var}
 \end{figure}
 
  
 \subsubsection{Genotypes}
-Genotyping was performed with the Affymetrix Axiom array. Genotypes had been called using the Iluminus calling algorithm and missing values had been imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. Furthermore, imputation results had already been filtered at IMPUTE value of 0.4. 
+Genotyping was performed with the Affymetrix Axiom array. On the data set used in this work genotypes had already been called using the Iluminus calling algorithm and missing values had been imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. Furthermore, imputation results had already been filtered at IMPUTE value of 0.4.  
 
-After excluding all SNPs with a minor allele frequency of less than one percent measurements of 9533127 SNPs for 3788 individuals were available in the form of continuous values from 0 to 2.
+%TODO rewrite
+Additionally SNPs with a minor allele frequency of less than one percent had been removed, which allows used association analyses to be have more powerful test statistics.
+
+In total measurements of 9533127 SNPs for 2940 individuals were available in the form of continuous values from 0 to 2 with 0 representing no occurrence of the SNP and 2 meaning the SNP is present in both chromosomes. Non integer values mean that different genotypes were measured in different cells in the sample and the resulting value describes the fraction of the occurrence of the variant. 
 
 \subsubsection{Covariates}
-Several covariates were known for each sample. These were age, sex, body mass index (BMI) and wide blood cell count, as well as experimental factors like storage time and RNA integrity number (RIN).
+Several covariates were known for each sample. They were used to correct expression and methylation values for common effects. 
+
+%TODO which sex is which?
+The sex of all participants was known. Of the 3020 participants with any available data 1458 were SEX1 and the remaining 1562 were SEX2. The 697 individuals that had all three essays available contained 348 men/women and 339 women/men.
+Further covariates specific to participating individuals are sex, age, body mass index (BMI) and white blood cell count. An overview of these covariate values for all 3020 individuals and the individuals with all three essays available is shown in table \ref{tab:covariate.overview}.
+
+
+%TODO fix tables, add caption
+\begin{table}[h!]
+  	\begin{minipage}{.45\textwidth}
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Covariate, Minimum, Maximum, Mean},
+	columns/Covariate/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]{../tables/full.covariate.overview.tsv}
+    \end{minipage}
+    \hfill
+     \begin{minipage}{.45\linewidth}
+    \pgfplotstabletypeset[
+    col sep=tab, 
+    header=true,    
+	columns={Covariate, Minimum, Maximum, Mean},
+	columns/Covariate/.style={column type=l,string type},
+	every head row/.style={before row=\hline, after row=\hline},
+	every last row/.style={after row=\hline}]{../tables/select.covariate.overview.tsv}
+    \end{minipage}%
+    \caption{Covariate overview}
+	\label{tab:covariate.overview}
+\end{table}
+
+Finally, two experimental factors for the expression measurements, storage time and RNA integrity number (RIN) and plate, were known.
 
 \subsubsection{Methylation quantitative trait loci}
-Previously process methylation quantitative trait loci (meQTL) data was used. The data set contained a total of xxxxxx significantly associated cpg-snp pairs. 
-xxxx distinct cpg-sites and xxxxxx snps were part of at least one meQTL. xxxx pairs consisted of cpgs and snps on the same chromosome, while xxxxx association were between different chromosomes. 
+Genotypic variants are known to effect methylation patterns in humans \cite{}. Therefore, we used previously processed methylation quantitative trait loci (meQTL) data to explore the mechanism of trans acting SNP-CpG associations. Associated pairs were used as a seed for trans-acting interaction networks.
+
+For meQTLs a stringent definition of trans effects was used: A SNP-CpG pair was called a trans-meQTL only if they are located on different chromosomes. This definition differs from the one used for eQTM and eQTL calculation as described later. 
+
+The data set contained a total of 11165559 significantly associated SNP-CpG pairs. 
+70709 distinct CpG-sites and 2709428 SNPs were part of at least one meQTL. Of these 467915 pairs consisting of 3592 CpG-sites and 200761 SNPs were between different chromosomes. 
+
 
 \subsection{Transcription factor binding}
-Transcription factor binding sites were obtained from two publicly available sources: 
+DNA methylation plays a major role in the specifics of transcription factor binding sites\cite{Yineaaj2239}. We used transcription factor binding sites obtained from two publicly available sources to enrich information about CpG-sites of interest with transcription factors that bind nearby: 
 
-First was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
+The first source was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
 
 It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{10.1101/gr.139105.112}. The pipeline uses the tools MEME-ChIP\cite{10.1093/bioinformatics/btr189} and FIMO\cite{10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifs with known motifs from Jaspar\cite{10.1093/nar/gkx1126} and TransFac\cite{10.1093/nar/gkj143} using machine learning methods and manual curation. 
 
 The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2173371 peaks for 125 transcription factors.  
 
-The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The finished data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The final data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
 
-It contains xxxxx peaks. After filtering for 19 blood related cell types a of xxxx peaks of xxx different transcription factors remained. 
+There were a total of xxxxxx peaks for xxx transcription factors in the data set. After filtering for 19 blood related cell types xxxx peaks and xxx different transcription factors remained.  
+%TODO fill in numbers when storage available 
 
-Combining both filtered data sets lead to a total of xxxxx peaks of xxx transcription factors.
+Combining both filtered data sets lead to a total of 3847561 peaks of 145 different transcription factors.
 
 
 \subsection{Chromatin states}
-Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}. The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
+%TODO rewrite somewhat - but not used right now
+Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model (\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}). The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
 
 It was generated using ChromHMM v1.10\cite{10.1038/nmeth.1906} on the chromatin marks H3K4me1, H3K4me3, H3K27me3, H3K9me3, and H3K36me3. ChromHMM is based on a multivarate Hidden Markov Model. 
 
-In this work the annotations for 27 blood related cell lines were used. To get the distribution of states for a single feature or a set of features the different annotations for the different cell lines were weighted according to the houseman counts and summed up.
+In this work the annotations for 27 blood related cell lines were used. When combining the annotation for a genomic location of interest like a HERV element or a SNP, houseman blood counts were used to account of the cell composition of the whole blood samples. 
+
 
 \newpage
 \section{Methods}
+Most computations were done using the statistical computing environment and programing language R, version 3.4.1\cite{Rlanguage}. Pre filtering steps on large files, that could not be loaded into random access memory, were performed using the bash command "awk", which runs scripts written in the "AWK" programming language.
+
 \subsection{Overlaps}
-The task of whether HERV elements contained any annotated elements like expression probes, genes, cpg sites and transcription factor binding sites (tfbs) was performed using function "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. 
+The main objective of this thesis was to analyze the effects of HERV elements on the regulation of cell activity. 
 
-Features were considered to be of interest for the analysis of an HERV element, if they overlapped by at least one base pair.
+To identify functional features like expression probes, genes, SNPs and CpG-sites that were associated with HERV elements, overlaps between these features and elements were calculated. Features were considered to be of interest for the analysis of an HERV element, if they overlapped by at least one base pair.
 
-Features were also filtered for the HERV elements and their 1kb or 2kb up- and downstream regions.
+The calculation was performed using the function "findOverlaps" from the Bioconductor package "GenomicRanges"\cite{10.1371/journal.pcbi.1003118}. The function allows to identify overlaps between "GRanges" objects. These were constructed from BED files for all HERV sets as well as SNPs and retrieved from the Bioconductor packages available for analyses on the expression and methylation essays, "illuminaHumanv3.db"\cite{illuminaHumanv3.db} and "FDb.InfiniumMethylation.hg19"\cite{FDb.InfiniumMethylation.hg19} respectively.
+
+The search for overlapping features was also performed on "GRanges" objects including all HERV elements as well as the 1kb or 2kb flanking regions of all elements. This was done to include functional features, that while not directly within HERV regions, are still likely to be influenced by them. Furthermore, this analysis was performed on all three HERV sets.
 
 \subsection{Data normalization}
-Expression and methylation values were corrected for available covariates by calculating the residual matrix. 
-A linear model containing the cell compositions and the first 20 principal components was used for methylation.
+Before expression and methylation values were used for analyses, they were corrected for batch effects. For this we used the available covariates to calculate a linear models and regress out the respective residuals. The model used for expression values is shown in equation \ref{eq:expr.res.model} and considers the covariates age, sex, RNA integrity number (RIN), plate and storage time. The model for methylation values, shown in equation \ref{eq:meth.res.model},
+includes the cell composition for the five blood cell types known from the houseman blood counts, as well as the first 20 principal components of the Illumina 450k array control-probes. 
+\begin{equation}
+\label{eq:expr.res.model}
+Expr \sim 1+age+sex+RIN+plate+storage.time
+\end{equation}
+\begin{equation}
+\label{eq:meth.res.model}
+Meth \sim 1+CD4T+CD8T+NK+Bcell+Mono+\sum_{i=1}^{20} PC_{i}
+\end{equation}
 
-Expression residuals were calculated using a linear model of age, sex, RNA integrity number (RIN), plate and storage time. 
 
 \subsection{eQTL/eQTM calculation}
-Expression quantitative trait loci (eQTL) and expression quantitative trait methylation were calculated using the Bioconductor package MatrixEQTL\cite{10.1093/bioinformatics/bts163}. MatrixEQTL tests for association of SNP-transcript pairs. It offers two modes of modeling the effect of the genotype on transcription levels: 
+As a preliminary analysis to interrogate the effect of genotype and methylation variants on expression, expression quantitative trait loci (eQTL) and expression quantitative trait methylation (eQTM) were calculated.
 
-When setting the parameter "$useModel = modelLINEAR$", as was done in this work, an additive linear model is used. The association ism modeled as simple linear regression and the absolute value of the sample correlation is used as test statistic.
- 
-Alternatively when choosing "$modelAnova$" for the parameter, the effect is modeled with ANOVA model. In this case the test statistic is the squared sample correlation.
+Calculations were performed using the Bioconductor package MatrixEQTL\cite{10.1093/bioinformatics/bts163}. MatrixEQTL tests for association of SNP-transcript pairs.  
 
-After calculating the test statistics the p-values for the all pairs that pass a defined significance threshold are calculated. These are corrected multiple testing using a Benjamini- Hochberg procedure, adapted for not recording all p-values.
+We set the parameter \texttt{useModel = modelLINEAR}, which leads to the use of an  additive linear model. The association is modeled as simple linear regression and the absolute value of the sample correlation is used as test statistic.
 
-MatrixEQTL is very performant because it manages to reduce the calculation of the test statistic to one single large matrix multiplication by cleverly transforming the genotype and transcription variables.
+After calculating the test statistics the p-values for all pairs that pass a defined significance threshold are calculated. These are corrected multiple testing using a Benjamini-Hochberg procedure\cite{10.2307/2346101}, adapted for not recording all p-values, as shown in equation \ref{eq:matrix.eqtl.transformation}
 
-MatrixEQTL also allows to include covariates in the QTL calculation. As the expression and methylation values used are residuals and therefore already consider covariates this option is not used. Furthermore MatrixEQTL can differentiate between cis- and trans-interactions. The maximal distance to consider a pair on the same chromosome as cis was set to 50kb. 
+MatrixEQTL is rather efficient because it manages to reduce the calculation of the sample correlation over all SNPs and transcripts to one single large matrix multiplication. This is achieved by transforming the genotype and transcription values. 
+
+MatrixEQTL also allows to include covariates in the QTL calculation. As the expression and methylation values used are residuals and therefore already corrected this option is not used. Furthermore, MatrixEQTL can differentiate between cis- and trans-interactions based on distance. The maximal distance to consider a pair on the same chromosome as cis was set to 500 kb. 
+%TODO motivate cis-distance
 
 The threshold for significant cis-QTLs during calculation was set to 10e-6 and 10e-8 for trans.
+
+
 
 \subsection{Functional Analysis of Gene Sets}
 In multiple analyses functional Gene Ontology enrichments were performed.
 
 First a set of all GO annotations with any evidence code for gene symbols  was retrieved from the Bioconductor package AnnotationDbi\cite{AnnotationDbi}. 
 
-Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom background set of genes specific to the analysis is given. Finally the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
+Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom background set of genes specific to the analysis is given. Finally, the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
 
 \subsection{Gaussian Graphical Models}
-
+%TODO write this stuff
 
 
 
@@ -319,7 +379,7 @@ In this section I will describe the expression probes that overlap with any HERV
 \subsubsection{Expression}
 A total of 2343 expression probes overlap directly with at least one of 2271 HERV elements from HERV S2. This means ca 4.50\% of all expression probes overlap with HERV elements and expression measurements are known for parts of ca 0.37\% of all HERV elements.
 
-The mean expression of the probes overlapping with HERV elements, as shown in figure \ref{fig:hervS2.expr.var} is on average lower than for all probes (figure \ref{fig:expr.var}). The coefficient of variance, however, shows a very similar pattern for the whole set of probes and the considered subset.
+The mean expression of the probes overlapping with HERV elements, as shown in figure \ref{fig:hervS2.expr.var} is on average lower than for all probes (figure \ref{fig:expr.raw.hist.cov}A). The coefficient of variance, however, shows a very similar pattern for the whole set of probes and the considered subset.
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_expr_var}  
@@ -345,7 +405,7 @@ However, when including the 2kb flanking regions of HERV S2 and performing the G
     {../tables/hervS2.2kb.expr.enrichment.tsv}}
   \end{center}        
 	\caption{Significantly enriched GO biological process terms among genes overlapping with HERV S2.}
-	\label{tab:expr.overlap.counts}
+	\label{tab:hervS2.expr.overlap.counts}
 \end{table}
 %Wrong hervS2.2kb
 
@@ -370,8 +430,7 @@ The results for all HERV sets and including flanking regions is shown in table \
 \subsubsection{Methylation}
 17077 CpG sites, equaling 3.52\% of all measured CpGs, were found within HERV S2 and 12871 distinct HERV elements (2.10\%) contain at least one interrogated CpG site.
 
-
-%The variance of the measurements of these sites, which is shown in figure \ref{fig:}, is lower on average.
+CpGs associated with HERV S2, as shown in figure \ref{fig:meth.hervS2.hist.var}, tend to be highly methylated. The variance also is...
 
 The number of CpG sites within all HERV sets and including flanking regions is shown in table \ref{tab:meth.overlap.counts}
 

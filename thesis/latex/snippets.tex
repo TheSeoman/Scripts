@@ -1,1 +1,14 @@
 $$ g = \alpha + \beta s + \epsilon, \text{ where } \epsilon \sim \text{ i.i.d. } N(0, \sigma^2).$$
+
+
+MatrixEQTL is rather efficient because it manages to reduce the calculation of the sample correlation to one single large matrix multiplication, shown in equation \ref{eq:matrix.eqtl.cor}, where g and s are vectors of all values for one gene or SNP over all samples respectively. This is achieved by transforming the genotype and transcription variables to have a zero mean and unit sum of squares (equation \ref{eq:matrix.eqtl.transformation}.
+
+
+\begin{equation}
+\label{eq:matrix.eqtl.transformation}
+\sum g_i = 0, \sum g_i^2 = 1, \sum s_i = 0, \sum s_i^2 = 1
+\end{equation}
+\begin{equation}
+\label{eq:matrix.eqtl.cor}
+r_{gs} = cor(s, g) = \frac{\sum (s_i - \bar{s})(g_i - \bar{g})}{\sqrt{\sum (s_i - \bar{s})^2(g_i - \bar{g})^2}} = 
+\end{equation}
