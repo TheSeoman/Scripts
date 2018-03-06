@@ -570,7 +570,15 @@ add.to.graphs <- function(graphs, sentinel, trans.genes, trans.cpgs, tfbs.ann) {
   require(graph)
   
   tf.edges = melt(tfbs.ann[trans.cpgs,])
-  colnames(tf.edges) = c("cpg", "condition", "adjacent")
+  if(length(trans.cpgs) == 1) {
+    colnames(tf.edges) = c("adjacent")
+    tf.edges$cpg <- trans.cpgs[1]
+    tf.edges$condition <- rownames(tf.edges)
+    tf.edges <- tf.edges[, c("cpg", "condition", "adjacent")]
+  } else {
+    colnames(tf.edges) = c("cpg", "condition", "adjacent")
+  }
+  
   tf.edges = tf.edges[tf.edges[,"adjacent"],]
   for (i in 1:2) {
     tf.edges[,i] = as.character(tf.edges[,i])
@@ -609,8 +617,15 @@ add.to.graphs <- function(graphs, sentinel, trans.genes, trans.cpgs, tfbs.ann) {
     ## add edges for the tfbs
     locus.graph = addEdge(use.tf.edges[,"tf"], use.tf.edges[,"cpg"], locus.graph)
 
-    ## add edges for the connection of the locus and its genes
-    locus.graph = addEdge(rep(sentinel, length(trans.genes)), trans.genes, locus.graph)
+    if(length(sentinel) > 1) {
+      for(snp in sentinel) {
+        locus.graph = addEdge(rep(snp, length(trans.genes)), trans.genes, locus.graph)
+      }
+    } else {
+      ## add edges for the connection of the locus and its genes
+      locus.graph = addEdge(rep(sentinel, length(trans.genes)), trans.genes, locus.graph)
+    }
+    
 
     out[[graph.idx]] = locus.graph
   }

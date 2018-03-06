@@ -2,11 +2,11 @@ source('Scripts/R/paths.R')
 
 require(BDgraph)
 
-set <- 'hervS1.2kb'
+set <- 'hervS2'
 filter <- 'meth'
 seed <- 'meqtl'
 flanking <- 2.5e5
-string <- F
+string <- T
 
 GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
 dir.create(paste0(GGM.DIR, 'ggm/'), showWarnings = F, recursive = T)
@@ -22,7 +22,9 @@ if (filter == 'snp') {
   }
   id <- snps[index]
 } else {
-  load(paste0(GGM.DIR, 'cpgs.RData'))
+  # load(paste0(GGM.DIR, 'cpgs.RData'))
+  load(paste0(GGM.DIR, 'missing.cpgs.RData'))
+  cpg.sets <- missing.cpg.sets
   id <- paste(cpg.sets[[index]], collapse = '|')
 }
 

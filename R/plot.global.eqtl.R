@@ -105,7 +105,6 @@ get.potential.pair.bins <- function(all.e1.bins, all.e2.bins, herv.e1.bins = NUL
   return(potential.pair.bins)
 }
 
-#axis.text.x = element_text(angle = 90, hjust = 1, vjust = -0.5, size = 7), axis.text.y = element_text(hjust = -0.5, vjust = 1, size = 7)
 
 plot.pair.bins <- function(pair.bins, bin.breaks, limits, e1.name, e2.name, title, show.legend = T) {
   g <- ggplot(pair.bins, aes(e1.bin, e2.bin)) + geom_tile(aes(fill = Freq)) +
