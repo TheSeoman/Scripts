@@ -4,45 +4,45 @@ The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
 Warning--empty journal in RepeatMasker
-You've used 21 entries,
+You've used 22 entries,
             1791 wiz_defined-function locations,
-            594 strings with 8850 characters,
-and the built_in function-call counts, 5295 in all, are:
-= -- 374
-> -- 407
+            602 strings with 9003 characters,
+and the built_in function-call counts, 5540 in all, are:
+= -- 398
+> -- 415
 < -- 0
-+ -- 144
-- -- 123
-* -- 469
-:= -- 937
-add.period$ -- 65
-call.type$ -- 21
-change.case$ -- 17
++ -- 147
+- -- 125
+* -- 487
+:= -- 976
+add.period$ -- 69
+call.type$ -- 22
+change.case$ -- 18
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 178
-empty$ -- 437
-format.name$ -- 123
-if$ -- 1103
+cite$ -- 23
+duplicate$ -- 187
+empty$ -- 461
+format.name$ -- 125
+if$ -- 1158
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 17
-newline$ -- 110
-num.names$ -- 21
+int.to.str$ -- 22
+missing$ -- 18
+newline$ -- 116
+num.names$ -- 22
 pop$ -- 31
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 68
+skip$ -- 72
 stack$ -- 0
-substring$ -- 291
-swap$ -- 24
+substring$ -- 315
+swap$ -- 25
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 35
-width$ -- 23
-write$ -- 232
+while$ -- 37
+width$ -- 24
+write$ -- 245
 (There was 1 warning)

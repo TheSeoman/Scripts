@@ -2,34 +2,34 @@
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {subsection}{\numberline {1.1}Regulation of cell functions and Epigenetics}{1}
 \contentsline {subsection}{\numberline {1.2}Human endogenous retroviruses}{1}
-\contentsline {subsection}{\numberline {1.3}Effect network analysis}{1}
-\contentsline {section}{\numberline {2}Data}{2}
-\contentsline {subsection}{\numberline {2.1}HERV annotation}{2}
-\contentsline {subsection}{\numberline {2.2}KORA}{3}
-\contentsline {subsubsection}{\numberline {2.2.1}Expression}{4}
-\contentsline {subsubsection}{\numberline {2.2.2}Methylation}{4}
-\contentsline {subsubsection}{\numberline {2.2.3}Genotypes}{5}
-\contentsline {subsubsection}{\numberline {2.2.4}Covariates}{6}
-\contentsline {subsubsection}{\numberline {2.2.5}Methylation quantitative trait loci}{6}
-\contentsline {subsection}{\numberline {2.3}Transcription factor binding}{7}
-\contentsline {subsection}{\numberline {2.4}Chromatin states}{7}
-\contentsline {section}{\numberline {3}Methods}{9}
-\contentsline {subsection}{\numberline {3.1}Overlaps}{9}
-\contentsline {subsection}{\numberline {3.2}Data normalization}{9}
-\contentsline {subsection}{\numberline {3.3}eQTL/eQTM calculation}{9}
-\contentsline {subsection}{\numberline {3.4}Functional Analysis of Gene Sets}{10}
-\contentsline {subsection}{\numberline {3.5}Gaussian Graphical Models}{10}
-\contentsline {section}{\numberline {4}Results}{11}
-\contentsline {subsection}{\numberline {4.1}Normalized Data}{11}
-\contentsline {subsection}{\numberline {4.2}HERV region features}{11}
-\contentsline {subsubsection}{\numberline {4.2.1}Expression}{11}
-\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{11}
-\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{12}
-\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{12}
-\contentsline {subsection}{\numberline {4.3}eQTLs}{13}
-\contentsline {subsection}{\numberline {4.4}eQTMs}{15}
-\contentsline {subsection}{\numberline {4.5}meQTLs}{16}
-\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{16}
-\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{16}
-\contentsline {section}{\numberline {5}Discussion}{17}
-\contentsline {section}{\numberline {6}Conclusion and Outlook}{18}
+\contentsline {subsection}{\numberline {1.3}Effect network analysis}{2}
+\contentsline {section}{\numberline {2}Data}{3}
+\contentsline {subsection}{\numberline {2.1}HERV annotation}{3}
+\contentsline {subsection}{\numberline {2.2}KORA}{4}
+\contentsline {subsubsection}{\numberline {2.2.1}Expression}{5}
+\contentsline {subsubsection}{\numberline {2.2.2}Methylation}{5}
+\contentsline {subsubsection}{\numberline {2.2.3}Genotypes}{6}
+\contentsline {subsubsection}{\numberline {2.2.4}Covariates}{7}
+\contentsline {subsubsection}{\numberline {2.2.5}Methylation quantitative trait loci}{7}
+\contentsline {subsection}{\numberline {2.3}Transcription factor binding}{8}
+\contentsline {subsection}{\numberline {2.4}Chromatin states}{8}
+\contentsline {section}{\numberline {3}Methods}{10}
+\contentsline {subsection}{\numberline {3.1}Overlaps}{10}
+\contentsline {subsection}{\numberline {3.2}Data normalization}{10}
+\contentsline {subsection}{\numberline {3.3}eQTL/eQTM calculation}{10}
+\contentsline {subsection}{\numberline {3.4}Functional Analysis of Gene Sets}{11}
+\contentsline {subsection}{\numberline {3.5}Gaussian Graphical Models}{11}
+\contentsline {section}{\numberline {4}Results}{12}
+\contentsline {subsection}{\numberline {4.1}Normalized Data}{12}
+\contentsline {subsection}{\numberline {4.2}HERV region features}{12}
+\contentsline {subsubsection}{\numberline {4.2.1}Expression}{12}
+\contentsline {subsubsection}{\numberline {4.2.2}Methylation}{12}
+\contentsline {subsubsection}{\numberline {4.2.3}Genotypes}{13}
+\contentsline {subsubsection}{\numberline {4.2.4}Chromatin states}{13}
+\contentsline {subsection}{\numberline {4.3}eQTLs}{14}
+\contentsline {subsection}{\numberline {4.4}eQTMs}{16}
+\contentsline {subsection}{\numberline {4.5}meQTLs}{17}
+\contentsline {subsection}{\numberline {4.6}HERV related regulatory networks}{17}
+\contentsline {subsubsection}{\numberline {4.6.1}Data collection}{17}
+\contentsline {section}{\numberline {5}Discussion}{18}
+\contentsline {section}{\numberline {6}Conclusion and Outlook}{19}
