@@ -103,7 +103,7 @@
 \pagenumbering{arabic}
 \section{Introduction}
 
-\subsection{Regulation of cell functions and Epigenetics}
+\subsection{Epigenetics}
 \begin{itemize}
 \item central dogma of biology
 \item rising importance of other factors atop DNA \textrightarrow epigenetics
@@ -123,11 +123,16 @@
 
 
 \subsection{Human endogenous retroviruses}
-When the draft for the first human genome was published in 2001\cite{Venter1304} there was the expectation, that it would allow to fully understand the human genome. But soon after genes were annotated only xx\% of the genome was found to be protein coding\cite{x}. The remaining majority of genome was often labeled as "junk DNA"\cite{x}. 
+When the draft for the first human genome was published in 2001\cite{Venter1304} there was the expectation, that it would allow to fully understand the human genome. But soon after genes were annotated less than 5\% of the genome was found to be protein coding\cite{Consortium2001} and later on the amount of exonic protein coding DNA was estimated to be as low as 1.2\%\cite{Encode2012}. The remaining majority of genome was often labeled as non-functional "junk DNA"\cite{Pennisi1159}. 
 
-Since then this notion has generally been revoked. With the discovery of functional RNAs\cite{x}, ...\cite{x} and the ever growing knowledge about regalutory elements\cite{x} understanding and discovering the function of the DNA that doesn't directly code for proteins has been one of the biggest areas of interest. 
+Since then this notion has generally been revoked. Especially within the two phases of the Encyclopedia of DNA Elements (ENCODE) project\cite{Encode2012}, participation in some functional role has been assigned to up 80.4\% of the human genome. 
 
-Still up to this day there are areas in the genome that cause problems 
+% With the discovery of functional RNAs\cite{x}, ...\cite{x} and the ever growing knowledge about regulatory elements\cite{x} understanding and discovering the function of the DNA that doesn't directly code for proteins has been one of the biggest areas of interest. 
+
+Still up to this day there are areas in the genome that are hard to analyze. Especially repetitive sequences cause huge problems for any method that relies on sequencing\cite{Treangen2011}. In human repetitive DNA makes up about 50\% of the whole Genome\cite{Treangen2011}. There are five major classes of repetitive elements: 
+
+
+
 \begin{itemize}
 \item first humane genome -> "junk DNA"
 \item ongoing discovery for non-coding regions
@@ -493,7 +498,7 @@ Associations were calculated for 156.4 millions cis acting SNP-expression probe 
 
 There were a total of 1511235 significant trans-eQTL with an p-value of less than 1e-8 and a FDR of less than $3.02e-4$. These are made up by 229332 distinct SNPs and 21338 expression probes. 11505 of the probes found in at least one trans-eQTL are annotated to 9389 different genes, while 9767 probes are not assigned to a gene.
 
-In a previous work Schramm et al. \cite{} calculated eQTLs on expression and genotype data from 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
+In a previous work Schramm et al. \cite{10.1371/journal.pone.0093844} calculated eQTLs on expression and genotype data from 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
 
 Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
 
