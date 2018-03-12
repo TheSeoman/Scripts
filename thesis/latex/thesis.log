@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  9 MAR 2018 17:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  12 MAR 2018 14:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -946,83 +946,87 @@ Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 74.
 \openout5 = `thesis.toc'.
 
 
-[1] [1] [2]
+[1] [1]
+
+LaTeX Warning: Citation `10.114610.1146/annurev.genom.7.080505.115700' on page 
+2 undefined on input line 136.
+
+[2]
 PGFPlots: reading {../tables/head.repeatmasker.track.tsv}
- [3]
-<../figures/hervS1_lengths_hist.pdf, id=36, 433.62pt x 289.08pt>
+ [3] <../figures/hervS1_lengths_hist.pdf, id=37, 433.62pt x 289.08pt>
 File: ../figures/hervS1_lengths_hist.pdf Graphic file (type pdf)
 
 <use ../figures/hervS1_lengths_hist.pdf>
 Package pdftex.def Info: ../figures/hervS1_lengths_hist.pdf used on input line 
-196.
+191.
 (pdftex.def)             Requested size: 433.61894pt x 289.07928pt.
 
-<../figures/samples_venn.pdf, id=37, 325.215pt x 144.54pt>
+<../figures/samples_venn.pdf, id=38, 325.215pt x 144.54pt>
 File: ../figures/samples_venn.pdf Graphic file (type pdf)
 
 <use ../figures/samples_venn.pdf>
-Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 214.
+Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 209.
 (pdftex.def)             Requested size: 325.2142pt x 144.53963pt.
  [4 <../figures/hervS1_lengths_hist.pdf>]
-<../figures/expr_raw_hist_cov.pdf, id=47, 454.69875pt x 216.81pt>
+<../figures/expr_raw_hist_cov.pdf, id=48, 454.69875pt x 216.81pt>
 File: ../figures/expr_raw_hist_cov.pdf Graphic file (type pdf)
 
 <use ../figures/expr_raw_hist_cov.pdf>
-Package pdftex.def Info: ../figures/expr_raw_hist_cov.pdf used on input line 23
-0.
+Package pdftex.def Info: ../figures/expr_raw_hist_cov.pdf used on input line 22
+5.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
  [5 <../figures/samples_venn.pdf>]
-<../figures/meth_raw_hist_var.png, id=59, 457.71pt x 217.81375pt>
+<../figures/meth_raw_hist_var.png, id=60, 457.71pt x 217.81375pt>
 File: ../figures/meth_raw_hist_var.png Graphic file (type png)
 
 <use ../figures/meth_raw_hist_var.png>
 Package pdftex.def Info: ../figures/meth_raw_hist_var.png used on input line 24
-8.
+3.
 (pdftex.def)             Requested size: 457.7089pt x 217.8132pt.
 
-Overfull \hbox (2.46478pt too wide) in paragraph at lines 248--249
+Overfull \hbox (2.46478pt too wide) in paragraph at lines 243--244
 [][] 
  []
 
 [6 <../figures/expr_raw_hist_cov.pdf>]
 PGFPlots: reading {../tables/full.covariate.overview.tsv}
 
-Overfull \hbox (21.98831pt too wide) in paragraph at lines 279--280
+Overfull \hbox (21.98831pt too wide) in paragraph at lines 274--275
 [][] 
  []
 
 PGFPlots: reading {../tables/select.covariate.overview.tsv}
 
-Overfull \hbox (21.98831pt too wide) in paragraph at lines 289--290
+Overfull \hbox (21.98831pt too wide) in paragraph at lines 284--285
 [][] 
  []
 
 [7 <../figures/meth_raw_hist_var.png>]
-Underfull \hbox (badness 7869) in paragraph at lines 309--310
+Underfull \hbox (badness 7869) in paragraph at lines 304--305
 \OT1/cmr/m/n/12 browser down-load sec-tion ($\OT1/cmtt/m/n/12 http : / / hgdown
 load . cse . ucsc . edu / goldenPath / hg19 /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 309--310
+Underfull \hbox (badness 10000) in paragraph at lines 304--305
 \OT1/cmtt/m/n/12 encodeDCC / wgEncodeRegTfbsClustered / wgEncodeRegTfbsClustere
 dWithCellsV3 .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 \OT1/cmr/m/n/12 Chromatin state an-no-ta-tions were down-loaded from Roadmap Ep
 ge-nomics
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 325--326
+Underfull \hbox (badness 10000) in paragraph at lines 320--321
 \OT1/cmr/m/n/12 Core 15-state model ($\OT1/cmtt/m/n/12 http : / / egg2 . wustl 
 . edu / roadmap / data / byFileType /
  []
 
 
-Underfull \hbox (badness 2126) in paragraph at lines 325--326
+Underfull \hbox (badness 2126) in paragraph at lines 320--321
 \OT1/cmtt/m/n/12 chromhmmSegmentations / ChmmModels / coreMarks / jointModel / 
 final$\OT1/cmr/m/n/12 ). The Model
  []
@@ -1030,28 +1034,28 @@ final$\OT1/cmr/m/n/12 ). The Model
 [8] [9] [10]
 
 LaTeX Warning: Reference `eq:matrix.eqtl.transformation' on page 11 undefined o
-n input line 365.
+n input line 360.
 
 [11]
 
 LaTeX Warning: Reference `fig:expr.raw.res' on page 12 undefined on input line 
-391.
+386.
 
-<../figures/hervS2_expr_var.pdf, id=88, 505.89pt x 289.08pt>
+<../figures/hervS2_expr_var.pdf, id=89, 505.89pt x 289.08pt>
 File: ../figures/hervS2_expr_var.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_expr_var.pdf>
-Package pdftex.def Info: ../figures/hervS2_expr_var.pdf used on input line 402.
+Package pdftex.def Info: ../figures/hervS2_expr_var.pdf used on input line 397.
 
 (pdftex.def)             Requested size: 505.88875pt x 289.07928pt.
 
-Overfull \hbox (50.64464pt too wide) in paragraph at lines 402--403
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 397--398
 [][] 
  []
 
 
 LaTeX Warning: Reference `tab:hervS2.2kb.enrichment' on page 12 undefined on in
-put line 409.
+put line 404.
 
 PGFPlots: reading {../tables/hervS2.2kb.expr.enrichment.tsv}
 
@@ -1063,7 +1067,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 LaTeX Warning: Reference `fig:meth.hervS2.hist.var' on page 12 undefined on inp
-ut line 450.
+ut line 445.
 
 PGFPlots: reading {../tables/meth.overlap.overview.tsv}
 
@@ -1078,17 +1082,17 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 [13 <../figures/hervS2_expr_var.pdf>] [14]
 
 LaTeX Warning: Reference `fig:best.worst.eqtl.boxplot' on page 15 undefined on 
-input line 505.
+input line 500.
 
 <../figures/eqtl_all_herv_heatmap.pdf, id=105, 505.89pt x 237.88875pt>
 File: ../figures/eqtl_all_herv_heatmap.pdf Graphic file (type pdf)
 
 <use ../figures/eqtl_all_herv_heatmap.pdf>
 Package pdftex.def Info: ../figures/eqtl_all_herv_heatmap.pdf used on input lin
-e 514.
+e 509.
 (pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
 
-Overfull \hbox (50.64464pt too wide) in paragraph at lines 514--515
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 509--510
 [][] 
  []
 
@@ -1098,16 +1102,16 @@ File: ../figures/eqtm_all_herv_heatmap.pdf Graphic file (type pdf)
 
 <use ../figures/eqtm_all_herv_heatmap.pdf>
 Package pdftex.def Info: ../figures/eqtm_all_herv_heatmap.pdf used on input lin
-e 535.
+e 530.
 (pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
 
-Overfull \hbox (50.64464pt too wide) in paragraph at lines 535--536
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 530--531
 [][] 
  []
 
 
 LaTeX Warning: Reference `tab:hervS2.eqtm.enrichment' on page 16 undefined on i
-nput line 540.
+nput line 535.
 
 [16 <../figures/eqtm_all_herv_heatmap.pdf>] [17] [18] [19] (./thesis.bbl
 [20]
@@ -1122,10 +1126,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 25394 strings out of 494910
- 635260 string characters out of 6179836
- 781344 words of memory out of 5000000
- 28191 multiletter control sequences out of 15000+600000
+ 25397 strings out of 494910
+ 635359 string characters out of 6179836
+ 781391 words of memory out of 5000000
+ 28194 multiletter control sequences out of 15000+600000
  12674 words of font info for 45 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  68i,11n,80p,1079b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1142,7 +1146,7 @@ m/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
 sy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pf
 b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (26 pages, 2434412 bytes).
+Output written on thesis.pdf (26 pages, 2436188 bytes).
 PDF statistics:
  205 PDF objects out of 1000 (max. 8388607)
  136 compressed objects within 2 object streams
