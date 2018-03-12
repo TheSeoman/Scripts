@@ -3,47 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
-Warning--I didn't find a database entry for "10.114610.1146/annurev.genom.7.080505.115700"
+Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
-You've used 30 entries,
+You've used 32 entries,
             1791 wiz_defined-function locations,
-            661 strings with 15952 characters,
-and the built_in function-call counts, 11236 in all, are:
-= -- 576
-> -- 1360
+            671 strings with 16274 characters,
+and the built_in function-call counts, 11631 in all, are:
+= -- 609
+> -- 1379
 < -- 0
-+ -- 466
-- -- 436
-* -- 1224
-:= -- 2157
-add.period$ -- 96
-call.type$ -- 30
-change.case$ -- 26
++ -- 473
+- -- 441
+* -- 1253
+:= -- 2223
+add.period$ -- 102
+call.type$ -- 32
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 31
-duplicate$ -- 259
-empty$ -- 649
-format.name$ -- 436
-if$ -- 2157
+cite$ -- 34
+duplicate$ -- 276
+empty$ -- 687
+format.name$ -- 441
+if$ -- 2243
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 26
-newline$ -- 159
-num.names$ -- 30
-pop$ -- 36
+int.to.str$ -- 32
+missing$ -- 28
+newline$ -- 169
+num.names$ -- 32
+pop$ -- 40
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 98
+skip$ -- 106
 stack$ -- 0
-substring$ -- 492
-swap$ -- 33
+substring$ -- 513
+swap$ -- 34
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 56
-width$ -- 32
-write$ -- 339
+warning$ -- 2
+while$ -- 59
+width$ -- 34
+write$ -- 360
 (There were 2 warnings)
