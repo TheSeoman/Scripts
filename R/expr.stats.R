@@ -15,7 +15,7 @@ load(PATHS$HERV.EXPR.OVERLAP.DATA)
 load(PATHS$METH.DATA)
 load(PATHS$METH.RANGES.DATA)
 load(PATHS$METH.RESIDUALS.DATA)
-load(PATHS$HERV.EXPR.OVERLAP.DATA)
+load(PATHS$HERV.METH.OVERLAP.DATA)
 
 plot.cov <- function(data, type, title) {
   mean <- apply(data, 1, mean, na.rm = T)
@@ -49,16 +49,17 @@ plot.bin.hist <- function(bin.df, bar.width, xlab, title){
   return(hist)
 }
 
-count.bins <- function(data, breaks) {
+count.bins <- function(data, breaks, margin = 1) {
   i <- 1
-  col.bins <- apply(data, 2, function(x) {
+  col.bins <- apply(data, margin, function(x) {
     cat(paste0('Processing sample: ', i), fill = T)
     i <<- i + 1
     bins <- table(cut(x, breaks))
     return(bins)
   })
   bins <- rowSums(col.bins)
-  return(bins)
+  bin.df <- data.frame(bin = breaks[-1], count = bins)
+  return(bin.df)
 }
 
 expr.data <- f4.norm[names(expr.ranges), ]
@@ -70,9 +71,16 @@ pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_hist_cov.pdf'), width = 6.3, height 
 grid.arrange(expr.hist, expr.cov.scatter, ncol = 2)
 dev.off()
 
-expr.res.hist <- plot.hist(expr.residuals, )
+#min(expr.residuals) == -6.736901, max(expr.residuals) == 7.072154
+expr.res.hist <- plot.hist(expr.residuals, 'Expression residual', 'A', seq(-7.2, 7.2, by = 0.1))
 
 hervS2.expr.data <- expr.data[names(hervS2.expr.overlap$expr.ranges),]
+hervS2.expr.hist <- plot.hist(hervS2.expr.data, 'Expression', 'A', seq(5, 15.5, by = 0.1))
+hervS2.expr.cov.scatter <- plot.cov(hervS2.expr.data, 'expression', 'B')
+pdf(file = paste0(PATHS$PLOT.DIR, 'hervS2_expr_raw_hist_cov.pdf'), width = 6.3, height = 3)
+grid.arrange(hervS2.expr.hist, hervS2.expr.cov.scatter, ncol = 2)
+dev.off()
+
 
 pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_res.pdf'), width = 6.3, height = 3)
 grid.arrange(expr.hist, expr.res.hist, ncol = 2)
@@ -80,13 +88,19 @@ dev.off()
 
 meth.data <- beta[names(meth.ranges),]
 
-meth.bins <- count.bins(meth.dat, c(-Inf, seq(0.01, 1, by = 0.01)))
-save(meth.bins, file = paste0(PATHS$DATA.DIR, 'Methylation/raw.meth.bins.RData'))
-
-meth.bin.df <- data.frame(bin = seq(0.005, 1, by = 0.01), count = meth.bins)
+meth.bins.df <- count.bins(meth.data, c(-Inf, seq(0.01, 1, by = 0.01)))
+save(meth.bins.df, file = paste0(PATHS$DATA.DIR, 'Methylation/raw.meth.bins.RData'))
 
 meth.hist <- plot.bin.hist(meth.bin.df, 0.01, 'Methylation beta', 'A')
 meth.var.scatter <- plot.var(meth.data, 'methylation beta', 'B')
+
+meth.res.bin.df <- count.bins(meth.residuals, seq(-1.25, 1.25, by = 0.025))
+save(meth.res.bin.df, file = paste0(PATHS$DATA.DIR, 'Methylation/meth.res.bins.RData'))
+meth.res.hist <- plot.bin.hist(meth.res.bin.df, 0.025, 'Methylation residual', 'B')
+
+pdf(file = paste0(PATHS$PLOT.DIR, 'expr_meth_res_hist.pdf'), width = 6.3, height = 3)
+grid.arrange(expr.res.hist, meth.res.hist, ncol = 2)
+dev.off()
 
 na.row.count <- apply(meth.data, 1, function(row) {return(sum(is.na(row)))})
 
@@ -95,3 +109,10 @@ png(file = paste0(PATHS$PLOT.DIR, 'meth_raw_hist_var.png'), width = 6.3/0.0138, 
 grid.arrange(meth.hist, meth.var.scatter, ncol = 2)
 dev.off()
 
+hervS2.meth.data <- meth.data[names(hervS2.meth.overlap$meth.ranges),]
+hervS2.meth.bin.df <- count.bins(hervS2.meth.data, c(-Inf, seq(0, 1, by = 0.01)), 2)
+hervS2.meth.hist <- plot.bin.hist(hervS2.meth.bin.df, 0.01, 'Methylation beta','A')
+hervS2.meth.var.scatter <- plot.var(hervS2.meth.data, 'methylation beta', 'B')
+pdf(file = paste0(PATHS$PLOT.DIR, 'hervS2_meth_raw_hist_var.pdf'), width = 6.3, height = 3) 
+grid.arrange(hervS2.meth.hist, hervS2.meth.var.scatter, ncol = 2)
+dev.off()

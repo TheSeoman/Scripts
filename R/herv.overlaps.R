@@ -229,8 +229,8 @@ for (set in c('S1', 'S2', 'S3')) {
 write.table(expr.overlap.overview, file = paste0(PATHS$TABLE.DIR, 'expr.overlap.overview.tsv'), 
             quote = F, sep = '\t', row.names = F, col.names = T)
 
-hervS2.2kb.expr.enrichment.signigicant <- hervS2.2kb.expr.enrichment[1:6, c(2, 8, 3, 9)]
-colnames(hervS2.2kb.expr.enrichment.signigicant) <- c('Term ID', 'Term', 'p', 'fdr')
+hervS2.2kb.expr.enrichment.significant <- hervS2.2kb.expr.enrichment[1:6, c(2, 8, 3, 9)]
+colnames(hervS2.2kb.expr.enrichment.significant) <- c('Term ID', 'Term', 'p', 'fdr')
 write.table(hervS2.2kb.expr.enrichment.signigicant, file = paste0(PATHS$TABLE.DIR, 'hervS2.2kb.expr.enrichment.tsv'), 
               quote = F, sep = '\t', row.names = F, col.names = T)
 
