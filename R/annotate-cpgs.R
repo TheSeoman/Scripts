@@ -49,8 +49,8 @@ library(data.table)
 library(GenomicRanges)
 
 
-tfbs = import(paste0(PATHS$TFBS.DIR, "/tfbs/filPeaks_public.bed"))
-tfbs = import(paste0(PATHS$DATA.DIR, "/tfbs/ReMap2_public_nrPeaks_hg19.bed"))
+tfbs = import(paste0(PATHS$TFBS.DIR, "tfbs/filPeaks_public.bed"))
+tfbs = import(paste0(PATHS$DATA.DIR, "tfbs/ReMap2_public_nrPeaks_hg19.bed"))
 ann = t(matrix(unlist(strsplit(values(tfbs)[,"name"], ".", fixed=T)), nrow=3))
 colnames(ann) = c("geo_id", "TF", "condition")
 values(tfbs) = DataFrame(name=values(tfbs)[,"name"], data.frame(ann, stringsAsFactors=F))
@@ -73,7 +73,6 @@ selected = tfbs[values(tfbs)[,"condition"] %in% conditions[conditions[,"blood.re
 
 
 ## load the encode tfs separately
-encode <- import(paste0(PATHS$DATA.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"))
 encode = as.data.frame(fread(paste0(PATHS$DATA.DIR, "tfbs/wgEncodeRegTfbsClusteredWithCellsV3.bed"), header=F))
 encode = GRanges(seqnames=encode[,1], ranges=IRanges(encode[,2] + 1, encode[,3]), name=paste("ENCODE", encode[,4], tolower(encode[,6]), sep="."), geo_id="ENCODE", TF=encode[,4], condition=tolower(encode[,6]))
 
@@ -87,7 +86,7 @@ values(encode.k562)[,"condition"] = "k562"
 encode.selected2 = encode[grep("k562|gm", values(encode)[,"condition"])]
 encode.selected <- c(encode.lcl, encode.k562)
 
-selected = c(selected, encode.lcl, encode.k562)
+blood.tfbs.ranges = c(selected, encode.lcl, encode.k562)
 
 
 chip = paste(values(selected)[,"TF"], values(selected)[,"condition"], sep=".")

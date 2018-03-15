@@ -8,6 +8,7 @@ load(PATHS$EQTM.ME.DATA)
 load(PATHS$EXPR.GENE.ANNOT.DATA)
 load(PATHS$EXPR.RANGES.DATA)
 load(PATHS$METH.RANGES.DATA)
+load(PATHS$HERV.EQTM.OVERLAP.DATA)
 
 cis.pos.pairs <- eqtm.me$cis$ntest
 trans.pos.pairs <- eqtm.me$trans$ntests
@@ -30,3 +31,16 @@ trans.pairs$gene <- as.character(trans.pairs$gene)
 trans.snps <- unique(as.character(trans.pairs$snps))
 trans.probes <- unique(as.character(trans.pairs$gene))
 trans.genes <- unique(na.omit(probe2gene[trans.probes]))
+
+hervS2.cis.either.pairs <- hervS2.eqtm.overlap$cis.either
+hervS2.cis.either.cpgs <- as.character(unique(hervS2.cis.either.pairs$snps))
+hervS2.cis.either.probes <- as.character(unique(hervS2.cis.either.pairs$gene))
+hervS2.cis.either.genes <- unique(na.omit(probe2gene[hervS2.cis.either.probes]))
+
+
+hervS2.trans.either.pairs <- hervS2.eqtm.overlap$trans.either
+hervS2.trans.either.cpgs <- as.character(unique(hervS2.trans.either.pairs$snps))
+hervS2.trans.either.probes <- as.character(unique(hervS2.trans.either.pairs$gene))
+hervS2.trans.either.genes <- unique(na.omit(probe2gene[hervS2.trans.either.probes]))
+
+hervS2.either.genes <- unique(c(hervS2.cis.either.genes, hervS2.trans.either.genes))

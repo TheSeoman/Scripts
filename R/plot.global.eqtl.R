@@ -7,6 +7,8 @@ load(PATHS$SNP.RANGES.DATA)
 load(PATHS$EQTM.ME.DATA)
 load(PATHS$METH.RANGES.DATA)
 
+load(PATHS$MEQTL.PAIRS.DATA)
+
 load(PATHS$HERV.EQTL.OVERLAP.DATA)
 load(PATHS$HERV.EQTM.OVERLAP.DATA)
 
@@ -17,6 +19,8 @@ load(PATHS$HERV.METH.OVERLAP.DATA)
 library(ggplot2)
 library(BSgenome.Hsapiens.UCSC.hg19)
 library(reshape2)
+library(GenomicRanges)
+require(gridExtra)
 
 get.chr.bin.ranges <- function(bin.size) {
   chrlen <- seqlengths(Hsapiens)
@@ -190,6 +194,40 @@ pdf(file=paste0(PATHS$PLOT.DIR, 'eqtm_all_herv_heatmap.pdf'), width = 7, height 
 grid.arrange(all.eqtm.heat, hervS2.eqtm.heat, ncol=2, widths=c(6, 8))
 dev.off()
 
+meqtl.snp.ids <- as.character(meqtl.pairs$snp)
+meqtl.meth.ids <- as.character(meqtl.pairs$cpg)
+meqtl.pairs <- cbind.data.frame(meqtl.snp.ids, meqtl.meth.ids, stringsAsFactors = F)
+meqtl.pairs <- meqtl.pairs[meqtl.pairs[, 1] %in% names(snp.ranges) & meqtl.pairs[, 2] %in% names(meth.ranges), ]
+meqtl.bins <- get.pair.bins(bin.ranges, meqtl.pairs, snp.ranges, meth.ranges)
 
+meqtl.potential.bins <- get.potential.pair.bins(snp.bins, meth.bins)
+norm.meqtl.bins <- meqtl.bins
+norm.meqtl.bins$Freq <- log10(meqtl.bins$Freq/meqtl.potential.bins$Freq)
+norm.meqtl.bins$Freq[!is.finite(norm.meqtl.bins$Freq)] <- NA
 
+hervS2.meqtl.either.pairs <- hervS2.meqtl.overlap$either[, 2:1]
+hervS2.meqtl.either.pairs$snp <- as.character(hervS2.meqtl.either.pairs$snp)
+hervS2.meqtl.either.pairs$cpg <- as.character(hervS2.meqtl.either.pairs$cpg)
+hervS2.meqtl.either.pairs <- hervS2.meqtl.either.pairs[hervS2.meqtl.either.pairs[, 1] %in% names(snp.ranges) & hervS2.meqtl.either.pairs[, 2] %in% names(meth.ranges), ]
+
+hervS2.meqtl.either.bins <- get.pair.bins(bin.ranges, hervS2.meqtl.either.pairs, snp.ranges, meth.ranges)
+
+hervS2.snp.bins <- get.single.bins(bin.ranges, hervS2.snp.overlap$snp.ranges)
+hervS2.meth.bins <- get.single.bins(bin.ranges, hervS2.meth.overlap$meth.ranges)
+
+hervS2.meqtl.potential.bins <- get.potential.pair.bins(snp.bins, meth.bins, hervS2.snp.bins, hervS2.meth.bins)
+
+norm.hervS2.meqtl.either.bins <- hervS2.meqtl.either.bins
+norm.hervS2.meqtl.either.bins$Freq <- log10(hervS2.meqtl.either.bins$Freq/hervS2.meqtl.potential.bins$Freq)
+norm.hervS2.meqtl.either.bins$Freq[!is.finite(norm.hervS2.meqtl.either.bins$Freq)] <- NA
+
+meqtl.limits <- c(min(c(na.omit(norm.meqtl.bins$Freq), na.omit(norm.hervS2.meqtl.either.bins$Freq))), max(c(na.omit(norm.meqtl.bins$Freq), na.omit(norm.hervS2.meqtl.either.bins$Freq))))
+all.meqtl.heat <- plot.pair.bins(norm.meqtl.bins, bin.breaks, meqtl.limits, 'Genotype', 'Methylation', 'A', F)
+hervS2.meqtl.heat <- plot.pair.bins(norm.hervS2.meqtl.either.bins, bin.breaks, meqtl.limits, 'Genotype', 'Methylation', 'B', T)
+
+pdf(file=paste0(PATHS$PLOT.DIR, 'meqtl_all_herv_heatmap.pdf'), width = 7, height = 3.3)
+grid.arrange(all.meqtl.heat, hervS2.meqtl.heat, ncol=2, widths=c(6, 8))
+dev.off()
+
+save(norm.meqtl.bins, norm.hervS2.meqtl.either.bins, file = paste0(PATHS$DATA.DIR, 'meQTL/global.plot.RData'))
 

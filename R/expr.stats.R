@@ -17,12 +17,15 @@ load(PATHS$METH.RANGES.DATA)
 load(PATHS$METH.RESIDUALS.DATA)
 load(PATHS$HERV.METH.OVERLAP.DATA)
 
+load(PATHS$HERV.SNP.OVERLAP.DATA)
+
+
 plot.cov <- function(data, type, title) {
   mean <- apply(data, 1, mean, na.rm = T)
   sd <- apply(data, 1, sd, na.rm = T)
   df <- data.frame(mean = mean, coef.var = sd/mean * 100)
   g <- ggplot(df, aes(mean, coef.var)) + geom_point() + theme(text = element_text(size=10)) +
-        labs(title=title, x = paste0('Mean ', type), y = 'Coefficient of variation')
+    labs(title=title, x = paste0('Mean ', type), y = 'Coefficient of variation')
   return(g)
 }
 
@@ -39,7 +42,7 @@ plot.var <- function(data, type, title) {
 plot.hist <- function(data, xlab, title, breaks) {
   data.flat <- melt(data)
   hist <- ggplot(data.flat, aes(value)) + geom_histogram(breaks = breaks) + 
-          theme(text = element_text(size=10)) + labs(title=title, x = xlab, y = 'Count')
+    theme(text = element_text(size=10)) + labs(title=title, x = xlab, y = 'Count')
   return(hist)
 }
 
@@ -86,8 +89,6 @@ pdf(file = paste0(PATHS$PLOT.DIR, 'expr_raw_res.pdf'), width = 6.3, height = 3)
 grid.arrange(expr.hist, expr.res.hist, ncol = 2)
 dev.off()
 
-meth.data <- beta[names(meth.ranges),]
-
 meth.bins.df <- count.bins(meth.data, c(-Inf, seq(0.01, 1, by = 0.01)))
 save(meth.bins.df, file = paste0(PATHS$DATA.DIR, 'Methylation/raw.meth.bins.RData'))
 
@@ -102,8 +103,6 @@ pdf(file = paste0(PATHS$PLOT.DIR, 'expr_meth_res_hist.pdf'), width = 6.3, height
 grid.arrange(expr.res.hist, meth.res.hist, ncol = 2)
 dev.off()
 
-na.row.count <- apply(meth.data, 1, function(row) {return(sum(is.na(row)))})
-
 pdf(file = paste0(PATHS$PLOT.DIR, 'meth_raw_hist_var.pdf'), width = 6.3, height = 3)
 png(file = paste0(PATHS$PLOT.DIR, 'meth_raw_hist_var.png'), width = 6.3/0.0138, height = 3/0.0138)
 grid.arrange(meth.hist, meth.var.scatter, ncol = 2)
@@ -115,4 +114,30 @@ hervS2.meth.hist <- plot.bin.hist(hervS2.meth.bin.df, 0.01, 'Methylation beta','
 hervS2.meth.var.scatter <- plot.var(hervS2.meth.data, 'methylation beta', 'B')
 pdf(file = paste0(PATHS$PLOT.DIR, 'hervS2_meth_raw_hist_var.pdf'), width = 6.3, height = 3) 
 grid.arrange(hervS2.meth.hist, hervS2.meth.var.scatter, ncol = 2)
+dev.off()
+
+na.row.count <-
+meth.probe.na.prop <- data.frame(value =  apply(meth.data, 1, function(row) {return(sum(is.na(row)))})/dim(meth.data)[2])
+meth.sample.na.prop <-  data.frame(value =  apply(meth.data, 2, function(col) {return(sum(is.na(col)))})/dim(meth.data)[1])
+meth.probe.na.hist <-  ggplot(meth.probe.na.prop, aes(value)) + geom_histogram(breaks = seq(0, 1, by = 0.01)) + 
+  theme(text = element_text(size=10)) + labs(title='A', x = 'Proportion of NAs', y = 'Count') + scale_y_log10()
+meth.sample.na.hist <-  ggplot(meth.sample.na.prop, aes(value)) + geom_histogram(breaks = seq(0, 0.06, by = 0.0006)) + 
+  theme(text = element_text(size=10)) + labs(title='B', x = 'Proportion of NAs', y = 'Count')
+
+pdf(file = paste0(PATHS$PLOT.DIR, 'meth_na_hist.pdf'), width = 6.3, height = 3)
+grid.arrange(meth.probe.na.hist, meth.sample.na.hist, ncol = 2)
+dev.off()
+
+hervS2.snp.count <- data.frame(table(hervS2.snp.overlap$pairs$herv.id))
+hervS2.snp.hist <-  ggplot(hervS2.snp.count, aes(Freq)) + geom_histogram(breaks = seq(0, 20, by = 1)) + 
+  theme(text = element_text(size=10)) + labs(title='A', x = 'SNPs per HERV', y = 'Count')
+#2423 HERVs with >40 SNPs not in plot
+hervS2.snp.count$width <- width(hervS2.ranges[hervS2.snp.count$Var1])
+hervS2.snp.count$density <- hervS2.snp.count$Freq/hervS2.snp.count$width
+
+hervS2.snp.density.hist <- ggplot(hervS2.snp.count, aes(density)) + geom_histogram(breaks = seq(0, 0.05, by = 0.001)) + 
+  theme(text = element_text(size=10)) + labs(title='B', x = 'SNPs per bp per HERV', y = 'Count')
+
+pdf(file = paste0(PATHS$PLOT.DIR, 'hervS2_snp_hist.pdf'), width = 6.3, height = 3)
+grid.arrange(hervS2.snp.hist, hervS2.snp.density.hist, ncol = 2)
 dev.off()
