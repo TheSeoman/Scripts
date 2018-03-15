@@ -3,46 +3,47 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
+Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
-You've used 21 entries,
+You've used 32 entries,
             1791 wiz_defined-function locations,
-            594 strings with 8850 characters,
-and the built_in function-call counts, 5295 in all, are:
-= -- 374
-> -- 407
+            671 strings with 16274 characters,
+and the built_in function-call counts, 11631 in all, are:
+= -- 609
+> -- 1379
 < -- 0
-+ -- 144
-- -- 123
-* -- 469
-:= -- 937
-add.period$ -- 65
-call.type$ -- 21
-change.case$ -- 17
++ -- 473
+- -- 441
+* -- 1253
+:= -- 2223
+add.period$ -- 102
+call.type$ -- 32
+change.case$ -- 28
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 178
-empty$ -- 437
-format.name$ -- 123
-if$ -- 1103
+cite$ -- 34
+duplicate$ -- 276
+empty$ -- 687
+format.name$ -- 441
+if$ -- 2243
 int.to.chr$ -- 0
-int.to.str$ -- 21
-missing$ -- 17
-newline$ -- 110
-num.names$ -- 21
-pop$ -- 31
+int.to.str$ -- 32
+missing$ -- 28
+newline$ -- 169
+num.names$ -- 32
+pop$ -- 40
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 68
+skip$ -- 106
 stack$ -- 0
-substring$ -- 291
-swap$ -- 24
+substring$ -- 513
+swap$ -- 34
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 1
-while$ -- 35
-width$ -- 23
-write$ -- 232
-(There was 1 warning)
+warning$ -- 2
+while$ -- 59
+width$ -- 34
+write$ -- 360
+(There were 2 warnings)
