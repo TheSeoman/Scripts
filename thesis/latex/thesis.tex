@@ -21,6 +21,16 @@
 \usepackage{textcomp}
 \usepackage[hyphens,spaces]{url}
 
+\usepackage[author={Julian Schmidt}]{pdfcomment}
+
+\setcounter{topnumber}{2}
+\setcounter{bottomnumber}{2}
+\setcounter{totalnumber}{4}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.85}
+\renewcommand{\textfraction}{0.15}
+\renewcommand{\floatpagefraction}{0.7}
+
 \begin{document}
 \sloppy
 \chapterfont{\LARGE}
@@ -124,26 +134,32 @@
 \item TF $<->$ cpg interaction
 \end{itemize}
 
+DNA methylation is the best understood and researched epigenetic mark\cite{Smith2013}. The term refers to the addition of a methyl group to the fifth carbon atom of a cytosine ring, thus transforming the cytosine to 5-methylcytosine. In humans this happens almost exclusively in the context of a cytosine neighbored by a guanine - a CpG-site. As the complementary sequence of CG is also CG, methylation usually occurs on both strands. 
+
 
 \section{Human endogenous retroviruses}
 \label{Introduction:Human endogenous retroviruses}
 
-When the draft for the first human genome was published in 2001\cite{Venter1304} there was the expectation, that it would allow to fully understand the human genome. But soon after genes were annotated less than 5\% of the genome was found to be protein coding\cite{Consortium2001} and later on the amount of exonic protein coding DNA was estimated to be as low as 1.2\%\cite{Encode2012}. The remaining majority of genome was often labeled as non-functional "junk DNA"\cite{Pennisi1159}. 
+When the draft for the first human genome was published in 2001\cite{Venter1304} there was the expectation, that it would allow to fully understand the human genome. But soon after genes were annotated less than 5\% of the genome was found to be protein coding\cite{Consortium2001} and later on the amount of exonic protein coding DNA was estimated to be as low as 1.2\%\cite{Encode2012}. The remaining majority of the genome was often labeled as non-functional "junk DNA"\cite{Pennisi1159}. 
 
 Since then this notion has generally been revoked. Especially within the two phases of the Encyclopedia of DNA Elements (ENCODE) project\cite{Encode2012}, participation in some functional role has been assigned to up 80.4\% of the human genome. 
 
-% With the discovery of functional RNAs\cite{x}, ...\cite{x} and the ever growing knowledge about regulatory elements\cite{x} understanding and discovering the function of the DNA that doesn't directly code for proteins has been one of the biggest areas of interest. 
-
 %TODO write fitting segue
-Still up to this day there are areas in the genome that are hard to analyze. Especially repetitive sequences cause huge problems for any method that relies on sequencing\cite{Treangen2011}. In human repetitive DNA makes up about 50\% of the whole Genome\cite{Treangen2011}. There are five major classes of repetitive elements: Satellites, short interspersed nuclear elements (SINE), long interspersed nuclear elements (LINE), DNA transposons and long terminal repeat (LTR) retrotransposons. 
+Still up to this day there are areas in the genome that are difficult to analyze. Especially repetitive sequences cause huge problems for any method that relies on sequencing\cite{Treangen2011}. In human repetitive DNA makes up about 50\% of the whole Genome\cite{Treangen2011}. There are five major classes of repetitive elements: Satellites, short interspersed nuclear elements (SINE), long interspersed nuclear elements (LINE), DNA transposons and long terminal repeat (LTR) retrotransposons. 
 
 %TODO go deeper into retrotransposons
-In this work we focused on a subclass of the latter repeat class. Human endogenous retroviruses (HERVs) belong to the class of LTR retrotransposons and make up about 8\% of the human genome\cite{APM:APM12476}. HERVs originate from retroviruses that infected the germ line of humans or human ancestors up to 30 million years ago\cite{10.1146/annurev.genom.7.080505.115700}. Therefore, they became dormant in the genome and are inherited in a Mendelian fashion. Newly integrated endogenous retroviruses (ERVs) share the typical structure of the viruses they originate from. This means they contain at least the four main genes in the order $5'-gag-pro-pol-env-3'$. Gag encodes the matrix and capsid proteins. Pro codes for a protease. Pol is the reverse transcriptase and integrase and env codes for the surface proteins. Furthermore, they have two flanking LTRs that originate from a duplication of the sequence, where the retrovirus was integrated\cite{10.1146/annurev.genom.7.080505.115700}.   
+In this work we will focus on a subclass of the latter repeat class. Human endogenous retroviruses (HERVs) belong to the class of LTR retrotransposons and make up about 8\% of the human genome\cite{APM:APM12476}. HERVs originate from retroviruses that infected the germ line of humans or human ancestors up to 30 million years ago\cite{10.1146/annurev.genom.7.080505.115700}. Therefore, they became dormant in the genome and are inherited in a Mendelian fashion. Newly integrated endogenous retroviruses (ERVs) share the typical structure of the viruses they originate from. This means they contain at least the four main genes in the order $5'-gag-pro-pol-env-3'$. Gag encodes the matrix and capsid proteins. Pro codes for a protease. Pol is the reverse transcriptase and integrase and env codes for the surface proteins. Furthermore, they have two flanking LTRs that originate from a duplication of the sequence, where the retrovirus was integrated\cite{10.1146/annurev.genom.7.080505.115700}. An example of the structure of a HERV element is shown in figure \ref{fig:herv.structure.example}.
+
+\begin{figure}[tb]
+	\includegraphics[scale = 0.92, keepaspectratio = true]{../figures/herv_structure_example}  
+	\caption{Exemplified structure of an intact HERV element. Based on a HERV-K provirus, which is considered the most recently introduced in humans and contains contains the most complete viral genes. Taken from Young et. al. \cite{BIES:BIES201300049}}
+    \label{fig:herv.structure.example}
+\end{figure}
 
 However, endogenous retroviruses in human are generally not able to replicate. This is due to a high level of degeneration of the HERV gene sequences due to mutations and deletion introducing frame shifts and premature stop codons. Homologous recombination of the flanking LTRs can also lead to elements containing only a single LTR and losing the entire coding body\cite{10.1146/annurev.genom.7.080505.115700}. Additionally, the promoter activity of LTRs is commonly silenced by hypermethylation\cite{Smith2013}.
 
-Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Furthermore, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}.
-%TODO add placenta fusion effect of HERVs
+Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Finally, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}.
+%TODO add placenta fusion effect of HERVs, exchange finally again
 
 
 
@@ -159,13 +175,14 @@ Regardless of their loss of capability to replicate there still are multiple way
 
 \newpage
 \chapter{Data}
-
+\label{Data}
 
 \section{HERV annotation}
 \label{Data:HERV annotation}
-HERV annotation was pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
+As mentioned in section \ref{Introduction:Human endogenous retroviruses} HERV elements tend to be highly degenerated. Therefore, it is no trivial task to pertain a complete HERV annotation for the human genome. Furthermore, classification and naming of endogenous retroviruses is not performed in an unified manner but rather dependent on how and by whom a given element was identified. 
+Instead of collecting a library of known HERV sequences and performing sequence search ourselves, HERV annotations were pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
 
-The track representing all identified elements from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. These are repeat name, the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurrence. Furthermore it contains the area of the known repeat sequence, that is covered by the occurrence. It also contains the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally, there is an indexing field used to speed up chromosome range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
+The track representing all identified repeats from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. These are repeat name, the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurrence. Furthermore it contains the area of the known repeat sequence, that is covered by the occurrence. It also contains the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally, there is an indexing field used to speed up chromosome range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
 
 \begin{table}[b]
 \centering
@@ -190,30 +207,29 @@ To extract HERV elements the annotation was filtered on different columns genera
 This work only discerned between different HERV element types by defining different HERV sets. Therefore, within each set annotations, whose genomic positions overlap or are directly adjacent, were merged into one element.
 
 A first set, HERV set 1 (HERV S1) was constructed by extracting all elements that contained "ERV" in the repeat name column. This set
-The resulting 42508 annotations condensed to 35358 elements after merging. The elements have a mean width of 956 bp and cover a total of 33.8 Mbp, which is about 1.04\% of the human genome. The distribution of element lengths in HERV S1 is shown in Figure \ref{fig:hervS1.lengths.hist}  
+The resulting 42508 annotations condensed to 35358 elements after merging. The elements have a mean width of 956 bp and cover a total of 33.8 Mbp, which is about 1.04\% of the human genome.  
 
-Alternatively, filtering the annotation for "ERV" in the super family column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. Therefore, it is the most comprehensive set and it is the focus of detailed results that are shown and discussed. After merging overlapping and adjacent annotations this led to 612594 elements. Their mean width is 430 bp and they make up to 263.4 Mbp or ca 8.13\% of the human genome. 
+Alternatively, filtering the annotation for "ERV" in the super family column leads to 696689 annotations. HERV set 2 (HERV S2) contains all endogenous retroviral sequences found in the human genome. Therefore, it is the most comprehensive set and it is the focus of detailed results that are shown and discussed. After merging overlapping and adjacent annotations this led to 612594 elements. Their mean width is 430 bp and they make up to 263.4 Mbp or ca 8.13\% of the human genome. The distribution of element lengths in HERV S2 is shown in Figure \ref{fig:hervS2.lengths.hist} 
 
 A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name column for "HERV", which resulted in 21361 annotations. As this set contains only elements that are explicitly named "HERV", we expect it to contain elements, that were inserted directly into the human genome. Merging overlapping and adjacent annotations resulted in 15284 elements with an average width of 1480 bp and a combined length of 22.6 Mbp.
 
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS1_lengths_hist}  
-	\caption{Length distribution of elements in HERV S2"}
-    \label{fig:hervS1.lengths.hist}
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_length_hist}  
+	\caption{Length distribution of elements in HERV S2}
+    \label{fig:hervS2.length.hist}
 \end{figure}
 
 
 \section{KORA}
 \label{Data:KORA}
-The functional data for our analysis of gene regulatory mechanisms are made up up expression, methylation and genotype data. These were collected in the light of the platform for Cooperative Health Research in the Region of Augsburg, short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
+The functional data for our analysis of gene regulatory mechanisms are made up expression, methylation and genotype data. These were collected in the light of the platform for Cooperative Health Research in the Region of Augsburg, short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
 The objective of KORA is to track changes in health conditions over a long period in order to identify and examine the causes, effects and development of chronical diseases.
 
 The data used in this work originates from the KORA F4 Survey, which was conducted from 2006 to 2008 and comprised samples of 3080 individuals. Of these data was available for 3020 individuals. F4 is a follow up study to the KORA S4 Survey performed from 1999 to 2001. It contains 4261 individuals. 
 
 All measurements were performed on whole blood samples. Houseman blood counts\cite{10.3389/fgene.2016.00023} describing the composition of different cell types for each individual had previously been calculated from the methylation data. They were used to weight certain cell type specific data. 
 
-Not all essays are available for all samples. Therefore different analyses were performed on varying sets of individuals according to availability of the required data types. A diagram of the samples available for each essay can be seen in figure \ref{fig:samples.venn}. 
-
+Not all essays are available for all samples. Therefore different analyses were performed on varying sets of individuals according to availability of the required data types. A diagram of the samples available for each essay can be seen in figure \ref{fig:samples.venn}. The joint analysis, using Gaussian Graphical Models, was performed on 687 individuals that had all three essays available. 
 \begin{figure}[tb]
 \begin{center}
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/samples_venn}  
@@ -226,10 +242,11 @@ Not all essays are available for all samples. Therefore different analyses were 
 \label{Data:Expression}
 The expression data was generated using the HumanHT-12 v3.0 Gene Expression BeadChip. The chip can measure expression values for 49576 probes. However, only 47864 probes represent an actual genomic location. The remaining probes are control probes used to assess the quality of the measurements and infer the background for measurements. 
 
-Measurements for 993 individuals are available from the KORA F4 survey. The comprise values for a total of 48803 probes per sample. Probes that do not map to a genomic location were excluded in all analyses, leaving 47864 probes. Of these 29521 are annotated to a total of 19288 genes. 
+Measurements for 993 individuals are available from the KORA F4 Survey. The< comprise values for a total of 48803 probes per sample. Probes that do not map to a genomic location were excluded in all analyses, leaving 47864 probes. Of these 29521 are annotated to a total of 19288 genes. 
 
 The available data had already been quantile normalized, corrected for the background and log-transformed. 
 
+%TODO generate example botplots for max/min cov probes, what up with long tail?
 Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of variation over all probes and samples. Apart from a tail of some probes with very high expression values figure \ref{fig:expr.raw.hist.cov}A roughly resembles a standard distribution. 
 
 \begin{figure}[tb]
@@ -239,16 +256,23 @@ Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of var
 \end{figure}
 
 
-Probes that could not be mapped to genes were not discarded to avoid losing data for HERV regions, which are only sparsely annotated with genes and were the focus of this work and. Therefore, most analyses were performed on probe level or a mix of probes and genes.
+Probes that could not be mapped to genes were not discarded to avoid losing data for HERV regions, which are only sparsely annotated with genes and were the focus of this work. Therefore, most analyses were performed on probe level or a mix of probes and genes. Whenever there were multiple probes mapping to the same gene, the mean of the expression values of these probes was taken as estimation of expression level for the gene. 
 
 
 \subsection{Methylation}
 \label{Data:Methylation}
 DNA methylation was measured using the Infinium HumanMethylation450K BeadChip, which interrogates methylation levels at 485577 genomic locations. Methylation intensities had already been corrected and transformed to beta values. Beta values have a range from 0 to 1 and represent the fraction of copies of a CpG site that are methylated in a sample.
 
-No imputation of missing measurements was performed for the methylation data. Therefore, only 44335 probes have measurements in all samples available. Overall there are about 11.2 million missing values, which makes up 1.3\% of all measurements and on average 23 samples missing per probe. 
+No imputation of missing measurements was performed for the methylation data. Therefore, only 44335 probes have no missing values at all and measurements in all samples available. Overall there are about 11.2 million missing values, which makes up 1.3\% of all measurements and on average 23 samples missing per probe. The histogram of proportion of missing values per probe (A) and sample (B) can be seen in figure \ref{fig:meth.na.hist}.
 
-Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes. The distribution of beta values and the variances over all samples and probes is shown in figure \ref{fig:meth.raw.hist.var}. As seen in figure \ref{fig:meth.raw.hist.var}A, the interrogated CpG sites tend to be either entirely methylated or unmetylated within single samples. However, as B shows there is some variance between individuals in most CpG-sites. The low variance for very low and very high betas is explained by the fact that for a CpG site to have a mean close to 0 all samples have to have a value close to 0. Therefore, the variance also is very low.
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/meth_na_hist}  
+	\caption{Histograms of proportions of missing values per CpG-site (A) and sample (B).}
+    \label{fig:meth.na.hist}
+\end{figure}
+
+%TODO find source for methylation pattern stability
+Methylation data was available for 1727 individuals and 485512 sites, which make up all 'cg' and 'ch' probe type probes. The distribution of beta values and the variances over all samples and probes is shown in figure \ref{fig:meth.raw.hist.var}. As seen in figure \ref{fig:meth.raw.hist.var}A, the interrogated CpG sites tend to be either entirely methylated or unmethylated within single samples. This means that all cells in a sample have the same, stable methylation pattern, which is expected as methylation is known to be stable within a certain condition\cite{}. However, as subfigure B shows there is some variance between individuals in most CpG-sites. The low variance for very low and very high betas is explained by the fact that for a CpG site to have a mean close to 0 all samples have to have a value close to 0. Therefore, the variance also is very low.
 
  
 \begin{figure}[tb]
@@ -265,18 +289,18 @@ Genotyping was performed with the Affymetrix Axiom array. On the data set used i
 %TODO rewrite
 Additionally SNPs with a minor allele frequency of less than one percent had been removed, which allows used association analyses to be have more powerful test statistics.
 
-In total measurements of 9533127 SNPs for 2940 individuals were available in the form of continuous values from 0 to 2 with 0 representing no occurrence of the SNP and 2 meaning the SNP is present in both chromosomes. Non integer values mean that different genotypes were measured in different cells in the sample and the resulting value describes the fraction of the occurrence of the variant. 
+In total measurements of 9533127 SNPs for 2940 individuals were available in the form of continuous dosages from 0 to 2 with 0 representing no occurrence of the SNP and 2 meaning the SNP is present in both chromosomes. Non integer values mean that different genotypes were measured in different cells in the sample and the resulting value describes the fraction of the occurrence of the variant. 
 
 \subsection{Covariates}
 \label{Data:Covariates}
-Several covariates were known for each sample. They were used to correct expression and methylation values for common effects. 
+Several covariates were known for each sample. They were used to correct expression and methylation values for shared effects. 
 
 %TODO which sex is which?
 The sex of all participants was known. Of the 3020 participants with any available data 1458 were SEX1 and the remaining 1562 were SEX2. The 697 individuals that had all three essays available contained 348 men/women and 339 women/men.
 Further covariates specific to participating individuals are sex, age, body mass index (BMI) and white blood cell count. An overview of these covariate values for all 3020 individuals and the individuals with all three essays available is shown in table \ref{tab:covariate.overview}.
 
 
-%TODO fix tables, add caption
+%TODO fix tables, add caption, maybe add RIN to table
 \begin{table}[h!]
   	\begin{minipage}{.45\textwidth}
     \pgfplotstabletypeset[
@@ -301,16 +325,20 @@ Further covariates specific to participating individuals are sex, age, body mass
 	\label{tab:covariate.overview}
 \end{table}
 
-Finally, two experimental factors for the expression measurements, storage time and RNA integrity number (RIN) and plate, were known.
+Finally, three experimental factors for the expression measurements, storage time, RNA integrity number (RIN), a measure that describes the degree of degradation of RNA molecules\cite{Schroeder2006}, and plate, were known.
 
 \subsection{Methylation quantitative trait loci}
-\subsection{Data:meQTL}
+\label{Data:meQTL}
+%TODO find source paper
 Genotypic variants are known to effect methylation patterns in humans \cite{}. Therefore, we used previously processed methylation quantitative trait loci (meQTL) data to explore the mechanism of trans acting SNP-CpG associations. Associated pairs were used as a seed for trans-acting interaction networks.
 
 For meQTLs a stringent definition of trans effects was used: A SNP-CpG pair was called a trans-meQTL only if they are located on different chromosomes. This definition differs from the one used for eQTM and eQTL calculation as described later. 
 
+%TODO generate some kind of figure for meQTL numbers
 The data set contained a total of 11165559 significantly associated SNP-CpG pairs. 
-70709 distinct CpG-sites and 2709428 SNPs were part of at least one meQTL. Of these 467915 pairs consisting of 3592 CpG-sites and 200761 SNPs were between different chromosomes. 
+70709 distinct CpG-sites and 2709428 SNPs were part of at least one meQTL. On average each SNP was associated with 4.12 CpGs and each CpG was part of on average 157.91 meQTLs.
+
+Of these 467915 pairs consisting of 3592 CpG-sites and 200761 SNPs were between different chromosomes. 
 
 
 \section{Transcription factor binding}
@@ -321,18 +349,17 @@ The first source was the third version of the track "Transcription Factor ChIP-s
 
 It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{10.1101/gr.139105.112}. The pipeline uses the tools MEME-ChIP\cite{10.1093/bioinformatics/btr189} and FIMO\cite{10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifs with known motifs from Jaspar\cite{10.1093/nar/gkx1126} and TransFac\cite{10.1093/nar/gkj143} using machine learning methods and manual curation. 
 
-The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2173371 peaks for 125 transcription factors.  
+The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2475316 peaks for 125 transcription factors.  
 
-The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{} to map reads to the human genome and the tool MACS\cite{} for peak calling. The final data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{10.1038/nmeth.1923} to map reads to the human genome and the tool MACS\cite{10.1186/gb-2008-9-9-r137} for peak calling. The final data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
 
-There were a total of xxxxxx peaks for xxx transcription factors in the data set. After filtering for 19 blood related cell types xxxx peaks and xxx different transcription factors remained.  
-%TODO fill in numbers when storage available 
+There were a total of 8905156 peaks for 131 transcription factors in the data set. After filtering for 19 blood related cell types 1372245 peaks for 35 different transcription factors remained.  
 
 Combining both filtered data sets lead to a total of 3847561 peaks of 145 different transcription factors.
 
 
 \section{Chromatin states}
-\section{Data:Chromatin states}
+\label{Data:Chromatin states}
 %TODO rewrite somewhat - but not used right now
 Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model (\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}). The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
 
@@ -358,7 +385,7 @@ The search for overlapping features was also performed on "GRanges" objects incl
 
 \section{Data normalization}
 \label{Methods:Data normalization}
-Before expression and methylation values were used for analyses, they were corrected for batch effects. For this we used the available covariates to calculate a linear models and regress out the respective residuals. The model used for expression values is shown in equation \ref{eq:expr.res.model} and considers the covariates age, sex, RNA integrity number (RIN), plate and storage time. The model for methylation values, shown in equation \ref{eq:meth.res.model},
+Before expression and methylation values were used for analyses, they were corrected for batch effects. For this we used the available covariates to calculate linear models and regress out the respective residuals. The model used for expression values is shown in equation \ref{eq:expr.res.model} and considers the covariates age, sex, RNA integrity number (RIN), plate and storage time. The model for methylation values, shown in equation \ref{eq:meth.res.model},
 includes the cell composition for the five blood cell types known from the houseman blood counts, as well as the first 20 principal components of the Illumina 450k array control-probes. 
 \begin{equation}
 \label{eq:expr.res.model}
@@ -366,13 +393,15 @@ Expr \sim 1+age+sex+RIN+plate+storage.time
 \end{equation}
 \begin{equation}
 \label{eq:meth.res.model}
-Meth \sim 1+CD4T+CD8T+NK+Bcell+Mono+\sum_{i=1}^{20} PC_{i}
+Meth \sim 1+CD4T+CD8T+NK+Bcell+Mono+PC_1+...+PC_{20}
 \end{equation}
 
 
 \section{eQTL/eQTM calculation}
 \label{Methods:eQTL/eQTM calculation}
 As a preliminary analysis to interrogate the effect of genotype and methylation variants on expression, expression quantitative trait loci (eQTL) and expression quantitative trait methylation (eQTM) were calculated.
+
+In the following paragraphs the calculation of eQTLs will be described. The calculation of eQTMs was performed analogously, the only difference being that methylation residuals were supplied instead of SNP dosages.
 
 Calculations were performed using the Bioconductor package MatrixEQTL\cite{10.1093/bioinformatics/bts163}. MatrixEQTL tests for association of SNP-transcript pairs.  
 
@@ -385,7 +414,7 @@ MatrixEQTL is rather efficient because it manages to reduce the calculation of t
 MatrixEQTL also allows to include covariates in the QTL calculation. As the expression and methylation values used are residuals and therefore already corrected this option is not used. Furthermore, MatrixEQTL can differentiate between cis- and trans-interactions based on distance. The maximal distance to consider a pair on the same chromosome as cis was set to 500 kb. 
 %TODO motivate cis-distance
 
-The threshold for significant cis-QTLs during calculation was set to 10e-6 and 10e-8 for trans.
+The p-value threshold for significant cis-QTLs during calculation was set to $10^{-6}$ and $10^{-8}$ for trans. As this cutoff is used for uncorrected p-values, a more stringent threshold is set for trans QTLs to account for the bigger number of possible pairs. 
 
 
 
@@ -395,7 +424,7 @@ In multiple analyses functional Gene Ontology enrichments were performed.
 
 First a set of all GO annotations with any evidence code for gene symbols  was retrieved from the Bioconductor package AnnotationDbi\cite{AnnotationDbi}. 
 
-Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on a set of genes of interest. For most enrichments a custom background set of genes specific to the analysis is given. Finally, the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
+Then a hypergeometric test\cite{GOstats} for overreprensentation was performed on a set of genes of interest. A custom background set of genes specific to the analysis was given for each enrichment. Finally, the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
 
 \section{Gaussian Graphical Models}
 \label{Methods:Gaussian Graphical Models}
@@ -408,7 +437,8 @@ Then a hypergeometric test\cite{GOstats} for overreprensentation is performed on
 \label{Results}
 \section{Normalized Data}
 \label{Results:Normalized Data}
-The distributions of the expression and methylation residuals, calculated as described in chapter \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian\cite{}.
+%TODO expand and source why normal dist
+The distributions of the expression and methylation residuals, calculated as described in chapter \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{}.
 
 \begin{figure}[b!]
 	\includegraphics[scale=1, keepaspectratio = true]{../figures/expr_meth_res_hist}
@@ -518,6 +548,17 @@ The results for all sets and flanking regions are shown in table \ref{tab:snp.ov
 	\label{tab:snp.overlap.counts}
 \end{table} 
 
+The distribution of number of SNPs found in each HERV element are shown in figure \ref{fig:hervS2.snp.hist}A. A total of 2423 HERV elements had more than 20 within its boundaries and were not shown in the figure. The maximum number of SNPs found in a single HERV element was 368. This HERV element, however, is unusually long at 7003 bp. 
+
+In figure \ref{fig:hervS2.snp.hist}B the density of SNPs per base pair of its HERV element are shown. 356 HERV elements that contained more than 0.05 SNPs per base pair were excluded from this figure.
+
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_snp_hist}  
+	\caption{}
+    \label{fig:hervS2.snp.hist}
+\end{figure}
+
+
 \subsection{Chromatin states}
 Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
 
@@ -526,7 +567,7 @@ Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
 Associations were calculated for 156.4 millions cis acting SNP-expression probe pairs and 456.1 billion possible pairs in trans. 
 
 812147 of cis-pairs were significantly associated with p-values of $1e-6$ or less. These significant eQTLs have a false discovery rate of less than $1.93e-4$. A total of 551728 distinct SNPs and 4903 expression probes were part of at least one cis-eQTL. 4145 of these probes are annotated to 3552 different genes. The remaining 
-758 can not be assigned to a specific gene.
+758 could not be assigned to a specific gene.
 
 There were a total of 1511235 significant trans-eQTL with an p-value of less than 1e-8 and a FDR of less than $3.02e-4$. These are made up by 229332 distinct SNPs and 21338 expression probes. 11505 of the probes found in at least one trans-eQTL are annotated to 9389 different genes, while 9767 probes are not assigned to a gene.
 
@@ -534,7 +575,20 @@ In a previous work Schramm et al. \cite{10.1371/journal.pone.0093844} calculated
 
 Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
 
-The signatures of wildtype, heterogenous and homogenous mutated SNP site for the two eQTLs with the best and worst p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. All eQTLs show clear differences in expression between different genotypic variants. 
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtl_all_herv_heatmap}  
+	\caption{Fraction of SNP-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTLs an pairs, while B is limited on the ones whose SNP and/or expression probes are connected to HERV set 2.}
+    \label{fig:global.eqtl.heatmap}
+\end{figure}
+
+The expression residual signatures of wildtype, heterogenous and homogenous mutated SNP site for the two eQTLs with the best and worst p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. The eQTLs with the best p-values in subfigures A and C show clear distinctions between the different SNP variants. While there is a small trend between variants in subfigures B and D, the distributions of expression residuals are rather similar.    
+
+%TODO write caption
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtl_boxplots.pdf}  
+	\caption{}
+    \label{fig:best.worst.eqtl.boxplot}
+\end{figure}
 
 45862 of the SNPs and 166 of the expression probes found in at least one cis-eQTL are located within HERV S2. When considering all significant associations, where either the SNP or the expression probe lie within a HERV element, a total of 112604 pairs remain. There are 5855 cis-eQTLs constituting one of 4748 SNPs within a HERV element controlling one of 128 expression probes, that overlap with a HERV element. 
 
@@ -542,11 +596,7 @@ When limiting trans-eQTLs to the ones that contain a HERV S2 SNP (23396) and/or 
 
 The fraction of HERV S2 related SNP-expression probe pairs that proved to be significantly associated is shown in figure \ref{fig:global.eqtl.heatmap}B. The distribution of this subset of eQTLs is very similar to the whole set. At least at this resolution there does not seem to be a difference between HERV regions and the whole genome when it comes to the probability of a SNP or expression probe to be part of an eQTL.
 
-\begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtl_all_herv_heatmap}  
-	\caption{Fraction of SNP-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTLs an pairs, while B is limited on the ones whose SNP and/or expression probes are connected to HERV set 2.}
-    \label{fig:global.eqtl.heatmap}
-\end{figure}
+
 
 A GO enrichment was performed on all 8211 genes associated to HERV related eQTLs using the set of all genes found in eQTLs as background. However, there were no significantly enriched genes. 
 
@@ -560,27 +610,60 @@ Calculating eQTMs with a significance threshold of 10e-6 for cis resulted in 818
 
 The fractions of potential CpG-expression probe pairs that were significantly associated between their genomic locations are shown in figure \ref{fig:global.eqtm.heatmap}A. In contrast to the eQTL results there is only a weaker preference for cis interactions. 
 
-HERV S2 contains 311 CpG sites and 420 expression probes, that were present in cis-eQTMs. A total of 738 cis-eQTMs are related to the set. 33 of these are associations between one of 33 CpG sites within a HERV element and one of 14 expression probes. 
-
-Considering trans-eQTMs, 1109 significantly associated CpGs lie within HERV S2 and 5422 expression probes overlapping a HERV element are part of a trans-eQTM.
-
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtm_all_herv_heatmap}  
-	\caption{Fraction of CpG-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTLs an pairs, while B is limited on the ones whose SNP and/or expression probes are connected to HERV set 2.}
+	\caption{Fraction of CpG-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTMs and pairs, while B is limited on the ones whose CpGs and/or expression probes are connected to HERV set 2.}
     \label{fig:global.eqtm.heatmap}
 \end{figure}
 
-The results of GO biological process enrichment performed on the xxxx genes that the expression probes found in HERV S2 related eQTMs are shown in table \ref{tab:hervS2.eqtm.enrichment}. 
-%whatever is in that fricking table
+The pairs of expression and methylation residual values for the eQTMs with the best and worst p-values for cis and trans each, are shown in figure \ref{fig:best.worst.eqtm.scatter}. 
+%TODO write caption
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtm_scatter.pdf}  
+	\caption{}
+    \label{fig:best.worst.eqtm.scatter}
+\end{figure}
 
+HERV S2 contains 311 CpG sites and 420 expression probes, that were present in cis-eQTMs. A total of 738 cis-eQTMs are related to the set. 33 of these are associations between one of 33 CpG sites and one of 14 expression probes that are both  within a HERV element. 
+
+Considering trans-eQTMs, 1109 significantly associated CpGs lie within HERV S2 and 5422 expression probes overlapping a HERV element are part of a trans-eQTM. In total 15085 trans-eQTMs are related to HERV S2.
+
+The GO biological process enrichment performed on the 1316 genes that the expression probes found in HERV S2 related eQTMs are annotated to, resulted in no GO term being significantly enriched. 
 
 \section{meQTLs}
 \label{Results:meQTLs}
+The number of cis- and trans-meQTLs in the used the data set was already elaborated in chapter \ref{Data:meQTL}. Therefore, in this chapter the focus is laid on the meQTLs that are related to HERV S2.
+
+There is a total of 360048 meQTLs, whose CpG-site lies within a HERV element. They are made up by different 1915 CpGs and 286289 SNPs. This means each of these CpG-sites is associated with 188 SNPs on average, which is slightly higher than the average of 157.91 for CpGs in the total set of meQTLs. The CpG, that is part of most meQTLs, cg07143125, is associated with 579 SNPs. 
+
+When considering meQTLs, whose SNP lies within HERV S2, there are 983664 significant CpG-SNP pairs. These consist of 229819 different SNPs and 52951 CpGs. On average each of these SNPs is associated with 4.28 CpG-sites. 
+
+In total there are 1301127 meQTLs, that are related to HERV S2. They are made up of 53167 different CpGs and 483019 SNPs
+
+The fractions of potential SNP-CpG pairs that were significantly associated between their genomic locations are shown in figure \ref{fig:global.meqtl.heatmap}A. Subfigure B shows the same analysis for the subset of meQTLs that were just described. The Fractions of significantly enriched pairs are very similar. The diagonal show, that there is a strong preference for cis-interactions in bot sets. 
+
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/meqtl_all_herv_heatmap}  
+	\caption{Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}
+    \label{fig:global.meqtl.heatmap}
+\end{figure}
+
+When limiting the analysis to meQTLs, that represent associations between different chromosomes, which are called trans-meQTLs, a total of 64852 significant pairs between 2681 CpGs and 34957 SNPs remain. Of these meQTLs, 23463 have their CpGs within HERV S2. They consists of 155 different CpGs and 18825 SNPs. Analogously for 45175 pairs their 19192 SNPs are located within HERV S2 and associated with 2655 different CpGs.
 
 \section{HERV related regulatory networks}
 \label{Results:HERV related regulatory networks}
 \subsection{Data collection}
 \label{Results:Data collection}
+
+\subsection{General analysis}
+\label{Results:General analysis}
+
+
+\subsection{Detailed analysis}
+\label{Results:Detailed analysis}
+
+
+
 
 \newpage
 \chapter{Discussion}
@@ -605,11 +688,27 @@ The results of GO biological process enrichment performed on the xxxx genes that
 \subsection{Genotypes}
 \label{Discussion:Genotypes}
 
+
+\section{eQTLs}
+\label{Discussion:eQTLs}
+
+\section{eQTMs}
+\label{Discussion:eQTMs}
+
+\section{meQTLs}
+\label{Discussion:meQTLs}
+
+\section{Regulatory networks}
+\label{Discussion:Regulatory networks}
+
 \newpage
 \chapter{Conclusion and Outlook}
 \label{Conclusion and Outlook}
 
 \newpage
+\listoffigures
+\listoftables
+
 \bibliography{mybib}{}
 \bibliographystyle{unsrt}
 
