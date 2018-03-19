@@ -1,10 +1,21 @@
 \begin{thebibliography}{10}
 
+\bibitem{Hasin2017}
+Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
+\newblock Multi-omics approaches to disease.
+\newblock {\em Genome Biology}, 18(1):83, May 2017.
+
 \bibitem{Smith2013}
 Zachary~D. Smith and Alexander Meissner.
 \newblock Dna methylation: roles in mammalian development.
 \newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
 \newblock Review Article.
+
+\bibitem{Deaton2011}
+Aim{\'e}e~M. Deaton and Adrian Bird.
+\newblock Cpg islands and the regulation of transcription.
+\newblock {\em Genes Dev}, 25(10):1010--1022, May 2011.
+\newblock 21576262[pmid].
 
 \bibitem{Venter1304}
 J.~Craig Venter, Mark~D. Adams, Eugene~W. Myers, Peter~W. Li, Richard~J. Mural,

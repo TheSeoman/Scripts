@@ -1,7 +1,7 @@
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Epigenetics}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}Human endogenous retroviruses}{1}{section.1.2}
+\contentsline {section}{\numberline {1.1}Multiomics}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}Human endogenous retroviruses}{2}{section.1.2}
 \contentsline {section}{\numberline {1.3}Effect network analysis}{3}{section.1.3}
 \contentsline {chapter}{\numberline {2}Data}{5}{chapter.2}
 \contentsline {section}{\numberline {2.1}HERV annotation}{5}{section.2.1}
@@ -29,10 +29,10 @@
 \contentsline {section}{\numberline {4.3}eQTLs}{20}{section.4.3}
 \contentsline {section}{\numberline {4.4}eQTMs}{22}{section.4.4}
 \contentsline {section}{\numberline {4.5}meQTLs}{23}{section.4.5}
-\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{25}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Data collection}{25}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}General analysis}{25}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Detailed analysis}{25}{subsection.4.6.3}
+\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{24}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Data collection}{24}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}General analysis}{24}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Detailed analysis}{24}{subsection.4.6.3}
 \contentsline {chapter}{\numberline {5}Discussion}{27}{chapter.5}
 \contentsline {section}{\numberline {5.1}HERV region features}{27}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Expression}{27}{subsection.5.1.1}

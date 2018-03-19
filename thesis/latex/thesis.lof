@@ -1,6 +1,6 @@
 \select@language {english}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Exemplified structure of an intact HERV element. Based on a HERV-K provirus, which is considered the most recently introduced in humans and contains contains the most complete viral genes. Taken from Young et. al. \cite {BIES:BIES201300049}}}{2}{figure.1.1}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Exemplified structure of an intact HERV element. Based on a HERV-K provirus, which is considered the most recently introduced in humans and contains the most complete viral genes. Taken from Young et. al. \cite {BIES:BIES201300049}}}{2}{figure.1.1}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Length distribution of elements in HERV S2}}{6}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Number of samples with genotype, expression and methylation measurements in KORA F4 Survey}}{7}{figure.2.2}
@@ -17,6 +17,6 @@
 \contentsline {figure}{\numberline {4.6}{\ignorespaces }}{23}{figure.4.6}
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Fraction of CpG-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTMs and pairs, while B is limited on the ones whose CpGs and/or expression probes are connected to HERV set 2.}}{24}{figure.4.7}
 \contentsline {figure}{\numberline {4.8}{\ignorespaces }}{25}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}}{26}{figure.4.9}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}}{25}{figure.4.9}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

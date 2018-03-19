@@ -4,48 +4,48 @@ The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
 Warning--I'm ignoring 10.1186/gb-2008-9-9-r137's extra "note" field
---line 363 of file mybib.bib
+--line 403 of file mybib.bib
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
-You've used 36 entries,
+You've used 38 entries,
             1791 wiz_defined-function locations,
-            697 strings with 17257 characters,
-and the built_in function-call counts, 12775 in all, are:
-= -- 694
-> -- 1465
+            712 strings with 17515 characters,
+and the built_in function-call counts, 13231 in all, are:
+= -- 734
+> -- 1484
 < -- 0
-+ -- 503
-- -- 467
-* -- 1365
-:= -- 2421
-add.period$ -- 115
-call.type$ -- 36
-change.case$ -- 32
++ -- 510
+- -- 472
+* -- 1405
+:= -- 2495
+add.period$ -- 122
+call.type$ -- 38
+change.case$ -- 34
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 312
-empty$ -- 779
-format.name$ -- 467
-if$ -- 2480
+cite$ -- 40
+duplicate$ -- 330
+empty$ -- 824
+format.name$ -- 472
+if$ -- 2580
 int.to.chr$ -- 0
-int.to.str$ -- 36
-missing$ -- 32
-newline$ -- 190
-num.names$ -- 36
-pop$ -- 43
+int.to.str$ -- 38
+missing$ -- 34
+newline$ -- 201
+num.names$ -- 38
+pop$ -- 44
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 119
+skip$ -- 126
 stack$ -- 0
-substring$ -- 592
-swap$ -- 38
+substring$ -- 625
+swap$ -- 40
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 2
-while$ -- 68
-width$ -- 38
-write$ -- 406
+while$ -- 72
+width$ -- 40
+write$ -- 430
 (There were 3 warnings)
