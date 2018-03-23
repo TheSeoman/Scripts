@@ -10,6 +10,7 @@
 \usepackage{longtable}
 \usepackage{tocloft}
 \usepackage{amsmath}
+\usepackage{amsfonts}
 
 %\usepackage[pdftex]{graphicx}
 \usepackage[ansinew]{inputenc}
@@ -20,6 +21,7 @@
 
 \usepackage{textcomp}
 \usepackage[hyphens,spaces]{url}
+\usepackage{setspace}
 
 \usepackage[author={Julian Schmidt}]{pdfcomment}
 
@@ -62,9 +64,10 @@
 
 % Title
 \HRule \\[0.4cm]
-{ \huge \bfseries Variation of HERV elements in the KORA cohort
-}\\[0.4cm]
-
+\begin{spacing}{1.6}
+{\huge \bfseries Variation of HERV elements in the KORA cohort
+}
+\end{spacing}
 \HRule \\[1.5cm]
 
 {\Large Julian Schmidt}\\[2.5cm]
@@ -87,10 +90,11 @@
 
 {\LARGE Department of Bioinformatics and Computational Biology}\\[0.5cm]
 {Technische Universit\"at M\"unchen}\\[1cm]
-
-{\Large Master's Thesis in Bioinformatics}\\[2cm]
-{\textbf{\LARGE Variation of HERV elements in the KORA cohort}}\\[2cm]
-{\textbf{\LARGE Variation von HERV elementen in der KORA Kohorte}}\\[4cm]
+\begin{spacing}{1.6}
+{\Large Master's Thesis in Bioinformatics}\\[1.6cm]
+{\textbf{\LARGE Variation of HERV elements in the KORA cohort}}\\[1.6cm]
+{\textbf{\LARGE Variation von HERV elementen in der KORA Kohorte}}\\[3.6cm]
+\end{spacing}
 
 \end{center}
 \begin{center}\Large
@@ -105,6 +109,21 @@
 }% end title page
 \end{titlepage}
 
+
+\vspace*{6cm}
+\begin{center}
+\begin{minipage}{.6\textwidth}
+I confirm that this master's thesis is my own work and I have documented all sources and material used.
+\\[2cm]
+\begin{tabular}{p{0.3\textwidth} p{0.7\textwidth}}
+13.04.2018 & \hrulefill \\
+& \hspace{1.95cm} Julian Schmidt
+\end{tabular}
+\end{minipage}
+\end{center}
+
+\newpage
+
 \pagenumbering{gobble}
 
 \tableofcontents
@@ -116,51 +135,19 @@
 \label{Introduction}
 
 \section{Multiomics}
-\label{Introduction:Epigenetics}
+\label{Introduction:Multiomics}
 The rise of high-throughput technologies allows researchers to paint a more complete picture of the mechanisms of cell processes than ever before. Multi-omics, the combination of the analysis of different types of cellular molecules, is made possible by that. The objective of multi-omics studies is to draw conclusions about cellular mechanisms and understand the flow of information by finding associations and patterns connecting them\cite{Hasin2017}. In this work we worked on data from the fields of transcriptomics, genomics and epigenomics to investigate the effects of changes in human endogenous retroviruses (HERVs), which are introduced in more detail in section \ref{Introduction:Human endogenous retroviruses}.
 
-Transcriptiomics examines the occurrence and level of RNAs on a genome-wide scale. Following the central dogma of molecular biology, RNA is the intermediate between DNA and proteins and therefore of central importance\cite{}. With the late progress in transcriptome studies, even more effects of RNA have been discovered in the form of several functional RNAs\cite{}. RNA levels can be measured using a technology called RNA-seq\cite{} or probe-based arrays\cite{}, as was the case with the data used in this work. 
+Transcriptomics examines the occurrence and level of RNAs on a genome-wide scale. Following the central dogma of molecular biology, RNA is the intermediate between DNA and proteins and therefore of central importance\cite{}. With the late progress in transcriptome studies, even more effects of RNA have been discovered in the form of several functional RNAs\cite{10.3389/fgene.2015.00002}. RNA levels can be measured using a technology called RNA-seq\cite{Wang2009} or probe-based arrays\cite{Schulze2001}, as was the case with the data used in this work. 
 
-The second field, Genomics, describes variation within between genomes. In this work we focused on single nucleotide polymorphisms (SNPs), which are single base changes. Genotypic information fills a special place in multi-omics analyses, as it not dependent on the environment and can be considered static in ones lifetime. Therefore, it is considered as the cause of changes instead of being a downstream effect of other changes\cite{Hasin2017}. This means they are an exceptional anchor for the start of multi-omics analyses. 
-Genotypic changes are known to cause mendelian diseases, when the change lies in the coding region of a protein. They also influence gene expression levels, which in turn is the cause of common diseases\cite{Hasin2017}.
+The second field, genomics, describes variation between genomes. In this work we focused on single nucleotide polymorphisms (SNPs), which are single base changes. Genotypic information fills a special place in multi-omics analyses, as it not dependent on the environment and can be considered static in ones lifetime. Therefore, it is considered as the cause of changes instead of being a downstream effect of other changes\cite{Hasin2017}. This means they are an exceptional anchor for the start of multi-omics analyses. 
+Genotypic changes are known to cause Mendelian diseases, when the change lies in the coding region of a protein. They also influence gene expression levels, which in turn is thought to be the cause of common diseases\cite{Hasin2017}.
 
-%\begin{itemize}
-%\item rise in performance of different essays => multiomics
-%\item aim of multiomics anlysis = integration of data types to ?
-%\item Transcriptomics
-%\begin{itemize}
-%\item functional RNAs
-%\item proxy for proteomics
-%\item regulation of transcription = central control of cell activity
-%\end{itemize}
-%\item Genomics
-%\begin{itemize}
-%\item data in form of SNP variants = Phenotypes
-%\item known effect on transcription regulation
-%\item ?
-%\end{itemize}
-%\item epigenomics/epigenetics
-%\begin{itemize}
-%\item newest 'omics' field
-%\item rising importance of other factors atop DNA \textrightarrow epigenetics
-%\item quick overview epigenetic marks
-%\item chromatin states
-%\item DNA methylation = focus of this work
-%\begin{itemize}
-%\item most understood and researched epigenetic mark \cite{Smith2013}
-%\item mechanism: methylation fifth position of cytosine, almost exclusively in CpG context in mammals, installed and maintained by 3 enzymes: DNA methyltransferase 1/3A/3B (DNMT1/...)
-%\item generally considered as silencing mark
-%\item CpG islands = groups of cg pairs, often in promoter regions, usually hypomethylated
-%\item promoter regions kept free of methylation
-%\item TF $<->$ cpg interaction
-%\end{itemize}
-%\end{itemize}
-%\item interaction of omics mechanism? snp $->$ cpg $->$ expression pattern?
-%\end{itemize}
+Epigenomics is the youngest field of 'omics' that is used in this work. It describes genome-wide reversible modifications of DNA and DNA-associated proteins. Among these are multiple different histone modifications and DNA methylation. Epigenetic modifications play a major role in the regulation of gene transcription\cite{Piuntiaad9780,Deaton2011} and in general are a additional layer of information on top of the DNA sequence. Changes in epigenetic modifications are influenced by genetic and environmental factors\cite{Hasin2017}.
 
-DNA methylation is the best understood and researched epigenetic mark\cite{Smith2013}. The term refers to the addition of a methyl group to the fifth carbon atom of a cytosine ring, thus transforming the cytosine to 5-methylcytosine. In humans this happens almost exclusively in the context of a cytosine neighbored by a guanine - a CpG-site. As the complementary sequence of CG is also CG, methylation usually occurs on both strands. 
+DNA methylation, the modification that is the focus in this work, is the best understood and researched epigenetic mark\cite{Smith2013}. The term refers to the addition of a methyl group to the fifth carbon atom of a cytosine ring, thus transforming the cytosine to 5-methylcytosine. In humans this happens almost exclusively in the context of a cytosine neighbored by a guanine - a CpG-site. As the complementary sequence of CG is also CG, methylation usually occurs on both strands. 
 
-There are about 28 GpG sites in the human genome, of which 60-80\% are generally methylated\cite{Smith2013}. The distribution of CpGs can be divided into two modes: The majority of the genome is sparsely populated by GpGs, that are usually methylated. Second there are CG-dense regions, which are predominantly nonmethylated. These are called CpG islands and occur mainly around the transcription start sites of genes\cite{Deaton2011}. The methylation of these CpG islands is strongly connected to the silencing of adjacent genes, by preventing the transcription initiation\cite{Deaton2011}. Other mechanisms that are negatively affected by DNA methylation are general promoter, enhancer and insulator activity as well as transcription factor binding\cite{Smith2013}. 
+There are about 28 million CpG sites in the human genome, of which 60-80\% are generally methylated\cite{Smith2013}. The distribution of CpGs can be divided into two modes: The majority of the genome is sparsely populated by CpGs, that are usually methylated. Second there are CG-dense regions, which are predominantly nonmethylated. These are called CpG islands and occur mainly around the transcription start sites of genes\cite{Deaton2011}. The methylation of these CpG islands is strongly connected to the silencing of adjacent genes, by preventing the transcription initiation\cite{Deaton2011}. Other mechanisms that are negatively affected by DNA methylation are general promoter, enhancer and insulator activity as well as transcription factor binding\cite{Smith2013}. 
 
 %DNA methylation in humans is controlled by three enzymes called DNA methyl transferase  1 (DNMT1), DNMT3A and DNMT3B\cite{Smith2013}.
 
@@ -188,18 +175,19 @@ However, endogenous retroviruses in human are generally not able to replicate. T
 Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Finally, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}. 
 %TODO add placenta fusion effect of HERVs, exchange finally again
 
-We used multiomics data to analyze the mechanism of HERVs influence. 
-
+The multiomics data analyses performed in this work were either started from an anchor relating to HERV elements or performed genome wide and afterwards filtered to retain HERV specific results. 
 
 \section{Effect network analysis}
 \label{Introduction:Effect network analysis}
-\begin{itemize}
-\item many bioinformatics methods find correlations, but not direct cause
-\item attempt to discern direct connections from bigger data webs
-\item hope to find possible biological mechanisms of gene regulation = path in model 
-\item used approach: Gaussian Graphical models
-\end{itemize}
+Many multiomics analyses are based on the calculation of associations within or between different data layers. Examples are co-expression of genes or the association of genotypic variants and transcription,  protein or methylation levels. These approaches allow to identify associated entities by calculating correlations between single entities over available individuals or samples. They can't give any resolution on the direction of an effect. Furthermore, purely correlation based methods can not differentiate between direct and indirect effects\cite{Hasin2017}.
 
+Multomics data can be organized into networks, where each entity from the different layers is a node and the significant pairwise associations, that exceed a given threshold,  are resembled by undirected edges. However when using Pearson correlation as measurement of association, the networks tend to be rather dense, as indirect associations are still contained\cite{Krumsiek2011}. 
+
+An approach to remove these indirect associations is the use of partial correlation coefficients. The partial correlation coefficient can be seen as the pairwise correlation between two variables conditioned against their correlations with all other variables. A scheme of how partial correlations work is shown in figure \ref{fig:partial.correlation.scheme}.
+
+An approach that combines partial correlation coefficients with Bayesian structure learning is called "Gaussian Graphical Models"\cite{Krumsiek2011} (GGMs). We used GGMs to investigate the mechanisms of cellular control related to variation within HERV elements.
+
+The Gaussian Graphical Models used in this work are described in more detail in section \ref{Methods:Gaussian Graphical Models}.
 
 \newpage
 \chapter{Data}
@@ -385,6 +373,17 @@ There were a total of 8905156 peaks for 131 transcription factors in the data se
 
 Combining both filtered data sets lead to a total of 3847561 peaks of 145 different transcription factors.
 
+\section{Protein interaction network}
+\label{Data:Protein interaction network}
+Protein interaction data were used to include potential interaction partners in the generation of interaction networks.
+
+Human protein interaction data were downloaded from the STRING database version 9\cite{Franceschini2013}. STRING is a database for direct and functional protein associations that is compiled by combining multiple sources: Experimental evidence of interaction, known pathways and protein complexes from curated databases, co-expression analysis, knowledge transfer from other species based on gene orthology, and automated text-mining of scientific literature\cite{Szklarczyk2017}. 
+
+The data set contained 3019612 pairwise protein interactions between 16590 different proteins. For each pair associations scores for the described categories were available. Protein interactions were filtered for the availability of experimental and/or database evidence by excluding pairs with and association score of 0 in both categories, which left 375702 interactions between 12769 different proteins. 
+
+Further filtering was performed, by excluding proteins, whose genes were not found expressed in whole blood. Therefore, expression values from RNA-seq experiments for 55 tissues in human were downloaded from the  Genotype-Tissue Expression (GTEx) Project\cite{GTExConsortium2013}. Transcripts with an RPKM (Reads per kilobase per million mapped reads) of more than 0.1 in blood were considered expressed. Interactions where one or both members were not represented by these 17343 transcripts were removed.
+
+Finally, connected components were calculated on the network represented by the remaining pairwise interactions and all genes not within the biggest connected component were removed. The final network contained 8546 proteins and 97447 interactions. 
 
 \section{Chromatin states}
 \label{Data:Chromatin states}
@@ -456,8 +455,104 @@ Then a hypergeometric test\cite{GOstats} for overreprensentation was performed o
 
 \section{Gaussian Graphical Models}
 \label{Methods:Gaussian Graphical Models}
-%TODO write this stuff
+In this work Gaussian Graphical Models (GGMs) on multiomics data with a connection to HERV elements were used to investigate the effects and effect pathways of changes in HERV elements. The calculation of GGMs was performed using the R package "BDgraph" version 2.44\cite{Mohammadi2015}.
 
+\subsection{Theoretical Background}
+In Gaussian Graphical Models, random variables are represented by nodes. Conditional dependence relationships, or partial correlations,  between these variables are represented as undirected edges in a graph $G=(V,E)$, where $V=\{1,2, ..., p\}$ is a set of nodes and $E \subset V \times V$ the set of edges. A zero mean Gaussian Graphical model with respect to graph G is defined as
+
+\begin{equation}
+\mathcal{M}_G = \lbrace \mathcal{N}_p(0,\Sigma|K  \Sigma^{-1} \in \mathbb{P}_G \rbrace
+\end{equation}
+
+where $\Sigma$ is the covariance matrix, its inverse $K$ is the precision matrix and $\mathbb{P}_G$ is the cone of symmetric positive definite matrices with elements $K_{ij}$ equal to zero for all $(i,j)\notin E$. This means the random variables representing our data are assumed to follow the multivariate Gaussian distribution $\mathcal{N}(\mu, K^{-1})$, where the mean $\mu$ is zero.
+
+With $Z = (Z^{(1)}, ..., Z^{(n)})$ being the observed data of $n$ independent samples, the likelihood function is
+\begin{equation}
+Pr(Z|K,G) \propto |K|^{n/2} exp\left\lbrace-\frac{1}{2}tr(KU)\right\rbrace,
+\end{equation}
+where $U = Z^TZ$.
+
+As for multivariate Gaussian distributions conditional dependence is a direct representation of partial correlation\cite{10.1111/j.1467-842X.2004.00360.x}, we will only use the former going forward.
+
+Conditional independence in the model is represented by the precision matrix in the form that two variables $i$ and $j$ are conditionally independent given the remaining variables, if and only if $K_{ij} = 0$. Therefore, the nonzero entries of $K$ correspond to links in the graph $G$.  
+
+
+
+The used implementation of GGM calculation explores the space of possible graphs and precision matrices by a birth-death Markov chain Monte Carlo (BDMCMC) method. A birth event represents the addition of an edge $e = (i,j) \notin E$ and leads the process to a new state $(G^{+e}, K^{+e}$, where $G^{+e} = (V, E \cup \{e\})$, and $K^{+e}$ is equal to $K$ except for the positions $\lbrace (i,j), (j,i), (j,j) \rbrace$.
+
+A death event represents the deletion of an edge $e = (i,j) \in E$ and leads the process to a new state $(G^{-e}, K^{-e}$, where $G^{-e} = (V, E \setminus \{e\})$, and $K^{-e}$ is equal to $K$ except for the positions $\lbrace (i,j), (j,i), (j,j) \rbrace$.
+
+These events are considered to be independent Poisson processes. Birth and death rates are conditional to the joint posterior distribution of a graph G and precision matrix K, $Pr(K,G|Z)$.
+
+The birth-rates and death-rates are defined as
+
+\begin{equation}
+\beta _e(K)=min\left\lbrace \frac{Pr(G^{+e}, K^{+e}|Z)}{Pr(G,K|Z)},1 \right\rbrace \text{, for each }  e \notin E,
+\end{equation}
+
+\begin{equation}
+\delta _e(K)=min\left\lbrace \frac{Pr(G^{-e}, K^{-e}|Z)}{Pr(G,K|Z)},1 \right\rbrace \text{, for each }  e \in E,
+\end{equation}
+
+As birth and death rates are independent the total birth and death rates are
+
+\begin{equation}
+\beta(K) = \sum_{e \notin E}\beta_e(K)
+\end{equation}
+ 
+\begin{equation}
+\delta(K) = \sum_{e \in E}\delta_e(K)
+\end{equation}
+
+Having the rates per edge and the overall rates the probability of a next birth/death event is
+
+\begin{equation}
+Pr(\text{birth of link e}) = \frac{\beta_e(K)}{\beta(K) + \delta(K)} \text{, for each } e \notin E,
+\end{equation}
+
+\begin{equation}
+Pr(\text{death of link e}) = \frac{\delta_e(K)}{\beta(K) + \delta(K)} \text{, for each } e \in E,
+\end{equation}
+
+
+\newpage
+The used implementation of GGMs considers the G-Wishart distribution $W_G(b,D)$ to be a prior distribution for the precision matrix $K$ with the following density:
+
+\begin{equation}
+Pr(K|G) = \frac{1}{I_G(b,D)}|K|^{\frac{b-2}{2}}exp\left\lbrace-\frac{1}{2}tr(DK)\right\rbrace 1(K \in \mathbb{P}_G),
+\end{equation}
+
+where $b>2$ is the degrees of freedom, $D$ is a symmetric positive definitive matrix, $I_G(b,D)$ is the normalizing constant with respect to the graph $G$ and $1(x)$ is 1 if $x$ is true, and 0 otherwise.
+
+The G-Wishart prior also is a conjugate prior the to likelihood function of the multivariate Gaussian distribution. Therefore, the posterior distribution of $K$ is 
+\begin{equation}
+Pr(K|Z,G) = \frac{1}{I_G(b^*,D^*)}|K|^{\frac{b^*-2}{2}}exp\left\lbrace-\frac{1}{2}tr(D^*K)\right\rbrace ,
+\end{equation}
+where $b^* = b+n$ and $D^* = D+S$. This is once again a G-Wishart distribution, $W_G(b^*,D^*)$.
+\subsection{Data collection}
+Gaussian Graphical models have the severe limitation, that sample covariance and correlation matrices are well conditioned only when the number of variables is smaller than the number of samples\cite{Schaefer2005}. Therefore, it is absolutely necessary to perform a pre-selection of included entities when calculating GGMs on our multiomics data set.
+
+We performed two mechanisms of selecting node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. 
+
+The first way starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the analysis.  To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the sentinel SNP are included. Analogously to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added. To include transcription factors, whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, in an attempt to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the String network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path.
+
+%TODO write caption
+\begin{figure}[b!]
+	\includegraphics[scale=0.86, keepaspectratio = true]{../figures/ggm_data_collect_snp_scheme}
+	\caption{}
+	\label{fig:ggm.data.collect.snp.scheme}
+\end{figure}
+
+The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.snp.scheme}
+
+The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.cpg.scheme}, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
+
+%TODO write caption
+\begin{figure}[b!]
+	\includegraphics[scale=0.86, keepaspectratio = true]{../figures/ggm_data_collect_cpg_scheme}
+	\caption{}
+	\label{fig:ggm.data.collect.cpg.scheme}
+\end{figure}
 
 
 \newpage

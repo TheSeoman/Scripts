@@ -5,17 +5,39 @@ Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
 \newblock Multi-omics approaches to disease.
 \newblock {\em Genome Biology}, 18(1):83, May 2017.
 
-\bibitem{Smith2013}
-Zachary~D. Smith and Alexander Meissner.
-\newblock Dna methylation: roles in mammalian development.
-\newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
-\newblock Review Article.
+\bibitem{10.3389/fgene.2015.00002}
+Alexander~F. Palazzo and Eliza~S. Lee.
+\newblock Non-coding rna: what is functional and what is junk?
+\newblock {\em Frontiers in Genetics}, 6:2, 2015.
+
+\bibitem{Wang2009}
+Zhong Wang, Mark Gerstein, and Michael Snyder.
+\newblock Rna-seq: a revolutionary tool for transcriptomics.
+\newblock {\em Nat Rev Genet}, 10(1):57--63, Jan 2009.
+\newblock 19015660[pmid].
+
+\bibitem{Schulze2001}
+Almut Schulze and Julian Downward.
+\newblock Navigating gene expression using microarrays -- a technology review.
+\newblock {\em Nature Cell Biology}, 3:E190 EP --, Aug 2001.
+
+\bibitem{Piuntiaad9780}
+Andrea Piunti and Ali Shilatifard.
+\newblock Epigenetic balance of gene expression by polycomb and compass
+  families.
+\newblock {\em Science}, 352(6290), 2016.
 
 \bibitem{Deaton2011}
 Aim{\'e}e~M. Deaton and Adrian Bird.
 \newblock Cpg islands and the regulation of transcription.
 \newblock {\em Genes Dev}, 25(10):1010--1022, May 2011.
 \newblock 21576262[pmid].
+
+\bibitem{Smith2013}
+Zachary~D. Smith and Alexander Meissner.
+\newblock Dna methylation: roles in mammalian development.
+\newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
+\newblock Review Article.
 
 \bibitem{Venter1304}
 J.~Craig Venter, Mark~D. Adams, Eugene~W. Myers, Peter~W. Li, Richard~J. Mural,
@@ -131,6 +153,13 @@ Gorjan Slokar and Gregor Hasler.
   development of schizophrenia.
 \newblock 6, 01 2016.
 
+\bibitem{Krumsiek2011}
+Jan Krumsiek, Karsten Suhre, Thomas Illig, Jerzy Adamski, and Fabian~J. Theis.
+\newblock Gaussian graphical modeling reconstructs pathway reactions from
+  high-throughput metabolomics data.
+\newblock {\em BMC Syst Biol}, 5:21--21, Jan 2011.
+\newblock 1752-0509-5-21[PII].
+
 \bibitem{RepeatMasker}
 R~Smit~AFA, Hubley and Green P.
 \newblock Repeatmasker open-4.0.
@@ -230,6 +259,29 @@ Yong Zhang, Tao Liu, Clifford~A. Meyer, J{\'e}r{\^o}me Eeckhoute, David~S.
 \newblock {\em Genome Biol}, 9(9):R137--R137, Sep 2008.
 \newblock gb-2008-9-9-r137[PII].
 
+\bibitem{Franceschini2013}
+Andrea Franceschini, Damian Szklarczyk, Sune Frankild, Michael Kuhn, Milan
+  Simonovic, Alexander Roth, Jianyi Lin, Pablo Minguez, Peer Bork, Christian
+  von Mering, and Lars~J. Jensen.
+\newblock String v9.1: protein-protein interaction networks, with increased
+  coverage and integration.
+\newblock {\em Nucleic Acids Res}, 41(Database issue):D808--D815, Jan 2013.
+\newblock gks1094[PII].
+
+\bibitem{Szklarczyk2017}
+Damian Szklarczyk, John~H. Morris, Helen Cook, Michael Kuhn, Stefan Wyder,
+  Milan Simonovic, Alberto Santos, Nadezhda~T. Doncheva, Alexander Roth, Peer
+  Bork, Lars~J. Jensen, and Christian von?Mering.
+\newblock The string database in 2017: quality-controlled protein-protein
+  association networks, made broadly accessible.
+\newblock {\em Nucleic Acids Res}, 45(Database issue):D362--D368, Jan 2017.
+\newblock 27924014[pmid].
+
+\bibitem{GTExConsortium2013}
+GTEx Consortium.
+\newblock The genotype-tissue expression (gtex) project.
+\newblock {\em Nature Genetics}, 45:580 EP --, May 2013.
+
 \bibitem{10.1038/nmeth.1906}
 Jason Ernst and Manolis Kellis.
 \newblock Chromhmm: automating chromatin-state discovery and characterization.
@@ -285,6 +337,24 @@ S~Falcon and R~Gentleman.
 Sture Holm.
 \newblock A simple sequentially rejective multiple test procedure.
 \newblock {\em Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
+
+\bibitem{Mohammadi2015}
+Abdolreza Mohammadi and Ernst~C. Wit.
+\newblock Bayesian structure learning in sparse gaussian graphical models.
+\newblock {\em Bayesian Analysis}, 10(1):109--138, 2015.
+
+\bibitem{10.1111/j.1467-842X.2004.00360.x}
+Kunihiro Baba, Ritei Shibata, and Masaaki Sibuya.
+\newblock Partial correlation and conditional correlation as measures of
+  conditional independence.
+\newblock {\em Australian \& New Zealand Journal of Statistics},
+  46(4):657--664.
+
+\bibitem{Schaefer2005}
+Juliane Schäfer and Korbinian Strimmer.
+\newblock Learning large-scale graphical gaussian models from genomic data.
+\newblock In {\em In Science of Complex Networks: From Biology to the Internet
+  and WWW}, 2005.
 
 \bibitem{10.1371/journal.pone.0093844}
 Katharina Schramm, Carola Marzi, Claudia Schurmann, Maren Carstensen, Eva

@@ -12,34 +12,37 @@
 \contentsline {subsection}{\numberline {2.2.4}Covariates}{10}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Methylation quantitative trait loci}{10}{subsection.2.2.5}
 \contentsline {section}{\numberline {2.3}Transcription factor binding}{10}{section.2.3}
-\contentsline {section}{\numberline {2.4}Chromatin states}{11}{section.2.4}
+\contentsline {section}{\numberline {2.4}Protein interaction network}{11}{section.2.4}
+\contentsline {section}{\numberline {2.5}Chromatin states}{12}{section.2.5}
 \contentsline {chapter}{\numberline {3}Methods}{13}{chapter.3}
 \contentsline {section}{\numberline {3.1}Overlaps}{13}{section.3.1}
 \contentsline {section}{\numberline {3.2}Data normalization}{13}{section.3.2}
 \contentsline {section}{\numberline {3.3}eQTL/eQTM calculation}{14}{section.3.3}
 \contentsline {section}{\numberline {3.4}Functional Analysis of Gene Sets}{14}{section.3.4}
 \contentsline {section}{\numberline {3.5}Gaussian Graphical Models}{15}{section.3.5}
-\contentsline {chapter}{\numberline {4}Results}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}Normalized Data}{17}{section.4.1}
-\contentsline {section}{\numberline {4.2}HERV region features}{17}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Expression}{18}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Methylation}{19}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Genotypes}{20}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Chromatin states}{20}{subsection.4.2.4}
-\contentsline {section}{\numberline {4.3}eQTLs}{20}{section.4.3}
-\contentsline {section}{\numberline {4.4}eQTMs}{22}{section.4.4}
-\contentsline {section}{\numberline {4.5}meQTLs}{23}{section.4.5}
-\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{24}{section.4.6}
-\contentsline {subsection}{\numberline {4.6.1}Data collection}{24}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}General analysis}{24}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Detailed analysis}{24}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Discussion}{27}{chapter.5}
-\contentsline {section}{\numberline {5.1}HERV region features}{27}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Expression}{27}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Methylation}{27}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Genotypes}{27}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}eQTLs}{27}{section.5.2}
-\contentsline {section}{\numberline {5.3}eQTMs}{27}{section.5.3}
-\contentsline {section}{\numberline {5.4}meQTLs}{27}{section.5.4}
-\contentsline {section}{\numberline {5.5}Regulatory networks}{27}{section.5.5}
-\contentsline {chapter}{\numberline {6}Conclusion and Outlook}{29}{chapter.6}
+\contentsline {subsection}{\numberline {3.5.1}Theoretical Background}{15}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.2}Data collection}{17}{subsection.3.5.2}
+\contentsline {chapter}{\numberline {4}Results}{19}{chapter.4}
+\contentsline {section}{\numberline {4.1}Normalized Data}{19}{section.4.1}
+\contentsline {section}{\numberline {4.2}HERV region features}{19}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Expression}{20}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Methylation}{21}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Genotypes}{22}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.4}Chromatin states}{22}{subsection.4.2.4}
+\contentsline {section}{\numberline {4.3}eQTLs}{22}{section.4.3}
+\contentsline {section}{\numberline {4.4}eQTMs}{24}{section.4.4}
+\contentsline {section}{\numberline {4.5}meQTLs}{25}{section.4.5}
+\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{26}{section.4.6}
+\contentsline {subsection}{\numberline {4.6.1}Data collection}{26}{subsection.4.6.1}
+\contentsline {subsection}{\numberline {4.6.2}General analysis}{26}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Detailed analysis}{26}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Discussion}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}HERV region features}{29}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}Expression}{29}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}Methylation}{29}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}Genotypes}{29}{subsection.5.1.3}
+\contentsline {section}{\numberline {5.2}eQTLs}{29}{section.5.2}
+\contentsline {section}{\numberline {5.3}eQTMs}{29}{section.5.3}
+\contentsline {section}{\numberline {5.4}meQTLs}{29}{section.5.4}
+\contentsline {section}{\numberline {5.5}Regulatory networks}{29}{section.5.5}
+\contentsline {chapter}{\numberline {6}Conclusion and Outlook}{31}{chapter.6}

@@ -3,49 +3,54 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: unsrt.bst
 Database file #1: mybib.bib
+Warning--I'm ignoring Franceschini2013's extra "note" field
+--line 71 of file mybib.bib
+Warning--I'm ignoring Krumsiek2011's extra "note" field
+--line 382 of file mybib.bib
 Warning--I'm ignoring 10.1186/gb-2008-9-9-r137's extra "note" field
---line 403 of file mybib.bib
+--line 583 of file mybib.bib
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
-You've used 38 entries,
+Warning--empty year in 10.1111/j.1467-842X.2004.00360.x
+You've used 49 entries,
             1791 wiz_defined-function locations,
-            712 strings with 17515 characters,
-and the built_in function-call counts, 13231 in all, are:
-= -- 734
-> -- 1484
+            783 strings with 19859 characters,
+and the built_in function-call counts, 15929 in all, are:
+= -- 950
+> -- 1640
 < -- 0
-+ -- 510
-- -- 472
-* -- 1405
-:= -- 2495
-add.period$ -- 122
-call.type$ -- 38
-change.case$ -- 34
++ -- 566
+- -- 517
+* -- 1632
+:= -- 2947
+add.period$ -- 159
+call.type$ -- 49
+change.case$ -- 45
 chr.to.int$ -- 0
-cite$ -- 40
-duplicate$ -- 330
-empty$ -- 824
-format.name$ -- 472
-if$ -- 2580
+cite$ -- 52
+duplicate$ -- 431
+empty$ -- 1073
+format.name$ -- 517
+if$ -- 3164
 int.to.chr$ -- 0
-int.to.str$ -- 38
-missing$ -- 34
-newline$ -- 201
-num.names$ -- 38
-pop$ -- 44
+int.to.str$ -- 49
+missing$ -- 45
+newline$ -- 260
+num.names$ -- 49
+pop$ -- 58
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 126
+skip$ -- 165
 stack$ -- 0
-substring$ -- 625
-swap$ -- 40
+substring$ -- 805
+swap$ -- 52
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 2
-while$ -- 72
-width$ -- 40
-write$ -- 430
-(There were 3 warnings)
+warning$ -- 3
+while$ -- 92
+width$ -- 51
+write$ -- 557
+(There were 6 warnings)
