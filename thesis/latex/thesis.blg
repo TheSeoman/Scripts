@@ -1,56 +1,61 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
-The style file: unsrt.bst
+The style file: unsrtMod.bst
 Database file #1: mybib.bib
 Warning--I'm ignoring Franceschini2013's extra "note" field
 --line 71 of file mybib.bib
 Warning--I'm ignoring Krumsiek2011's extra "note" field
---line 382 of file mybib.bib
+--line 388 of file mybib.bib
 Warning--I'm ignoring 10.1186/gb-2008-9-9-r137's extra "note" field
---line 583 of file mybib.bib
+--line 589 of file mybib.bib
+Warning--I'm ignoring Malfavon-Borja2015's extra "note" field
+--line 817 of file mybib.bib
+Warning--entry type for "HumanHT" isn't style-file defined
+--line 823 of file mybib.bib
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
+Warning--empty booktitle in Mohammadi2015BDgraphAR
 Warning--empty year in 10.1111/j.1467-842X.2004.00360.x
-You've used 49 entries,
-            1791 wiz_defined-function locations,
-            783 strings with 19859 characters,
-and the built_in function-call counts, 15929 in all, are:
-= -- 950
-> -- 1640
+You've used 52 entries,
+            1814 wiz_defined-function locations,
+            807 strings with 20383 characters,
+and the built_in function-call counts, 11987 in all, are:
+= -- 1075
+> -- 574
 < -- 0
-+ -- 566
-- -- 517
-* -- 1632
-:= -- 2947
-add.period$ -- 159
-call.type$ -- 49
-change.case$ -- 45
++ -- 266
+- -- 133
+* -- 869
+:= -- 1889
+add.period$ -- 168
+call.type$ -- 52
+change.case$ -- 48
 chr.to.int$ -- 0
-cite$ -- 52
-duplicate$ -- 431
-empty$ -- 1073
-format.name$ -- 517
-if$ -- 3164
+cite$ -- 56
+duplicate$ -- 456
+empty$ -- 1140
+format.name$ -- 133
+if$ -- 2674
 int.to.chr$ -- 0
-int.to.str$ -- 49
-missing$ -- 45
-newline$ -- 260
-num.names$ -- 49
-pop$ -- 58
+int.to.str$ -- 52
+missing$ -- 47
+newline$ -- 275
+num.names$ -- 52
+pop$ -- 115
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 165
+skip$ -- 284
 stack$ -- 0
-substring$ -- 805
-swap$ -- 52
+substring$ -- 832
+swap$ -- 55
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 3
-while$ -- 92
-width$ -- 51
-write$ -- 557
-(There were 6 warnings)
+warning$ -- 4
+while$ -- 96
+width$ -- 54
+write$ -- 587
+(There were 9 warnings)

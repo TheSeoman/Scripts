@@ -1,101 +1,7 @@
 \begin{thebibliography}{10}
 
-\bibitem{Hasin2017}
-Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
-\newblock Multi-omics approaches to disease.
-\newblock {\em Genome Biology}, 18(1):83, May 2017.
-
-\bibitem{10.3389/fgene.2015.00002}
-Alexander~F. Palazzo and Eliza~S. Lee.
-\newblock Non-coding rna: what is functional and what is junk?
-\newblock {\em Frontiers in Genetics}, 6:2, 2015.
-
-\bibitem{Wang2009}
-Zhong Wang, Mark Gerstein, and Michael Snyder.
-\newblock Rna-seq: a revolutionary tool for transcriptomics.
-\newblock {\em Nat Rev Genet}, 10(1):57--63, Jan 2009.
-\newblock 19015660[pmid].
-
-\bibitem{Schulze2001}
-Almut Schulze and Julian Downward.
-\newblock Navigating gene expression using microarrays -- a technology review.
-\newblock {\em Nature Cell Biology}, 3:E190 EP --, Aug 2001.
-
-\bibitem{Piuntiaad9780}
-Andrea Piunti and Ali Shilatifard.
-\newblock Epigenetic balance of gene expression by polycomb and compass
-  families.
-\newblock {\em Science}, 352(6290), 2016.
-
-\bibitem{Deaton2011}
-Aim{\'e}e~M. Deaton and Adrian Bird.
-\newblock Cpg islands and the regulation of transcription.
-\newblock {\em Genes Dev}, 25(10):1010--1022, May 2011.
-\newblock 21576262[pmid].
-
-\bibitem{Smith2013}
-Zachary~D. Smith and Alexander Meissner.
-\newblock Dna methylation: roles in mammalian development.
-\newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
-\newblock Review Article.
-
 \bibitem{Venter1304}
-J.~Craig Venter, Mark~D. Adams, Eugene~W. Myers, Peter~W. Li, Richard~J. Mural,
-  Granger~G. Sutton, Hamilton~O. Smith, Mark Yandell, Cheryl~A. Evans,
-  Robert~A. Holt, Jeannine~D. Gocayne, Peter Amanatides, Richard~M. Ballew,
-  Daniel~H. Huson, Jennifer~Russo Wortman, Qing Zhang, Chinnappa~D. Kodira,
-  Xiangqun~H. Zheng, Lin Chen, Marian Skupski, Gangadharan Subramanian, Paul~D.
-  Thomas, Jinghui Zhang, George~L. Gabor~Miklos, Catherine Nelson, Samuel
-  Broder, Andrew~G. Clark, Joe Nadeau, Victor~A. McKusick, Norton Zinder,
-  Arnold~J. Levine, Richard~J. Roberts, Mel Simon, Carolyn Slayman, Michael
-  Hunkapiller, Randall Bolanos, Arthur Delcher, Ian Dew, Daniel Fasulo, Michael
-  Flanigan, Liliana Florea, Aaron Halpern, Sridhar Hannenhalli, Saul Kravitz,
-  Samuel Levy, Clark Mobarry, Knut Reinert, Karin Remington, Jane Abu-Threideh,
-  Ellen Beasley, Kendra Biddick, Vivien Bonazzi, Rhonda Brandon, Michele
-  Cargill, Ishwar Chandramouliswaran, Rosane Charlab, Kabir Chaturvedi, Zuoming
-  Deng, Valentina~Di Francesco, Patrick Dunn, Karen Eilbeck, Carlos
-  Evangelista, Andrei~E. Gabrielian, Weiniu Gan, Wangmao Ge, Fangcheng Gong,
-  Zhiping Gu, Ping Guan, Thomas~J. Heiman, Maureen~E. Higgins, Rui-Ru Ji,
-  Zhaoxi Ke, Karen~A. Ketchum, Zhongwu Lai, Yiding Lei, Zhenya Li, Jiayin Li,
-  Yong Liang, Xiaoying Lin, Fu~Lu, Gennady~V. Merkulov, Natalia Milshina,
-  Helen~M. Moore, Ashwinikumar~K Naik, Vaibhav~A. Narayan, Beena Neelam,
-  Deborah Nusskern, Douglas~B. Rusch, Steven Salzberg, Wei Shao, Bixiong Shue,
-  Jingtao Sun, Zhen~Yuan Wang, Aihui Wang, Xin Wang, Jian Wang, Ming-Hui Wei,
-  Ron Wides, Chunlin Xiao, Chunhua Yan, Alison Yao, Jane Ye, Ming Zhan, Weiqing
-  Zhang, Hongyu Zhang, Qi~Zhao, Liansheng Zheng, Fei Zhong, Wenyan Zhong,
-  Shiaoping~C. Zhu, Shaying Zhao, Dennis Gilbert, Suzanna Baumhueter, Gene
-  Spier, Christine Carter, Anibal Cravchik, Trevor Woodage, Feroze Ali, Huijin
-  An, Aderonke Awe, Danita Baldwin, Holly Baden, Mary Barnstead, Ian Barrow,
-  Karen Beeson, Dana Busam, Amy Carver, Angela Center, Ming~Lai Cheng, Liz
-  Curry, Steve Danaher, Lionel Davenport, Raymond Desilets, Susanne Dietz,
-  Kristina Dodson, Lisa Doup, Steven Ferriera, Neha Garg, Andres Gluecksmann,
-  Brit Hart, Jason Haynes, Charles Haynes, Cheryl Heiner, Suzanne Hladun, Damon
-  Hostin, Jarrett Houck, Timothy Howland, Chinyere Ibegwam, Jeffery Johnson,
-  Francis Kalush, Lesley Kline, Shashi Koduru, Amy Love, Felecia Mann, David
-  May, Steven McCawley, Tina McIntosh, Ivy McMullen, Mee Moy, Linda Moy, Brian
-  Murphy, Keith Nelson, Cynthia Pfannkoch, Eric Pratts, Vinita Puri, Hina
-  Qureshi, Matthew Reardon, Robert Rodriguez, Yu-Hui Rogers, Deanna Romblad,
-  Bob Ruhfel, Richard Scott, Cynthia Sitter, Michelle Smallwood, Erin Stewart,
-  Renee Strong, Ellen Suh, Reginald Thomas, Ni~Ni Tint, Sukyee Tse, Claire
-  Vech, Gary Wang, Jeremy Wetter, Sherita Williams, Monica Williams, Sandra
-  Windsor, Emily Winn-Deen, Keriellen Wolfe, Jayshree Zaveri, Karena Zaveri,
-  Josep~F. Abril, Roderic Guig{\'o}, Michael~J. Campbell, Kimmen~V. Sjolander,
-  Brian Karlak, Anish Kejariwal, Huaiyu Mi, Betty Lazareva, Thomas Hatton,
-  Apurva Narechania, Karen Diemer, Anushya Muruganujan, Nan Guo, Shinji Sato,
-  Vineet Bafna, Sorin Istrail, Ross Lippert, Russell Schwartz, Brian Walenz,
-  Shibu Yooseph, David Allen, Anand Basu, James Baxendale, Louis Blick, Marcelo
-  Caminha, John Carnes-Stine, Parris Caulk, Yen-Hui Chiang, My~Coyne, Carl
-  Dahlke, Anne~Deslattes Mays, Maria Dombroski, Michael Donnelly, Dale Ely,
-  Shiva Esparham, Carl Fosler, Harold Gire, Stephen Glanowski, Kenneth Glasser,
-  Anna Glodek, Mark Gorokhov, Ken Graham, Barry Gropman, Michael Harris, Jeremy
-  Heil, Scott Henderson, Jeffrey Hoover, Donald Jennings, Catherine Jordan,
-  James Jordan, John Kasha, Leonid Kagan, Cheryl Kraft, Alexander Levitsky,
-  Mark Lewis, Xiangjun Liu, John Lopez, Daniel Ma, William Majoros, Joe
-  McDaniel, Sean Murphy, Matthew Newman, Trung Nguyen, Ngoc Nguyen, Marc
-  Nodell, Sue Pan, Jim Peck, Marshall Peterson, William Rowe, Robert Sanders,
-  John Scott, Michael Simpson, Thomas Smith, Arlan Sprague, Timothy Stockwell,
-  Russell Turner, Eli Venter, Mei Wang, Meiyuan Wen, David Wu, Mitchell Wu,
-  Ashley Xia, Ali Zandieh, and Xiaohong Zhu.
+J.~Craig Venter, Mark~D. Adams, Eugene~W. Myers, et~al.
 \newblock The sequence of the human genome.
 \newblock {\em Science}, 291(5507):1304--1351, 2001.
 
@@ -140,6 +46,12 @@ George~R. Young, Jonathan~P. Stoye, and George Kassiotis.
   the hypothesis.
 \newblock {\em BioEssays}, 35(9):794--803, 2013.
 
+\bibitem{Smith2013}
+Zachary~D. Smith and Alexander Meissner.
+\newblock Dna methylation: roles in mammalian development.
+\newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
+\newblock Review Article.
+
 \bibitem{10.3892/ijmm.2013.1460}
 H.~Yu, Z.~Zhao, and F.~Zhu.
 \newblock The role of human endogenous retroviral long terminal repeat
@@ -152,6 +64,39 @@ Gorjan Slokar and Gregor Hasler.
 \newblock Human endogenous retroviruses as pathogenic factors in the
   development of schizophrenia.
 \newblock 6, 01 2016.
+
+\bibitem{Hasin2017}
+Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
+\newblock Multi-omics approaches to disease.
+\newblock {\em Genome Biology}, 18(1):83, May 2017.
+
+\bibitem{10.3389/fgene.2015.00002}
+Alexander~F. Palazzo and Eliza~S. Lee.
+\newblock Non-coding rna: what is functional and what is junk?
+\newblock {\em Frontiers in Genetics}, 6:2, 2015.
+
+\bibitem{Wang2009}
+Zhong Wang, Mark Gerstein, and Michael Snyder.
+\newblock Rna-seq: a revolutionary tool for transcriptomics.
+\newblock {\em Nat Rev Genet}, 10(1):57--63, Jan 2009.
+\newblock 19015660[pmid].
+
+\bibitem{Schulze2001}
+Almut Schulze and Julian Downward.
+\newblock Navigating gene expression using microarrays -- a technology review.
+\newblock {\em Nature Cell Biology}, 3:E190 EP --, Aug 2001.
+
+\bibitem{Piuntiaad9780}
+Andrea Piunti and Ali Shilatifard.
+\newblock Epigenetic balance of gene expression by polycomb and compass
+  families.
+\newblock {\em Science}, 352(6290), 2016.
+
+\bibitem{Deaton2011}
+Aim{\'e}e~M. Deaton and Adrian Bird.
+\newblock Cpg islands and the regulation of transcription.
+\newblock {\em Genes Dev}, 25(10):1010--1022, May 2011.
+\newblock 21576262[pmid].
 
 \bibitem{Krumsiek2011}
 Jan Krumsiek, Karsten Suhre, Thomas Illig, Jerzy Adamski, and Fabian~J. Theis.
@@ -171,9 +116,7 @@ T.F. Smith and M.S. Waterman.
 \newblock {\em Journal of Molecular Biology}, 147(1):195 -- 197, 1981.
 
 \bibitem{10.3389/fgene.2016.00023}
-Lindsay~L. Waite, Benjamin Weaver, Kenneth Day, Xinrui Li, Kevin Roberts,
-  Andrew~W. Gibson, Jeffrey~C. Edberg, Robert~P. Kimberly, Devin~M. Absher, and
-  Hemant~K. Tiwari.
+Lindsay~L. Waite, Benjamin Weaver, Kenneth Day, et~al.
 \newblock Estimation of cell-type composition including t and b cell subtypes
   for whole blood methylation microarray data.
 \newblock {\em Frontiers in Genetics}, 7:23, 2016.
@@ -185,27 +128,19 @@ Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
 \newblock {\em PLOS Genetics}, 5(6):1--15, 06 2009.
 
 \bibitem{Schroeder2006}
-Andreas Schroeder, Odilo Mueller, Susanne Stocker, Ruediger Salowsky, Michael
-  Leiber, Marcus Gassmann, Samar Lightfoot, Wolfram Menzel, Martin Granzow, and
-  Thomas Ragg.
+Andreas Schroeder, Odilo Mueller, Susanne Stocker, et~al.
 \newblock The rin: an rna integrity number for assigning integrity values to
   rna measurements.
 \newblock {\em BMC Molecular Biology}, 7(1):3, Jan 2006.
 
 \bibitem{Yineaaj2239}
-Yimeng Yin, Ekaterina Morgunova, Arttu Jolma, Eevi Kaasinen, Biswajyoti Sahu,
-  Syed Khund-Sayeed, Pratyush~K. Das, Teemu Kivioja, Kashyap Dave, Fan Zhong,
-  Kazuhiro~R. Nitta, Minna Taipale, Alexander Popov, Paul~A. Ginno, Silvia
-  Domcke, Jian Yan, Dirk Sch{\"u}beler, Charles Vinson, and Jussi Taipale.
+Yimeng Yin, Ekaterina Morgunova, Arttu Jolma, et~al.
 \newblock Impact of cytosine methylation on dna binding specificities of human
   transcription factors.
 \newblock {\em Science}, 356(6337), 2017.
 
 \bibitem{10.1101/gr.139105.112}
-Jie Wang, Jiali Zhuang, Sowmya Iyer, XinYing Lin, Troy~W. Whitfield, Melissa~C.
-  Greven, Brian~G. Pierce, Xianjun Dong, Anshul Kundaje, Yong Cheng, Oliver~J.
-  Rando, Ewan Birney, Richard~M. Myers, William~S. Noble, Michael Snyder, and
-  Zhiping Weng.
+Jie Wang, Jiali Zhuang, Sowmya Iyer, et~al.
 \newblock Sequence features and chromatin structure around the genomic regions
   bound by 119 human transcription factors.
 \newblock {\em Genome Res}, 22(9):1798--1812, Sep 2012.
@@ -221,27 +156,20 @@ Charles~E. Grant, Timothy~L. Bailey, and William~Stafford Noble.
 \newblock {\em Bioinformatics}, 27(7):1017--1018, 2011.
 
 \bibitem{10.1093/nar/gkx1126}
-Aziz Khan, Oriol Fornes, Arnaud Stigliani, Marius Gheorghe, Jaime~A
-  Castro-Mondragon, Robin van~der Lee, Adrien Bessy, Jeanne Chèneby,
-  Shubhada~R Kulkarni, Ge~Tan, Damir Baranasic, David~J Arenillas, Albin
-  Sandelin, Klaas Vandepoele, Boris Lenhard, Benoît Ballester, Wyeth~W
-  Wasserman, François Parcy, and Anthony Mathelier.
+Aziz Khan, Oriol Fornes, Arnaud Stigliani, et~al.
 \newblock Jaspar 2018: update of the open-access database of transcription
   factor binding profiles and its web framework.
 \newblock {\em Nucleic Acids Research}, 46(D1):D260--D266, 2018.
 
 \bibitem{10.1093/nar/gkj143}
-V.~Matys, O.~V. Kel-Margoulis, E.~Fricke, I.~Liebich, S.~Land, A.~Barre-Dirrie,
-  I.~Reuter, D.~Chekmenev, M.~Krull, K.~Hornischer, N.~Voss, P.~Stegmaier,
-  B.~Lewicki-Potapov, H.~Saxel, A.~E. Kel, and E.~Wingender.
+V.~Matys, O.~V. Kel-Margoulis, E.~Fricke, et~al.
 \newblock Transfac(?) and its module transcompel(?): transcriptional gene
   regulation in eukaryotes.
 \newblock {\em Nucleic Acids Res}, 34(Database issue):D108--D110, Jan 2006.
 \newblock 16381825[pmid].
 
 \bibitem{10.1093/nar/gku1280}
-Aurelien Griffon, Quentin Barbier, Jordi Dalino, Jacques van Helden, Salvatore
-  Spicuglia, and Benoit Ballester.
+Aurelien Griffon, Quentin Barbier, Jordi Dalino, et~al.
 \newblock Integrative analysis of public chip-seq experiments reveals a complex
   multi-cell regulatory landscape.
 \newblock {\em Nucleic Acids Research}, 43(4):e27, 2015.
@@ -252,26 +180,20 @@ Ben Langmead and Steven~L. Salzberg.
 \newblock {\em Nature Methods}, 9:357 EP --, Mar 2012.
 
 \bibitem{10.1186/gb-2008-9-9-r137}
-Yong Zhang, Tao Liu, Clifford~A. Meyer, J{\'e}r{\^o}me Eeckhoute, David~S.
-  Johnson, Bradley~E. Bernstein, Chad Nusbaum, Richard~M. Myers, Myles Brown,
-  Wei Li, and X.~Shirley Liu.
+Yong Zhang, Tao Liu, Clifford~A. Meyer, et~al.
 \newblock Model-based analysis of chip-seq (macs).
 \newblock {\em Genome Biol}, 9(9):R137--R137, Sep 2008.
 \newblock gb-2008-9-9-r137[PII].
 
 \bibitem{Franceschini2013}
-Andrea Franceschini, Damian Szklarczyk, Sune Frankild, Michael Kuhn, Milan
-  Simonovic, Alexander Roth, Jianyi Lin, Pablo Minguez, Peer Bork, Christian
-  von Mering, and Lars~J. Jensen.
+Andrea Franceschini, Damian Szklarczyk, Sune Frankild, et~al.
 \newblock String v9.1: protein-protein interaction networks, with increased
   coverage and integration.
 \newblock {\em Nucleic Acids Res}, 41(Database issue):D808--D815, Jan 2013.
 \newblock gks1094[PII].
 
 \bibitem{Szklarczyk2017}
-Damian Szklarczyk, John~H. Morris, Helen Cook, Michael Kuhn, Stefan Wyder,
-  Milan Simonovic, Alberto Santos, Nadezhda~T. Doncheva, Alexander Roth, Peer
-  Bork, Lars~J. Jensen, and Christian von?Mering.
+Damian Szklarczyk, John~H. Morris, Helen Cook, et~al.
 \newblock The string database in 2017: quality-controlled protein-protein
   association networks, made broadly accessible.
 \newblock {\em Nucleic Acids Res}, 45(Database issue):D362--D368, Jan 2017.
@@ -294,8 +216,7 @@ R~Core Team.
 \newblock R Foundation for Statistical Computing, Vienna, Austria, 2017.
 
 \bibitem{10.1371/journal.pcbi.1003118}
-Michael Lawrence, Wolfgang Huber, Herv\'e Pag\`es, Patrick Aboyoun, Marc
-  Carlson, Robert Gentleman, Martin Morgan, and Vincent Carey.
+Michael Lawrence, Wolfgang Huber, Herv\'e Pag\`es, et~al.
 \newblock Software for computing and annotating genomic ranges.
 \newblock {\em {PLoS} Computational Biology}, 9, 2013.
 
@@ -338,6 +259,12 @@ Sture Holm.
 \newblock A simple sequentially rejective multiple test procedure.
 \newblock {\em Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
 
+\bibitem{Mohammadi2015BDgraphAR}
+Abdolreza Mohammadi and Ernst~C Wit.
+\newblock Bdgraph: An r package for bayesian structure learning in graphical
+  models.
+\newblock 2015.
+
 \bibitem{Mohammadi2015}
 Abdolreza Mohammadi and Ernst~C. Wit.
 \newblock Bayesian structure learning in sparse gaussian graphical models.
@@ -357,14 +284,19 @@ Juliane Schäfer and Korbinian Strimmer.
   and WWW}, 2005.
 
 \bibitem{10.1371/journal.pone.0093844}
-Katharina Schramm, Carola Marzi, Claudia Schurmann, Maren Carstensen, Eva
-  Reinmaa, Reiner Biffar, Gertrud Eckstein, Christian Gieger, Hans-Jörgen
-  Grabe, Georg Homuth, Gabriele Kastenmüller, Reedik Mägi, Andres Metspalu,
-  Evelin Mihailov, Annette Peters, Astrid Petersmann, Michael Roden, Konstantin
-  Strauch, Karsten Suhre, Alexander Teumer, Uwe Völker, Henry Völzke, Rui
-  Wang-Sattler, Melanie Waldenberger, Thomas Meitinger, Thomas Illig, Christian
-  Herder, Harald Grallert, and Holger Prokisch.
+Katharina Schramm, Carola Marzi, Claudia Schurmann, et~al.
 \newblock Mapping the genetic architecture of gene regulation in whole blood.
 \newblock {\em PLOS ONE}, 9(4):1--13, 04 2014.
+
+\bibitem{HumanHT}
+Inc Illumina.
+\newblock Data sheet: Humanht-12 v3 expression beadchip, 2010.
+
+\bibitem{Malfavon-Borja2015}
+Ray Malfavon-Borja and C{\'e}dric Feschotte.
+\newblock Fighting fire with fire: Endogenous retrovirus envelopes as
+  restriction factors.
+\newblock {\em J Virol}, 89(8):4047--4050, Apr 2015.
+\newblock 03653-14[PII].
 
 \end{thebibliography}
