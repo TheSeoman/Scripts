@@ -35,14 +35,11 @@
 \contentsline {section}{\numberline {4.6}HERV related regulatory networks}{29}{section.4.6}
 \contentsline {subsection}{\numberline {4.6.1}Data collection}{30}{subsection.4.6.1}
 \contentsline {subsection}{\numberline {4.6.2}General networks overview}{31}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Example networks}{32}{subsection.4.6.3}
-\contentsline {chapter}{\numberline {5}Discussion}{33}{chapter.5}
-\contentsline {section}{\numberline {5.1}HERV region features}{33}{section.5.1}
-\contentsline {subsection}{\numberline {5.1.1}Expression}{33}{subsection.5.1.1}
-\contentsline {subsection}{\numberline {5.1.2}Methylation}{33}{subsection.5.1.2}
-\contentsline {subsection}{\numberline {5.1.3}Genotypes}{34}{subsection.5.1.3}
-\contentsline {section}{\numberline {5.2}eQTLs}{34}{section.5.2}
-\contentsline {section}{\numberline {5.3}eQTMs}{34}{section.5.3}
-\contentsline {section}{\numberline {5.4}meQTLs}{34}{section.5.4}
-\contentsline {section}{\numberline {5.5}Regulatory networks}{34}{section.5.5}
+\contentsline {subsection}{\numberline {4.6.3}Example networks}{33}{subsection.4.6.3}
+\contentsline {chapter}{\numberline {5}Discussion}{35}{chapter.5}
+\contentsline {section}{\numberline {5.1}HERV region features}{35}{section.5.1}
+\contentsline {section}{\numberline {5.2}Quantitative trait loci}{36}{section.5.2}
+\contentsline {section}{\numberline {5.3}eQTMs}{36}{section.5.3}
+\contentsline {section}{\numberline {5.4}meQTLs}{36}{section.5.4}
+\contentsline {section}{\numberline {5.5}Regulatory networks}{36}{section.5.5}
 \contentsline {chapter}{\numberline {6}Conclusion and Outlook}{37}{chapter.6}

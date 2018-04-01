@@ -22,6 +22,9 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces }}{29}{figure.4.8}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}}{30}{figure.4.9}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Size and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}}{31}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Number and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}}{32}{figure.4.11}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Number and composition of nodes in restricted GGM networks. A and B are the ten biggest networks for GGMs seeded in SNPs, C are all networks for GGMs seeded HERV-CpGs.}}{32}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Number of entities and size of the biggest connected component of GGMs based on SNP (A) and CpG (B) seeds.}}{33}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Restricted network seeded in rs11079148. }}{34}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Restricted network seeded in cg06889971. }}{34}{figure.4.14}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

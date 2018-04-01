@@ -546,7 +546,7 @@ In the calculation of GGMs with the package BDgraph the following steps are repe
 
 First The birth and death rates as well as the waiting time is calculated. Then a jump is simulated according to the probabilities in equations \ref{eq:birth.prob} and \ref{eq:death.prob} and an edge is added or removed. Finally, the precision matrix for the new graph is sampled. This is done using a sampler defined in \cite{Mohammadi2015}, that I will not elaborate on.  
 
-The output of the calculation consists of the graphs, precision matrices and waiting times for each iteration. The posterior probabilities of all visited graphs are estimated by the total waiting time on each graph during the iterations as shown in figure \ref{fig:bdgraph.waiting.graph}. This means a graph is considered more likely when it was visited multiple times and/or the total birth and death rates when at this graph were low leading to long waiting times. The approach usually takes some time to converge close to the posterior distribution. Therefore, BDgraph offers the the function to define a number of iterations, that are used as "burn-in" period, which are not considered for the calculation of graph probabilities.  
+The output of the calculation consists of the graphs, precision matrices and waiting times for each iteration. The posterior probabilities of all visited graphs are estimated by the total waiting time on each graph during the iterations as shown in figure \ref{fig:bdgraph.waiting.graph}. This means a graph is considered more likely when it was visited multiple times and/or the total birth and death rates when at this graph were low leading to long waiting times. The approach usually takes some time to converge close to the posterior distribution. Therefore, BDgraph offers the function to define a number of iterations, that are used as "burn-in" period, which are not considered for the calculation of graph probabilities.  
 
 \begin{figure}[b!]
 \begin{center}
@@ -601,7 +601,7 @@ First the edges in the network were filtered for an edge inclusion probability o
 
 Then the numbers of CpGs/SNPs, CpG/SNP genes and probes, transcription factors and path genes included in the biggest connected component were counted. As for the data prior to GGM calculation, networks with less than one SNP/CpG gene or probe and no shortest path gene or transcription factor were removed. 
 
-Furthermore, the the amount of CpG and SNP genes, that had an edge to the CpG/SNP that caused them to be included in the analysis was determined. Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either as being part of the same connected component or a direct edge. 
+Furthermore, the amount of CpG and SNP genes, that had an edge to the CpG/SNP that caused them to be included in the analysis was determined. Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either as being part of the same connected component or a direct edge. 
 
 %TODO include expected/hoped for GGM structure, elaborate on why certain edges are interesting
 
@@ -856,7 +856,7 @@ In the following chapter I will present the results of the GGM analysis on HERV 
 In the following "entity" describes one of a CpG site, a SNP, a gene or an expression probe.
 %SNP seed approach
 
-Filtering the SNPs that were part of at least five trans-meQTLs for relation to elements in HERV S2 resulted in 1885 seed-SNPs. These were consequently used to generate 1883 data sets for GGM calculation accordingly to the criteria defined in \ref{Methods:Data collection}. These sets contained between 13 and 727 entities. The exact size and composition of the biggest (A) and smallest (B) sets is shown in figure \ref{fig:ggm.data.entity.bar}.
+Filtering the SNPs that were part of at least five trans-meQTLs for relation to elements in HERV S2 resulted in 1885 seed-SNPs. These were consequently used to generate 1882 data sets for GGM calculation accordingly to the criteria defined in \ref{Methods:Data collection}. These sets contained between 13 and 428 entities. The exact size and composition of the biggest (A) and smallest (B) sets is shown in figure \ref{fig:ggm.data.entity.bar}.
 
 In general the biggest groups of entities were CpGs, genes and probes neighboring CpGs and transcription factors. The number genes and probes around the SNP was rather consistent. 1103 of the data sets were enriched with shortest path genes derived from protein-protein interactions. The length of these paths was between 1 and 8. 
 
@@ -880,24 +880,49 @@ The distribution of different types of entities was similar to the data sets con
 \label{Results:General networks overview}
 The following section will give a short overview over GGMs calculated as described in section \ref{Methods:GGM calculation and filtering}. 
 
-xxx of the 1883 data sets generated from HERV related SNPs remained after filtering. The restricted networks consisted of between xx and xxx nodes. The actual sizes and compositions of the biggest (A) and smallest networks can be seen in figure \ref{fig:ggm.cc.nodes.bar}.
+937 of the 1882 data sets generated from HERV related SNPs remained after filtering. The restricted networks consisted of between 16 and 425 nodes. The number and composition of nodes for the biggest (A) and smallest networks can be seen in figure \ref{fig:ggm.cc.nodes.bar}.
 
 The networks contained between xx and xxxx edges. 
 
-After filtering the 100 networks seeded in HERV-CpGs, 37 networks remained. The restricted networks contained between 914 and 23 nodes. Their sizes and compositions are shown in figure \ref{fig:ggm.cc.nodes.bar}C.
+After filtering the 100 networks seeded in HERV-CpGs, 37 networks remained. The restricted networks contained between 23 and 914 nodes. Their number and composition of nodes are shown in figure \ref{fig:ggm.cc.nodes.bar}C. 
+
+As displayed in figure \ref{fig:ggm.entity.cc.scatter}B almost all networks had one connected component which contained almost all nodes. Furthermore, GGMs with more entities were more likely to be retained after the filtering. 
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_cc_nodes_bar}  
-	\caption{Number and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}
+	\caption{Number and composition of nodes in restricted GGM networks. A and B are the ten biggest networks for GGMs seeded in SNPs, C are all networks for GGMs seeded HERV-CpGs.}
     \label{fig:ggm.cc.nodes.bar}
+\end{figure}
+
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_entity_cc_size_scatter}  
+	\caption{Number of entities and size of the biggest connected component of GGMs based on SNP (A) and CpG (B) seeds.}
+    \label{fig:ggm.entity.cc.scatter}
 \end{figure}
 
 %TODO calculate and add graph measures
 \subsection{Example networks}
 \label{Results:Example networks}
+In the follwing section I will show restricted networks. 
 
+Figure \ref{fig:rs11079148.ggm.network} shows the network generated from the dataset seeded in rs11079148 after edges were filtered at an edge inclusion probability of 0.9 or more. Only the biggest connected component, containing the SNP, is shown. 
 
+The dataset contained 95 entities, made up of one SNP, 29 CpGs that were significantly associated with it, 4 genes or unmapped probes around the SNP, 29 genes or unmapped probes neighboring the CpGs, 27 transcription factors and 8 shortes path genes. Of these 36 remained connected to the SNP. Apart form the SNP itself, they are 19 CpGs, one SNP gene, 11 CpG genes and probes, 10 transcription factors and 2 shortest path genes. The resticted network contains 35 edges, of which 3 are of special interest, as they connect CpG sites and their neighboring genes. There is no edge between the SNP and its neighboring gene. Instead the SNP is directly connected to three CpGs and one probe neighboring a CpG. 
 
+\begin{figure}[tb]
+	\includegraphics[scale = 0.2, keepaspectratio = true]{"../figures/rs11079148"}  
+	\caption{Restricted network seeded in rs11079148. }
+    \label{fig:rs11079148.ggm.network}
+\end{figure}
+
+The network shown in figure \ref{fig:cg06889971.ggm.network} is generated from the dataset collected starting with the CpG-site cg06889971. 
+
+19 of the 29 entities in the dataset are in the same connected component as the seed CpG. These are one of the two CpG genes, 15 of the 24 SNP genes and probes, two of which () lie within a HERV element themselves, and the only transcription factor in the data set. The restricted network contains 28 edges. The CpG has only one edge to the SNP, which shares an edge with the SNP gene ZNF415. 
+\begin{figure}[tb]
+	\includegraphics[scale = 0.6, keepaspectratio = true]{"../figures/cg06889971"}  
+	\caption{Restricted network seeded in cg06889971. }
+    \label{fig:cg06889971.ggm.network}
+\end{figure}
 
 \newpage
 \chapter{Discussion}
@@ -908,26 +933,24 @@ After filtering the 100 networks seeded in HERV-CpGs, 37 networks remained. The 
 
 Genotypes, expression levels and methylation levels were measured with microarray based methods. This means no global, unbiased analysis is possible. Therefore, the absence of measurements for many HERV elements is not sufficient to infer e.g. the lack of expression activity. The design of these arrays is not only based on prior knowledge and an assessment of the interest of each probe, but also sequence properties. For example the data sheet for the HumanHT-12 v3 Expression BeadChip\cite{HumanHT} mentions as parameters for the probe design among others the lack of similarity to other genes and the absence of highly repeated sequence in the genome. As a result it is to be expected, that HERVs, which are considered repeats after all, are covered sparsely. 
 
-\subsection{Expression}
-\label{Discussion:Expression}
 The number of available expression measurements within HERV elements was lower than expected, if the probes were randomly distributed. This is explained by the mentioned limitations in probe design, as well as the focus on annotated genes. This was supported by the result, that while over 60\% of all probes on the HumanHT-12 v3 Expression BeadChip are annotated to a gene, less than one fourth of the probes overlapping with HERVs belong to a gene.
 
 The enrichment of genes associated with the GO term "defense response" among them might conform with prior findings. Products encoded by HERVs have been found to play a role in host protection against viral infection\cite{Malfavon-Borja2015}.
 
 The distribution of expression values of HERV associated probes shows, that there certainly is expression activity within HERV elements. While the variance of expression values tends to be lower than on the entire data set, it is still enough for differential analyses. 
 
-\subsection{Methylation}
-\label{Discussion:Methylation}
+%\subsection{Methylation}
+%\label{Discussion:Methylation}
 The amount of probes measuring CpG-sites with HERV elements also was lower than would be expected, if probes were randomly distributed. This is expected to be due to probe design instead actual CpG occurrence. However an actual calculation of CpG density in HERV elements was not performed. 
 
 The high average of methylation level of HERV CpGs is in line with observations, that HERV LTRs tend to be methylated in order to silence their promoter activity\cite{Smith2013}.
 
-\subsection{Genotypes}
-\label{Discussion:Genotypes}
+%\subsection{Genotypes}
+%\label{Discussion:Genotypes}
 The availability of genotype measurements was an exception, as the fraction of SNPs within HERV elements was slightly higher than the fraction of the genome covered by HERVs. This might be represent an actual higher density of common variants in HERV elements, as they are known to be highly degenerated and experience almost no evolutionary pressure pressure\cite{10.1146/annurev.genom.7.080505.115700}.
 
-\section{eQTLs}
-\label{Discussion:eQTLs}
+\section{Quantitative trait loci}
+\label{Discussion:Quantitative trait loci}
 We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{}.
 
 Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. %TODO why?
@@ -936,7 +959,7 @@ The distributions of expression residuals for the significant eQTLs with worst p
 
 About 65\% of the cis-eQTLs identified by Schramm et al\cite{Schramm2014} were reproduced in this analysis. Considering that only a subset of the data was used and they methods as well as thresholds for the calculation of significant eQTLs were different, this is a good overlap. 
 
-The number of HERV related eQTLs shows that there certainly is some variation within HERV elements. Especially the high number of expression probes significantly associated with SNPs that lie within HERV elements shows the wide reaching effects. However, eQTLs do not grant insight into the underlying mechanisms. 
+The number of HERV related eQTLs shows that there certainly is some variation within HERV elements. Especially the high number of expression probes significantly associated with SNPs that lie within HERV elements hints at wide reaching effects. However, eQTLs do not grant insight into the underlying mechanisms. 
 
 This high number of probes and subsequently also genes might be the reason, that the GO enrichment on genes being part of HERV related eQTLs produced no significant results. xx\% of the genes that were part of any eQTL were also found in the filtered set.
 \section{eQTMs}
@@ -952,6 +975,8 @@ This high number of probes and subsequently also genes might be the reason, that
 
 \section{Regulatory networks}
 \label{Discussion:Regulatory networks}
+
+
 \begin{itemize}
 \item data collection not perfect
 \item example networks:
