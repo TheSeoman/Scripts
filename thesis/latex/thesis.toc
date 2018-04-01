@@ -22,21 +22,20 @@
 \contentsline {section}{\numberline {3.5}Gaussian Graphical Models}{15}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Methodological Background}{15}{subsection.3.5.1}
 \contentsline {subsection}{\numberline {3.5.2}Data collection}{18}{subsection.3.5.2}
-\contentsline {subsection}{\numberline {3.5.3}BDgraph parameters}{19}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3.5.3}GGM calculation and filtering}{19}{subsection.3.5.3}
 \contentsline {chapter}{\numberline {4}Results}{21}{chapter.4}
 \contentsline {section}{\numberline {4.1}Normalized Data}{21}{section.4.1}
 \contentsline {section}{\numberline {4.2}HERV region features}{21}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Expression}{22}{subsection.4.2.1}
 \contentsline {subsection}{\numberline {4.2.2}Methylation}{23}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Genotypes}{24}{subsection.4.2.3}
-\contentsline {subsection}{\numberline {4.2.4}Chromatin states}{24}{subsection.4.2.4}
 \contentsline {section}{\numberline {4.3}eQTLs}{24}{section.4.3}
 \contentsline {section}{\numberline {4.4}eQTMs}{26}{section.4.4}
 \contentsline {section}{\numberline {4.5}meQTLs}{27}{section.4.5}
-\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{30}{section.4.6}
+\contentsline {section}{\numberline {4.6}HERV related regulatory networks}{29}{section.4.6}
 \contentsline {subsection}{\numberline {4.6.1}Data collection}{30}{subsection.4.6.1}
-\contentsline {subsection}{\numberline {4.6.2}Network Selection}{31}{subsection.4.6.2}
-\contentsline {subsection}{\numberline {4.6.3}Detailed analysis}{32}{subsection.4.6.3}
+\contentsline {subsection}{\numberline {4.6.2}General networks overview}{31}{subsection.4.6.2}
+\contentsline {subsection}{\numberline {4.6.3}Example networks}{32}{subsection.4.6.3}
 \contentsline {chapter}{\numberline {5}Discussion}{33}{chapter.5}
 \contentsline {section}{\numberline {5.1}HERV region features}{33}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}Expression}{33}{subsection.5.1.1}
@@ -46,4 +45,4 @@
 \contentsline {section}{\numberline {5.3}eQTMs}{34}{section.5.3}
 \contentsline {section}{\numberline {5.4}meQTLs}{34}{section.5.4}
 \contentsline {section}{\numberline {5.5}Regulatory networks}{34}{section.5.5}
-\contentsline {chapter}{\numberline {6}Conclusion and Outlook}{35}{chapter.6}
+\contentsline {chapter}{\numberline {6}Conclusion and Outlook}{37}{chapter.6}

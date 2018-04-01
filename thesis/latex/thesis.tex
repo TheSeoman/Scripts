@@ -14,6 +14,7 @@
 
 %\usepackage[pdftex]{graphicx}
 \usepackage[utf8]{inputenc}
+\DeclareUnicodeCharacter{2010}{-}
 \usepackage{geometry}
 %\usepackage{bbold}
 \geometry{a4paper,left=2.5cm,right=2.5cm, top=2.5cm, bottom=3cm}
@@ -588,11 +589,23 @@ The second approach of data collection, shown in figure \ref{fig:ggm.data.collec
 	\label{fig:ggm.data.collect.cpg.scheme}
 \end{figure}
 
-\subsection{BDgraph parameters}
-\label{Methods:BDgraph parameters}
+For both approaches data sets that contained too few members were excluded as follow. Sets with less than one gene or probe neighboring a SNP and one neighboring a CpG-site were removed. Furthermore, if no transcription factor and no shortest path gene was found, the set was excluded. Therefore, each GGM calculated contained at least 5 entities.
+
+\subsection{GGM calculation and filtering}
+\label{Methods:GGM calculation and filtering}
 The BDgraph main method "bdgraph" was used to calculated the GGMs on the data sets that were just defined. I used the parameters, \texttt{'method = "gcgm"}, which leads to the use of the extension for mixed data. As algorithm I used the package default 'algorithm = "bdmcmc". The number of iterations was set to \texttt{'iter = 50000'}, while the burn-in period was \texttt{'burnin = 25000'}. "bdgraph" was run with a prior edge distribution of 'g.prior = 0.5'. The starting graph was set to \texttt{'g.start = "empty"'}, which means the calculation is started in an unconnected graph. Finally, the degrees of freedom for the G-Wishart distribution used to calculate the prior of the precision matrix was chosen as \texttt{'prior.df = 3'}.
 
+Due to large number and size of calculated GGMs no manual analyses of all networks was possible. Therefore, multiple criteria were defined to identify potentially interesting GGMs.
 
+First the edges in the network were filtered for an edge inclusion probability of more than 0.9. Then the connected components were determined. Networks, whose seed SNP or at least one seed CpG were not part of the biggest connected component, were excluded from the analysis. 
+
+Then the numbers of CpGs/SNPs, CpG/SNP genes and probes, transcription factors and path genes included in the biggest connected component were counted. As for the data prior to GGM calculation, networks with less than one SNP/CpG gene or probe and no shortest path gene or transcription factor were removed. 
+
+Furthermore, the the amount of CpG and SNP genes, that had an edge to the CpG/SNP that caused them to be included in the analysis was determined. Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either as being part of the same connected component or a direct edge. 
+
+%TODO include expected/hoped for GGM structure, elaborate on why certain edges are interesting
+
+A manual inspection of these criteria was performed in order to select which GGMs would be the target of detailed manual analysis. 
 
 \newpage
 \chapter{Results}
@@ -600,7 +613,7 @@ The BDgraph main method "bdgraph" was used to calculated the GGMs on the data se
 \section{Normalized Data}
 \label{Results:Normalized Data}
 %TODO expand and source why normal dist
-The distributions of the expression and methylation residuals, calculated as described in chapter \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res.hist}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{}.
+The distributions of the expression and methylation residuals, calculated as described in chapter \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res.hist}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{Mohammadi2015}.
 
 \begin{figure}[b!]
 	\includegraphics[scale=1, keepaspectratio = true]{../figures/expr_meth_res_hist}
@@ -722,8 +735,8 @@ In figure \ref{fig:hervS2.snp.hist}B the density of SNPs per base pair of its HE
 \end{figure}
 
 
-\subsection{Chromatin states}
-Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
+%\subsection{Chromatin states}
+%Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
 
 \section{eQTLs}
 \label{Results:eQTLs}
@@ -734,7 +747,7 @@ Associations were calculated for 156.4 millions cis acting SNP-expression probe 
 
 There were a total of 1511235 significant trans-eQTLs with an p-value of less than $10^{-8}$ and a FDR of less than $3.02*10^{-4}$. These are made up by 229332 distinct SNPs and 21338 expression probes. 11505 of the probes found in at least one trans-eQTL are annotated to 9389 different genes, while 9767 probes are not assigned to a gene.
 
-In a previous work Schramm et al. \cite{10.1371/journal.pone.0093844} calculated eQTLs on expression and genotype data from 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
+In a previous work Schramm et al. \cite{10.1371/journal.pone.0093844} calculated eQTLs on expression and genotype data from 2,708 subjects, including 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
 
 Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
 
@@ -815,7 +828,7 @@ The fractions of potential SNP-CpG pairs that were significantly associated with
 
 When limiting the analysis to meQTLs, that represent associations between different chromosomes, what we defined trans-meQTLs, a total of 64852 significant pairs between 2681 CpGs and 34957 SNPs remain. Of these meQTLs, 23463 have their CpGs within HERV S2. They consists of 155 different CpGs and 18825 SNPs. Analogously for 45175 pairs their 19192 SNPs are located within HERV S2 and associated with 2655 different CpGs.
 
-A GO biological process enrichment was performed on the 5128 genes, that contained at least one of the 53167 CpGs that were part of an HERV related meQTL. The significantly enriched terms are shown in table \ref{tab:tab:hervS2.meqtl.enrichment}
+A GO biological process enrichment was performed on the 5128 genes, that contained at least one of the 53167 CpGs that were part of an HERV related meQTL. The significantly enriched terms are shown in table \ref{tab:hervS2.meqtl.enrichment}
 
 \begin{table}[h!]
   \begin{center}
@@ -843,32 +856,45 @@ In the following chapter I will present the results of the GGM analysis on HERV 
 In the following "entity" describes one of a CpG site, a SNP, a gene or an expression probe.
 %SNP seed approach
 
-Filtering the SNPs that were part of at least five trans-meQTLs for relation to elements in HERV S2 resulted in 1885 seed-SNPs. These were consequently used to generate data sets for GGM calculation accordingly to the criteria defined in \ref{Methods:Data collection}. These sets contained between xx and xxx entities. The exact size and composition of the biggest (A) and smallest (B) sets is shown in figure \ref{fig:ggm.entity.bar}.
+Filtering the SNPs that were part of at least five trans-meQTLs for relation to elements in HERV S2 resulted in 1885 seed-SNPs. These were consequently used to generate 1883 data sets for GGM calculation accordingly to the criteria defined in \ref{Methods:Data collection}. These sets contained between 13 and 727 entities. The exact size and composition of the biggest (A) and smallest (B) sets is shown in figure \ref{fig:ggm.data.entity.bar}.
 
-%TODO write about distribution
+In general the biggest groups of entities were CpGs, genes and probes neighboring CpGs and transcription factors. The number genes and probes around the SNP was rather consistent. 1103 of the data sets were enriched with shortest path genes derived from protein-protein interactions. The length of these paths was between 1 and 8. 
 
-Collecting data with the HERV-CpG based approach described in section \ref{Methods:Data collection}, resulted in 148 data sets. However, the inclusion criterion of all other CpGs associated to the best associated SNP to any seed CpG lead to some duplicated sets, when the additional CpGs were seed-CpGs themselves. These sets were merged, as their data matrices were identical, which left 143 data sets. 
+For the selection of the CpG based approach, there were 148 CpGs that were part of an trans-meQTL and laid within HERV S2. 103 of these CpGs produced data sets, that contained all demanded types of entities. However, the inclusion criterion of all other CpGs associated to the best associated SNP to any seed CpG lead to some duplicated sets, when the additional CpGs were seed-CpGs themselves. These sets were merged, as their data matrices were identical, which left 100 data sets. 
 
-136 of these started from a single seed CpG, that had a significant trans association with a SNP, while 4 sets contained two seed CpGs, two sets three and one set four. 
+93 of these started from a single seed CpG, while 4 sets contained two seed CpGs, two sets three and one set four. 
 
-In total there were between 3 and 914 entities per data set. The number and composition of entities in the ten data sets with most (C) and least (D) entities is shown in figure \ref{fig:ggm.entity.bar}.
+In total there were between 5 and 914 entities per data set. The number and composition of entities in the ten data sets with most (C) and least (D) entities is shown in figure \ref{fig:ggm.data.entity.bar}.
 
-%TODO write about distribution
+The distribution of different types of entities was similar to the data sets constructed starting from HERV related SNPs. A total of 34 data sets contained shortest path genes of a length between 1 and 10.
 
-%TODO add figure caption, add plots for snp-ggms, change color scheme
+%TODO change color scheme
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_entity_bar}  
-	\caption{Number and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}
-    \label{fig:ggm.entity.bar}
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_data_entity_bar}  
+	\caption{Size and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}
+    \label{fig:ggm.data.entity.bar}
 \end{figure}
 
 
-\subsection{Network Selection}
-\label{Results:Network Selection}
-Due to large number and size of calculated GGMs no thorough analyses of all networks was possible. Therefore, multiple criteria were defined to identify potentially interesting GGMs.
+\subsection{General networks overview}
+\label{Results:General networks overview}
+The following section will give a short overview over GGMs calculated as described in section \ref{Methods:GGM calculation and filtering}. 
 
-\subsection{Detailed analysis}
-\label{Results:Detailed analysis}
+xxx of the 1883 data sets generated from HERV related SNPs remained after filtering. The restricted networks consisted of between xx and xxx nodes. The actual sizes and compositions of the biggest (A) and smallest networks can be seen in figure \ref{fig:ggm.cc.nodes.bar}.
+
+The networks contained between xx and xxxx edges. 
+
+After filtering the 100 networks seeded in HERV-CpGs, 37 networks remained. The restricted networks contained between 914 and 23 nodes. Their sizes and compositions are shown in figure \ref{fig:ggm.cc.nodes.bar}C.
+
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_cc_nodes_bar}  
+	\caption{Number and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}
+    \label{fig:ggm.cc.nodes.bar}
+\end{figure}
+
+%TODO calculate and add graph measures
+\subsection{Example networks}
+\label{Results:Example networks}
 
 
 
@@ -902,31 +928,39 @@ The availability of genotype measurements was an exception, as the fraction of S
 
 \section{eQTLs}
 \label{Discussion:eQTLs}
-\begin{itemize}
-\item loads of significant associations
-\item strong bias for cis-eQTL \cite{}
-\item cis way more known genes than trans - why?
-\item no clear visible pattern for "worst" eqtls... stricter threshold?
-\item schramm-eqtls pretty well replicated, differenced due to different methods and thresholds
-\item herv-eqtls somewhat lower, otherwise seem representative subset of total eqtls
-\item no go enrichment, low amount of genes anyways
-\end{itemize}
+We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{}.
+
+Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. %TODO why?
+ 
+The distributions of expression residuals for the significant eQTLs with worst p-values, shown in figure \ref{fig:best.worst.eqtl.boxplot}B and D, might hint towards setting a stricter cutoff. However, matrixEQTL works with continuous dosages instead of the discrete variants shown in the figure. This might disguise a more palpable association of the variant on the expression levels.
+
+About 65\% of the cis-eQTLs identified by Schramm et al\cite{Schramm2014} were reproduced in this analysis. Considering that only a subset of the data was used and they methods as well as thresholds for the calculation of significant eQTLs were different, this is a good overlap. 
+
+The number of HERV related eQTLs shows that there certainly is some variation within HERV elements. Especially the high number of expression probes significantly associated with SNPs that lie within HERV elements shows the wide reaching effects. However, eQTLs do not grant insight into the underlying mechanisms. 
+
+This high number of probes and subsequently also genes might be the reason, that the GO enrichment on genes being part of HERV related eQTLs produced no significant results. xx\% of the genes that were part of any eQTL were also found in the filtered set.
 \section{eQTMs}
 \label{Discussion:eQTMs}
-\begin{itemize}
-\item 
-\end{itemize}
 
 
 \section{meQTLs}
 \label{Discussion:meQTLs}
 \begin{itemize}
 \item 
-\item go-enrichment: neuro related -> associated with neurodegenerative diseases\cite{}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}
+\item go-enrichment: neuro related -> associated with neurodegenerative diseases\cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}
 \end{itemize}
 
 \section{Regulatory networks}
 \label{Discussion:Regulatory networks}
+\begin{itemize}
+\item data collection not perfect
+\item example networks:
+\begin{itemize}
+\item cg25843003|cg18808777: direct cpg-snp edge/only con through each other: maybe true path members not  present, multiple step path weaker than strong direct association, direct cpg-(trans-)snp gene edge is surprising
+\end{itemize}
+\item add priors to guide analysis 
+\end{itemize}
+
 
 \newpage
 \chapter{Conclusion and Outlook}

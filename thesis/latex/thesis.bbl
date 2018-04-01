@@ -283,11 +283,6 @@ Juliane Schäfer and Korbinian Strimmer.
 \newblock In {\em In Science of Complex Networks: From Biology to the Internet
   and WWW}, 2005.
 
-\bibitem{10.1371/journal.pone.0093844}
-Katharina Schramm, Carola Marzi, Claudia Schurmann, et~al.
-\newblock Mapping the genetic architecture of gene regulation in whole blood.
-\newblock {\em PLOS ONE}, 9(4):1--13, 04 2014.
-
 \bibitem{HumanHT}
 Inc Illumina.
 \newblock Data sheet: Humanht-12 v3 expression beadchip, 2010.
@@ -298,5 +293,16 @@ Ray Malfavon-Borja and C{\'e}dric Feschotte.
   restriction factors.
 \newblock {\em J Virol}, 89(8):4047--4050, Apr 2015.
 \newblock 03653-14[PII].
+
+\bibitem{Schramm2014}
+Katharina Schramm, Carola Marzi, Claudia Schurmann, et~al.
+\newblock Mapping the genetic architecture of gene regulation in whole blood.
+\newblock {\em PLOS ONE}, 9(4):1--13, 04 2014.
+
+\bibitem{Mortelmans2016}
+Kristien Mortelmans, Feng Wang-Johanning, and Gary~L. Johanning.
+\newblock The role of human endogenous retroviruses in brain development and
+  function.
+\newblock {\em APMIS}, 124(1-2):105--115.
 
 \end{thebibliography}

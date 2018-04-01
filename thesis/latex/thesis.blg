@@ -13,49 +13,51 @@ Warning--I'm ignoring Malfavon-Borja2015's extra "note" field
 --line 817 of file mybib.bib
 Warning--entry type for "HumanHT" isn't style-file defined
 --line 823 of file mybib.bib
+Warning--I didn't find a database entry for "10.1371/journal.pone.0093844"
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
 Warning--empty booktitle in Mohammadi2015BDgraphAR
 Warning--empty year in 10.1111/j.1467-842X.2004.00360.x
-You've used 52 entries,
+Warning--empty year in Mortelmans2016
+You've used 53 entries,
             1814 wiz_defined-function locations,
-            807 strings with 20383 characters,
-and the built_in function-call counts, 11987 in all, are:
-= -- 1075
-> -- 574
+            814 strings with 20583 characters,
+and the built_in function-call counts, 12245 in all, are:
+= -- 1097
+> -- 587
 < -- 0
-+ -- 266
-- -- 133
-* -- 869
-:= -- 1889
-add.period$ -- 168
-call.type$ -- 52
-change.case$ -- 48
++ -- 272
+- -- 136
+* -- 892
+:= -- 1927
+add.period$ -- 171
+call.type$ -- 53
+change.case$ -- 49
 chr.to.int$ -- 0
-cite$ -- 56
-duplicate$ -- 456
-empty$ -- 1140
-format.name$ -- 133
-if$ -- 2674
+cite$ -- 58
+duplicate$ -- 465
+empty$ -- 1164
+format.name$ -- 136
+if$ -- 2731
 int.to.chr$ -- 0
-int.to.str$ -- 52
-missing$ -- 47
-newline$ -- 275
-num.names$ -- 52
-pop$ -- 115
+int.to.str$ -- 53
+missing$ -- 48
+newline$ -- 280
+num.names$ -- 53
+pop$ -- 119
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 284
+skip$ -- 289
 stack$ -- 0
-substring$ -- 832
-swap$ -- 55
+substring$ -- 853
+swap$ -- 56
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 4
-while$ -- 96
-width$ -- 54
-write$ -- 587
-(There were 9 warnings)
+warning$ -- 5
+while$ -- 98
+width$ -- 55
+write$ -- 597
+(There were 11 warnings)
