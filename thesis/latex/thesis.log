@@ -1848,4 +1848,175 @@ Overfull \hbox (50.64464pt too wide) in paragraph at lines 762--763
 File: ../figures/best_worst_eqtl_boxplots.pdf Graphic file (type pdf)
 
 <use ../figures/best_worst_eqtl_boxplots.pdf>
-Package pdftex.def Info: ../figures/best_worst_eq
+Package pdftex.def Info: ../figures/best_worst_eqtl_boxplots.pdf used on input 
+line 771.
+(pdftex.def)             Requested size: 454.69763pt x 325.2142pt.
+ [25 <../figures/hervS2_snp_hist.pdf>] <../figures/eqtm_all_herv_heatmap.pdf, i
+d=650, 505.89pt x 237.88875pt>
+File: ../figures/eqtm_all_herv_heatmap.pdf Graphic file (type pdf)
+
+<use ../figures/eqtm_all_herv_heatmap.pdf>
+Package pdftex.def Info: ../figures/eqtm_all_herv_heatmap.pdf used on input lin
+e 797.
+(pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
+
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 797--798
+[][] 
+ []
+
+<../figures/best_worst_eqtm_scatter.pdf, id=652, 454.69875pt x 325.215pt>
+File: ../figures/best_worst_eqtm_scatter.pdf Graphic file (type pdf)
+
+<use ../figures/best_worst_eqtm_scatter.pdf>
+Package pdftex.def Info: ../figures/best_worst_eqtm_scatter.pdf used on input l
+ine 805.
+(pdftex.def)             Requested size: 454.69763pt x 325.2142pt.
+ [26 <../figures/eqtl_all_herv_heatmap.pdf>] [27 <../figures/best_worst_eqtl_bo
+xplots.pdf>]
+<../figures/meqtl_all_herv_heatmap.pdf, id=680, 505.89pt x 237.88875pt>
+File: ../figures/meqtl_all_herv_heatmap.pdf Graphic file (type pdf)
+
+<use ../figures/meqtl_all_herv_heatmap.pdf>
+Package pdftex.def Info: ../figures/meqtl_all_herv_heatmap.pdf used on input li
+ne 831.
+(pdftex.def)             Requested size: 505.88875pt x 237.88815pt.
+
+Overfull \hbox (50.64464pt too wide) in paragraph at lines 831--832
+[][] 
+ []
+
+PGFPlots: reading {../tables/hervS2.meqtl.enrichment.tsv}
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28 <../figures/eqtm_all_herv_heatmap.pdf>] [29 <../figures/best_worst_eqtm_sc
+atter.pdf>] [30 <../figures/meqtl_all_herv_heatmap.pdf>]
+<../figures/hervS2_ggm_data_entity_bar.pdf, id=722, 454.69875pt x 433.62pt>
+File: ../figures/hervS2_ggm_data_entity_bar.pdf Graphic file (type pdf)
+
+<use ../figures/hervS2_ggm_data_entity_bar.pdf>
+Package pdftex.def Info: ../figures/hervS2_ggm_data_entity_bar.pdf used on inpu
+t line 880.
+(pdftex.def)             Requested size: 454.69763pt x 433.61894pt.
+ [31 <../figures/hervS2_ggm_data_entity_bar.pdf>]
+<../figures/hervS2_ggm_cc_nodes_bar.pdf, id=736, 454.69875pt x 433.62pt>
+File: ../figures/hervS2_ggm_cc_nodes_bar.pdf Graphic file (type pdf)
+
+<use ../figures/hervS2_ggm_cc_nodes_bar.pdf>
+Package pdftex.def Info: ../figures/hervS2_ggm_cc_nodes_bar.pdf used on input l
+ine 907.
+(pdftex.def)             Requested size: 454.69763pt x 433.61894pt.
+
+<../figures/hervS2_ggm_entity_cc_size_scatter.pdf, id=737, 454.69875pt x 194.72
+75pt>
+File: ../figures/hervS2_ggm_entity_cc_size_scatter.pdf Graphic file (type pdf)
+ <use ../figures/hervS2_ggm_entity_cc_size_scatter.pdf>
+Package pdftex.def Info: ../figures/hervS2_ggm_entity_cc_size_scatter.pdf used 
+on input line 913.
+(pdftex.def)             Requested size: 454.69763pt x 194.727pt.
+
+<"../figures/rs11079148".png, id=739, 1897.0875pt x 1750.54pt>
+File: "../figures/rs11079148".png Graphic file (type png)
+
+<use "../figures/rs11079148".png>
+Package pdftex.def Info: "../figures/rs11079148".png used on input line 928.
+(pdftex.def)             Requested size: 379.41078pt x 350.10179pt.
+
+<"../figures/rs1833977".pdf, id=742, 601.24625pt x 413.545pt>
+File: "../figures/rs1833977".pdf Graphic file (type pdf)
+
+<use "../figures/rs1833977".pdf>
+Package pdftex.def Info: "../figures/rs1833977".pdf used on input line 938.
+(pdftex.def)             Requested size: 360.75052pt x 248.1289pt.
+
+<"../figures/cg06889971".pdf, id=744, 606.265pt x 364.36125pt>
+File: "../figures/cg06889971".pdf Graphic file (type pdf)
+
+<use "../figures/cg06889971".pdf>
+Package pdftex.def Info: "../figures/cg06889971".pdf used on input line 949.
+(pdftex.def)             Requested size: 363.76181pt x 218.61842pt.
+ [32] [33 <../figures/hervS2_ggm_cc_nodes_bar.pdf>] [34 <../figures/hervS2_ggm_
+entity_cc_size_scatter.pdf> <../figures/rs11079148.png (PNG copy)>] [35 <../fig
+ures/rs1833977.pdf> <../figures/cg06889971.pdf>] [36
+
+]
+Chapter 5.
+
+LaTeX Warning: Citation `Joehanes2017' on page 37 undefined on input line 981.
+
+[37] [38] [39] [40
+
+]
+Chapter 6.
+[41] (./thesis.lof
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42])
+\tf@lof=\write8
+\openout8 = `thesis.lof'.
+
+
+(./thesis.lot)
+\tf@lot=\write9
+\openout9 = `thesis.lot'.
+
+ (./thesis.bbl [43] [44
+
+]
+Underfull \hbox (badness 1783) in paragraph at lines 20--23
+[]\OT1/cmr/m/n/12 Elizabeth Pen-nisi.  En-code project writes eu-logy for junk 
+dna.  \OT1/cmr/m/it/12 Sci-ence\OT1/cmr/m/n/12 ,
+ []
+
+[45] [46] [47]) [48]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1027.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1027.
+ (./thesis.aux
+* soulpos - computing points - it may take a few seconds *
+\openout5 = `thesis.upb'.
+
+ (./thesis.upa))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1027.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1027.
+
+Package rerunfilecheck Info: File `thesis.out' has not changed.
+(rerunfilecheck)             Checksum: 3F72133AC9499080FB958CD43B8213F4;2689.
+
+
+LaTeX Warning: There were undefined references.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 32377 strings out of 494910
+ 752863 string characters out of 6179837
+ 941210 words of memory out of 5000000
+ 34826 multiletter control sequences out of 15000+600000
+ 15606 words of font info for 58 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 68i,11n,80p,1186b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
+blic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmss12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmss17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+sbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (53 pages, 3588062 bytes).
+PDF statistics:
+ 1028 PDF objects out of 1200 (max. 8388607)
+ 891 compressed objects within 9 object streams
+ 191 named destinations out of 1000 (max. 500000)
+ 484 words of extra memory for PDF output out of 10000 (max. 10000000)
+
