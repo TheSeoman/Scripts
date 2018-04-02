@@ -567,9 +567,9 @@ An extension to GGMs that allows the method to be used on both discrete and cont
 \label{Methods:Data collection}
 Gaussian Graphical models have the severe limitation, that sample covariance and correlation matrices are well conditioned only when the number of variables is smaller than the number of samples\cite{Schaefer2005}. Therefore, it is absolutely necessary to perform a pre-selection of included entities when calculating GGMs on our multiomics data set.
 
-We performed two mechanisms of selecting node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. 
+We performed two mechanisms of selecting node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. Trans-meQTLs provide interesting boundaries for the analysis of regulatory mechanisms, as the effect is guaranteed to be indirect. Furthermore, the effect size of a trans-meQTL has to big to reach significance. 
 
-The first way starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the analysis.  To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the sentinel SNP are included. Analogously to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added. To include transcription factors, whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, in an attempt to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the String network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path.
+The first way starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the analysis.  To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the sentinel SNP (SNP genes/probes) are included. Analogously to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, in an attempt to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the String network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path.
 
 %TODO write caption
 \begin{figure}[b!]
@@ -580,7 +580,7 @@ The first way starts of with a SNP that lies within a HERV element and has signi
 
 The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.snp.scheme}
 
-The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.cpg.scheme}, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV and are part of a trans-meQTL, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Other CpGs that are in a trans-meQTL with these SNps are included as well. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
+The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.cpg.scheme}, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV and are part of a trans-meQTL, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Other CpGs that are in a trans-meQTL with these SNPs are included as well. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
 
 %TODO write caption
 \begin{figure}[b!]
@@ -597,11 +597,18 @@ The BDgraph main method "bdgraph" was used to calculated the GGMs on the data se
 
 Due to large number and size of calculated GGMs no manual analyses of all networks was possible. Therefore, multiple criteria were defined to identify potentially interesting GGMs.
 
-First the edges in the network were filtered for an edge inclusion probability of more than 0.9. Then the connected components were determined. Networks, whose seed SNP or at least one seed CpG were not part of the biggest connected component, were excluded from the analysis. 
+First the edges in the network were filtered for an edge inclusion probability of more than 0.9. Then the connected components were determined. Networks were restricted to the connected component, which contained the seed SNP or seed CpG. If several seed CpGs were in different connected components, the bigger one was chosen. Finally, restricted networks with less than one SNP/CpG gene or probe and no shortest path gene or transcription factor were discarded. 
 
-Then the numbers of CpGs/SNPs, CpG/SNP genes and probes, transcription factors and path genes included in the biggest connected component were counted. As for the data prior to GGM calculation, networks with less than one SNP/CpG gene or probe and no shortest path gene or transcription factor were removed. 
+Figure \ref{fig:ggm.expectation.scheme} shows the structure we expected to find in the networks. A SNP is associated with a neighboring gene. This gene connects to a CpG site through a route of transcripiton factor and/or shortest path genes. The CpG in turn has an edge to a neighboring CpG gene. 
 
-Furthermore, the amount of CpG and SNP genes, that had an edge to the CpG/SNP that caused them to be included in the analysis was determined. Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either as being part of the same connected component or a direct edge. 
+Therefore, the number edges between SNPs/CpGs and neighboring genes were counted, to identify restricted networks, that potentially follow this pattern Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either through an path over other nodes or as a direct edge. 
+
+%TODO write caption
+\begin{figure}[b!]
+	\includegraphics[scale=0.92, keepaspectratio = true]{../figures/ggm_expectation_scheme}
+	\caption{}
+	\label{fig:ggm.expectation.scheme}
+\end{figure}
 
 %TODO include expected/hoped for GGM structure, elaborate on why certain edges are interesting
 
@@ -866,7 +873,7 @@ For the selection of the CpG based approach, there were 148 CpGs that were part 
 
 In total there were between 5 and 914 entities per data set. The number and composition of entities in the ten data sets with most (C) and least (D) entities is shown in figure \ref{fig:ggm.data.entity.bar}.
 
-The distribution of different types of entities was similar to the data sets constructed starting from HERV related SNPs. A total of 34 data sets contained shortest path genes of a length between 1 and 10.
+The distribution of different types of entities was similar to the data sets constructed starting from HERV related SNPs. A total of 34 data sets contained between 1 and 10 shortest path genes. 
 
 %TODO change color scheme
 \begin{figure}[tb]
@@ -876,15 +883,23 @@ The distribution of different types of entities was similar to the data sets con
 \end{figure}
 
 
-\subsection{General networks overview}
-\label{Results:General networks overview}
+\subsection{General network overview}
+\label{Results:General network overview}
 The following section will give a short overview over GGMs calculated as described in section \ref{Methods:GGM calculation and filtering}. 
 
 937 of the 1882 data sets generated from HERV related SNPs remained after filtering. The restricted networks consisted of between 16 and 425 nodes. The number and composition of nodes for the biggest (A) and smallest networks can be seen in figure \ref{fig:ggm.cc.nodes.bar}.
 
+%TODO fill in numbers
 The networks contained between xx and xxxx edges. 
 
+The networks were investigated for the presence of SNP-expression probe pairs as well as CpG-expression probe pairs known to be associated form the eQTL and eQTM analysis. 
+
+484 networks contained both members of up to three eQTLs. In 448 of these the eQTLs were representend as an edge. Analogously 211 networks contained eQTMs, but only in three of the networks one eQTM was present as an edge. 
+
 After filtering the 100 networks seeded in HERV-CpGs, 37 networks remained. The restricted networks contained between 23 and 914 nodes. Their number and composition of nodes are shown in figure \ref{fig:ggm.cc.nodes.bar}C. 
+
+%TODO check if eqtl bug
+None of these networks contained any eQTLs. 18 networks contained eQTMs, of which 3 were present as edge. 
 
 As displayed in figure \ref{fig:ggm.entity.cc.scatter}B almost all networks had one connected component which contained almost all nodes. Furthermore, GGMs with more entities were more likely to be retained after the filtering. 
 
@@ -914,6 +929,18 @@ The dataset contained 95 entities, made up of one SNP, 29 CpGs that were signifi
 	\caption{Restricted network seeded in rs11079148. }
     \label{fig:rs11079148.ggm.network}
 \end{figure}
+
+Another restricted network generated from a dataset based on a seed SNP, rs1833977, is shown in figure \ref{fig:rs1833977.ggm.network}. 
+
+It contains 28 of the 42 entities in the dataset. Apart from the seed SNP these are 5 of 5 CpGs, 3 of 10 CpG genes and probes, 5 of 9 SNP genes and probes, 11 of 14 transcription factors and all 3 shortes path genes in the dataset. The network has 49 edges, among which there is one edge between the SNP and one of its neighboring genes, as well as one edge between a CpG and a CpG gene. The network acutally allows to trace the following path from the SNP a CpG gene as described in figure \ref{fig:ggm.expectation.scheme}: rs1833977 - LDHD - CEBPA - cg25930786 - OSCAR. However, this path is not the only and not the shortest path between these nodes, as the CpG also is directly connected to the SNP. 
+
+\begin{figure}[tb]
+	\includegraphics[scale = 0.6, keepaspectratio = true]{"../figures/rs1833977"}  
+	\caption{Restricted network seeded in rs1833977. }
+    \label{fig:rs1833977.ggm.network}
+\end{figure}
+
+
 
 The network shown in figure \ref{fig:cg06889971.ggm.network} is generated from the dataset collected starting with the CpG-site cg06889971. 
 
@@ -951,7 +978,7 @@ The availability of genotype measurements was an exception, as the fraction of S
 
 \section{Quantitative trait loci}
 \label{Discussion:Quantitative trait loci}
-We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{}.
+We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{Joehanes2017}.
 
 Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. %TODO why?
  
@@ -961,35 +988,34 @@ About 65\% of the cis-eQTLs identified by Schramm et al\cite{Schramm2014} were r
 
 The number of HERV related eQTLs shows that there certainly is some variation within HERV elements. Especially the high number of expression probes significantly associated with SNPs that lie within HERV elements hints at wide reaching effects. However, eQTLs do not grant insight into the underlying mechanisms. 
 
-This high number of probes and subsequently also genes might be the reason, that the GO enrichment on genes being part of HERV related eQTLs produced no significant results. xx\% of the genes that were part of any eQTL were also found in the filtered set.
-\section{eQTMs}
-\label{Discussion:eQTMs}
+%TODO correct number
+This high number of probes and subsequently also genes might be the reason, that the GO enrichment on genes being part of HERV related eQTLs produced no significant results. 78\% of the genes that were part of any eQTL were also found in the filtered set.
+%\section{eQTMs}
+%\label{Discussion:eQTMs}
 
-
-\section{meQTLs}
-\label{Discussion:meQTLs}
-\begin{itemize}
-\item 
-\item go-enrichment: neuro related -> associated with neurodegenerative diseases\cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}
-\end{itemize}
+The GO enrichment performed on HERV related meQTLs showed an enrichment of therms regarding the development nervours system and especially neurons. This is interesting as HERVs have previously been associated with neurodegenerative diseases \cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}.
 
 \section{Regulatory networks}
 \label{Discussion:Regulatory networks}
 
 
-\begin{itemize}
-\item data collection not perfect
-\item example networks:
-\begin{itemize}
-\item cg25843003|cg18808777: direct cpg-snp edge/only con through each other: maybe true path members not  present, multiple step path weaker than strong direct association, direct cpg-(trans-)snp gene edge is surprising
-\end{itemize}
-\item add priors to guide analysis 
-\end{itemize}
+I was not able to discern mechanisms of HERV influence on cellular functions from the calculated GGMs. This was due to multiple problems. 
+
+For once the networks tende to be highly connected even after filtering edges at an edge inclusion probability cugoff as high as 0.9. This meant that in almost all cases there was one big connected component, that contained almost all nodes. Therefore, anlyses on whether genes are included in the restricted graph, like GO enrichments, were not meaningful. 
+
+Another problem was, that the meQTLs that were used as cornerstones of the data collection, were present as direct edges in almost all cases. This meant that the strong known association lead to strong partial correlation even when respecting all other entities. A possible explanation for this might be the data collection. If the fators mediating the indirect assocation are not part of the dataset, there is no way to calcuate usefull partial correlations. Another reason might be, that if the acutal path the effect follows is longer than a few elements, even small errors in the data could lead to enough the failure to explain the indirect effect. 
+
+In many cases the SNP and CpGs were not only directly connected, but this edge was the only edge for one of them. This is the case in the network for cg06889971 (Figure \ref{fig:cg06889971.ggm.network}.
+
+A potential solution to these problems could be the introduction of priors to the calculation. This might guide the iterative GGM calculation to be quicker to converge to the correct underlying interactions. I was not able to include priors due to time constraints and the troubles at finding publicy avaialable datasets that contain expression values not only on gene but on probe level. As expression probes without a known gene made up a big part of the networks, the information to define complete priors was not available. 
+
+Their sheer size posed a major problems to the manual analysis of most networks. More sophisticated automated analyses were sorely needed, but could not be implemented due to the lack of time. 
 
 
 \newpage
 \chapter{Conclusion and Outlook}
 \label{Conclusion and Outlook}
+
 
 \newpage
 \listoffigures

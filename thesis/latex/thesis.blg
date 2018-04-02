@@ -14,6 +14,7 @@ Warning--I'm ignoring Malfavon-Borja2015's extra "note" field
 Warning--entry type for "HumanHT" isn't style-file defined
 --line 823 of file mybib.bib
 Warning--I didn't find a database entry for "10.1371/journal.pone.0093844"
+Warning--I didn't find a database entry for "Joehanes2017"
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
 Warning--empty booktitle in Mohammadi2015BDgraphAR
@@ -21,7 +22,7 @@ Warning--empty year in 10.1111/j.1467-842X.2004.00360.x
 Warning--empty year in Mortelmans2016
 You've used 53 entries,
             1814 wiz_defined-function locations,
-            814 strings with 20583 characters,
+            816 strings with 20607 characters,
 and the built_in function-call counts, 12245 in all, are:
 = -- 1097
 > -- 587
@@ -60,4 +61,4 @@ warning$ -- 5
 while$ -- 98
 width$ -- 55
 write$ -- 597
-(There were 11 warnings)
+(There were 12 warnings)
