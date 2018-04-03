@@ -3,7 +3,7 @@ source('Scripts/R/paths.R')
 require(BDgraph)
 
 set <- 'hervS2'
-filter <- 'meth'
+filter <- 'snp'
 seed <- 'meqtl'
 flanking <- 2.5e5
 string <- T
@@ -15,16 +15,10 @@ args <- commandArgs(TRUE)
 index <- as.integer(args[1])
 
 if (filter == 'snp') {
-  if(string) {
-    load(paste0(GGM.DIR, 'path.snps.RData'))
-  } else {
-    load(paste0(GGM.DIR, 'snps.RData'))
-  }
+  load(paste0(GGM.DIR, 'extra.snps.RData'))
   id <- snps[index]
 } else {
-  # load(paste0(GGM.DIR, 'cpgs.RData'))
-  load(paste0(GGM.DIR, 'missing.cpgs.RData'))
-  cpg.sets <- missing.cpg.sets
+  load(paste0(GGM.DIR, 'cpgs.RData'))
   id <- paste(cpg.sets[[index]], collapse = '|')
 }
 

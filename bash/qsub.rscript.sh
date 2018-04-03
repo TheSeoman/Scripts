@@ -35,14 +35,15 @@ fi
 
 
 if [ ! -z $from ] && [ ! -z $to  ]; then
-	qsub_out_file=$qsub_out_dir'out.'$script_name'-1:1.txt'
-	qsub_err_file=$qsub_out_dir'err.'$script_name'-1:1.txt'
+	qsub_out_file=$qsub_out_dir'out.'$script_name'-1#'$from'.txt'
+	qsub_err_file=$qsub_out_dir'err.'$script_name'-1#1'$from'.txt'
 	i=1
 	while [ -f $qsub_out_file ]; do
 		i=$[i+1]
-		qsub_out_file=$qsub_out_dir'out.'$script_name'-'$i'#1.txt'
-		qsub_err_file=$qsub_out_dir'err.'$script_name'-'$i'#1.txt'
+		qsub_out_file=$qsub_out_dir'out.'$script_name'-'$i'#'$from'.txt'
+		qsub_err_file=$qsub_out_dir'err.'$script_name'-'$i'#'$from'.txt'
 	done
+	echo "$qsub_out_file"
 	for j in `seq $from $to`; do
 		qsub_out_file=$qsub_out_dir'out.'$script_name'-'$i'#'$j'.txt'
 		qsub_err_file=$qsub_out_dir'err.'$script_name'-'$i'#'$j'.txt'

@@ -16,6 +16,9 @@ load(PATHS$METH.RESIDUALS.DATA)
 
 load(PATHS$SNP.SAMPLES.DATA)
 
+load(PATHS$HERV.EXPR.OVERLAP.DATA)
+load(PATHS$HERV.SNP.OVERLAP.DATA)
+
 cis.pos.pairs <- eqtl.me$cis$ntest
 trans.pos.pairs <- eqtl.me$trans$ntests
 
@@ -34,9 +37,23 @@ cis.gene.enrichment <- go.enrichment(cis.genes, pos.cis.genes, gsc, c('BP'))
 trans.pairs <- eqtl.me$trans$eqtls
 trans.pairs$snps <- as.character(trans.pairs$snps)
 trans.pairs$gene <- as.character(trans.pairs$gene)
-trans.snps <- unique(as.character(trans.pairs$snps))
-trans.probes <- unique(as.character(trans.pairs$gene))
+trans.snps <- unique(trans.pairs$snps)
+trans.probes <- unique(trans.pairs$gene)
 trans.genes <- unique(na.omit(probe2gene[trans.probes]))
+
+hervS2.cis.pairs <- hervS2.eqtl.overlap$cis.either
+hervS2.cis.pairs$snps <- as.character(hervS2.cis.pairs$snps)
+hervS2.cis.pairs$gene <- as.character(hervS2.cis.pairs$gene)
+hervS2.cis.snps <- unique(hervS2.cis.pairs$snps)
+hervS2.cis.probes <- unique(hervS2.cis.pairs$gene)
+hervS2.cis.genes <- unique(na.omit(probe2gene[hervS2.cis.probes]))
+
+hervS2.trans.pairs <- hervS2.eqtl.overlap$trans.either
+hervS2.trans.pairs$snps <- as.character(hervS2.trans.pairs$snps)
+hervS2.trans.pairs$gene <- as.character(hervS2.trans.pairs$gene)
+hervS2.trans.snps <- unique(hervS2.trans.pairs$snps)
+hervS2.trans.probes <- unique(hervS2.trans.pairs$gene)
+hervS2.trans.genes <- unique(na.omit(probe2gene[hervS2.trans.probes]))
 
 # schramm eqtl
 require(gdata)
@@ -130,3 +147,5 @@ worst.eqtm.trans.scatter <- plot.single.eqtm(eqtm.me$trans$eqtls[dim(eqtm.me$tra
 pdf(file = paste0(PATHS$PLOT.DIR, 'best_worst_eqtm_scatter.pdf'), width = 6.3, height = 4.5)
 grid.arrange(best.eqtm.cis.scatter, worst.eqtm.cis.scatter, best.eqtm.trans.scatter, worst.eqtm.trans.scatter, ncol = 2, widths = c(0.5, 0.5), heights = c(0.5, 0.5))
 dev.off()
+
+

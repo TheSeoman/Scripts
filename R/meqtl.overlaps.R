@@ -102,6 +102,15 @@ for (set in c('S1', 'S2', 'S3')) {
   }
 }
 
+hervS2.meqtl.cpgs <- unique(hervS2.meqtl.overlap$either$cpg)
+hervS2.meqtl.cpgs <- hervS2.meqtl.cpgs[hervS2.meqtl.cpgs %in% rownames(meqtl.gene.annotation)]
+hervS2.meqtl.genes <- unique(meqtl.gene.annotation[hervS2.meqtl.cpgs, 'nearestGeneSymbol'])
+hervS2.meqtl.enrichment.significant <- hervS2.meqtl.enrichment$either[1:10, c(2, 8, 3, 9)]
+colnames(hervS2.meqtl.enrichment.significant) <- c('Term ID', 'Term', 'p', 'fdr')
+write.table(hervS2.meqtl.enrichment.significant, file = paste0(PATHS$TABLE.DIR, 'hervS2.meqtl.enrichment.tsv'), 
+            quote = F, sep = '\t', row.names = F, col.names = T)
+
+
 cat('Saving herv-trans.meqtl overlaps...', fill = TRUE)
 save(hervS1.meqtl.trans.overlap, hervS2.meqtl.trans.overlap, hervS3.meqtl.trans.overlap, hervS1.1kb.meqtl.trans.overlap, hervS2.1kb.meqtl.trans.overlap, hervS3.1kb.meqtl.trans.overlap,
      hervS1.2kb.meqtl.trans.overlap, hervS2.2kb.meqtl.trans.overlap, hervS3.2kb.meqtl.trans.overlap, file = PATHS$HERV.MEQTL.TRANS.OVERLAP.DATA)
