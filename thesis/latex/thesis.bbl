@@ -70,6 +70,11 @@ Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
 \newblock Multi-omics approaches to disease.
 \newblock {\em Genome Biology}, 18(1):83, May 2017.
 
+\bibitem{CRICK1970}
+FRANCIS CRICK.
+\newblock Central dogma of molecular biology.
+\newblock {\em Nature}, 227:561 EP --, Aug 1970.
+
 \bibitem{10.3389/fgene.2015.00002}
 Alexander~F. Palazzo and Eliza~S. Lee.
 \newblock Non-coding rna: what is functional and what is junk?
@@ -132,6 +137,12 @@ Andreas Schroeder, Odilo Mueller, Susanne Stocker, et~al.
 \newblock The rin: an rna integrity number for assigning integrity values to
   rna measurements.
 \newblock {\em BMC Molecular Biology}, 7(1):3, Jan 2006.
+
+\bibitem{Jones2013}
+Meaghan~J. Jones, Anthony~P. Fejes, and Michael~S. Kobor.
+\newblock Dna methylation, genotype and gene expression: who is driving and who
+  is along for the ride?
+\newblock {\em Genome Biology}, 14(7):126, Jul 2013.
 
 \bibitem{Yineaaj2239}
 Yimeng Yin, Ekaterina Morgunova, Arttu Jolma, et~al.
@@ -260,7 +271,7 @@ Sture Holm.
 \newblock {\em Scandinavian Journal of Statistics}, 6(2):65--70, 1979.
 
 \bibitem{Mohammadi2015BDgraphAR}
-Abdolreza Mohammadi and Ernst~C Wit.
+Abdolreza Mohammadi and Ernst~C. Wit.
 \newblock Bdgraph: An r package for bayesian structure learning in graphical
   models.
 \newblock 2015.
@@ -276,6 +287,11 @@ Kunihiro Baba, Ritei Shibata, and Masaaki Sibuya.
   conditional independence.
 \newblock {\em Australian \& New Zealand Journal of Statistics},
   46(4):657--664.
+
+\bibitem{Lenkoski2013}
+Alex Lenkoski.
+\newblock A direct sampler for g‐wishart variates.
+\newblock {\em Stat}, 2(1):119--128.
 
 \bibitem{Schaefer2005}
 Juliane Schäfer and Korbinian Strimmer.

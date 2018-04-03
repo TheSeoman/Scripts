@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt,twoside,openright]{report}
+\documentclass[a4paper,12pt,twoside,openright]{article}
 \usepackage[english]{babel}
 \usepackage{graphicx}
 \usepackage{csvsimple}
@@ -33,15 +33,20 @@
 \renewcommand{\bottomfraction}{0.85}
 \renewcommand{\textfraction}{0.15}
 \renewcommand{\floatpagefraction}{0.7}
+\renewcommand{\thefootnote}{\alph{footnote}}
+
+\let\oldsection\section
+\def\section{\cleardoublepage\oldsection}
+
 
 \begin{document}
 \sloppy
-\chapterfont{\LARGE}
-\sectionfont{\Large}
+\sectionfont{\LARGE}
 \subsectionfont{\Large}
 \subsubsectionfont{\Large}
-\counterwithin{figure}{chapter}
-\counterwithin{table}{chapter}
+\subsubsectionfont{\Large}
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
 
 \begin{titlepage}
 
@@ -132,10 +137,10 @@ I confirm that this master's thesis is my own work and I have documented all sou
 
 \pagestyle{plain}
 \pagenumbering{arabic}
-\chapter{Introduction} 
+\section{Introduction} 
 \label{Introduction}
 
-\section{Human endogenous retroviruses}
+\subsection{Human endogenous retroviruses}
 \label{Introduction:Human endogenous retroviruses}
 
 When the draft for the first human genome was published in 2001\cite{Venter1304} it was expected, that it would allow to fully understand the human genome. But soon after genes were annotated less than 5\% of the genome was found to be protein coding\cite{Consortium2001} and later on the amount of exonic protein coding DNA was estimated to be as low as 1.2\%\cite{Encode2012}. The remaining majority of the genome was often labeled as non-functional "junk DNA"\cite{Pennisi1159}. 
@@ -148,7 +153,7 @@ Still up to this day there are areas in the genome that are difficult to analyze
 %TODO go deeper into retrotransposons
 In this work we will focus on a subclass of the latter repeat class. Human endogenous retroviruses (HERVs) belong to the class of LTR retrotransposons and make up about 8\% of the human genome\cite{APM:APM12476}. HERVs originate from retroviruses that infected the germ line of humans or human ancestors up to 30 million years ago\cite{10.1146/annurev.genom.7.080505.115700}. Therefore, they became dormant in the genome and are inherited in a Mendelian fashion. Newly integrated endogenous retroviruses (ERVs) share the typical structure of the viruses they originate from. This means they contain at least the four main genes in the order $5'-gag-pro-pol-env-3'$. Gag encodes the matrix and capsid proteins. Pro codes for a protease. Pol is the reverse transcriptase and integrase and env codes for the surface proteins. Furthermore, they have two flanking LTRs that originate from a duplication of the sequence, where the retrovirus was integrated\cite{10.1146/annurev.genom.7.080505.115700}. An example of the structure of a HERV element is shown in figure \ref{fig:herv.structure.example}.
 
-\begin{figure}[tb]
+\begin{figure}[b]
 	\includegraphics[scale = 0.92, keepaspectratio = true]{../figures/herv_structure_example}  
 	\caption{Exemplified structure of an intact HERV element. Based on a HERV-K provirus, which is considered the most recently introduced in humans and contains the most complete viral genes. Taken from Young et. al. \cite{BIES:BIES201300049}}
     \label{fig:herv.structure.example}
@@ -158,43 +163,58 @@ However, endogenous retroviruses in human are generally not able to replicate. T
 
 Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Finally, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}. 
 
-\section{Multiomics}
+\subsection{Multiomics}
 \label{Introduction:Multiomics}
-The rise of high-throughput technologies allows researchers to paint a more complete picture of the mechanisms of cell processes than ever before. Multi-omics, the combination of the analysis of different types of cellular molecules, is made possible by that. The objective of multi-omics studies is to draw conclusions about cellular mechanisms and understand the flow of information by finding associations and patterns connecting them\cite{Hasin2017}. In this work we worked on data from the fields of transcriptomics, genomics and epigenomics to investigate the effects of changes in human endogenous retroviruses (HERVs), which are introduced in more detail in section \ref{Introduction:Human endogenous retroviruses}.
+%TODO what for
+The rise of high-throughput technologies  allows researchers to paint a more complete picture of the mechanisms of cell processes than ever before. Multi-omics, the integration of the analysis of different types of cellular molecules, is made possible by that. The objective of multiomics studies is to draw conclusions about cellular mechanisms and understand the flow of information by finding associations and patterns connecting them\cite{Hasin2017}. The objective of this work was to use data from the fields of transcriptomics, genomics and epigenomics to investigate the effects of variation in these three fields within human endogenous retroviruses.
 
-Transcriptomics examines the occurrence and level of RNAs on a genome-wide scale. Following the central dogma of molecular biology, RNA is the intermediate between DNA and proteins and therefore of central importance\cite{}. With the late progress in transcriptome studies, even more effects of RNA have been discovered in the form of several functional RNAs\cite{10.3389/fgene.2015.00002}. RNA levels can be measured using a technology called RNA-seq\cite{Wang2009} or probe-based arrays\cite{Schulze2001}, as was the case with the data used in this work. 
+Transcriptomics examines the expression of RNAs on a genome-wide scale. Following the central dogma of molecular biology, RNA is the intermediate between DNA and proteins and therefore of central importance\cite{CRICK1970}. With the late progress in transcriptome studies, even more effects of RNA have been discovered in the form of several functional RNAs\cite{10.3389/fgene.2015.00002}. RNA levels can be measured using a technology called RNA-seq\cite{Wang2009} or probe-based arrays\cite{Schulze2001}, as were used in this work. 
 
-The second field, genomics, describes variation between genomes. In this work we focused on single nucleotide polymorphisms (SNPs), which are single base changes. Genotypic information fills a special place in multi-omics analyses, as it not dependent on the environment and can be considered static in ones lifetime. Therefore, it is considered as the cause of changes instead of being a downstream effect of other changes\cite{Hasin2017}. This means they are an exceptional anchor for the start of multi-omics analyses. 
-Genotypic changes are known to cause Mendelian diseases, when the change lies in the coding region of a protein. They also influence gene expression levels, which in turn is thought to be the cause of common diseases\cite{Hasin2017}.
+The second field, genomics, describes variation between genomes. In this work I focused on single nucleotide polymorphisms (SNPs), which are single base changes.
+Such genotype information fills a special place in multiomics analyses, as it is not dependent on the environment and can be considered static in individuals. Therefore, it is considered as the cause of changes instead of being a downstream effect of other changes\cite{Hasin2017}. This means SNPs are well suited to be used as anchors for the start of multi-omics analyses. 
+Genotypic changes are known to cause Mendelian diseases, when the change lies in the coding region of a protein. They also influence gene expression levels by, when occurring in enhancer or promoter regions of genes, which in turn is thought to be the cause of common diseases\cite{Hasin2017}.
 
 Epigenomics is the youngest field of 'omics' that is used in this work. It describes genome-wide reversible modifications of DNA and DNA-associated proteins. Among these are multiple different histone modifications and DNA methylation. Epigenetic modifications play a major role in the regulation of gene transcription\cite{Piuntiaad9780,Deaton2011} and in general are a additional layer of information on top of the DNA sequence. Changes in epigenetic modifications are influenced by genetic and environmental factors\cite{Hasin2017}.
 
-DNA methylation, the modification that is the focus in this work, is the best understood and researched epigenetic mark\cite{Smith2013}. The term refers to the addition of a methyl group to the fifth carbon atom of a cytosine ring, thus transforming the cytosine to 5-methylcytosine. In humans this happens almost exclusively in the context of a cytosine neighbored by a guanine - a CpG-site. As the complementary sequence of CG is also CG, methylation usually occurs on both strands. 
+DNA methylation, the epigenetic modification that is the focus in this work, is the best understood and researched epigenetic mark\cite{Smith2013}. The term refers to the addition of a methyl group to the fifth carbon atom of a cytosine ring, thus transforming the cytosine to 5-methylcytosine. In humans, this happens almost exclusively in the context of a cytosine neighbored by a guanine - a CpG-site. As the complementary sequence of CG is also CG, methylation usually occurs on both strands. 
 
-There are about 28 million CpG sites in the human genome, of which 60-80\% are generally methylated\cite{Smith2013}. The distribution of CpGs can be divided into two modes: The majority of the genome is sparsely populated by CpGs, that are usually methylated. Second, there are CG-dense regions, which are predominantly nonmethylated. These are called CpG islands and occur mainly around the transcription start sites of genes\cite{Deaton2011}. The methylation of these CpG islands is strongly connected to the silencing of adjacent genes, by preventing the transcription initiation\cite{Deaton2011}. Other mechanisms that are negatively affected by DNA methylation are general promoter, enhancer and insulator activity as well as transcription factor binding\cite{Smith2013}. 
+There are about 28 million CpG sites in the human genome, of which 60-80\% are generally methylated\cite{Smith2013}. The distribution of CpGs can be divided into two modes: The majority of the genome is sparsely populated by CpGs, that are usually methylated. Second, there are CG-dense regions, which are predominantly nonmethylated. These are called CpG islands (CGIs) and occur mainly around the transcription start sites of genes\cite{Deaton2011}. The methylation of these CpG islands is strongly connected to the silencing of adjacent genes, by preventing the transcription initiation\cite{Deaton2011}. The mechanisms this is realized by include the reduction of general promoter, enhancer and insulator activity as well as transcription factor binding\cite{Smith2013}. 
 
 %DNA methylation in humans is controlled by three enzymes called DNA methyl transferase  1 (DNMT1), DNMT3A and DNMT3B\cite{Smith2013}.
 %TODO add placenta fusion effect of HERVs, exchange finally again
 
 The multiomics data analyses performed in this work were either started from an anchor relating to HERV elements or performed genome wide and afterwards filtered to retain HERV specific results. 
 
-\section{Effect network analysis}
+\subsection{Effect network analysis}
 \label{Introduction:Effect network analysis}
-Many multiomics analyses are based on the calculation of associations within or between different data layers. Examples are co-expression of genes or the association of genotypic variants and transcription,  protein or methylation levels. These approaches allow to identify associated entities by calculating correlations between single entities over available individuals or samples. They can't give any resolution on the direction of an effect. Furthermore, purely correlation based methods can not differentiate between direct and indirect effects\cite{Hasin2017}.
+Many multiomics analyses are based on the calculation of associations within or between different data layers. Examples are co-expression of genes or the association of genotypic variants and transcription,  protein or methylation levels, called eQTL, pQTL and meQTL. These approaches allow to identify associated entities by calculating correlations between single entities over available individuals or samples. However, purely correlation based methods can not differentiate between direct and indirect effects\cite{Hasin2017}.
 
-Multomics data can be organized into networks, where each entity from the different layers is a node and the significant pairwise associations, that exceed a given threshold,  are resembled by undirected edges. However when using Pearson correlation as measurement of association, the networks tend to be rather dense, as indirect associations are still contained\cite{Krumsiek2011}. 
+Multomics data can used to construct networks, where each entity from the different layers is a node and the significant pairwise associations, that exceed a given threshold, are resembled by undirected edges. However when using Pearson correlation as measurement of association, the networks tend to be rather dense, as indirect associations are still contained\cite{Krumsiek2011}. 
 
-An approach to remove these indirect associations is the use of partial correlation coefficients. The partial correlation coefficient can be seen as the pairwise correlation between two variables conditioned against their correlations with all other variables. A scheme of how partial correlations work is shown in figure \ref{fig:partial.correlation.scheme}.
+An approach to remove these indirect associations is the use of partial correlation coefficients. The partial correlation coefficient can be seen as the pairwise correlation between two variables after removing the common effects of all other variables. A scheme of how partial correlations work is shown in figure \ref{fig:partial.correlation.scheme}.
 
-An approach that combines partial correlation coefficients with Bayesian structure learning is called "Gaussian Graphical Models"\cite{Krumsiek2011} (GGMs). We used GGMs to investigate the mechanisms of cellular control related to variation within HERV elements.
+An approach that uses partial correlation coefficients to construct networks is called "Gaussian Graphical Model"\cite{Krumsiek2011} (GGM). 
+%We used GGMs to investigate the effect and effect mechanisms of variation within HERV elements.
 
-The Gaussian Graphical Models used in this work are described in more detail in section \ref{Methods:Gaussian Graphical Models}.
+The approach to Gaussian Graphical modeling used in this work utilizes Bayesian structure learning and is described in more detail in section \ref{Methods:Gaussian Graphical Models}.
+
+\subsection{Objectives}
+This work had three main objectives. The first objective was the global annotation of multiomics features in HERV elements. This allows to assess which data is available within HERVs, as well as simple analyses, like GO enrichments. Furthermore, this annotation was used to filter later genome wide analyses.
+
+The second objective
+
+
+\begin{itemize}
+\item global annotation of functional elements in HERVs -> explore capability of HERVs to influence stuff
+\item pairwise multiomics analysis (eQTL, meQTL, eQTM) -> find where changes in HERVs have effect
+\item network analysis -> explore actual mechanisms of HERV influence
+\end{itemize}
 
 \newpage
-\chapter{Data}
+\section{Data}
 \label{Data}
 
-\section{HERV annotation}
+\subsection{HERV annotation}
 \label{Data:HERV annotation}
 As mentioned in section \ref{Introduction:Human endogenous retroviruses} HERV elements tend to be highly degenerated. Therefore, it is no trivial task to pertain a complete HERV annotation for the human genome. Furthermore, classification and naming of endogenous retroviruses is not performed in an unified manner but rather dependent on how and by whom a given element was identified. 
 Instead of collecting a library of known HERV sequences and performing sequence search ourselves, HERV annotations were pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
@@ -237,7 +257,7 @@ A third set "HERV set 3" (HERV S3) was constructed by filtering the repeat name 
 \end{figure}
 
 
-\section{KORA}
+\subsection{KORA}
 \label{Data:KORA}
 The functional data for our analysis of gene regulatory mechanisms are made up expression, methylation and genotype data. These were collected in the light of the platform for Cooperative Health Research in the Region of Augsburg, short KORA. It contains health surveys as well as examinations of individuals of German nationality living in the area of Augsburg, Bavaria.
 The objective of KORA is to track changes in health conditions over a long period in order to identify and examine the causes, effects and development of chronical diseases.
@@ -255,7 +275,7 @@ Not all essays are available for all samples. Therefore different analyses were 
 \end{center}
 \end{figure}
 
-\subsection{Expression}
+\subsubsection{Expression}
 \label{Data:Expression}
 The expression data was generated using the HumanHT-12 v3.0 Gene Expression BeadChip. The chip can measure expression values for 49576 probes. However, only 47864 probes represent an actual genomic location. The remaining probes are control probes used to assess the quality of the measurements and infer the background for measurements. 
 
@@ -276,7 +296,7 @@ Figure \ref{fig:expr.raw.hist.cov} shows the distribution and coefficient of var
 Probes that could not be mapped to genes were not discarded to avoid losing data for HERV regions, which are only sparsely annotated with genes and were the focus of this work. Therefore, most analyses were performed on probe level or a mix of probes and genes. Whenever there were multiple probes mapping to the same gene, the mean of the expression values of these probes was taken as estimation of expression level for the gene. 
 
 
-\subsection{Methylation}
+\subsubsection{Methylation}
 \label{Data:Methylation}
 DNA methylation was measured using the Infinium HumanMethylation450K BeadChip, which interrogates methylation levels at 485577 genomic locations. Methylation intensities had already been corrected and transformed to beta values. Beta values have a range from 0 to 1 and represent the fraction of copies of a CpG site that are methylated in a sample.
 
@@ -299,7 +319,7 @@ Methylation data was available for 1727 individuals and 485512 sites, which make
 \end{figure}
 
  
-\subsection{Genotypes}
+\subsubsection{Genotypes}
 \label{Data:Genotypes}
 Genotyping was performed with the Affymetrix Axiom 6.0 array. On the data set used in this work genotypes had already been called using the Iluminus calling algorithm and missing values had been imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. Furthermore, imputation results had already been filtered at IMPUTE value of 0.4.  
 
@@ -308,7 +328,7 @@ Additionally SNPs with a minor allele frequency of less than one percent had bee
 
 In total measurements of 9533127 SNPs for 2940 individuals were available in the form of continuous dosages from 0 to 2 with 0 representing no occurrence of the SNP and 2 meaning the SNP is present in both chromosomes. Non integer values mean that different genotypes were measured in different cells in the sample and the resulting value describes the fraction of the occurrence of the variant. 
 
-\subsection{Covariates}
+\subsubsection{Covariates}
 \label{Data:Covariates}
 Several covariates were known for each sample. They were used to correct expression and methylation values for shared effects. 
 
@@ -338,55 +358,54 @@ Further covariates specific to participating individuals are sex, age, body mass
 	every head row/.style={before row=\hline, after row=\hline},
 	every last row/.style={after row=\hline}]{../tables/select.covariate.overview.tsv}
     \end{minipage}%
-    \caption{Covariate overview}
+    \caption{Covariate overview of all 3020 individuals in the KORA S4 survey (left) and the 687 individuals with available genotype, expression and methylation data (right).}
 	\label{tab:covariate.overview}
 \end{table}
 
-Finally, three experimental factors for the expression measurements, storage time, RNA integrity number (RIN), a measure that describes the degree of degradation of RNA molecules\cite{Schroeder2006}, and plate, were known.
+Finally, three experimental factors for the expression measurements, storage time, RNA integrity number (RIN), a measure that describes the degree of degradation of RNA molecules\cite{Schroeder2006}, and amplification plate, were known. These were used to correct expression values for batch effects. 
 
-\subsection{Methylation quantitative trait loci}
+\subsubsection{Methylation quantitative trait loci}
 \label{Data:meQTL}
-%TODO find source paper
-Genotypic variants are known to effect methylation patterns in humans \cite{}. Therefore, we used previously processed methylation quantitative trait loci (meQTL) data to explore the mechanism of trans acting SNP-CpG associations. Associated pairs were used as a seed for trans-acting interaction networks.
+Genotypic variants are known to effect methylation patterns in humans \cite{Jones2013}. Therefore, we used previously processed methylation quantitative trait loci (meQTL) data to explore the mechanism of trans acting SNP-CpG associations. Associated pairs were used as a seed for trans-acting interaction networks as described in section \ref{Methods:Data collection}.
 
 For meQTLs a stringent definition of trans effects was used: A SNP-CpG pair was called a trans-meQTL only if they are located on different chromosomes. This definition differs from the one used for eQTM and eQTL calculation as described later. 
 
 %TODO generate some kind of figure for meQTL numbers
-The data set contained a total of 11165559 significantly associated SNP-CpG pairs. 
-70709 distinct CpG-sites and 2709428 SNPs were part of at least one meQTL. On average each SNP was associated with 4.12 CpGs and each CpG was part of on average 157.91 meQTLs.
+The data set contained a total of 11,165,559 significantly associated SNP-CpG pairs. 
+70,709 distinct CpG-sites and 2,709,428 SNPs were part of at least one meQTL. On average each SNP was associated with 4.12 CpGs and each CpG was part of on average 157.91 meQTLs.
 
-Of these 467915 pairs consisting of 3592 CpG-sites and 200761 SNPs were between different chromosomes. 
+Of these 467,915 pairs consisting of 3,592 CpG-sites and 200,761 SNPs were between different chromosomes. 
 
 
-\section{Transcription factor binding}
+\subsection{Transcription factor binding}
 \label{Data:tfbs}
 DNA methylation plays a major role in the specifics of transcription factor binding sites\cite{Yineaaj2239}. We used transcription factor binding sites obtained from two publicly available sources to enrich information about CpG-sites of interest with transcription factors that bind nearby: 
 
-The first source was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section (\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}).
+The first source was the third version of the track "Transcription Factor ChIP-seq (161 factors) from ENCODE with Factorbook Motifs"\cite{10.1101/gr.139105.112} downloaded from the UCSC genome browser download section \footnote{\url{http://hgdownload.cse.ucsc.edu/goldenPath/hg19/encodeDCC/wgEncodeRegTfbsClustered/wgEncodeRegTfbsClusteredWithCellsV3.bed.gz}}.
 
 It combines 690 high quality ENCODE ChIP-seq data sets, which were processed with the Factorbook motif discovery and annotation pipeline\cite{10.1101/gr.139105.112}. The pipeline uses the tools MEME-ChIP\cite{10.1093/bioinformatics/btr189} and FIMO\cite{10.1093/bioinformatics/btr064} from the MEME software suite and merges discovered motifs with known motifs from Jaspar\cite{10.1093/nar/gkx1126} and TransFac\cite{10.1093/nar/gkj143} using machine learning methods and manual curation. 
 
-The track contains a total of 438044 distinct peaks for 161 transcription factors in 91 cell types. For our analyses we filtered and combined the peaks for 23 blood related cell types. This leaves a total of 2475316 peaks for 125 transcription factors.  
+The track contains a total of 4,380,444 distinct peaks, representing binding sites for 161 transcription factors in 91 cell lines. For our analyses we filtered and combined the peaks for 23 blood cell lines, consisting of k562 and 22  B lymphocyte derived cell lines. This leaves a total of 2,475,316 peaks for 125 transcription factors.  
 
-The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines. ReMap uses Bowtie2\cite{10.1038/nmeth.1923} to map reads to the human genome and the tool MACS\cite{10.1186/gb-2008-9-9-r137} for peak calling. The final data set was downloaded from the ReMap website\url{(http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz)}.
+The second source was the ReMap project\cite{10.1093/nar/gku1280}. It combines 395 publicly available ChIP-seq data sets covering 132 different transcription factors across 83 cell lines and 264 conditions. ReMap uses Bowtie2\cite{10.1038/nmeth.1923} to map reads to the human genome and the tool MACS\cite{10.1186/gb-2008-9-9-r137} for peak calling. The final data set was downloaded from the ReMap website\footnote{\url{http://tagc.univ-mrs.fr/remap/download/All/filPeaks_public.bed.gz}}.
 
-There were a total of 8905156 peaks for 131 transcription factors in the data set. After filtering for 19 blood related cell types 1372245 peaks for 35 different transcription factors remained.  
+There were a total of 8,905,156 peaks for 131 transcription factors in the data set. After filtering for 54 conditions, made up by 19 blood related cell lines,  1,372,245 peaks for 35 different transcription factors remained.  
 
-Combining both filtered data sets lead to a total of 3847561 peaks of 145 different transcription factors.
+Combining both filtered data sets lead to a total of 3,847,561 peaks of 145 different transcription factors.
 
-\section{Protein interaction network}
+\subsection{Protein interaction network}
 \label{Data:Protein interaction network}
 Protein interaction data were used to include potential interaction partners in the generation of interaction networks.
 
 Human protein interaction data were downloaded from the STRING database version 9\cite{Franceschini2013}. STRING is a database for direct and functional protein associations that is compiled by combining multiple sources: Experimental evidence of interaction, known pathways and protein complexes from curated databases, co-expression analysis, knowledge transfer from other species based on gene orthology, and automated text-mining of scientific literature\cite{Szklarczyk2017}. 
 
-The data set contained 3019612 pairwise protein interactions between 16590 different proteins. For each pair associations scores for the described categories were available. Protein interactions were filtered for the availability of experimental and/or database evidence by excluding pairs with and association score of 0 in both categories, which left 375702 interactions between 12769 different proteins. 
+The data set contained 3,019,612 pairwise protein interactions between 16,590 different proteins. For each pair associations scores for each source were available. Protein interactions were filtered for the availability of experimental or database evidence by excluding pairs with and association score of 0 in both categories, which left 375,702 interactions between 12,769 different proteins. 
 
-Further filtering was performed, by excluding proteins, whose genes were not found expressed in whole blood. Therefore, expression values from RNA-seq experiments for 55 tissues in human were downloaded from the  Genotype-Tissue Expression (GTEx) Project\cite{GTExConsortium2013}. Transcripts with an RPKM (Reads per kilobase per million mapped reads) of more than 0.1 in blood were considered expressed. Interactions where one or both members were not represented by these 17343 transcripts were removed.
+Further filtering was performed by excluding proteins, whose genes were not found expressed in whole blood. For this, expression values from RNA-seq experiments for 55 tissues in human were downloaded from the  Genotype-Tissue Expression (GTEx) Project\cite{GTExConsortium2013}. Transcripts with an RPKM (Reads per kilobase per million mapped reads) of more than 0.1 in GTEx blood samples were considered expressed. Interactions where one or both members were not represented by these 17,343 transcripts were removed.
 
 Finally, connected components were calculated on the network represented by the remaining pairwise interactions and all genes not within the biggest connected component were removed. The final network contained 8546 proteins and 97447 interactions. 
 
-\section{Chromatin states}
+\subsection{Chromatin states}
 \label{Data:Chromatin states}
 %TODO rewrite somewhat - but not used right now
 Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model (\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}). The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
@@ -397,11 +416,11 @@ In this work the annotations for 27 blood related cell lines were used. When com
 
 
 \newpage
-\chapter{Methods}
+\section{Methods}
 \label{Methods}
 Most computations were done using the statistical computing environment and programing language R, version 3.4.1\cite{Rlanguage}. Pre filtering steps on large files, that could not be loaded into random access memory, were performed using the bash command "awk", which runs scripts written in the "AWK" programming language.
 
-\section{Overlaps}
+\subsection{Overlaps}
 \label{Methods:Overlaps}
 The main objective of this thesis was to analyze the effects of HERV elements on the regulation of cell activity. 
 
@@ -411,7 +430,7 @@ The calculation was performed using the function "findOverlaps" from the Biocond
 
 The search for overlapping features was also performed on "GRanges" objects including all HERV elements as well as the 1kb or 2kb flanking regions of all elements. This was done to include functional features, that while not directly within HERV regions, are still likely to be influenced by them. Furthermore, this analysis was performed on all three HERV sets.
 
-\section{Data normalization}
+\subsection{Data normalization}
 \label{Methods:Data normalization}
 Before expression and methylation values were used for analyses, they were corrected for batch effects. For this we used the available covariates to calculate linear models and regress out the respective residuals. The model used for expression values is shown in equation \ref{eq:expr.res.model} and considers the covariates age, sex, RNA integrity number (RIN), plate and storage time. The model for methylation values, shown in equation \ref{eq:meth.res.model},
 includes the cell composition for the five blood cell types known from the houseman blood counts, as well as the first 20 principal components of the Illumina 450k array control-probes. 
@@ -425,7 +444,7 @@ Meth \sim 1+CD4T+CD8T+NK+Bcell+Mono+PC_1+...+PC_{20}
 \end{equation}
 
 
-\section{eQTL/eQTM calculation}
+\subsection{eQTL/eQTM calculation}
 \label{Methods:eQTL/eQTM calculation}
 As a preliminary analysis to interrogate the effect of genotype and methylation variants on expression, expression quantitative trait loci (eQTL) and expression quantitative trait methylation (eQTM) were calculated.
 
@@ -446,7 +465,7 @@ The p-value threshold for significant cis-QTLs during calculation was set to $10
 
 
 
-\section{Functional Analysis of Gene Sets}
+\subsection{Functional Analysis of Gene Sets}
 \label{Methods:Functional Analysis of Gene Sets}
 In multiple analyses functional Gene Ontology enrichments were performed.
 
@@ -454,38 +473,40 @@ First a set of all GO annotations with any evidence code for gene symbols  was r
 
 Then a hypergeometric test\cite{GOstats} for overreprensentation was performed on a set of genes of interest. A custom background set of genes specific to the analysis was given for each enrichment. Finally, the p-values for overrepresented GO terms were adjusted for multiple testing using the Holm method\cite{10.2307/4615733}. Terms with an adjusted p-value of less than 0.05 were considered significantly overrepresented. 
 
-\section{Gaussian Graphical Models}
+\subsection{Gaussian Graphical Models}
 \label{Methods:Gaussian Graphical Models}
-In this work Gaussian Graphical Models (GGMs) on multiomics data with a connection to HERV elements were used to investigate the effects and effect pathways of changes in HERV elements. The calculation of GGMs was performed using the R package "BDgraph" version 2.44\cite{Mohammadi2015BDgraphAR}. First I will shortly go over the theoretical background and the method, following Mohammadi and Wit\cite{Mohammadi2015,Mohammadi2015BDgraphAR}. Then I will elaborate on how I defined the data sets to generate GGMs on.
+In this work, Gaussian Graphical Models (GGMs) on multiomics data with a connection to HERV elements were used to investigate the effects and effect pathways of changes in HERV elements. The calculation of GGMs was performed using the R package "BDgraph" version 2.44\cite{Mohammadi2015BDgraphAR}. First, I will shortly go over the theoretical background and the method, following Mohammadi and Wit\cite{Mohammadi2015,Mohammadi2015BDgraphAR}. All formulas are taken from the papers. For the complete theory I suggest reading the original paper\cite{Mohammadi2015}.
 
-\subsection{Methodological Background}
-In Gaussian Graphical Models, random variables are represented by nodes. Conditional dependence relationships, or partial correlations,  between these variables are represented as undirected edges in a graph $G=(V,E)$, where $V=\{1,2, ..., p\}$ is a set of nodes and $E \subset V \times V$ the set of edges. A zero mean Gaussian Graphical model with respect to graph G is defined as
+Then I will elaborate on how I defined the data sets to generate GGMs on.
+
+\subsubsection{Methodological Background}
+In Gaussian Graphical Models, random variables are represented by nodes. Conditional dependence relationships, or partial correlations,  between these variables are represented as undirected edges in a graph $G=(V,E)$, where $V=\{1,2, ..., p\}$ is the set of nodes and $E \subset V \times V$ the set of edges. A zero mean Gaussian Graphical model with respect to the graph G is defined as
 
 \begin{equation}
-\mathcal{M}_G = \lbrace \mathcal{N}_p(0,\Sigma|K  \Sigma^{-1} \in \mathbb{P}_G \rbrace
+\mathcal{M}_G = \lbrace \mathcal{N}_p(0,\Sigma|K = \Sigma^{-1} \in \mathbb{P}_G \rbrace
 \end{equation}
 
 where $\Sigma$ is the covariance matrix, its inverse $K$ is the precision matrix and $\mathbb{P}_G$ is the cone of symmetric positive definite matrices with elements $K_{ij}$ equal to zero for all $(i,j)\notin E$. This means the random variables representing our data are assumed to follow the multivariate Gaussian distribution $\mathcal{N}(\mu, K^{-1})$, where the mean $\mu$ is zero.
 
-With $Z = (Z^{(1)}, ..., Z^{(n)})$ being the observed data of $p$ independent samples, the likelihood function is
+With $Z = (Z^{(1)}, ..., Z^{(n)})$ being the observed data of $p$ independent samples, the likelihood function is given as
 \begin{equation}
 Pr(Z|K,G) \propto |K|^{n/2} exp\left\lbrace-\frac{1}{2}tr(KU)\right\rbrace,
 \end{equation}
 where $U = Z^TZ$.
 
-As for multivariate Gaussian distributions conditional dependence is a direct representation of partial correlation\cite{10.1111/j.1467-842X.2004.00360.x}, we will only use the former going forward.
+In section \ref{Introduction:Effect network analysis} I introduced GGMs as being based on partial correlations. For multivariate Gaussian distributions conditional dependence is a direct representation of partial correlation\cite{10.1111/j.1467-842X.2004.00360.x}. Therefore, to stay closer to the paper we will only use the term conditional dependence going forward.
 
 Conditional independence in the model is represented by the precision matrix in the form that two variables $i$ and $j$ are conditionally independent given the remaining variables, if and only if $K_{ij} = 0$. Therefore, the nonzero entries of $K$ correspond to links in the graph $G$.  
 
-As mentioned in section \ref{Introduction:Effect network analysis}, the space of possible graphs is too big to explore exhaustively. When considering a case with as low as $p = 50$ variables, there are $2^{p(p-1)/2} > 10^{300}$ possible graphs. Therefore a heuristic approach is necessary. 
+The space of possible graphs is too large to explore exhaustively. When considering a case with as low as $p = 50$ variables, there are $2^{p(p-1)/2} > 10^{300}$ possible graphs. Therefore, a heuristic approach is necessary. 
 
-In the used implementation of GGM calculation the space of possible graphs and precision matrices is explored by a birth-death Markov chain Monte Carlo (BDMCMC) method. It is based on a continuous time Markov process, where jumps to a larger or a smaller dimension occur based on birth and death rates, that are chosen so that the stationary distribution of the Markov chain represents the chosen posteriori distribution.
+In this implementation of GGM calculation the space of possible graphs and precision matrices is explored by a birth-death Markov chain Monte Carlo (BDMCMC) method. It is based on a continuous time Markov process, where jumps to a larger or a smaller dimension occur based on birth and death rates, that are chosen so that the stationary distribution of the Markov chain represents the chosen posteriori distribution.
 
-More specific in the case of Graphical Models a birth event represents the addition of an edge $e = (i,j) \notin E$ and leads the process to a new state $(G^{+e}, K^{+e}$, where $G^{+e} = (V, E \cup \{e\})$, and $K^{+e}$ is equal to $K$ except for the positions $\lbrace (i,j), (j,i), (j,j) \rbrace$.
+More specifically, in the case of Graphical Models a birth event represents the addition of an edge $e = (i,j) \notin E$ and leads the process to a new state $(G^{+e}, K^{+e}$, where $G^{+e} = (V, E \cup \{e\})$, and $K^{+e}$ is equal to $K$ except for the positions $\lbrace (i,j), (j,i), (j,j) \rbrace$.
 
 Analogously a death event represents the deletion of an edge $e = (i,j) \in E$ and leads the process to a new state $(G^{-e}, K^{-e}$, where $G^{-e} = (V, E \setminus \{e\})$, and $K^{-e}$ is equal to $K$ except for the positions $\lbrace (i,j), (j,i), (j,j) \rbrace$.
 
-These events are considered to be independent Poisson processes. Birth and death rates are conditional to the joint posterior distribution of a graph G and precision matrix K, $Pr(K,G|Z)$.
+These events are considered to be independent Poisson processes. Birth and death rates are conditional to the joint posterior distribution of a graph G and precision matrix K given as $Pr(K,G|Z)$.
 
 The birth-rates and death-rates are defined as
 
@@ -497,7 +518,7 @@ The birth-rates and death-rates are defined as
 \delta _e(K)=min\left\lbrace \frac{Pr(G^{-e}, K^{-e}|Z)}{Pr(G,K|Z)},1 \right\rbrace \text{, for each }  e \in E,
 \end{equation}
 
-As birth and death rates are independent the total birth and death rates are
+As birth and death rates are independent Poisson processes the total birth and death rates are
 
 \begin{equation}
 \beta(K) = \sum_{e \notin E}\beta_e(K),
@@ -507,7 +528,7 @@ As birth and death rates are independent the total birth and death rates are
 \delta(K) = \sum_{e \in E}\delta_e(K).
 \end{equation}
 
-The time between successive events is exponentially distributed and has the mean $1/(\beta(K)+\delta(K))$. Therefore, the probability of a birth or death event is given by
+The waiting time between successive events is exponentially distributed and has the mean $1/(\beta(K)+\delta(K))$. This means the length of the waiting time is dependent on the how likely a graph is, compared to the graphs that could be reached by a birth or death event. The probability of a birth or death event is given by
 
 \begin{equation}
 Pr(\text{birth of link e}) = \frac{\beta_e(K)}{\beta(K) + \delta(K)} \text{, for each } e \notin E,
@@ -525,7 +546,7 @@ The joint posterior distribution of a graph $G$ with the precision matrix $K$ is
 Pr(K,G|Z) \propto Pr(Z|K) Pr(K|G) Pr(G)
 \end{equation}
 
-$Pr(Z|K)$ is the likelihood and already defined. The default for the prior of the graph is $Pr(G)=\frac{1}{|\mathcal{G}|}$, where $\mathcal{G}$ is the graph space. Alternatively $Pr(G)$ can be supplanted by a distribution representing prior information of relationships between variables, if available. Finally, the prior distribution for the precision matrix is defined to be the G-Wishart distribution $W_G(b,D)$ with the following density:
+$Pr(Z|K)$ is the likelihood and was defined previously. The default for the prior of the graph is the uniform distribution $Pr(G)=\frac{1}{|\mathcal{G}|}$, where $\mathcal{G}$ is the space of possible graphs. Alternatively $Pr(G)$ can be supplanted by a distribution representing prior information of relationships between variables, if available. Finally, the prior distribution for the precision matrix is defined to be the G-Wishart distribution $W_G(b,D)$ with the following density:
 
 \begin{equation}
 Pr(K|G) = \frac{1}{I_G(b,D)}|K|^{\frac{b-2}{2}}exp\left\lbrace-\frac{1}{2}tr(DK)\right\rbrace 1(K \in \mathbb{P}_G),
@@ -533,43 +554,29 @@ Pr(K|G) = \frac{1}{I_G(b,D)}|K|^{\frac{b-2}{2}}exp\left\lbrace-\frac{1}{2}tr(DK)
 
 where $b>2$ is the degrees of freedom, $D$ is a symmetric positive definitive matrix, $I_G(b,D)$ is the normalizing constant with respect to the graph $G$ and $1(x)$ is 1 if $x$ is true, and 0 otherwise.
 
-\newpage
-The used implementation of GGMs considers the G-Wishart distribution $W_G(b,D)$ to be a prior distribution for the precision matrix $K$ with the following density:
+In the calculation of GGMs with the package BDgraph the following steps are repeated for a set number of iterations:
 
-\begin{equation}
-Pr(K|G) = \frac{1}{I_G(b,D)}|K|^{\frac{b-2}{2}}exp\left\lbrace-\frac{1}{2}tr(DK)\right\rbrace 1(K \in \mathbb{P}_G),
-\end{equation}
+First, the birth and death rates as well as the waiting time is calculated. Then a jump is simulated according to the probabilities in equations \ref{eq:birth.prob} and \ref{eq:death.prob} and an edge is added or removed. Finally, the precision matrix for the new graph is sampled. This is done using a sampler defined in \cite{Mohammadi2015}, based on work by Lenkoski\cite{Lenkoski2013}. 
 
-where $b>2$ is the degrees of freedom, $D$ is a symmetric positive definitive matrix, $I_G(b,D)$ is the normalizing constant with respect to the graph $G$ and $1(x)$ is 1 if $x$ is true, and 0 otherwise.
-
-In the calculation of GGMs with the package BDgraph the following steps are repeated for a given number of iterations:
-
-First The birth and death rates as well as the waiting time is calculated. Then a jump is simulated according to the probabilities in equations \ref{eq:birth.prob} and \ref{eq:death.prob} and an edge is added or removed. Finally, the precision matrix for the new graph is sampled. This is done using a sampler defined in \cite{Mohammadi2015}, that I will not elaborate on.  
-
-The output of the calculation consists of the graphs, precision matrices and waiting times for each iteration. The posterior probabilities of all visited graphs are estimated by the total waiting time on each graph during the iterations as shown in figure \ref{fig:bdgraph.waiting.graph}. This means a graph is considered more likely when it was visited multiple times and/or the total birth and death rates when at this graph were low leading to long waiting times. The approach usually takes some time to converge close to the posterior distribution. Therefore, BDgraph offers the function to define a number of iterations, that are used as "burn-in" period, which are not considered for the calculation of graph probabilities.  
+The output of the calculation consists of the graphs, precision matrices and waiting times for each iteration. The posterior probabilities of all visited graphs are estimated by the total waiting time on each graph during the iterations as shown in figure \ref{fig:bdgraph.waiting.graph}. This means a graph is considered more likely when it was visited multiple times and the waiting times were long due to low birth and death rates. The approach takes some time to converge close to the posterior distribution. Therefore, BDgraph offers the function to define a number of iterations, that are used as "burn-in" period, which are not considered for the calculation of graph probabilities.  
 
 \begin{figure}[b!]
 \begin{center}
-	\includegraphics[scale=1.2, keepaspectratio = true]{../figures/bdgraph_waiting_graph}
+	\includegraphics[scale=0.33, keepaspectratio = true]{../figures/bdgraph_waiting_graph}
 	\end{center}
-	\caption{}
+	\caption{(Left) Continuous time BDMCMC algorithm where $\{t_1 , t_2 , t_3 , ...\}$ are jumping times and $\{w_1 , w_2 , w_3 , ...\}$ are waiting times. (Right) Posterior probability estimation of the graphs based on the proportions of their waiting times.}
 	\label{fig:bdgraph.waiting.graph}
 \end{figure}
 
 An extension to GGMs that allows the method to be used on both discrete and continuous variables is called Gaussian copula graphical modeling. This is done by introducing a multivariate Gaussian latent variable that transform the raw data in way that makes it usable in the calculation of GGMs. 
 
-%The G-Wishart prior also is a conjugate prior the to likelihood function of the multivariate Gaussian distribution. Therefore, the posterior distribution of $K$ is 
-%\begin{equation}
-%Pr(K|Z,G) = \frac{1}{I_G(b^*,D^*)}|K|^{\frac{b^*-2}{2}}exp\left\lbrace-\frac{1}{2}tr(D^*K)\right\rbrace ,
-%\end{equation}
-%where $b^* = b+n$ and $D^* = D+S$. This is once again a G-Wishart distribution, $W_G(b^*,D^*)$.
-\subsection{Data collection}
+\subsubsection{Data collection}
 \label{Methods:Data collection}
-Gaussian Graphical models have the severe limitation, that sample covariance and correlation matrices are well conditioned only when the number of variables is smaller than the number of samples\cite{Schaefer2005}. Therefore, it is absolutely necessary to perform a pre-selection of included entities when calculating GGMs on our multiomics data set.
+The stability of Gaussian Graphical models is limited by the property, that sample covariance and correlation matrices are well conditioned only when the number of variables is smaller than the number of samples\cite{Schaefer2005}. Therefore, it is absolutely necessary to perform a pre-selection of included entities when calculating GGMs on our multiomics data set instead of calculating genome wide networks.
 
-We performed two mechanisms of selecting node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. Trans-meQTLs provide interesting boundaries for the analysis of regulatory mechanisms, as the effect is guaranteed to be indirect. Furthermore, the effect size of a trans-meQTL has to big to reach significance. 
+We performed two approaches of selecting potential node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. Trans-meQTLs provide interesting boundaries for the analysis of regulatory mechanisms, as the effect is guaranteed to be indirect. Furthermore, the effect size of a trans-meQTL has to big to reach significance. 
 
-The first way starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the analysis.  To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the sentinel SNP (SNP genes/probes) are included. Analogously to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, in an attempt to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the String network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path.
+The first approach starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the nodes. To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the SNP (SNP genes/probes) are included. Analogously, to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the protein-protein interaction network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path. The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.snp.scheme}
 
 %TODO write caption
 \begin{figure}[b!]
@@ -578,7 +585,7 @@ The first way starts of with a SNP that lies within a HERV element and has signi
 	\label{fig:ggm.data.collect.snp.scheme}
 \end{figure}
 
-The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.snp.scheme}
+
 
 The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.cpg.scheme}, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV and are part of a trans-meQTL, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Other CpGs that are in a trans-meQTL with these SNPs are included as well. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
 
@@ -591,7 +598,7 @@ The second approach of data collection, shown in figure \ref{fig:ggm.data.collec
 
 For both approaches data sets that contained too few members were excluded as follow. Sets with less than one gene or probe neighboring a SNP and one neighboring a CpG-site were removed. Furthermore, if no transcription factor and no shortest path gene was found, the set was excluded. Therefore, each GGM calculated contained at least 5 entities.
 
-\subsection{GGM calculation and filtering}
+\subsubsection{GGM calculation and filtering}
 \label{Methods:GGM calculation and filtering}
 The BDgraph main method "bdgraph" was used to calculated the GGMs on the data sets that were just defined. I used the parameters, \texttt{'method = "gcgm"}, which leads to the use of the extension for mixed data. As algorithm I used the package default 'algorithm = "bdmcmc". The number of iterations was set to \texttt{'iter = 50000'}, while the burn-in period was \texttt{'burnin = 25000'}. "bdgraph" was run with a prior edge distribution of 'g.prior = 0.5'. The starting graph was set to \texttt{'g.start = "empty"'}, which means the calculation is started in an unconnected graph. Finally, the degrees of freedom for the G-Wishart distribution used to calculate the prior of the precision matrix was chosen as \texttt{'prior.df = 3'}.
 
@@ -615,12 +622,12 @@ Therefore, the number edges between SNPs/CpGs and neighboring genes were counted
 A manual inspection of these criteria was performed in order to select which GGMs would be the target of detailed manual analysis. 
 
 \newpage
-\chapter{Results}
+\section{Results}
 \label{Results}
-\section{Normalized Data}
+\subsection{Normalized Data}
 \label{Results:Normalized Data}
 %TODO expand and source why normal dist
-The distributions of the expression and methylation residuals, calculated as described in chapter \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res.hist}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{Mohammadi2015}.
+The distributions of the expression and methylation residuals, calculated as described in section \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res.hist}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{Mohammadi2015}.
 
 \begin{figure}[b!]
 	\includegraphics[scale=1, keepaspectratio = true]{../figures/expr_meth_res_hist}
@@ -628,11 +635,11 @@ The distributions of the expression and methylation residuals, calculated as des
 	\label{fig:expr.meth.res.hist}
 \end{figure}
 
-\section{HERV region features}
+\subsection{HERV region features}
 \label{Results:HERV region features}
-In this section I will describe the expression probes that overlap with and the cpgs and SNPs that lie within any HERV element and/or their flanking regions. The results for the set of all endogenous retroviral elements, HERV set 2, without flanking regions are described in detail. The results for the other sets defined in chapter \ref{Data:HERV annotation} and including flanking regions will be shown in tables or in the supplementary data.
+In this section I will describe the expression probes that overlap with and the cpgs and SNPs that lie within any HERV element and/or their flanking regions. The results for the set of all endogenous retroviral elements, HERV set 2, without flanking regions are described in detail. The results for the other sets defined in section \ref{Data:HERV annotation} and including flanking regions will be shown in tables or in the supplementary data.
 
-\subsection{Expression}
+\subsubsection{Expression}
 \label{Results:Expression}
 
 \begin{figure}[tb]
@@ -683,7 +690,7 @@ The results for all HERV sets and including flanking regions is shown in table \
 	\label{tab:expr.overlap.counts}
 \end{table}
 
-\subsection{Methylation}
+\subsubsection{Methylation}
 \label{Results:Methylation}
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_meth_raw_hist_var}  
@@ -710,7 +717,7 @@ The number of CpG sites within all HERV sets and including flanking regions is s
 	\caption{Overview of CpGs overlapping with different HERV sets and flanking regions. "Pairs" describes the total number of overlaps occurring, "HERVs" and "CpGs" are the number of distinct HERV elements/GpG sites that are part of at least one overlap.}
 	\label{tab:meth.overlap.counts}
 \end{table} 
-\subsection{Genotypes}
+\subsubsection{Genotypes}
 A total of 890780 the considered SNPs are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
 
 The results for all sets and flanking regions are shown in table \ref{tab:snp.overlap.counts}
@@ -742,10 +749,10 @@ In figure \ref{fig:hervS2.snp.hist}B the density of SNPs per base pair of its HE
 \end{figure}
 
 
-%\subsection{Chromatin states}
+%\subsubsection{Chromatin states}
 %Data in /storage/groups/groups\textunderscore epigenreg/users/julian.schmidt ...
 
-\section{eQTLs}
+\subsection{eQTLs}
 \label{Results:eQTLs}
 Associations were calculated for 156.4 millions cis acting SNP-expression probe pairs and 456.1 billion possible pairs in trans. 
 
@@ -783,7 +790,7 @@ The fraction of HERV S2 related SNP-expression probe pairs that proved to be sig
 
 A GO enrichment was performed on all 8211 genes associated to HERV related eQTLs using the set of all genes found in eQTLs as background. However, there were no significantly enriched genes. 
 
-\section{eQTMs}
+\subsection{eQTMs}
 \label{Results:eQTMs}
 When calculating expression quantitative trait methylation there were a total of 13.88 millions CpG-expression probe pairs within a distance of 50 Kpb or less of each other. The number of potential trans-acting pairs equaled around 23.22 billions. 
 
@@ -815,9 +822,9 @@ The fraction of potential HERV related eQTMs that were significant is shown in f
 
 A GO biological process enrichment was performed on the 1316 genes that the expression probes found in HERV S2 related eQTMs are annotated to. All gene that were part of an eQTM were used as background. After correction for multiple testing no GO terms were found to be significantly enriched. 
 
-\section{meQTLs}
+\subsection{meQTLs}
 \label{Results:meQTLs}
-The number of cis- and trans-meQTLs in the obtained data set was already elaborated on in chapter \ref{Data:meQTL}. Therefore, in this chapter the focus is laid on the meQTLs that are related to HERV S2.
+The number of cis- and trans-meQTLs in the obtained data set was already elaborated on in section \ref{Data:meQTL}. Therefore, in this section the focus is laid on the meQTLs that are related to HERV S2.
 
 There is a total of 360048 meQTLs, whose CpG-site lies within a HERV element. They are made up by 1915 unique CpGs and 286289 SNPs. This means each of these CpG-sites is associated with 188 SNPs on average, which is slightly higher than the average of 157.91 for CpGs in the total set of meQTLs. The CpG, that is part of most meQTLs, cg07143125, is associated with 579 SNPs. 
 
@@ -854,11 +861,11 @@ A GO biological process enrichment was performed on the 5128 genes, that contain
 	\label{tab:hervS2.meqtl.enrichment}
 \end{table}
 
-\section{HERV related regulatory networks}
+\subsection{HERV related regulatory networks}
 \label{Results:HERV related regulatory networks}
-In the following chapter I will present the results of the GGM analysis on HERV related multiomics data. First, I will describe the data sets that were generated according to the two methods described in section \ref{Methods:Data collection}. Next I will give a general overview over the GGMs that were calculated using BDgraph and describe several measures that I used to identify interesting networks. Finally, I will show some of these interesting networks and analyze some of their structures in detail.
+In the following sections I will present the results of the GGM analysis on HERV related multiomics data. First, I will describe the data sets that were generated according to the two methods described in section \ref{Methods:Data collection}. Next I will give a general overview over the GGMs that were calculated using BDgraph and describe several measures that I used to identify interesting networks. Finally, I will show some of these interesting networks and analyze some of their structures in detail.
 
-\subsection{Data collection}
+\subsubsection{Data collection}
 \label{Results:Data collection}
 In the following "entity" describes one of a CpG site, a SNP, a gene or an expression probe.
 %SNP seed approach
@@ -883,7 +890,7 @@ The distribution of different types of entities was similar to the data sets con
 \end{figure}
 
 
-\subsection{General network overview}
+\subsubsection{General network overview}
 \label{Results:General network overview}
 The following section will give a short overview over GGMs calculated as described in section \ref{Methods:GGM calculation and filtering}. 
 
@@ -916,9 +923,9 @@ As displayed in figure \ref{fig:ggm.entity.cc.scatter}B almost all networks had 
 \end{figure}
 
 %TODO calculate and add graph measures
-\subsection{Example networks}
+\subsubsection{Example networks}
 \label{Results:Example networks}
-In the follwing section I will show restricted networks. 
+In the following section I will show restricted networks. 
 
 Figure \ref{fig:rs11079148.ggm.network} shows the network generated from the dataset seeded in rs11079148 after edges were filtered at an edge inclusion probability of 0.9 or more. Only the biggest connected component, containing the SNP, is shown. 
 
@@ -952,10 +959,10 @@ The network shown in figure \ref{fig:cg06889971.ggm.network} is generated from t
 \end{figure}
 
 \newpage
-\chapter{Discussion}
+\section{Discussion}
 \label{Discussion}
 
-\section{HERV region features}
+\subsection{HERV region features}
 \label{Discussion:HERV region features}
 
 Genotypes, expression levels and methylation levels were measured with microarray based methods. This means no global, unbiased analysis is possible. Therefore, the absence of measurements for many HERV elements is not sufficient to infer e.g. the lack of expression activity. The design of these arrays is not only based on prior knowledge and an assessment of the interest of each probe, but also sequence properties. For example the data sheet for the HumanHT-12 v3 Expression BeadChip\cite{HumanHT} mentions as parameters for the probe design among others the lack of similarity to other genes and the absence of highly repeated sequence in the genome. As a result it is to be expected, that HERVs, which are considered repeats after all, are covered sparsely. 
@@ -966,23 +973,25 @@ The enrichment of genes associated with the GO term "defense response" among the
 
 The distribution of expression values of HERV associated probes shows, that there certainly is expression activity within HERV elements. While the variance of expression values tends to be lower than on the entire data set, it is still enough for differential analyses. 
 
-%\subsection{Methylation}
+%\subsubsection{Methylation}
 %\label{Discussion:Methylation}
 The amount of probes measuring CpG-sites with HERV elements also was lower than would be expected, if probes were randomly distributed. This is expected to be due to probe design instead actual CpG occurrence. However an actual calculation of CpG density in HERV elements was not performed. 
 
+%TODO effect of LTR promoter activity - own genes, genome genes, role in inclusion in host regulatory mechanisms
 The high average of methylation level of HERV CpGs is in line with observations, that HERV LTRs tend to be methylated in order to silence their promoter activity\cite{Smith2013}.
 
-%\subsection{Genotypes}
+%\subsubsection{Genotypes}
 %\label{Discussion:Genotypes}
 The availability of genotype measurements was an exception, as the fraction of SNPs within HERV elements was slightly higher than the fraction of the genome covered by HERVs. This might be represent an actual higher density of common variants in HERV elements, as they are known to be highly degenerated and experience almost no evolutionary pressure pressure\cite{10.1146/annurev.genom.7.080505.115700}.
+%TODO 
 
-\section{Quantitative trait loci}
+\subsection{Quantitative trait loci}
 \label{Discussion:Quantitative trait loci}
 We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{Joehanes2017}.
 
 Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. %TODO why?
  
-The distributions of expression residuals for the significant eQTLs with worst p-values, shown in figure \ref{fig:best.worst.eqtl.boxplot}B and D, might hint towards setting a stricter cutoff. However, matrixEQTL works with continuous dosages instead of the discrete variants shown in the figure. This might disguise a more palpable association of the variant on the expression levels.
+The distributions of expression residuals for the significant eQTLs with highest p-values, shown in figure \ref{fig:best.worst.eqtl.boxplot}B and D, might hint towards setting a stricter cutoff. However, matrixEQTL works with continuous dosages instead of the discrete variants shown in the figure. This might disguise a more palpable association of the variant on the expression levels.
 
 About 65\% of the cis-eQTLs identified by Schramm et al\cite{Schramm2014} were reproduced in this analysis. Considering that only a subset of the data was used and they methods as well as thresholds for the calculation of significant eQTLs were different, this is a good overlap. 
 
@@ -990,32 +999,33 @@ The number of HERV related eQTLs shows that there certainly is some variation wi
 
 %TODO correct number
 This high number of probes and subsequently also genes might be the reason, that the GO enrichment on genes being part of HERV related eQTLs produced no significant results. 78\% of the genes that were part of any eQTL were also found in the filtered set.
-%\section{eQTMs}
+%\subsection{eQTMs}
 %\label{Discussion:eQTMs}
 
 The GO enrichment performed on HERV related meQTLs showed an enrichment of therms regarding the development nervours system and especially neurons. This is interesting as HERVs have previously been associated with neurodegenerative diseases \cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}.
 
-\section{Regulatory networks}
+\subsection{Regulatory networks}
 \label{Discussion:Regulatory networks}
 
+%TODO restructure: First describe expectation for networks, then describe condititions that would be necessary, then describe/show why conds are not met
 
 I was not able to discern mechanisms of HERV influence on cellular functions from the calculated GGMs. This was due to multiple problems. 
 
-For once the networks tende to be highly connected even after filtering edges at an edge inclusion probability cugoff as high as 0.9. This meant that in almost all cases there was one big connected component, that contained almost all nodes. Therefore, anlyses on whether genes are included in the restricted graph, like GO enrichments, were not meaningful. 
+For once the networks tended to be highly connected even after filtering edges at an edge inclusion probability cutoff as high as 0.9. This meant that in almost all cases there was one big connected component, that contained almost all nodes. Therefore, analyses on whether genes are included in the restricted graph, like GO enrichments, were not meaningful. 
 
-Another problem was, that the meQTLs that were used as cornerstones of the data collection, were present as direct edges in almost all cases. This meant that the strong known association lead to strong partial correlation even when respecting all other entities. A possible explanation for this might be the data collection. If the fators mediating the indirect assocation are not part of the dataset, there is no way to calcuate usefull partial correlations. Another reason might be, that if the acutal path the effect follows is longer than a few elements, even small errors in the data could lead to enough the failure to explain the indirect effect. 
+Another problem was, that the meQTLs that were used as cornerstones of the data collection, were present as direct edges in almost all cases. However, it is highly  unlikely that these associations represent a direct effect due to being located on different chromosomes. It seems that the strong known association lead to strong partial correlation even when respecting all other entities. A possible explanation for this might be the data collection. If the factors mediating the indirect association are not part of the dataset, there is no way to calculate useful partial correlations. Another reason might be, that if the actual path the effect follows is longer than a few elements, even small errors in the data could lead to the failure to explain the indirect effect. 
 
 In many cases the SNP and CpGs were not only directly connected, but this edge was the only edge for one of them. This is the case in the network for cg06889971 (Figure \ref{fig:cg06889971.ggm.network}.
 
-A potential solution to these problems could be the introduction of priors to the calculation. This might guide the iterative GGM calculation to be quicker to converge to the correct underlying interactions. I was not able to include priors due to time constraints and the troubles at finding publicy avaialable datasets that contain expression values not only on gene but on probe level. As expression probes without a known gene made up a big part of the networks, the information to define complete priors was not available. 
+A potential solution to these problems could be the introduction of priors to the calculation. This might guide the iterative GGM calculation to be quicker to converge to the correct underlying interactions. I was not able to include priors due to time constraints and the troubles at finding publicly available datasets that contain expression values not only on gene but on probe level. As expression probes without a known gene made up a big part of the networks, the information to define complete priors was not available. 
 
 Their sheer size posed a major problems to the manual analysis of most networks. More sophisticated automated analyses were sorely needed, but could not be implemented due to the lack of time. 
 
 
 \newpage
-\chapter{Conclusion and Outlook}
+\section{Conclusion and Outlook}
 \label{Conclusion and Outlook}
-
+The analysis of multiomics data from the KORA S4 Survey with a focus on human endogenous retroviruses showed that HERV elements have wide reaching effects in the human genome. While the array based measurements did not allow a truly genome wide analysis of the expression and methylation of HERV elements, 
 
 \newpage
 \listoffigures
