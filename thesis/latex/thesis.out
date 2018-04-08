@@ -13,31 +13,30 @@
 \BOOKMARK [3][-]{subsubsection.2.2.5}{Methylation quantitative trait loci}{subsection.2.2}% 13
 \BOOKMARK [2][-]{subsection.2.3}{Transcription factor binding}{section.2}% 14
 \BOOKMARK [2][-]{subsection.2.4}{Protein interaction network}{section.2}% 15
-\BOOKMARK [2][-]{subsection.2.5}{Chromatin states}{section.2}% 16
-\BOOKMARK [1][-]{section.3}{Methods}{}% 17
-\BOOKMARK [2][-]{subsection.3.1}{Overlaps}{section.3}% 18
-\BOOKMARK [2][-]{subsection.3.2}{Data normalization}{section.3}% 19
-\BOOKMARK [2][-]{subsection.3.3}{eQTL/eQTM calculation}{section.3}% 20
-\BOOKMARK [2][-]{subsection.3.4}{Functional Analysis of Gene Sets}{section.3}% 21
-\BOOKMARK [2][-]{subsection.3.5}{Gaussian Graphical Models}{section.3}% 22
-\BOOKMARK [3][-]{subsubsection.3.5.1}{Methodological Background}{subsection.3.5}% 23
-\BOOKMARK [3][-]{subsubsection.3.5.2}{Data collection}{subsection.3.5}% 24
-\BOOKMARK [3][-]{subsubsection.3.5.3}{GGM calculation and filtering}{subsection.3.5}% 25
-\BOOKMARK [1][-]{section.4}{Results}{}% 26
-\BOOKMARK [2][-]{subsection.4.1}{Normalized Data}{section.4}% 27
-\BOOKMARK [2][-]{subsection.4.2}{HERV region features}{section.4}% 28
-\BOOKMARK [3][-]{subsubsection.4.2.1}{Expression}{subsection.4.2}% 29
-\BOOKMARK [3][-]{subsubsection.4.2.2}{Methylation}{subsection.4.2}% 30
-\BOOKMARK [3][-]{subsubsection.4.2.3}{Genotypes}{subsection.4.2}% 31
-\BOOKMARK [2][-]{subsection.4.3}{eQTLs}{section.4}% 32
-\BOOKMARK [2][-]{subsection.4.4}{eQTMs}{section.4}% 33
-\BOOKMARK [2][-]{subsection.4.5}{meQTLs}{section.4}% 34
-\BOOKMARK [2][-]{subsection.4.6}{HERV related regulatory networks}{section.4}% 35
-\BOOKMARK [3][-]{subsubsection.4.6.1}{Data collection}{subsection.4.6}% 36
-\BOOKMARK [3][-]{subsubsection.4.6.2}{General network overview}{subsection.4.6}% 37
-\BOOKMARK [3][-]{subsubsection.4.6.3}{Example networks}{subsection.4.6}% 38
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 39
-\BOOKMARK [2][-]{subsection.5.1}{HERV region features}{section.5}% 40
-\BOOKMARK [2][-]{subsection.5.2}{Quantitative trait loci}{section.5}% 41
-\BOOKMARK [2][-]{subsection.5.3}{Regulatory networks}{section.5}% 42
-\BOOKMARK [1][-]{section.6}{Conclusion and Outlook}{}% 43
+\BOOKMARK [1][-]{section.3}{Methods}{}% 16
+\BOOKMARK [2][-]{subsection.3.1}{Overlaps}{section.3}% 17
+\BOOKMARK [2][-]{subsection.3.2}{Data normalization}{section.3}% 18
+\BOOKMARK [2][-]{subsection.3.3}{eQTL/eQTM calculation}{section.3}% 19
+\BOOKMARK [2][-]{subsection.3.4}{Functional Analysis of Gene Sets}{section.3}% 20
+\BOOKMARK [2][-]{subsection.3.5}{Gaussian Graphical Models}{section.3}% 21
+\BOOKMARK [3][-]{subsubsection.3.5.1}{Methodological Background}{subsection.3.5}% 22
+\BOOKMARK [3][-]{subsubsection.3.5.2}{Data collection}{subsection.3.5}% 23
+\BOOKMARK [3][-]{subsubsection.3.5.3}{GGM calculation and filtering}{subsection.3.5}% 24
+\BOOKMARK [1][-]{section.4}{Results}{}% 25
+\BOOKMARK [2][-]{subsection.4.1}{Normalized Data}{section.4}% 26
+\BOOKMARK [2][-]{subsection.4.2}{HERV region features}{section.4}% 27
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Expression}{subsection.4.2}% 28
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Methylation}{subsection.4.2}% 29
+\BOOKMARK [3][-]{subsubsection.4.2.3}{Genotypes}{subsection.4.2}% 30
+\BOOKMARK [2][-]{subsection.4.3}{eQTLs}{section.4}% 31
+\BOOKMARK [2][-]{subsection.4.4}{eQTMs}{section.4}% 32
+\BOOKMARK [2][-]{subsection.4.5}{meQTLs}{section.4}% 33
+\BOOKMARK [2][-]{subsection.4.6}{HERV related regulatory networks}{section.4}% 34
+\BOOKMARK [3][-]{subsubsection.4.6.1}{Data collection}{subsection.4.6}% 35
+\BOOKMARK [3][-]{subsubsection.4.6.2}{General network overview}{subsection.4.6}% 36
+\BOOKMARK [3][-]{subsubsection.4.6.3}{Example networks}{subsection.4.6}% 37
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 38
+\BOOKMARK [2][-]{subsection.5.1}{HERV region features}{section.5}% 39
+\BOOKMARK [2][-]{subsection.5.2}{Quantitative trait loci}{section.5}% 40
+\BOOKMARK [2][-]{subsection.5.3}{Regulatory networks}{section.5}% 41
+\BOOKMARK [1][-]{section.6}{Conclusion and Outlook}{}% 42

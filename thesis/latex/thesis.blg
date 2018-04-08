@@ -4,16 +4,15 @@ The top-level auxiliary file: thesis.aux
 The style file: unsrtMod.bst
 Database file #1: mybib.bib
 Warning--I'm ignoring Franceschini2013's extra "note" field
---line 101 of file mybib.bib
+--line 142 of file mybib.bib
 Warning--I'm ignoring Krumsiek2011's extra "note" field
---line 456 of file mybib.bib
+--line 497 of file mybib.bib
 Warning--I'm ignoring 10.1186/gb-2008-9-9-r137's extra "note" field
---line 657 of file mybib.bib
+--line 698 of file mybib.bib
 Warning--I'm ignoring Malfavon-Borja2015's extra "note" field
---line 885 of file mybib.bib
+--line 926 of file mybib.bib
 Warning--entry type for "HumanHT" isn't style-file defined
---line 891 of file mybib.bib
-Warning--I didn't find a database entry for "Joehanes2017"
+--line 932 of file mybib.bib
 Warning--empty journal in 10.3389/fpsyt.2015.00183
 Warning--empty journal in RepeatMasker
 Warning--empty booktitle in Mohammadi2015BDgraphAR
@@ -22,36 +21,36 @@ Warning--empty year in Lenkoski2013
 Warning--empty year in Mortelmans2016
 You've used 57 entries,
             1814 wiz_defined-function locations,
-            838 strings with 21047 characters,
-and the built_in function-call counts, 13148 in all, are:
-= -- 1180
-> -- 617
+            836 strings with 21548 characters,
+and the built_in function-call counts, 13127 in all, are:
+= -- 1173
+> -- 625
 < -- 0
-+ -- 286
-- -- 143
-* -- 963
++ -- 290
+- -- 145
+* -- 964
 := -- 2067
-add.period$ -- 184
+add.period$ -- 183
 call.type$ -- 57
 change.case$ -- 53
 chr.to.int$ -- 0
 cite$ -- 63
 duplicate$ -- 501
-empty$ -- 1256
-format.name$ -- 143
-if$ -- 2932
+empty$ -- 1251
+format.name$ -- 145
+if$ -- 2925
 int.to.chr$ -- 0
 int.to.str$ -- 57
 missing$ -- 52
-newline$ -- 301
+newline$ -- 300
 num.names$ -- 57
 pop$ -- 126
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 305
+skip$ -- 308
 stack$ -- 0
-substring$ -- 931
+substring$ -- 913
 swap$ -- 60
 text.length$ -- 0
 text.prefix$ -- 0
@@ -60,5 +59,5 @@ type$ -- 0
 warning$ -- 6
 while$ -- 106
 width$ -- 59
-write$ -- 642
-(There were 12 warnings)
+write$ -- 640
+(There were 11 warnings)

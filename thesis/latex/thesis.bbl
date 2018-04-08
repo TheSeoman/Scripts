@@ -222,12 +222,6 @@ GTEx Consortium.
 \newblock The genotype-tissue expression (gtex) project.
 \newblock {\em Nature Genetics}, 45:580 EP --, May 2013.
 
-\bibitem{10.1038/nmeth.1906}
-Jason Ernst and Manolis Kellis.
-\newblock Chromhmm: automating chromatin-state discovery and characterization.
-\newblock {\em Nature Methods}, 9:215 EP --, Feb 2012.
-\newblock Correspondence.
-
 \bibitem{Rlanguage}
 R~Core Team.
 \newblock {\em R: A Language and Environment for Statistical Computing}.
@@ -321,6 +315,12 @@ Ray Malfavon-Borja and C{\'e}dric Feschotte.
   restriction factors.
 \newblock {\em J Virol}, 89(8):4047--4050, Apr 2015.
 \newblock 03653-14[PII].
+
+\bibitem{Joehanes2017}
+Roby Joehanes, Xiaoling Zhang, Tianxiao Huan, et~al.
+\newblock Integrated genome-wide analysis of expression quantitative trait loci
+  aids interpretation of genomic association studies.
+\newblock {\em Genome Biology}, 18(1):16, Jan 2017.
 
 \bibitem{Mortelmans2016}
 Kristien Mortelmans, Feng Wang-Johanning, and Gary~L. Johanning.

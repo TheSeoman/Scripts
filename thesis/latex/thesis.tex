@@ -23,6 +23,9 @@
 \usepackage{textcomp}
 \usepackage[hyphens,spaces]{url}
 \usepackage{setspace}
+\usepackage{float}
+\usepackage[caption = false]{subfig}
+
 
 \usepackage[author={Julian Schmidt}]{pdfcomment}
 
@@ -310,7 +313,7 @@ Methylation data was available for 1727 individuals and 485512 sites, which make
 
  
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/meth_raw_hist_var}  
+	\includegraphics[scale = 0.99, keepaspectratio = true]{../figures/meth_raw_hist_var}  
 	\caption{Distribution of all methylation beta values (A) and variance (B) of 485577 CpGs between 1727 individuals.}
     \label{fig:meth.raw.hist.var}
 \end{figure}
@@ -320,8 +323,7 @@ Methylation data was available for 1727 individuals and 485512 sites, which make
 \label{Data:Genotypes}
 Genotyping was performed with the Affymetrix Axiom 6.0 array. On the data set used in this work genotypes had already been called using the Iluminus calling algorithm and missing values had been imputed using the IMPUTE2 software\cite{10.1371/journal.pgen.1000529}. Furthermore, imputation results had already been filtered at IMPUTE value of 0.4.  
 
-%TODO rewrite
-Additionally SNPs with a minor allele frequency of less than one percent had been removed, which allows used association analyses to be have more powerful test statistics.
+Additionally SNPs with a minor allele frequency (MAF) of less than one percent had been removed. This allows association analyses to have more powerful test statistics.
 
 In total measurements of 9533127 SNPs for 2940 individuals were available in the form of continuous dosages from 0 to 2 with 0 representing no occurrence of the SNP and 2 meaning the SNP is present in both chromosomes. Non integer values mean that different genotypes were measured in different cells in the sample and the resulting value describes the fraction of the occurrence of the variant. 
 
@@ -334,9 +336,8 @@ The sex of all participants was known. Of the 3020 participants with any availab
 Further covariates specific to participating individuals are sex, age, body mass index (BMI) and white blood cell count. An overview of these covariate values for all 3020 individuals and the individuals with all three essays available is shown in table \ref{tab:covariate.overview}.
 
 
-%TODO fix tables, add caption, maybe add RIN to table
 \begin{table}[h!]
-  	\begin{minipage}{.45\textwidth}
+  	\begin{minipage}{.5\textwidth}
     \pgfplotstabletypeset[
     col sep=tab, 
     header=true,    
@@ -345,8 +346,7 @@ Further covariates specific to participating individuals are sex, age, body mass
 	every head row/.style={before row=\hline, after row=\hline},
 	every last row/.style={after row=\hline}]{../tables/full.covariate.overview.tsv}
     \end{minipage}
-    \hfill
-     \begin{minipage}{.45\linewidth}
+     \begin{minipage}{.5\linewidth}
     \pgfplotstabletypeset[
     col sep=tab, 
     header=true,    
@@ -367,7 +367,6 @@ Genotypic variants are known to effect methylation patterns in humans \cite{Jone
 
 For meQTLs a stringent definition of trans effects was used: A SNP-CpG pair was called a trans-meQTL only if they are located on different chromosomes. This definition differs from the one used for eQTM and eQTL calculation as described later. 
 
-%TODO generate some kind of figure for meQTL numbers
 The data set contained a total of 11,165,559 significantly associated SNP-CpG pairs. 
 70,709 distinct CpG-sites and 2,709,428 SNPs were part of at least one meQTL. On average each SNP was associated with 4.12 CpGs and each CpG was part of on average 157.91 meQTLs.
 
@@ -402,14 +401,13 @@ Further filtering was performed by excluding proteins, whose genes were not foun
 
 Finally, connected components were calculated on the network represented by the remaining pairwise interactions and all genes not within the biggest connected component were removed. The final network contained 8546 proteins and 97447 interactions. 
 
-\subsection{Chromatin states}
-\label{Data:Chromatin states}
-%TODO rewrite somewhat - but not used right now
-Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model (\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}). The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
+%\subsection{Chromatin states}
+%\label{Data:Chromatin states}
+%Chromatin state annotations were downloaded from Roadmap Epgenomics Core 15-state model \footnote{\url{http://egg2.wustl.edu/roadmap/data/byFileType/chromhmmSegmentations/ChmmModels/coreMarks/jointModel/final}}. The Model provides a whole genome chromatin state annotation of 200 bp wide windows to the following 15 states: Active Transcription Start Site (TSS), Flanking Active TSS, Transcription at gene 5' and 4', Strong transcription, Weak transcription, Genic enhancers, Enhancers, ZNF genes \& repeats, Heterochromatin, Bivalent/Poised TSS, Flanking Bivalent TSS/Enhancer, Bivalent Enhancer, Repressed PolyComb, Weak Repressed PolyComb and Quiescent/Low. The model is available for 127 diverse cell lines. 
 
-It was generated using ChromHMM v1.10\cite{10.1038/nmeth.1906} on the chromatin marks H3K4me1, H3K4me3, H3K27me3, H3K9me3, and H3K36me3. ChromHMM is based on a multivarate Hidden Markov Model. 
+%It was generated using ChromHMM v1.10\cite{10.1038/nmeth.1906} on the chromatin marks H3K4me1, H3K4me3, H3K27me3, H3K9me3, and H3K36me3. ChromHMM is based on a multivarate Hidden Markov Model. 
 
-In this work the annotations for 27 blood related cell lines were used. When combining the annotation for a genomic location of interest like a HERV element or a SNP, houseman blood counts were used to account of the cell composition of the whole blood samples. 
+%In this work the annotations for 27 blood related cell lines were used. When combining the annotation for a genomic location of interest like a HERV element or a SNP, houseman blood counts were used to account of the cell composition of the whole blood samples. 
 
 
 \newpage
@@ -451,12 +449,11 @@ Calculations were performed using the Bioconductor package MatrixEQTL\cite{10.10
 
 We set the parameter \texttt{useModel = modelLINEAR}, which leads to the use of an  additive linear model. The association is modeled as simple linear regression and the absolute value of the sample correlation is used as test statistic.
 
-After calculating the test statistics the p-values for all pairs that pass a defined significance threshold are calculated. These are corrected multiple testing using a Benjamini-Hochberg procedure\cite{10.2307/2346101}, adapted for not recording all p-values, as shown in equation \ref{eq:matrix.eqtl.transformation}
+After calculating the test statistics the p-values for all pairs that pass a defined significance threshold are calculated. These are corrected multiple testing using a Benjamini-Hochberg procedure\cite{10.2307/2346101}, adapted for not recording all p-values.
 
 MatrixEQTL is rather efficient because it manages to reduce the calculation of the sample correlation over all SNPs and transcripts to one single large matrix multiplication. This is achieved by transforming the genotype and transcription values. 
 
 MatrixEQTL also allows to include covariates in the QTL calculation. As the expression and methylation values used are residuals and therefore already corrected this option is not used. Furthermore, MatrixEQTL can differentiate between cis- and trans-interactions based on distance. The maximal distance to consider a pair on the same chromosome as cis was set to 500 kb. 
-%TODO motivate cis-distance
 
 The p-value threshold for significant cis-QTLs during calculation was set to $10^{-6}$ and $10^{-8}$ for trans. As this cutoff is used for uncorrected p-values, a more stringent threshold is set for trans QTLs to account for the bigger number of possible pairs. 
 
@@ -573,12 +570,11 @@ The stability of Gaussian Graphical models is limited by the property, that samp
 
 We performed two approaches of selecting potential node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. Trans-meQTLs provide interesting boundaries for the analysis of regulatory mechanisms, as the effect is guaranteed to be indirect. Furthermore, the effect size of a trans-meQTL has to big to reach significance. 
 
-The first approach starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the nodes. To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the SNP (SNP genes/probes) are included. Analogously, to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the protein-protein interaction network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path. The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.scheme}A.
+The first approach starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the nodes. To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the SNP (SNP genes/probes) are included. Analogously, to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the protein-protein interaction network described in section \ref{Data:Protein interaction network}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path. The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.scheme}A.
 
-%TODO write caption
 \begin{figure}[b!]
 	\includegraphics[scale=0.75, keepaspectratio = true]{../figures/ggm_data_collect_scheme}
-	\caption{}
+	\caption{Scheme for data collection starting from a SNP (A) and a CpG (B) within a HERV element. }
 	\label{fig:ggm.data.collect.scheme}
 \end{figure}
 
@@ -590,7 +586,7 @@ For both approaches data sets that contained too few members were excluded as fo
 
 \subsubsection{GGM calculation and filtering}
 \label{Methods:GGM calculation and filtering}
-The BDgraph main method "bdgraph" was used to calculated the GGMs on the data sets that were just defined. I used the parameters, \texttt{'method = "gcgm"}, which leads to the use of the extension for mixed data. As algorithm I used the package default 'algorithm = "bdmcmc". The number of iterations was set to \texttt{'iter = 50000'}, while the burn-in period was \texttt{'burnin = 25000'}. "bdgraph" was run with a prior edge distribution of 'g.prior = 0.5'. The starting graph was set to \texttt{'g.start = "empty"'}, which means the calculation is started in an unconnected graph. Finally, the degrees of freedom for the G-Wishart distribution used to calculate the prior of the precision matrix was chosen as \texttt{'prior.df = 3'}.
+The BDgraph main method "bdgraph" was used to calculated the GGMs on the data sets that were just defined. I used the parameters, \texttt{'method = "gcgm"}, which leads to the use of the extension for mixed data. As algorithm I used the package default 'algorithm = "bdmcmc". The number of iterations was set to \texttt{'iter = 50000'}, while the burn-in period was \texttt{'burnin = 25000'}. "bdgraph" was run with a prior edge distribution of \texttt{'g.prior = 0.5'}. The starting graph was set to \texttt{'g.start = "empty"'}, which means the calculation is started in an unconnected graph. Finally, the degrees of freedom for the G-Wishart distribution used to calculate the prior of the precision matrix was chosen as \texttt{'prior.df = 3'}.
 
 Due to large number and size of calculated GGMs no manual analyses of all networks was possible. Therefore, multiple criteria were defined to identify potentially interesting GGMs.
 
@@ -600,14 +596,11 @@ Figure \ref{fig:ggm.expectation.scheme} shows the structure we expected to find 
 
 Therefore, the number edges between SNPs/CpGs and neighboring genes were counted, to identify restricted networks, that potentially follow this pattern Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either through a path over other nodes or as a direct edge. 
 
-%TODO write caption
 \begin{figure}[b!]
 	\includegraphics[scale=0.92, keepaspectratio = true]{../figures/ggm_expectation_scheme}
-	\caption{}
+	\caption{Expected structure of regulatory networks. }
 	\label{fig:ggm.expectation.scheme}
 \end{figure}
-
-%TODO include expected/hoped for GGM structure, elaborate on why certain edges are interesting
 
 A manual inspection of these criteria was performed in order to select which GGMs would be the target of detailed manual analysis. 
 
@@ -616,7 +609,6 @@ A manual inspection of these criteria was performed in order to select which GGM
 \label{Results}
 \subsection{Normalized Data}
 \label{Results:Normalized Data}
-%TODO expand and source why normal dist
 The distributions of the expression and methylation residuals, calculated as described in section \ref{Methods:Data normalization}, over all probes and samples can be seen in figure \ref{fig:expr.meth.res.hist}. As expected the residuals follow a normal distribution. This is important for the calculation of the Gaussian graphical models, as the normal distribution of the data is one of base assumptions for Gaussian graphical models\cite{Mohammadi2015}.
 
 \begin{figure}[b!]
@@ -693,7 +685,6 @@ CpGs associated with HERV S2, as shown in figure \ref{fig:hervS2.meth.hist.var}A
 
 The number of CpG sites within all HERV sets and including flanking regions is shown in table \ref{tab:meth.overlap.counts}
 
-%TODO write capthoin
 \begin{table}[h!]
   \begin{center}
     \resizebox{\textwidth}{!}{
@@ -757,17 +748,16 @@ In a previous work Schramm et al. \cite{Schramm2014} calculated eQTLs on express
 Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb genomic windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
 
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtl_all_herv_heatmap}  
+	\includegraphics[scale = 0.9, keepaspectratio = true]{../figures/eqtl_all_herv_heatmap}  
 	\caption{Fraction of SNP-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTLs in the given pair of bins. A considers all eQTLs and pairs, while B is limited on the ones whose SNP and/or expression probe are connected to HERV set 2.}
     \label{fig:global.eqtl.heatmap}
 \end{figure}
 
 The expression residual signatures of homozygous reference allele, heterozygous and homozygous alternative allele for the two eQTLs with the most and least significant p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. The eQTLs with the best p-values in subfigures A and C show clear distinctions between the different SNP variants. While there is a small trend between variants in subfigures B and D, the distributions of expression residuals are rather similar.    
 
-%TODO write caption
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtl_boxplots}  
-	\caption{}
+	\caption{Distribution of expression residuals with respect to genotypic variant in most significant (left column) and least significant (right column) eQTLs for cis (upper row) and trans(lower row).}
     \label{fig:best.worst.eqtl.boxplot}
 \end{figure}
 
@@ -792,26 +782,24 @@ Calculating eQTMs with a significance threshold of $10^{-6}$ for cis resulted in
 The fractions of potential CpG-expression probe pairs that were significantly associated between their genomic locations are shown in figure \ref{fig:global.eqtm.heatmap}A. In contrast to the eQTL results there is only a weaker preference for cis interactions. 
 
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtm_all_herv_heatmap}  
+	\includegraphics[scale = 0.9, keepaspectratio = true]{../figures/eqtm_all_herv_heatmap}  
 	\caption{Fraction of CpG-expression probe pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all eQTMs and pairs, while B is limited on the ones whose CpGs and/or expression probes are connected to HERV set 2.}
     \label{fig:global.eqtm.heatmap}
 \end{figure}
 
 The pairs of expression and methylation residual values for the eQTMs with the best and worst p-values for cis and trans each, are shown in figure \ref{fig:best.worst.eqtm.scatter}. 
 
-%TODO write caption
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtm_scatter}  
-	\caption{}
+	\caption{ in most significant (left column) and least significant (right column) eQTMs for cis (upper row) and trans(lower row).}
     \label{fig:best.worst.eqtm.scatter}
 \end{figure}
 
 The distribution of methylation betas for all CpGs that are part of at least one eQTM are shown in figure \ref{fig:eqtm.meth.hist}A. It has a higher proportion of beta values close to zero than the distribution for all CpGs (figure \ref{fig:meth.raw.hist.var}). 
 
-%TODO write caption
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtm_meth_hist}  
-	\caption{}
+	\caption{Distribution of methylation betas of all CpGs within meQTLs (A) and meQTL-CpGs within HERV S2 (B).}
     \label{fig:eqtm.meth.hist}
 \end{figure}
 
@@ -838,7 +826,7 @@ In total there are 1301127 meQTLs, that are related to HERV S2. They are made up
 The fractions of potential SNP-CpG pairs that were significantly associated with respect to their genomic locations are shown in figure \ref{fig:global.meqtl.heatmap}A. Subfigure B shows the same analysis for the subset of meQTLs that were just described. The Fractions of significantly enriched pairs are very similar. The high values along the diagonal show, that there is a strong preference for cis-interactions in both sets. 
 
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/meqtl_all_herv_heatmap}  
+	\includegraphics[scale = 0.9, keepaspectratio = true]{../figures/meqtl_all_herv_heatmap}  
 	\caption{Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}
     \label{fig:global.meqtl.heatmap}
 \end{figure}
@@ -885,7 +873,6 @@ In total there were between 5 and 914 entities per data set. The number and comp
 
 The distribution of different types of entities was similar to the data sets constructed starting from HERV related SNPs. A total of 34 data sets contained between 1 and 10 shortest path genes. 
 
-%TODO change color scheme
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_ggm_data_entity_bar}  
 	\caption{Size and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}
@@ -899,8 +886,7 @@ The following section will give a short overview over GGMs calculated as describ
 
 937 of the 1882 data sets generated from HERV related SNPs remained after filtering. The restricted networks consisted of between 16 and 425 nodes. The number and composition of nodes for the biggest (A) and smallest networks can be seen in figure \ref{fig:ggm.cc.nodes.bar}.
 
-%TODO fill in numbers
-The networks contained between xx and xxxx edges. 
+The restricted networks contained between 24 and 2866 edges. 
 
 The networks were investigated for the presence of SNP-expression probe pairs as well as CpG-expression probe pairs known to be associated form the eQTL and eQTM analysis. 
 
@@ -928,7 +914,7 @@ As displayed in figure \ref{fig:ggm.entity.cc.scatter}B almost all networks had 
 %TODO calculate and add graph measures
 \subsubsection{Example networks}
 \label{Results:Example networks}
-In the following section I will show restricted networks. 
+In the following section I will show some interesting restricted networks. 
 
 Figure \ref{fig:rs11079148.ggm.network} shows the network generated from the dataset seeded in rs11079148 after edges were filtered at an edge inclusion probability of 0.9 or more. Only the biggest connected component, containing the SNP, is shown. 
 
@@ -956,7 +942,8 @@ The network shown in figure \ref{fig:cg06889971.ggm.network} is generated from t
 
 19 of the 29 entities in the dataset are in the same connected component as the seed CpG. These are one of the two CpG genes, 15 of the 24 SNP genes and probes, two of which () lie within a HERV element themselves, and the only transcription factor in the data set. The restricted network contains 28 edges. The CpG has only one edge to the SNP, which shares an edge with the SNP gene ZNF415. 
 \begin{figure}[tb]
-	\includegraphics[scale = 0.6, keepaspectratio = true]{"../figures/cg06889971"}  
+\subfloat[]{\includegraphics[scale = 0.55, keepaspectratio = true]{"../figures/cg06889971"}}
+\subfloat[]{\includegraphics[scale=0.7]{"../figures/ggm_legend"}}
 	\caption{Restricted network seeded in cg06889971. }
     \label{fig:cg06889971.ggm.network}
 \end{figure}
@@ -986,13 +973,12 @@ The high average of methylation level of HERV CpGs is in line with observations,
 %\subsubsection{Genotypes}
 %\label{Discussion:Genotypes}
 The availability of genotype measurements was an exception, as the fraction of SNPs within HERV elements was slightly higher than the fraction of the genome covered by HERVs. This might be represent an actual higher density of common variants in HERV elements, as they are known to be highly degenerated and experience almost no evolutionary pressure pressure\cite{10.1146/annurev.genom.7.080505.115700}.
-%TODO 
 
 \subsection{Quantitative trait loci}
 \label{Discussion:Quantitative trait loci}
 We identified a high number of significant cis- as well as trans-eQTLs in the data set. Nevertheless, pairs of SNPs and expression probes are a lot more likely to be associated when they are in cis. This agrees with previous findings\cite{Joehanes2017}.
 
-Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. %TODO why?
+Interestingly a far higher percentage of probes taking part in cis-eQTLs at about 85\% is annotated to a gene, compared to probes in trans-eQTLs at 44\%. However, this might be due to a bias towards measuring SNPs close to genes on the genotyping array.
  
 The distributions of expression residuals for the significant eQTLs with highest p-values, shown in figure \ref{fig:best.worst.eqtl.boxplot}B and D, might hint towards setting a stricter cutoff. However, matrixEQTL works with continuous dosages instead of the discrete variants shown in the figure. This might disguise a more palpable association of the variant on the expression levels.
 
@@ -1018,19 +1004,15 @@ The GO enrichment performed on HERV related meQTLs showed an enrichment of therm
 
 %TODO restructure: First describe expectation for networks, then describe condititions that would be necessary, then describe/show why conds are not met
 
-I expected to find paths matching the pattern shown in figure \ref{fig:ggm.expectation.scheme} in the calculated networks.  A SNP influences the expression of a neighboring gene. This gene connects to a CpG site through a route made up by transcription factors and shortest path genes. The methylation level of the CpG in turn controls the expression of a neighboring gene. Nodes not taking part in this path would be expected to have no strong edges to any of the visited nodes. 
+I expected to find paths matching the pattern shown in figure \ref{fig:ggm.expectation.scheme} in the calculated networks.  A SNP influences the expression of a neighboring gene. This gene connects to a CpG site through a route made up by transcription factors and shortest path genes. The methylation level of the CpG in turn controls the expression of a neighboring gene. Nodes not taking part the same in this functional module would be expected to not be strongly connected to any of the visited nodes. As a result there would be more than one connected component in the graph and some nodes would be totally isolated. 
 
-To be able to calculate the correct 
+To be able to correctly identify indirect assocations, when using partial correlations, it is necessary that all variables that mediate the effect are considered. In this case this means that a strong indirect association can only be identified as such, when all mediating entities are in the collected data set. 
 
-For this, all members of this path would need to be in the data set the GGMs were calculated on. 
+This, however, didn't seem to be the case in most calculated networks. The most obvious consequence could be seen for the meQTLs that were used as conerstones of the data collection. They were present as direct edges in almost all networks. However, it is highly  unlikely that these associations represent a direct effect due to being located on different chromosomes. Therefore, it was very likely that not all mediators were in the considered data sets. Another contributing reason might be, that if the actual path the effect follows is longer than a few elements, even small errors in the data could lead to the failure to explain the indirect effect. 
 
-I was not able to discern mechanisms of HERV influence on cellular functions from the calculated GGMs. This was due to multiple problems. 
+In many cases the SNP and CpGs were not only directly connected, but this edge was the only edge for one of them. This was the case in the network for cg06889971 (Figure \ref{fig:cg06889971.ggm.network}.
 
 For once the networks tended to be highly connected even after filtering edges at an edge inclusion probability cutoff as high as 0.9. This meant that in almost all cases there was one big connected component, that contained almost all nodes. Therefore, analyses on whether genes are included in the restricted graph, like GO enrichments, were not meaningful. 
-
-Another problem was, that the meQTLs that were used as cornerstones of the data collection, were present as direct edges in almost all cases. However, it is highly  unlikely that these associations represent a direct effect due to being located on different chromosomes. It seems that the strong known association lead to strong partial correlation even when respecting all other entities. A possible explanation for this might be the data collection. If the factors mediating the indirect association are not part of the dataset, there is no way to calculate useful partial correlations. Another reason might be, that if the actual path the effect follows is longer than a few elements, even small errors in the data could lead to the failure to explain the indirect effect. 
-
-In many cases the SNP and CpGs were not only directly connected, but this edge was the only edge for one of them. This is the case in the network for cg06889971 (Figure \ref{fig:cg06889971.ggm.network}.
 
 A potential solution to these problems could be the introduction of priors to the calculation. This might guide the iterative GGM calculation to be quicker to converge to the correct underlying interactions. I was not able to include priors due to time constraints and the troubles at finding publicly available datasets that contain expression values not only on gene but on probe level. As expression probes without a known gene made up a big part of the networks, the information to define complete priors was not available. 
 
