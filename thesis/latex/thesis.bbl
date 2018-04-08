@@ -59,6 +59,13 @@ H.~Yu, Z.~Zhao, and F.~Zhu.
 \newblock {\em International Journal of Molecular Medicine}, 32(4):755--762,
   2013.
 
+\bibitem{Feschotte2012}
+C{\'e}dric Feschotte and Cl{\'e}ment Gilbert.
+\newblock Endogenous viruses: insights into viral evolution and impact on host
+  biology.
+\newblock {\em Nature Reviews Genetics}, 13:283 EP --, Mar 2012.
+\newblock Review Article.
+
 \bibitem{10.3389/fpsyt.2015.00183}
 Gorjan Slokar and Gregor Hasler.
 \newblock Human endogenous retroviruses as pathogenic factors in the
@@ -299,6 +306,11 @@ Juliane Schäfer and Korbinian Strimmer.
 \newblock In {\em In Science of Complex Networks: From Biology to the Internet
   and WWW}, 2005.
 
+\bibitem{Schramm2014}
+Katharina Schramm, Carola Marzi, Claudia Schurmann, et~al.
+\newblock Mapping the genetic architecture of gene regulation in whole blood.
+\newblock {\em PLOS ONE}, 9(4):1--13, 04 2014.
+
 \bibitem{HumanHT}
 Inc Illumina.
 \newblock Data sheet: Humanht-12 v3 expression beadchip, 2010.
@@ -309,11 +321,6 @@ Ray Malfavon-Borja and C{\'e}dric Feschotte.
   restriction factors.
 \newblock {\em J Virol}, 89(8):4047--4050, Apr 2015.
 \newblock 03653-14[PII].
-
-\bibitem{Schramm2014}
-Katharina Schramm, Carola Marzi, Claudia Schurmann, et~al.
-\newblock Mapping the genetic architecture of gene regulation in whole blood.
-\newblock {\em PLOS ONE}, 9(4):1--13, 04 2014.
 
 \bibitem{Mortelmans2016}
 Kristien Mortelmans, Feng Wang-Johanning, and Gary~L. Johanning.

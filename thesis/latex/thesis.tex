@@ -135,6 +135,8 @@ I confirm that this master's thesis is my own work and I have documented all sou
 \tableofcontents
 \newpage
 
+%TODO replace all graphs with e+... notation
+
 \pagestyle{plain}
 \pagenumbering{arabic}
 \section{Introduction} 
@@ -148,7 +150,7 @@ When the draft for the first human genome was published in 2001\cite{Venter1304}
 Since then this notion has generally been revoked. Especially within the two phases of the Encyclopedia of DNA Elements (ENCODE) project\cite{Encode2012}, participation in some functional role has been assigned to up 80.4\% of the human genome. 
 
 %TODO write fitting segue
-Still up to this day there are areas in the genome that are difficult to analyze. Especially repetitive sequences cause huge problems for any method that relies on sequencing\cite{Treangen2011}. In human repetitive DNA makes up about 50\% of the whole Genome\cite{Treangen2011}. There are five major classes of repetitive elements: Satellites, short interspersed nuclear elements (SINE), long interspersed nuclear elements (LINE), DNA transposons and long terminal repeat (LTR) retrotransposons. 
+Still, up to this day there are areas in the genome that are difficult to analyze. Especially repetitive sequences cause huge problems for any method that relies on sequencing\cite{Treangen2011}. In human repetitive DNA makes up about 50\% of the whole Genome\cite{Treangen2011}. There are five major classes of repetitive elements: Satellites, short interspersed nuclear elements (SINE), long interspersed nuclear elements (LINE), DNA transposons and long terminal repeat (LTR) retrotransposons. 
 
 %TODO go deeper into retrotransposons
 In this work we will focus on a subclass of the latter repeat class. Human endogenous retroviruses (HERVs) belong to the class of LTR retrotransposons and make up about 8\% of the human genome\cite{APM:APM12476}. HERVs originate from retroviruses that infected the germ line of humans or human ancestors up to 30 million years ago\cite{10.1146/annurev.genom.7.080505.115700}. Therefore, they became dormant in the genome and are inherited in a Mendelian fashion. Newly integrated endogenous retroviruses (ERVs) share the typical structure of the viruses they originate from. This means they contain at least the four main genes in the order $5'-gag-pro-pol-env-3'$. Gag encodes the matrix and capsid proteins. Pro codes for a protease. Pol is the reverse transcriptase and integrase and env codes for the surface proteins. Furthermore, they have two flanking LTRs that originate from a duplication of the sequence, where the retrovirus was integrated\cite{10.1146/annurev.genom.7.080505.115700}. An example of the structure of a HERV element is shown in figure \ref{fig:herv.structure.example}.
@@ -161,11 +163,11 @@ In this work we will focus on a subclass of the latter repeat class. Human endog
 
 However, endogenous retroviruses in human are generally not able to replicate. This is due to a high level of degeneration of the HERV gene sequences due to mutations and deletions introducing frame shifts and premature stop codons. Homologous recombination of the flanking LTRs can also lead to elements containing only a single LTR and losing the entire coding body\cite{10.1146/annurev.genom.7.080505.115700}. Additionally, the promoter activity of LTRs is commonly silenced by hypermethylation\cite{Smith2013}.
 
-Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Finally, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}. 
+Regardless of their loss of capability to replicate there still are multiple ways in which HERVs can influence human cells. LTRs of HERVs can act as promoters or enhancers to regulate gene expression. This can lead to disease and has been associated to various cancers\cite{10.3892/ijmm.2013.1460}. However, in other known the promoter activity has been recruited and adds to transcription regulation in a positive way\cite{Feschotte2012}. While most HERV genes are degenerated, some are still expressed. A change in the transcription of several HERV subclasses was found in schizophrenia subjects, but the mechanisms of HERV involvement are not yet well understood\cite{10.3389/fpsyt.2015.00183}. Finally, non-coding HERV RNAs have been found to play a role in control of stem cell properties\cite{APM:APM12476}. 
 
 \subsection{Multiomics}
 \label{Introduction:Multiomics}
-%TODO what for
+%TODO what for ht?
 The rise of high-throughput technologies  allows researchers to paint a more complete picture of the mechanisms of cell processes than ever before. Multi-omics, the integration of the analysis of different types of cellular molecules, is made possible by that. The objective of multiomics studies is to draw conclusions about cellular mechanisms and understand the flow of information by finding associations and patterns connecting them\cite{Hasin2017}. The objective of this work was to use data from the fields of transcriptomics, genomics and epigenomics to investigate the effects of variation in these three fields within human endogenous retroviruses.
 
 Transcriptomics examines the expression of RNAs on a genome-wide scale. Following the central dogma of molecular biology, RNA is the intermediate between DNA and proteins and therefore of central importance\cite{CRICK1970}. With the late progress in transcriptome studies, even more effects of RNA have been discovered in the form of several functional RNAs\cite{10.3389/fgene.2015.00002}. RNA levels can be measured using a technology called RNA-seq\cite{Wang2009} or probe-based arrays\cite{Schulze2001}, as were used in this work. 
@@ -187,28 +189,23 @@ The multiomics data analyses performed in this work were either started from an 
 
 \subsection{Effect network analysis}
 \label{Introduction:Effect network analysis}
-Many multiomics analyses are based on the calculation of associations within or between different data layers. Examples are co-expression of genes or the association of genotypic variants and transcription,  protein or methylation levels, called eQTL, pQTL and meQTL. These approaches allow to identify associated entities by calculating correlations between single entities over available individuals or samples. However, purely correlation based methods can not differentiate between direct and indirect effects\cite{Hasin2017}.
+Many multiomics analyses are based on the calculation of associations within or between different data layers. Examples are co-expression of genes or the association of genotypic variants and transcription, protein or methylation levels, called eQTL, pQTL and meQTL. These approaches allow to identify associated entities by calculating correlations between single entities over available individuals or samples. However, purely correlation based methods can not differentiate between direct and indirect effects\cite{Hasin2017}.
 
 Multomics data can used to construct networks, where each entity from the different layers is a node and the significant pairwise associations, that exceed a given threshold, are resembled by undirected edges. However when using Pearson correlation as measurement of association, the networks tend to be rather dense, as indirect associations are still contained\cite{Krumsiek2011}. 
 
 An approach to remove these indirect associations is the use of partial correlation coefficients. The partial correlation coefficient can be seen as the pairwise correlation between two variables after removing the common effects of all other variables. A scheme of how partial correlations work is shown in figure \ref{fig:partial.correlation.scheme}.
 
-An approach that uses partial correlation coefficients to construct networks is called "Gaussian Graphical Model"\cite{Krumsiek2011} (GGM). 
+A method that uses partial correlation coefficients to construct networks is called "Gaussian Graphical Model"\cite{Krumsiek2011} (GGM). 
 %We used GGMs to investigate the effect and effect mechanisms of variation within HERV elements.
 
 The approach to Gaussian Graphical modeling used in this work utilizes Bayesian structure learning and is described in more detail in section \ref{Methods:Gaussian Graphical Models}.
 
 \subsection{Objectives}
-This work had three main objectives. The first objective was the global annotation of multiomics features in HERV elements. This allows to assess which data is available within HERVs, as well as simple analyses, like GO enrichments. Furthermore, this annotation was used to filter later genome wide analyses.
+This work had three main objectives. The first objective was the generation of a comprehensive annotation of multiomics features in HERV elements. This allows to assess which expression, genotype and methylation data is available within HERVs, as well as identifying common patterns among these features, like the common association with certain pathways, or phenotypes. Furthermore, this annotation was used to filter later genome wide analyses.
 
-The second objective
+The second objective was the integration of the multiomics data set by pairwise quantitative loci calculation. This was done by calculating eQTLs and eQTMs, and using an already existing dataset of meQTLs. The pairwise analysis allows the exploration of which cellular mechanisms are influenced by changes within HERV elements. 
 
-
-\begin{itemize}
-\item global annotation of functional elements in HERVs -> explore capability of HERVs to influence stuff
-\item pairwise multiomics analysis (eQTL, meQTL, eQTM) -> find where changes in HERVs have effect
-\item network analysis -> explore actual mechanisms of HERV influence
-\end{itemize}
+However, these associations can't differentiate between direct and indirect effects. Therefore, to elucidate the underlying mechanisms and pathways of the effects of changes within HERVs and integrate all omics, I generated networks representing direct interactions. This was done using Graphical Gaussian models, that are based on the concept of partial correlations. 
 
 \newpage
 \section{Data}
@@ -219,7 +216,7 @@ The second objective
 As mentioned in section \ref{Introduction:Human endogenous retroviruses} HERV elements tend to be highly degenerated. Therefore, it is no trivial task to pertain a complete HERV annotation for the human genome. Furthermore, classification and naming of endogenous retroviruses is not performed in an unified manner but rather dependent on how and by whom a given element was identified. 
 Instead of collecting a library of known HERV sequences and performing sequence search ourselves, HERV annotations were pertained from RepeatMasker\cite{RepeatMasker} repeat library. RepeatMasker is a tool that screens DNA sequences against a library interspersed repeats and low complexity DNA sequences. It generates an annotation of identified repeats and masks them in the query sequence.
 
-The track representing all identified repeats from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section \url{(http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz)}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. These are repeat name, the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurrence. Furthermore it contains the area of the known repeat sequence, that is covered by the occurrence. It also contains the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally, there is an indexing field used to speed up chromosome range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
+The track representing all identified repeats from the RepeatMasker library for human genome hg19 was downloaded from the UCSC genome browser download section\footnote{\url{http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/rmsk.txt.gz}}. It contains a total of 5298130 occurrences of repeats. Each entry consists of 17 values. These are repeat name, the repeat class and family, as well as the chromosome, strand, and the genomic start and end position of the repeat occurrence. Furthermore it contains the area of the known repeat sequence, that is covered by the occurrence. It also contains the quality of the alignment of the repeat sequence to the annotated position using the Smith Waterman alignment score\cite{SMITH1981195} and the number of base mismatches, deletions and insertions per thousand base pairs. Finally, there is an indexing field used to speed up chromosome range queries and the first digit of the id field in the RepeatMasker output file. The first 10 lines of the track are shown in table \ref{tab:RepeatMaskerTrack}.
 
 \begin{table}[b]
 \centering
@@ -576,25 +573,18 @@ The stability of Gaussian Graphical models is limited by the property, that samp
 
 We performed two approaches of selecting potential node sets. Both are anchored in trans-acting SNP-CpG interactions as well as a relationship to HERV elements. Trans-meQTLs provide interesting boundaries for the analysis of regulatory mechanisms, as the effect is guaranteed to be indirect. Furthermore, the effect size of a trans-meQTL has to big to reach significance. 
 
-The first approach starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the nodes. To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the SNP (SNP genes/probes) are included. Analogously, to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the protein-protein interaction network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path. The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.snp.scheme}
+The first approach starts of with a SNP that lies within a HERV element and has significant associations with at least 5 CpG sites located on another chromosome. These CpGs are added to the nodes. To include genes, that are potentially associated with this SNP, all expression probes within a 250 kb flanking region up- and downstream of the SNP (SNP genes/probes) are included. Analogously, to find genes that are likely to be affected by methylation changes, for each associated CpG all overlapping probes and the first up- and downstream probe each within a distance of less than 250 kb are added (CpG genes). To include transcription factors (TFs), whose binding might be affected by DNA methylation changes, all TFs that have a binding site within 100 bp of a CpG of interest are added. Finally, to connect genes around the sentinel SNP with genes around the methylation sites or transcription factors, we used the protein-protein interaction network described in section \ref{Data:String protein interactions}. We calculated the shortest path from a representative SNP gene to any TF or CpG gene and included all genes on this path. The schematic representation of the selection starting from an example SNP is shown in figure \ref{fig:ggm.data.collect.scheme}A.
 
 %TODO write caption
 \begin{figure}[b!]
-	\includegraphics[scale=0.86, keepaspectratio = true]{../figures/ggm_data_collect_snp_scheme}
+	\includegraphics[scale=0.75, keepaspectratio = true]{../figures/ggm_data_collect_scheme}
 	\caption{}
-	\label{fig:ggm.data.collect.snp.scheme}
+	\label{fig:ggm.data.collect.scheme}
 \end{figure}
 
 
 
-The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.cpg.scheme}, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV and are part of a trans-meQTL, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Other CpGs that are in a trans-meQTL with these SNPs are included as well. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
-
-%TODO write caption
-\begin{figure}[b!]
-	\includegraphics[scale=0.86, keepaspectratio = true]{../figures/ggm_data_collect_cpg_scheme}
-	\caption{}
-	\label{fig:ggm.data.collect.cpg.scheme}
-\end{figure}
+The second approach of data collection, shown in figure \ref{fig:ggm.data.collect.scheme}B, starts with an CpG-site within a HERV element, that is part of a trans-meQTL. First, if any other measured CpGs lie within the same HERV and are part of a trans-meQTL, they are added to the analysis. Then for each CpG of interest the most strongly associated SNP that lies on another chromosome is added. Other CpGs that are in a trans-meQTL with these SNPs are included as well. Finally neighboring genes, transcription factors and shortest path genes are included according to the same criteria as in the first approach.
 
 For both approaches data sets that contained too few members were excluded as follow. Sets with less than one gene or probe neighboring a SNP and one neighboring a CpG-site were removed. Furthermore, if no transcription factor and no shortest path gene was found, the set was excluded. Therefore, each GGM calculated contained at least 5 entities.
 
@@ -608,7 +598,7 @@ First the edges in the network were filtered for an edge inclusion probability o
 
 Figure \ref{fig:ggm.expectation.scheme} shows the structure we expected to find in the networks. A SNP is associated with a neighboring gene. This gene connects to a CpG site through a route of transcripiton factor and/or shortest path genes. The CpG in turn has an edge to a neighboring CpG gene. 
 
-Therefore, the number edges between SNPs/CpGs and neighboring genes were counted, to identify restricted networks, that potentially follow this pattern Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either through an path over other nodes or as a direct edge. 
+Therefore, the number edges between SNPs/CpGs and neighboring genes were counted, to identify restricted networks, that potentially follow this pattern Finally, the eQTL and eQTM results described in sections \ref{Results:eQTLs} and \ref{Results:eQTMs} were used to assess how many of the identified associations were found in the network, either through a path over other nodes or as a direct edge. 
 
 %TODO write caption
 \begin{figure}[b!]
@@ -703,6 +693,7 @@ CpGs associated with HERV S2, as shown in figure \ref{fig:hervS2.meth.hist.var}A
 
 The number of CpG sites within all HERV sets and including flanking regions is shown in table \ref{tab:meth.overlap.counts}
 
+%TODO write capthoin
 \begin{table}[h!]
   \begin{center}
     \resizebox{\textwidth}{!}{
@@ -718,7 +709,7 @@ The number of CpG sites within all HERV sets and including flanking regions is s
 	\label{tab:meth.overlap.counts}
 \end{table} 
 \subsubsection{Genotypes}
-A total of 890780 the considered SNPs are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
+A total of 890780 of the considered SNPs are located within elements of HERV S2. This constitutes 9.34\% of all SNPs. These SNPs are found in 330744 distinct HERV elements. Therefore, 53.99\% contain at least one SNP.
 
 The results for all sets and flanking regions are shown in table \ref{tab:snp.overlap.counts}
 
@@ -740,7 +731,7 @@ The results for all sets and flanking regions are shown in table \ref{tab:snp.ov
 
 The distribution of number of SNPs found in each HERV element are shown in figure \ref{fig:hervS2.snp.hist}A. A total of 2423 HERV elements had more than 20 within its boundaries and were not shown in the figure. The maximum number of SNPs found in a single HERV element was 368. This HERV element, however, is unusually long at 7003 bp. 
 
-In figure \ref{fig:hervS2.snp.hist}B the density of SNPs per base pair of its HERV element are shown. 356 HERV elements that contained more than 0.05 SNPs per base pair were excluded from this figure.
+In figure \ref{fig:hervS2.snp.hist}B the density of SNPs per base pair of its HERV element are shown. 356 HERV elements that contained more than 0.05 SNPs per base pair were excluded from this figure. When considering a uniform distribution of the measured SNPs over the whole genome, a concentration of 3.18 SNPs per kilobase would be expected. The majority of HERV elements have a similar concentration, however, there is a sizable subset, that is more densely populated by measured SNPs. 
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/hervS2_snp_hist}  
@@ -761,9 +752,9 @@ Associations were calculated for 156.4 millions cis acting SNP-expression probe 
 
 There were a total of 1511235 significant trans-eQTLs with an p-value of less than $10^{-8}$ and a FDR of less than $3.02*10^{-4}$. These are made up by 229332 distinct SNPs and 21338 expression probes. 11505 of the probes found in at least one trans-eQTL are annotated to 9389 different genes, while 9767 probes are not assigned to a gene.
 
-In a previous work Schramm et al. \cite{10.1371/journal.pone.0093844} calculated eQTLs on expression and genotype data from 2,708 subjects, including 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
+In a previous work Schramm et al. \cite{Schramm2014} calculated eQTLs on expression and genotype data from 2,708 subjects, including 890 KORA F4 samples. They found significant cis-eQTLs for 4116 probes and considered only the pair of the most strongly associated SNPs with the probe. Of these pairs 2680 were also found in my analysis. 
 
-Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
+Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all possible  SNP-expression probe pairs, mapped to 10 Mpb genomic windows. As expected the values at the diagonal are comparatively higher, containing all cis-eQTLs. 
 
 \begin{figure}[tb]
 	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtl_all_herv_heatmap}  
@@ -771,11 +762,11 @@ Figure \ref{fig:global.eqtl.heatmap}A shows the fraction of significant to all p
     \label{fig:global.eqtl.heatmap}
 \end{figure}
 
-The expression residual signatures of wildtype, heterogeneous and homogeneous mutated SNP site for the two eQTLs with the best and worst p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. The eQTLs with the best p-values in subfigures A and C show clear distinctions between the different SNP variants. While there is a small trend between variants in subfigures B and D, the distributions of expression residuals are rather similar.    
+The expression residual signatures of homozygous reference allele, heterozygous and homozygous alternative allele for the two eQTLs with the most and least significant p-values in cis and trans are shown in figure \ref{fig:best.worst.eqtl.boxplot}. The eQTLs with the best p-values in subfigures A and C show clear distinctions between the different SNP variants. While there is a small trend between variants in subfigures B and D, the distributions of expression residuals are rather similar.    
 
 %TODO write caption
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtl_boxplots.pdf}  
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtl_boxplots}  
 	\caption{}
     \label{fig:best.worst.eqtl.boxplot}
 \end{figure}
@@ -807,18 +798,30 @@ The fractions of potential CpG-expression probe pairs that were significantly as
 \end{figure}
 
 The pairs of expression and methylation residual values for the eQTMs with the best and worst p-values for cis and trans each, are shown in figure \ref{fig:best.worst.eqtm.scatter}. 
+
 %TODO write caption
 \begin{figure}[tb]
-	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtm_scatter.pdf}  
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/best_worst_eqtm_scatter}  
 	\caption{}
     \label{fig:best.worst.eqtm.scatter}
+\end{figure}
+
+The distribution of methylation betas for all CpGs that are part of at least one eQTM are shown in figure \ref{fig:eqtm.meth.hist}A. It has a higher proportion of beta values close to zero than the distribution for all CpGs (figure \ref{fig:meth.raw.hist.var}). 
+
+%TODO write caption
+\begin{figure}[tb]
+	\includegraphics[scale = 1, keepaspectratio = true]{../figures/eqtm_meth_hist}  
+	\caption{}
+    \label{fig:eqtm.meth.hist}
 \end{figure}
 
 HERV S2 contains 311 CpG sites and 420 expression probes, that were present in cis-eQTMs. A total of 738 cis-eQTMs are related to the set. 33 of these are associations between one of 33 CpG sites and one of 14 expression probes that are both  within a HERV element. 
 
 Considering trans-eQTMs, 1109 significantly associated CpGs lie within HERV S2 and 5422 expression probes overlapping a HERV element are part of a trans-eQTM. In total 15085 trans-eQTMs are related to HERV S2.
 
-The fraction of potential HERV related eQTMs that were significant is shown in figure\ref{fig:global.eqtm.heatmap}B. Due to low number of significant pairs compared to the 90000 cells in the graph it was only sparsely filled. No preference for cis-eQTM could be seen. 
+The fraction of potential HERV related eQTMs that were significant is shown in figure\ref{fig:global.eqtm.heatmap}B. Due to low number of significant pairs compared to the 90000 cells in the graph it was only sparsely filled. Only a weak preference for cis-eQTM could be seen. 
+
+Figure \ref{fig:eqtm.meth.hist}B shows the distribution of methylation beta values for all CpGs that are part of at least one eQTM and lie within HERV S2. It is very similar to the distribution for all eQTM-CpGs. However, comparing the distribution to the one for all CpGs within HERV elements (figure \ref{fig:hervS2.meth.hist.var}A), shows that the proportion of beta values close to zero is higher.  
 
 A GO biological process enrichment was performed on the 1316 genes that the expression probes found in HERV S2 related eQTMs are annotated to. All gene that were part of an eQTM were used as background. After correction for multiple testing no GO terms were found to be significantly enriched. 
 
@@ -969,7 +972,7 @@ Genotypes, expression levels and methylation levels were measured with microarra
 
 The number of available expression measurements within HERV elements was lower than expected, if the probes were randomly distributed. This is explained by the mentioned limitations in probe design, as well as the focus on annotated genes. This was supported by the result, that while over 60\% of all probes on the HumanHT-12 v3 Expression BeadChip are annotated to a gene, less than one fourth of the probes overlapping with HERVs belong to a gene.
 
-The enrichment of genes associated with the GO term "defense response" among them might conform with prior findings. Products encoded by HERVs have been found to play a role in host protection against viral infection\cite{Malfavon-Borja2015}.
+The enrichment of genes associated with the GO term "defense response" among them might conform with prior findings. Several env genes of endogenous retroviruses have been found to play a role in host protection against viral infection in different vertebrates\cite{Malfavon-Borja2015}. The mechanism of this defense, while not yet exhaustively understood, is suspected to be facilitated the binding of the env surface subunit to the host receptor ASCT2, which blocks the binding of exogenous retroviruses\cite{Malfavon-Borja2015}. 
 
 The distribution of expression values of HERV associated probes shows, that there certainly is expression activity within HERV elements. While the variance of expression values tends to be lower than on the entire data set, it is still enough for differential analyses. 
 
@@ -1002,12 +1005,24 @@ This high number of probes and subsequently also genes might be the reason, that
 %\subsection{eQTMs}
 %\label{Discussion:eQTMs}
 
-The GO enrichment performed on HERV related meQTLs showed an enrichment of therms regarding the development nervours system and especially neurons. This is interesting as HERVs have previously been associated with neurodegenerative diseases \cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}.
+The number of significant eQTMs was rather small. Just as observed in the eQTL results, there is a bias towards cis-acting associations, even though its not quite as strong. 
+
+Performing an GO biological process enrichment on the genes that were parts of HERV S2 related eQTMs, didn't result in any significantly enriched terms. This might be caused by the low number of genes among eQTM expression probes in general.  
+
+The increased proportion of low methylation beta values among CpGs that are part of eQTMs and are located within HERV S2 is very interesting. A possible explanation is, that a lower level methylation within the HERV increases the regulatory function of the HERV LTRs. The expression probes associated to these CpGs, therefore, have a changed expression. 
+
+The GO enrichment performed on HERV related meQTLs showed an enrichment of therms regarding the development nervous system and especially neurons. This is interesting as HERVs have previously been associated with neurodegenerative diseases \cite{Mortelmans2016}, like schizophrenia\cite{10.3389/fpsyt.2015.00183}.
 
 \subsection{Regulatory networks}
 \label{Discussion:Regulatory networks}
 
 %TODO restructure: First describe expectation for networks, then describe condititions that would be necessary, then describe/show why conds are not met
+
+I expected to find paths matching the pattern shown in figure \ref{fig:ggm.expectation.scheme} in the calculated networks.  A SNP influences the expression of a neighboring gene. This gene connects to a CpG site through a route made up by transcription factors and shortest path genes. The methylation level of the CpG in turn controls the expression of a neighboring gene. Nodes not taking part in this path would be expected to have no strong edges to any of the visited nodes. 
+
+To be able to calculate the correct 
+
+For this, all members of this path would need to be in the data set the GGMs were calculated on. 
 
 I was not able to discern mechanisms of HERV influence on cellular functions from the calculated GGMs. This was due to multiple problems. 
 
