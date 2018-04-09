@@ -8,13 +8,12 @@ J.~Craig Venter, Mark~D. Adams, Eugene~W. Myers, et~al.
 \bibitem{Consortium2001}
 International Human Genome~Sequencing Consortium.
 \newblock Initial sequencing and analysis of the human genome.
-\newblock {\em Nature}, 409:860 EP --, Feb 2001.
+\newblock {\em Nature}, 409:860, Feb 2001.
 
 \bibitem{Encode2012}
 The ENCODE~Project Consortium.
 \newblock An integrated encyclopedia of dna elements in the human genome.
-\newblock {\em Nature}, 489:57 EP --, Sep 2012.
-\newblock Article.
+\newblock {\em Nature}, 489:57, Sep 2012.
 
 \bibitem{Pennisi1159}
 Elizabeth Pennisi.
@@ -25,8 +24,7 @@ Elizabeth Pennisi.
 Todd~J. Treangen and Steven~L. Salzberg.
 \newblock Repetitive dna and next-generation sequencing: computational
   challenges and solutions.
-\newblock {\em Nature Reviews Genetics}, 13:36 EP --, Nov 2011.
-\newblock Review Article.
+\newblock {\em Nature Reviews Genetics}, 13:36, Nov 2011.
 
 \bibitem{APM:APM12476}
 Robin~A. Weiss.
@@ -38,7 +36,6 @@ Norbert Bannert and Reinhard Kurth.
 \newblock The evolutionary dynamics of human endogenous retroviral families.
 \newblock {\em Annual Review of Genomics and Human Genetics}, 7(1):149--173,
   2006.
-\newblock PMID: 16722807.
 
 \bibitem{BIES:BIES201300049}
 George~R. Young, Jonathan~P. Stoye, and George Kassiotis.
@@ -49,8 +46,7 @@ George~R. Young, Jonathan~P. Stoye, and George Kassiotis.
 \bibitem{Smith2013}
 Zachary~D. Smith and Alexander Meissner.
 \newblock Dna methylation: roles in mammalian development.
-\newblock {\em Nature Reviews Genetics}, 14:204 EP --, Feb 2013.
-\newblock Review Article.
+\newblock {\em Nature Reviews Genetics}, 14:204 EP, Feb 2013.
 
 \bibitem{10.3892/ijmm.2013.1460}
 H.~Yu, Z.~Zhao, and F.~Zhu.
@@ -59,18 +55,24 @@ H.~Yu, Z.~Zhao, and F.~Zhu.
 \newblock {\em International Journal of Molecular Medicine}, 32(4):755--762,
   2013.
 
+\bibitem{YU2013}
+HONG-LIAN YU, ZHAN-KUI ZHAO, and FAN ZHU.
+\newblock The role of human endogenous retroviral long terminal repeat
+  sequences in human cancer (review).
+\newblock {\em International Journal of Molecular Medicine}, 32(4):755--762,
+  jul 2013.
+
 \bibitem{Feschotte2012}
 C{\'e}dric Feschotte and Cl{\'e}ment Gilbert.
 \newblock Endogenous viruses: insights into viral evolution and impact on host
   biology.
-\newblock {\em Nature Reviews Genetics}, 13:283 EP --, Mar 2012.
-\newblock Review Article.
+\newblock {\em Nature Reviews Genetics}, 13:283, Mar 2012.
 
 \bibitem{10.3389/fpsyt.2015.00183}
 Gorjan Slokar and Gregor Hasler.
 \newblock Human endogenous retroviruses as pathogenic factors in the
   development of schizophrenia.
-\newblock 6, 01 2016.
+\newblock {\em Frontiers in Psychiatry}, 6, 01 2016.
 
 \bibitem{Hasin2017}
 Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
@@ -78,9 +80,9 @@ Yehudit Hasin, Marcus Seldin, and Aldons Lusis.
 \newblock {\em Genome Biology}, 18(1):83, May 2017.
 
 \bibitem{CRICK1970}
-FRANCIS CRICK.
+Francis Crick.
 \newblock Central dogma of molecular biology.
-\newblock {\em Nature}, 227:561 EP --, Aug 1970.
+\newblock {\em Nature}, 227:561, Aug 1970.
 
 \bibitem{10.3389/fgene.2015.00002}
 Alexander~F. Palazzo and Eliza~S. Lee.
@@ -91,12 +93,11 @@ Alexander~F. Palazzo and Eliza~S. Lee.
 Zhong Wang, Mark Gerstein, and Michael Snyder.
 \newblock Rna-seq: a revolutionary tool for transcriptomics.
 \newblock {\em Nat Rev Genet}, 10(1):57--63, Jan 2009.
-\newblock 19015660[pmid].
 
 \bibitem{Schulze2001}
 Almut Schulze and Julian Downward.
 \newblock Navigating gene expression using microarrays -- a technology review.
-\newblock {\em Nature Cell Biology}, 3:E190 EP --, Aug 2001.
+\newblock {\em Nature Cell Biology}, 3:E190, Aug 2001.
 
 \bibitem{Piuntiaad9780}
 Andrea Piunti and Ali Shilatifard.
@@ -108,17 +109,15 @@ Andrea Piunti and Ali Shilatifard.
 Aim{\'e}e~M. Deaton and Adrian Bird.
 \newblock Cpg islands and the regulation of transcription.
 \newblock {\em Genes Dev}, 25(10):1010--1022, May 2011.
-\newblock 21576262[pmid].
 
 \bibitem{Krumsiek2011}
 Jan Krumsiek, Karsten Suhre, Thomas Illig, Jerzy Adamski, and Fabian~J. Theis.
 \newblock Gaussian graphical modeling reconstructs pathway reactions from
   high-throughput metabolomics data.
 \newblock {\em BMC Syst Biol}, 5:21--21, Jan 2011.
-\newblock 1752-0509-5-21[PII].
 
 \bibitem{RepeatMasker}
-R~Smit~AFA, Hubley and Green P.
+AFA Smit, R~Hubley, and Green P.
 \newblock Repeatmasker open-4.0.
 \newblock 2013-2015.
 
@@ -132,6 +131,12 @@ Lindsay~L. Waite, Benjamin Weaver, Kenneth Day, et~al.
 \newblock Estimation of cell-type composition including t and b cell subtypes
   for whole blood methylation microarray data.
 \newblock {\em Frontiers in Genetics}, 7:23, 2016.
+
+\bibitem{Choi072488}
+Minseung Choi, Diane~P Genereux, Jamie Goodson, et~al.
+\newblock Evaluating the stability and flexibility of dna methylation patterns
+  from stem to differentiated cells.
+\newblock {\em bioRxiv}, 2016.
 
 \bibitem{10.1371/journal.pgen.1000529}
 Bryan~N. Howie, Peter Donnelly, and Jonathan Marchini.
@@ -150,6 +155,12 @@ Meaghan~J. Jones, Anthony~P. Fejes, and Michael~S. Kobor.
 \newblock Dna methylation, genotype and gene expression: who is driving and who
   is along for the ride?
 \newblock {\em Genome Biology}, 14(7):126, Jul 2013.
+
+\bibitem{Lehne2018}
+Benjamin Lehne, Rory Wilson, Marie Loh, et~al.
+\newblock Unravelling the genetic architecture of dna methylation provides new
+  insights into nuclear regulatory pathways.
+\newblock {\em Manuscript in preparation}.
 
 \bibitem{Yineaaj2239}
 Yimeng Yin, Ekaterina Morgunova, Arttu Jolma, et~al.
@@ -181,10 +192,9 @@ Aziz Khan, Oriol Fornes, Arnaud Stigliani, et~al.
 
 \bibitem{10.1093/nar/gkj143}
 V.~Matys, O.~V. Kel-Margoulis, E.~Fricke, et~al.
-\newblock Transfac(?) and its module transcompel(?): transcriptional gene
+\newblock Transfac® and its module transcompel®: transcriptional gene
   regulation in eukaryotes.
 \newblock {\em Nucleic Acids Res}, 34(Database issue):D108--D110, Jan 2006.
-\newblock 16381825[pmid].
 
 \bibitem{10.1093/nar/gku1280}
 Aurelien Griffon, Quentin Barbier, Jordi Dalino, et~al.
@@ -195,32 +205,29 @@ Aurelien Griffon, Quentin Barbier, Jordi Dalino, et~al.
 \bibitem{10.1038/nmeth.1923}
 Ben Langmead and Steven~L. Salzberg.
 \newblock Fast gapped-read alignment with bowtie 2.
-\newblock {\em Nature Methods}, 9:357 EP --, Mar 2012.
+\newblock {\em Nature Methods}, 9:357, Mar 2012.
 
 \bibitem{10.1186/gb-2008-9-9-r137}
 Yong Zhang, Tao Liu, Clifford~A. Meyer, et~al.
 \newblock Model-based analysis of chip-seq (macs).
 \newblock {\em Genome Biol}, 9(9):R137--R137, Sep 2008.
-\newblock gb-2008-9-9-r137[PII].
 
 \bibitem{Franceschini2013}
 Andrea Franceschini, Damian Szklarczyk, Sune Frankild, et~al.
 \newblock String v9.1: protein-protein interaction networks, with increased
   coverage and integration.
 \newblock {\em Nucleic Acids Res}, 41(Database issue):D808--D815, Jan 2013.
-\newblock gks1094[PII].
 
 \bibitem{Szklarczyk2017}
 Damian Szklarczyk, John~H. Morris, Helen Cook, et~al.
 \newblock The string database in 2017: quality-controlled protein-protein
   association networks, made broadly accessible.
 \newblock {\em Nucleic Acids Res}, 45(Database issue):D362--D368, Jan 2017.
-\newblock 27924014[pmid].
 
 \bibitem{GTExConsortium2013}
 GTEx Consortium.
 \newblock The genotype-tissue expression (gtex) project.
-\newblock {\em Nature Genetics}, 45:580 EP --, May 2013.
+\newblock {\em Nature Genetics}, 45:580, May 2013.
 
 \bibitem{Rlanguage}
 R~Core Team.
@@ -287,7 +294,7 @@ Kunihiro Baba, Ritei Shibata, and Masaaki Sibuya.
 \newblock Partial correlation and conditional correlation as measures of
   conditional independence.
 \newblock {\em Australian \& New Zealand Journal of Statistics},
-  46(4):657--664.
+  46(4):657--664, 2004.
 
 \bibitem{Lenkoski2013}
 Alex Lenkoski.
@@ -314,18 +321,18 @@ Ray Malfavon-Borja and C{\'e}dric Feschotte.
 \newblock Fighting fire with fire: Endogenous retrovirus envelopes as
   restriction factors.
 \newblock {\em J Virol}, 89(8):4047--4050, Apr 2015.
-\newblock 03653-14[PII].
-
-\bibitem{Joehanes2017}
-Roby Joehanes, Xiaoling Zhang, Tianxiao Huan, et~al.
-\newblock Integrated genome-wide analysis of expression quantitative trait loci
-  aids interpretation of genomic association studies.
-\newblock {\em Genome Biology}, 18(1):16, Jan 2017.
 
 \bibitem{Mortelmans2016}
 Kristien Mortelmans, Feng Wang-Johanning, and Gary~L. Johanning.
 \newblock The role of human endogenous retroviruses in brain development and
   function.
 \newblock {\em APMIS}, 124(1-2):105--115.
+
+\bibitem{Schacht2014}
+Theresa Schacht, Marcus Oswald, Roland Eils, Stefan~B. Eichmüller, and Rainer
+  König.
+\newblock Estimating the activity of transcription factors by the effect on
+  their target genes.
+\newblock {\em Bioinformatics}, 30(17):i401--i407, 2014.
 
 \end{thebibliography}
