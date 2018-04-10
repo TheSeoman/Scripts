@@ -39,5 +39,8 @@
 \contentsline {section}{\numberline {5}Discussion}{37}{section.5}
 \contentsline {subsection}{\numberline {5.1}HERV region features}{37}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Quantitative trait loci}{38}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Regulatory networks}{38}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.3}Regulatory networks}{39}{subsection.5.3}
 \contentsline {section}{\numberline {6}Conclusion and Outlook}{41}{section.6}
+\contentsline {section}{List of Figures}{42}{section*.6}
+\contentsline {section}{List of Tables}{43}{section*.7}
+\contentsline {section}{References}{45}{section*.8}
