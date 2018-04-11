@@ -102,10 +102,10 @@ plot.cpg.ggm <- function(g, id, dot.out=NULL){
   col[grep("^rs", n)] = "#fab4ad";
   col[unlist(nodeData(g,n,"seed.cpg"))] = "#b5a380";
   col[unlist(nodeData(g,n,"extra.cpg"))] = "#e4d7bc";
-  col[cpg.genes] = "#e0e810";
-  col[snp.genes] = "#a32c2c"
+  col[cpg.genes] = "#faff54";
+  col[snp.genes] = "#fab4ad"
   if(!is.null(tfs)){
-    col[tfs] = "green"
+    col[tfs] = "589ecd"
   }
   
   penwidth = rep(1, numNodes(g))
@@ -274,10 +274,10 @@ plot.snp.ggm <- function(g, id, dot.out=NULL){
   names(col) = n
   col[grep("^rs", n)] = "#fab4ad";
   col[grep("^cg", n)] = "#e4d7bc";
-  col[cpg.genes] = "#e0e810";
+  col[cpg.genes] = "#faff54";
   col[snp.genes] = "#a32c2c"
   if(!is.null(tfs)){
-    col[tfs] = "green"
+    col[tfs] = "589ecd"
   }
   
   penwidth = rep(1, numNodes(g))

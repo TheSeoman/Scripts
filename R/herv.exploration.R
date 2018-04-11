@@ -16,8 +16,8 @@ for(set in c('S1', 'S2', 'S3')) {
 
 plot.herv.width <- function(herv.ranges) {
   widths <- width(herv.ranges)
-  breaks <- seq(0, ceiling(max(widths)/100)*100, by = 100)
-  hist <- ggplot(as.data.frame(widths), aes(widths)) + geom_histogram(breaks = breaks) + labs(x = "length (bp)")
+  breaks <- seq(0, 10000, by = 100)
+  hist <- ggplot(as.data.frame(widths), aes(widths)) + geom_histogram(breaks = breaks) + labs(x = "length (bp)") + scale_y_continuous(labels = fancy_scientific)
   return(hist)
 }
 

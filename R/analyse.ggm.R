@@ -21,15 +21,12 @@ load(PATHS$MAF001.RES.ME.DATA)
 GGM.DIR <- paste0(PATHS$DATA.DIR, 'ggm/', set, '.', seed, '.', filter, '.', flanking/1000, 'kb', ifelse(string, '.string', ''), '/')
 if (filter == 'snp' ) {
   load(paste0(GGM.DIR, 'filtered.snps.RData'))
-  #remove snps, whose ggm calculation is still running
-  filtered.snps <- filtered.snps[!filtered.snps %in% c('rs8047159')]
 } else {
   load(paste0(GGM.DIR, 'cpgs.RData'))
 }
 load(paste0(GGM.DIR, 'data.meta.RData'))
 load(paste0(GGM.DIR, 'data.overview.RData'))
 
-ggms <- sapply(strsplit(list.files(paste0(GGM.DIR, 'ggm/')), split = '\\.'), function(x) x[1])
 
 if (filter == 'snp' ) {
   cis.eqtl.pairs <- get(paste0(set, '.eqtl.overlap'))[[paste0('cis.', filter)]][, 1:2]
