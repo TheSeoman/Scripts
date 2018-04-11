@@ -3,62 +3,52 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: thesis.aux
 The style file: unsrtMod.bst
 Database file #1: mybib.bib
-Warning--I'm ignoring Franceschini2013's extra "note" field
---line 71 of file mybib.bib
-Warning--I'm ignoring Krumsiek2011's extra "note" field
---line 388 of file mybib.bib
-Warning--I'm ignoring 10.1186/gb-2008-9-9-r137's extra "note" field
---line 589 of file mybib.bib
-Warning--I'm ignoring Malfavon-Borja2015's extra "note" field
---line 817 of file mybib.bib
 Warning--entry type for "HumanHT" isn't style-file defined
---line 823 of file mybib.bib
-Warning--I didn't find a database entry for "10.1371/journal.pone.0093844"
-Warning--I didn't find a database entry for "Joehanes2017"
-Warning--empty journal in 10.3389/fpsyt.2015.00183
+--line 931 of file mybib.bib
 Warning--empty journal in RepeatMasker
+Warning--empty year in Lehne2018
 Warning--empty booktitle in Mohammadi2015BDgraphAR
-Warning--empty year in 10.1111/j.1467-842X.2004.00360.x
+Warning--empty year in Lenkoski2013
 Warning--empty year in Mortelmans2016
-You've used 53 entries,
+You've used 61 entries,
             1814 wiz_defined-function locations,
-            816 strings with 20607 characters,
-and the built_in function-call counts, 12245 in all, are:
-= -- 1097
-> -- 587
+            844 strings with 22425 characters,
+and the built_in function-call counts, 13562 in all, are:
+= -- 1176
+> -- 697
 < -- 0
-+ -- 272
-- -- 136
-* -- 892
-:= -- 1927
-add.period$ -- 171
-call.type$ -- 53
-change.case$ -- 49
++ -- 324
+- -- 162
+* -- 989
+:= -- 2156
+add.period$ -- 182
+call.type$ -- 61
+change.case$ -- 57
 chr.to.int$ -- 0
-cite$ -- 58
-duplicate$ -- 465
-empty$ -- 1164
-format.name$ -- 136
-if$ -- 2731
+cite$ -- 66
+duplicate$ -- 534
+empty$ -- 1283
+format.name$ -- 162
+if$ -- 3008
 int.to.chr$ -- 0
-int.to.str$ -- 53
-missing$ -- 48
-newline$ -- 280
-num.names$ -- 53
-pop$ -- 119
+int.to.str$ -- 61
+missing$ -- 56
+newline$ -- 307
+num.names$ -- 61
+pop$ -- 152
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 289
+skip$ -- 337
 stack$ -- 0
-substring$ -- 853
-swap$ -- 56
+substring$ -- 829
+swap$ -- 65
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 5
-while$ -- 98
-width$ -- 55
-write$ -- 597
-(There were 12 warnings)
+while$ -- 111
+width$ -- 63
+write$ -- 657
+(There were 6 warnings)
