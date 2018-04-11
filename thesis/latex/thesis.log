@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  10 APR 2018 19:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.8.28)  11 APR 2018 19:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1208,9 +1208,8 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \sf@top=\skip89
 \sf@bottom=\skip90
 )
-(/usr/share/texlive/texmf-dist/tex/latex/pdfcomment/pdfcomment.sty
-Package: pdfcomment 2012/09/28 pdfcomment.sty v2.3a - Josef Kleber (C) 2008-201
-2
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
 
 (/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
@@ -1223,11 +1222,50 @@ Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
 \XKV@depth=\count155
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 ))
-\c@pc@count@i=\count156
-\c@pc@count@ii=\count157
-\c@pc@count@iii=\count158
-\c@pc@count@iv=\count159
-\pc@mathannot@box=\box48
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/trimclip.sty
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+(/usr/share/texlive/texmf-dist/tex/latex/collectbox/collectbox.sty
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box48
+)
+\tc@llx=\dimen267
+\tc@lly=\dimen268
+\tc@urx=\dimen269
+\tc@ury=\dimen270
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/adjustbox/tc-pdftex.def
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen271
+\adjbox@Height=\dimen272
+\adjbox@Depth=\dimen273
+\adjbox@Totalheight=\dimen274
+
+(/usr/share/texlive/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
+Package: ifoddpage 2011/09/13 v1.0 Conditionals for odd/even page detection
+\c@checkoddpage=\count156
+)
+(/usr/share/texlive/texmf-dist/tex/latex/varwidth/varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box49
+\sift@deathcycles=\count157
+\@vwid@loff=\dimen275
+\@vwid@roff=\dimen276
+))
+(/usr/share/texlive/texmf-dist/tex/latex/pdfcomment/pdfcomment.sty
+Package: pdfcomment 2012/09/28 pdfcomment.sty v2.3a - Josef Kleber (C) 2008-201
+2
+\c@pc@count@i=\count158
+\c@pc@count@ii=\count159
+\c@pc@count@iii=\count160
+\c@pc@count@iv=\count161
+\pc@mathannot@box=\box50
 \pc@dima=\skip91
 \pc@dimb=\skip92
 \pc@Sposx=\skip93
@@ -1282,21 +1320,21 @@ Package zref Info: New property list: savepos on input line 75.
 Package zref Info: New property: posx on input line 76.
 Package zref Info: New property: posy on input line 77.
 )
-\c@zref@unique=\count160
+\c@zref@unique=\count162
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/refcount.sty
 Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
 )
 (/usr/share/texlive/texmf-dist/tex/latex/marginnote/marginnote.sty
 Package: marginnote 2012/03/29 v1.1i non floating margin notes for LaTeX
-\c@mn@abspage=\count161
+\c@mn@abspage=\count163
 )
 (/usr/share/texlive/texmf-dist/tex/latex/datetime/datetime.sty
 Package: datetime 2015/03/20 v2.60 Date Time Package
 
 (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count162
+\etb@tempcnta=\count164
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fmtcount.sty
 Package: fmtcount 2015/05/05 v3.01
@@ -1306,53 +1344,53 @@ Package: fcprefix 2012/09/28
 
 (/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fcnumparser.sty
 Package: fcnumparser 2012/09/28
-\fc@digit@counter=\count163
+\fc@digit@counter=\count165
 ))
-\c@padzeroesN=\count164
-\fc@tmpcatcode=\count165
+\c@padzeroesN=\count166
+\fc@tmpcatcode=\count167
 
 (/usr/share/texlive/texmf-dist/tex/latex/fmtcount/fc-english.def
 File: fc-english.def 2013/08/17
 )
-\@DT@modctr=\count166
-\@ordinalctr=\count167
-\@orgargctr=\count168
-\@strctr=\count169
-\@tmpstrctr=\count170
-\@DT@loopN=\count171
-\@DT@X=\count172
+\@DT@modctr=\count168
+\@ordinalctr=\count169
+\@orgargctr=\count170
+\@strctr=\count171
+\@tmpstrctr=\count172
+\@DT@loopN=\count173
+\@DT@X=\count174
 )
 (/usr/share/texlive/texmf-dist/tex/latex/datetime/datetime-defaults.sty
 Package: datetime-defaults 2013/09/10
 )
-\@day=\count173
-\@month=\count174
-\@year=\count175
-\c@HOUR=\count176
-\c@HOURXII=\count177
-\c@MINUTE=\count178
-\c@TOHOUR=\count179
-\c@TOMINUTE=\count180
-\c@SECOND=\count181
-\currenthour=\count182
-\currentminute=\count183
-\currentsecond=\count184
+\@day=\count175
+\@month=\count176
+\@year=\count177
+\c@HOUR=\count178
+\c@HOURXII=\count179
+\c@MINUTE=\count180
+\c@TOHOUR=\count181
+\c@TOMINUTE=\count182
+\c@SECOND=\count183
+\currenthour=\count184
+\currentminute=\count185
+\currentsecond=\count186
 Package datetime Info: No datetime.cfg file found, using default settings on in
 put line 308.
-\@dtctr=\count185
-\dayofyear=\count186
-\dayofweek=\count187
+\@dtctr=\count187
+\dayofyear=\count188
+\dayofweek=\count189
 LaTeX Info: Redefining \today on input line 736.
 \dt@a=\toks46
 \dt@b=\toks47
 )
 (/usr/share/texlive/texmf-dist/tex/latex/bezos/soulpos.sty
 Package: soulpos 2012/02/25 v1.0 Fancy underlining
-\ulp@subcnt=\count188
-\ulp@cnt=\count189
+\ulp@subcnt=\count190
+\ulp@cnt=\count191
 \ulp@out=\write5
 \ulp@in=\read3
-\ulwidth=\dimen267
+\ulwidth=\dimen277
 )
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
@@ -1392,16 +1430,16 @@ Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 )
-\@linkdim=\dimen268
-\Hy@linkcounter=\count190
-\Hy@pagecounter=\count191
+\@linkdim=\dimen278
+\Hy@linkcounter=\count192
+\Hy@pagecounter=\count193
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count192
+\Hy@SavedSpaceFactor=\count194
 
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
@@ -1413,12 +1451,12 @@ Package hyperref Info: Plain pages OFF on input line 4458.
 Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4688.
-\c@Hy@tempcnt=\count193
+\c@Hy@tempcnt=\count195
 LaTeX Info: Redefining \url on input line 5041.
-\XeTeXLinkMargin=\dimen269
-\Fld@menulength=\count194
-\Field@Width=\dimen270
-\Fld@charsize=\dimen271
+\XeTeXLinkMargin=\dimen279
+\Fld@menulength=\count196
+\Field@Width=\dimen280
+\Fld@charsize=\dimen281
 Package hyperref Info: Hyper figures OFF on input line 6295.
 Package hyperref Info: Link nesting OFF on input line 6300.
 Package hyperref Info: Hyper index ON on input line 6303.
@@ -1428,17 +1466,17 @@ Package hyperref Info: Link coloring with OCG OFF on input line 6320.
 Package hyperref Info: PDF/A mode OFF on input line 6325.
 LaTeX Info: Redefining \ref on input line 6365.
 LaTeX Info: Redefining \pageref on input line 6369.
-\Hy@abspage=\count195
-\c@Item=\count196
-\c@Hfootnote=\count197
+\Hy@abspage=\count197
+\c@Item=\count198
+\c@Hfootnote=\count199
 )
 
 Package hyperref Message: Driver: hpdftex.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
 File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
-\Fld@listcount=\count198
-\c@bookmark@seq@number=\count199
+\Fld@listcount=\count266
+\c@bookmark@seq@number=\count267
 
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
 Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
@@ -1457,6 +1495,8 @@ Package tocbibind Info: The document has section divisions on input line 50.
 
 Package tocbibind Note: Using section or other style headings.
 
+) (/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
 )
 
 LaTeX Warning: Unused global option(s):
@@ -1465,39 +1505,39 @@ LaTeX Warning: Unused global option(s):
 (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 45.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 47.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 47.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 45.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 45.
-LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    ... okay on input line 47.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 47.
+LaTeX Font Info:    ... okay on input line 47.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count266
-\scratchdimen=\dimen272
-\scratchbox=\box49
-\nofMPsegments=\count267
-\nofMParguments=\count268
+\scratchcounter=\count268
+\scratchdimen=\dimen282
+\scratchbox=\box51
+\nofMPsegments=\count269
+\nofMParguments=\count270
 \everyMPshowfont=\toks48
-\MPscratchCnt=\count269
-\MPscratchDim=\dimen273
-\MPnumerator=\count270
-\makeMPintoPDFobject=\count271
+\MPscratchCnt=\count271
+\MPscratchDim=\dimen283
+\MPnumerator=\count272
+\makeMPintoPDFobject=\count273
 \everyMPtoPDFconversion=\toks49
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1519,9 +1559,9 @@ ABD: EveryShipout initializing macros
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.13} into 
 your preamble.
- on input line 45.
+ on input line 47.
 
-\AtBeginShipoutBox=\box50
+\AtBeginShipoutBox=\box52
 (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
 Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
 
@@ -1569,7 +1609,7 @@ Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: End \AtBeginDocument code.
 Package marginnote Info: \pdfoutput not 0 and \pdflastxpos available.
 (marginnote)             Extended position detection mode activated.
-Package soulpos Info: Loading soulutf8 on input line 45.
+Package soulpos Info: Loading soulutf8 on input line 47.
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/soulutf8.sty
 Package: soulutf8 2007/09/09 v1.0 Permit use of UTF-8 characters in soul (HO)
 
@@ -1581,11 +1621,11 @@ Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
 \SOUL@buffer=\toks53
 \SOUL@token=\toks54
 \SOUL@spaceskip=\skip102
-\SOUL@ttwidth=\dimen274
-\SOUL@uldp=\dimen275
-\SOUL@ulht=\dimen276
+\SOUL@ttwidth=\dimen284
+\SOUL@uldp=\dimen285
+\SOUL@ulht=\dimen286
 ))
-Package hyperref Info: Link coloring OFF on input line 45.
+Package hyperref Info: Link coloring OFF on input line 47.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1593,11 +1633,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count272
+\c@section@level=\count274
 )
-LaTeX Info: Redefining \ref on input line 45.
-LaTeX Info: Redefining \pageref on input line 45.
-LaTeX Info: Redefining \nameref on input line 45.
+LaTeX Info: Redefining \ref on input line 47.
+LaTeX Info: Redefining \pageref on input line 47.
+LaTeX Info: Redefining \nameref on input line 47.
 
 (./thesis.out) (./thesis.out)
 \@outlinefile=\write6
@@ -1608,14 +1648,14 @@ LaTeX Info: Redefining \nameref on input line 45.
 File: ../figures/LMU-logo.jpg Graphic file (type jpg)
 
 <use ../figures/LMU-logo.jpg>
-Package pdftex.def Info: ../figures/LMU-logo.jpg used on input line 64.
+Package pdftex.def Info: ../figures/LMU-logo.jpg used on input line 66.
 (pdftex.def)             Requested size: 136.57462pt x 65.6625pt.
 
 <../figures/TUM-logo.jpg, id=188, 143.5764pt x 46.2528pt>
 File: ../figures/TUM-logo.jpg Graphic file (type jpg)
 
 <use ../figures/TUM-logo.jpg>
-Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 66.
+Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 68.
 (pdftex.def)             Requested size: 182.09486pt x 58.66629pt.
  [1
 
@@ -1626,18 +1666,18 @@ Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 66.
 File: ../figures/LMU-logo.jpg Graphic file (type jpg)
 
 <use ../figures/LMU-logo.jpg>
-Package pdftex.def Info: ../figures/LMU-logo.jpg used on input line 95.
+Package pdftex.def Info: ../figures/LMU-logo.jpg used on input line 97.
 (pdftex.def)             Requested size: 136.57462pt x 65.6625pt.
 File: ../figures/TUM-logo.jpg Graphic file (type jpg)
  <use ../figures/TUM-logo.jpg>
-Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 97.
+Package pdftex.def Info: ../figures/TUM-logo.jpg used on input line 99.
 (pdftex.def)             Requested size: 182.09486pt x 58.66629pt.
-LaTeX Font Info:    Try loading font information for U+msa on input line 110.
+LaTeX Font Info:    Try loading font information for U+msa on input line 112.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 110.
+LaTeX Font Info:    Try loading font information for U+msb on input line 112.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1645,9 +1685,9 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.119 \end{titlepage}
+l.121 \end{titlepage}
                       [1]
-Overfull \hbox (23.99998pt too wide) in paragraph at lines 127--133
+Overfull \hbox (23.99998pt too wide) in paragraph at lines 129--135
 [] 
  []
 
@@ -1657,50 +1697,50 @@ Overfull \hbox (23.99998pt too wide) in paragraph at lines 127--133
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.136 \section
+l.138 \section
               *{Acknowledgements} [2
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.138 \section
+l.140 \section
               *{Abstract} [3]pdfTeX warning (ext4): destination with the same i
 dentifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.138 \section
+l.140 \section
               *{Abstract} [4
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.140 \section
+l.142 \section
               *{Zusammenfassung} [5]pdfTeX warning (ext4): destination with the
  same identifier (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.140 \section
+l.142 \section
               *{Zusammenfassung} [6
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{page.}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.142 \section
+l.144 \section
               *{} [7]pdfTeX warning (ext4): destination with the same identifie
 r (name{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.142 \section
+l.144 \section
               *{} [8
 
 ] (./thesis.tocpdfTeX warning (ext4): destination with the same identifier (nam
 e{page.}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.42 ...3}Regulatory networks}{39}{subsection.5.3}
+l.42 ...3}Regulatory networks}{41}{subsection.5.3}
                                                    [9])
 \tf@toc=\write7
 \openout7 = `thesis.toc'.
@@ -1709,79 +1749,82 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.144 \newpage
+l.146 \newpage
                [10]
 <../figures/herv_structure_example.png, id=296, 495.35063pt x 80.55093pt>
 File: ../figures/herv_structure_example.png Graphic file (type png)
 
 <use ../figures/herv_structure_example.png>
 Package pdftex.def Info: ../figures/herv_structure_example.png used on input li
-ne 165.
+ne 167.
 (pdftex.def)             Requested size: 455.72055pt x 74.10652pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.173 
+l.175 
        [1
 
- <../figures/herv_structure_example.png (PNG copy)>] [2]
+ <../figures/herv_structure_example.png (PNG copy)>] [2] [3]
+<../figures/overview_scheme.pdf, id=364, 289.08pt x 238.8925pt>
+File: ../figures/overview_scheme.pdf Graphic file (type pdf)
 
-LaTeX Warning: Reference `fig:partial.correlation.scheme' on page 3 undefined o
-n input line 202.
+<use ../figures/overview_scheme.pdf>
+Package pdftex.def Info: ../figures/overview_scheme.pdf used on input line 220.
 
-[3] [4]
+(pdftex.def)             Requested size: 317.98897pt x 262.78255pt.
+ [4 <../figures/overview_scheme.pdf>]
 PGFPlots: reading {../tables/head.repeatmasker.track.tsv}
- [5
 
-]
-<../figures/hervS2_length_hist.pdf, id=386, 454.69875pt x 216.81pt>
+[5
+
+] <../figures/hervS2_length_hist.pdf, id=412, 454.69875pt x 216.81pt>
 File: ../figures/hervS2_length_hist.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_length_hist.pdf>
 Package pdftex.def Info: ../figures/hervS2_length_hist.pdf used on input line 2
-57.
+67.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
 
-<../figures/samples_venn.pdf, id=389, 325.215pt x 144.54pt>
+<../figures/samples_venn.pdf, id=415, 325.215pt x 144.54pt>
 File: ../figures/samples_venn.pdf Graphic file (type pdf)
 
 <use ../figures/samples_venn.pdf>
-Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 275.
+Package pdftex.def Info: ../figures/samples_venn.pdf used on input line 285.
 (pdftex.def)             Requested size: 325.2142pt x 144.53963pt.
  [6 <../figures/hervS2_length_hist.pdf>]
-<../figures/expr_raw_hist_cov.pdf, id=404, 454.69875pt x 216.81pt>
+<../figures/expr_raw_hist_cov.pdf, id=430, 454.69875pt x 216.81pt>
 File: ../figures/expr_raw_hist_cov.pdf Graphic file (type pdf)
 
 <use ../figures/expr_raw_hist_cov.pdf>
-Package pdftex.def Info: ../figures/expr_raw_hist_cov.pdf used on input line 29
+Package pdftex.def Info: ../figures/expr_raw_hist_cov.pdf used on input line 30
 3.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
  [7 <../figures/samples_venn.pdf>]
-<../figures/meth_na_hist.pdf, id=421, 454.69875pt x 216.81pt>
+<../figures/meth_na_hist.pdf, id=447, 454.69875pt x 216.81pt>
 File: ../figures/meth_na_hist.pdf Graphic file (type pdf)
 
 <use ../figures/meth_na_hist.pdf>
-Package pdftex.def Info: ../figures/meth_na_hist.pdf used on input line 309.
+Package pdftex.def Info: ../figures/meth_na_hist.pdf used on input line 319.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
  [8 <../figures/expr_raw_hist_cov.pdf> <../figures/meth_na_hist.pdf>]
-<../figures/meth_raw_hist_var.png, id=443, 457.71pt x 217.81375pt>
+<../figures/meth_raw_hist_var.png, id=469, 457.71pt x 217.81375pt>
 File: ../figures/meth_raw_hist_var.png Graphic file (type png)
 
 <use ../figures/meth_raw_hist_var.png>
-Package pdftex.def Info: ../figures/meth_raw_hist_var.png used on input line 31
+Package pdftex.def Info: ../figures/meth_raw_hist_var.png used on input line 32
 8.
 (pdftex.def)             Requested size: 453.13431pt x 215.63626pt.
  [9 <../figures/meth_raw_hist_var.png>]
 PGFPlots: reading {../tables/full.covariate.overview.tsv}
 PGFPlots: reading {../tables/select.covariate.overview.tsv}
 
-Overfull \hbox (2.61108pt too wide) in paragraph at lines 342--360
+Overfull \hbox (2.61108pt too wide) in paragraph at lines 352--374
 []$[]$ $[]$ 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 382--382
+Underfull \hbox (badness 10000) in paragraph at lines 396--396
 [][][][]$\OT1/cmtt/m/n/10 http : / / hgdownload . cse . ucsc . edu / goldenPath
  / hg19 / encodeDCC / wgEncodeRegTfbsClustered /
  []
@@ -1793,60 +1836,63 @@ Underfull \vbox (badness 1412) has occurred while \output is active []
 
  [14]
 [15] [16]
-<../figures/bdgraph_waiting_graph.png, id=578, 1275.26437pt x 660.21657pt>
+<../figures/bdgraph_waiting_graph.png, id=604, 1275.26437pt x 660.21657pt>
 File: ../figures/bdgraph_waiting_graph.png Graphic file (type png)
 
 <use ../figures/bdgraph_waiting_graph.png>
 Package pdftex.def Info: ../figures/bdgraph_waiting_graph.png used on input lin
-e 561.
+e 576.
 (pdftex.def)             Requested size: 420.83855pt x 217.87213pt.
  [17 <../figures/bdgraph_waiting_graph.png (PNG copy)>]
-<../figures/ggm_data_collect_scheme.pdf, id=587, 607.26875pt x 347.2975pt>
+<../figures/ggm_data_collect_scheme.pdf, id=614, 607.26875pt x 347.2975pt>
 File: ../figures/ggm_data_collect_scheme.pdf Graphic file (type pdf)
 
 <use ../figures/ggm_data_collect_scheme.pdf>
 Package pdftex.def Info: ../figures/ggm_data_collect_scheme.pdf used on input l
-ine 578.
+ine 593.
 (pdftex.def)             Requested size: 455.45045pt x 260.47247pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [18 <../figures/ggm_data_collect_scheme.pdf>]
-<../figures/ggm_expectation_scheme.pdf, id=610, 491.8375pt x 241.90375pt>
+<../figures/ggm_expectation_scheme.pdf, id=637, 336.25626pt x 152.57pt>
 File: ../figures/ggm_expectation_scheme.pdf Graphic file (type pdf)
 
 <use ../figures/ggm_expectation_scheme.pdf>
 Package pdftex.def Info: ../figures/ggm_expectation_scheme.pdf used on input li
-ne 602.
-(pdftex.def)             Requested size: 452.48848pt x 222.55045pt.
- [19 <../figures/ggm_expectation_scheme.pdf>] [20
-
-]
-<../figures/expr_meth_res_hist.pdf, id=631, 454.69875pt x 216.81pt>
+ne 616.
+(pdftex.def)             Requested size: 309.35437pt x 140.36377pt.
+ [19 <../figures/ggm_expectation_scheme.pdf>] [20]
+<../figures/expr_meth_res_hist.pdf, id=662, 454.69875pt x 216.81pt>
 File: ../figures/expr_meth_res_hist.pdf Graphic file (type pdf)
 
 <use ../figures/expr_meth_res_hist.pdf>
 Package pdftex.def Info: ../figures/expr_meth_res_hist.pdf used on input line 6
-17.
+32.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
 
-<../figures/hervS2_expr_raw_hist_cov.pdf, id=633, 454.69875pt x 216.81pt>
+<../figures/hervS2_expr_raw_hist_cov.pdf, id=664, 454.69875pt x 216.81pt>
 File: ../figures/hervS2_expr_raw_hist_cov.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_expr_raw_hist_cov.pdf>
 Package pdftex.def Info: ../figures/hervS2_expr_raw_hist_cov.pdf used on input 
-line 630.
+line 645.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
- [21 <../figures/expr_meth_res_hist.pdf>]
+ [21
+
+ <../figures/expr_meth_res_hist.pdf>]
 PGFPlots: reading {../tables/hervS2.2kb.expr.enrichment.tsv}
 PGFPlots: reading {../tables/expr.overlap.overview.tsv}
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<../figures/hervS2_meth_raw_hist_var.pdf, id=652, 454.69875pt x 216.81pt>
+<../figures/hervS2_meth_raw_hist_var.pdf, id=683, 454.69875pt x 216.81pt>
 File: ../figures/hervS2_meth_raw_hist_var.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_meth_raw_hist_var.pdf>
 Package pdftex.def Info: ../figures/hervS2_meth_raw_hist_var.pdf used on input 
-line 680.
+line 695.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
  [22 <../figures/hervS2_expr_raw_hist_cov.pdf>]
 PGFPlots: reading {../tables/meth.overlap.overview.tsv}
@@ -1856,66 +1902,66 @@ Underfull \vbox (badness 1019) has occurred while \output is active []
  [23 <../figures/hervS2_meth_raw_hist_var.pdf>]
 PGFPlots: reading {../tables/snp.overlap.overview.tsv}
 
-<../figures/hervS2_snp_hist.pdf, id=686, 454.69875pt x 216.81pt>
+<../figures/hervS2_snp_hist.pdf, id=717, 454.69875pt x 216.81pt>
 File: ../figures/hervS2_snp_hist.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_snp_hist.pdf>
-Package pdftex.def Info: ../figures/hervS2_snp_hist.pdf used on input line 730.
+Package pdftex.def Info: ../figures/hervS2_snp_hist.pdf used on input line 745.
 
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
 
 Underfull \vbox (badness 8170) has occurred while \output is active []
 
  [24 <../figures/hervS2_snp_hist.pdf>]
-<../figures/eqtl_all_herv_heatmap.pdf, id=701, 505.89pt x 237.88875pt>
+<../figures/eqtl_all_herv_heatmap.pdf, id=733, 505.89pt x 237.88875pt>
 File: ../figures/eqtl_all_herv_heatmap.pdf Graphic file (type pdf)
 
 <use ../figures/eqtl_all_herv_heatmap.pdf>
 Package pdftex.def Info: ../figures/eqtl_all_herv_heatmap.pdf used on input lin
-e 753.
+e 768.
 (pdftex.def)             Requested size: 455.29678pt x 214.09789pt.
 
-<../figures/best_worst_eqtl_boxplots.pdf, id=703, 454.69875pt x 325.215pt>
+<../figures/best_worst_eqtl_boxplots.pdf, id=735, 454.69875pt x 325.215pt>
 File: ../figures/best_worst_eqtl_boxplots.pdf Graphic file (type pdf)
 
 <use ../figures/best_worst_eqtl_boxplots.pdf>
 Package pdftex.def Info: ../figures/best_worst_eqtl_boxplots.pdf used on input 
-line 761.
+line 776.
 (pdftex.def)             Requested size: 454.69763pt x 325.2142pt.
  [25 <../figures/eqtl_all_herv_heatmap.pdf>]
 Underfull \vbox (badness 1226) has occurred while \output is active []
 
  [26 <../figures/best_worst_eqtl_boxplots.pdf>]
-<../figures/eqtm_all_herv_heatmap.pdf, id=732, 505.89pt x 237.88875pt>
+<../figures/eqtm_all_herv_heatmap.pdf, id=763, 505.89pt x 237.88875pt>
 File: ../figures/eqtm_all_herv_heatmap.pdf Graphic file (type pdf)
 
 <use ../figures/eqtm_all_herv_heatmap.pdf>
 Package pdftex.def Info: ../figures/eqtm_all_herv_heatmap.pdf used on input lin
-e 787.
+e 802.
 (pdftex.def)             Requested size: 455.29678pt x 214.09789pt.
 
-<../figures/best_worst_eqtm_scatter.pdf, id=734, 454.69875pt x 325.215pt>
+<../figures/best_worst_eqtm_scatter.pdf, id=765, 454.69875pt x 325.215pt>
 File: ../figures/best_worst_eqtm_scatter.pdf Graphic file (type pdf)
 
 <use ../figures/best_worst_eqtm_scatter.pdf>
 Package pdftex.def Info: ../figures/best_worst_eqtm_scatter.pdf used on input l
-ine 795.
+ine 810.
 (pdftex.def)             Requested size: 454.69763pt x 325.2142pt.
 
-<../figures/eqtm_meth_hist.pdf, id=737, 454.69875pt x 216.81pt>
+<../figures/eqtm_meth_hist.pdf, id=768, 454.69875pt x 216.81pt>
 File: ../figures/eqtm_meth_hist.pdf Graphic file (type pdf)
 
 <use ../figures/eqtm_meth_hist.pdf>
-Package pdftex.def Info: ../figures/eqtm_meth_hist.pdf used on input line 803.
+Package pdftex.def Info: ../figures/eqtm_meth_hist.pdf used on input line 818.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
  [27 <../figures/eqtm_all_herv_heatmap.pdf>] [28 <../figures/best_worst_eqtm_sc
 atter.pdf>]
-<../figures/meqtl_all_herv_heatmap.pdf, id=767, 505.89pt x 237.88875pt>
+<../figures/meqtl_all_herv_heatmap.pdf, id=798, 505.89pt x 237.88875pt>
 File: ../figures/meqtl_all_herv_heatmap.pdf Graphic file (type pdf)
 
 <use ../figures/meqtl_all_herv_heatmap.pdf>
 Package pdftex.def Info: ../figures/meqtl_all_herv_heatmap.pdf used on input li
-ne 831.
+ne 846.
 (pdftex.def)             Requested size: 455.29678pt x 214.09789pt.
 PGFPlots: reading {../tables/hervS2.meqtl.enrichment.tsv}
 
@@ -1923,112 +1969,126 @@ PGFPlots: reading {../tables/hervS2.meqtl.enrichment.tsv}
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [29 <../figures/eqtm_meth_hist.pdf>] [30 <../figures/meqtl_all_herv_heatmap.pdf
->] <../figures/hervS2_ggm_data_entity_bar.pdf, id=796, 454.69875pt x 433.62pt>
+>] <../figures/hervS2_ggm_data_entity_bar.pdf, id=826, 454.69875pt x 433.62pt>
 File: ../figures/hervS2_ggm_data_entity_bar.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_ggm_data_entity_bar.pdf>
 Package pdftex.def Info: ../figures/hervS2_ggm_data_entity_bar.pdf used on inpu
-t line 879.
+t line 884.
 (pdftex.def)             Requested size: 454.69763pt x 433.61894pt.
-
-<../figures/hervS2_ggm_cc_nodes_bar.pdf, id=801, 454.69875pt x 433.62pt>
+ [31 <../figures/hervS2_ggm_data_entity_bar.pdf>]
+<../figures/hervS2_ggm_cc_nodes_bar.pdf, id=842, 454.69875pt x 433.62pt>
 File: ../figures/hervS2_ggm_cc_nodes_bar.pdf Graphic file (type pdf)
 
 <use ../figures/hervS2_ggm_cc_nodes_bar.pdf>
 Package pdftex.def Info: ../figures/hervS2_ggm_cc_nodes_bar.pdf used on input l
-ine 896.
+ine 912.
 (pdftex.def)             Requested size: 454.69763pt x 433.61894pt.
 
-<../figures/hervS2_ggm_entity_cc_size_scatter.pdf, id=802, 454.69875pt x 194.72
+<../figures/hervS2_ggm_entity_cc_size_scatter.pdf, id=844, 454.69875pt x 194.72
 75pt>
 File: ../figures/hervS2_ggm_entity_cc_size_scatter.pdf Graphic file (type pdf)
  <use ../figures/hervS2_ggm_entity_cc_size_scatter.pdf>
 Package pdftex.def Info: ../figures/hervS2_ggm_entity_cc_size_scatter.pdf used 
-on input line 902.
+on input line 920.
 (pdftex.def)             Requested size: 454.69763pt x 194.727pt.
-
-Underfull \vbox (badness 2932) has occurred while \output is active []
-
- [31]
-<"../figures/rs11079148".pdf, id=812, 604.2575pt x 544.0325pt>
+ [32] [33 <../figures/hervS2_ggm_cc_nodes_bar.pdf>] [34 <../figures/hervS2_ggm_
+entity_cc_size_scatter.pdf>] <"../figures/rs11079148".pdf, id=873, 606.265pt x 
+546.04pt>
 File: "../figures/rs11079148".pdf Graphic file (type pdf)
 
 <use "../figures/rs11079148".pdf>
-Package pdftex.def Info: "../figures/rs11079148".pdf used on input line 915.
-(pdftex.def)             Requested size: 362.5573pt x 326.42201pt.
+Package pdftex.def Info: "../figures/rs11079148".pdf used on input line 937.
+(pdftex.def)             Requested size: 333.44678pt x 300.32292pt.
+
+<"../figures/ggm_legend".pdf, id=874, 110.4125pt x 133.49875pt>
+File: "../figures/ggm_legend".pdf Graphic file (type pdf)
+
+<use "../figures/ggm_legend".pdf>
+Package pdftex.def Info: "../figures/ggm_legend".pdf used on input line 938.
+(pdftex.def)             Requested size: 110.41222pt x 133.4984pt.
 
 
-LaTeX Warning: Reference `fig:rs11079148.boxplot' on page 32 undefined on input
- line 920.
+LaTeX Warning: Reference `fig:rs11079148.boxplot' on page 35 undefined on input
+ line 945.
 
-
-Underfull \vbox (badness 1342) has occurred while \output is active []
-
- [32 <../figures/hervS2_ggm_data_entity_bar.pdf>]
-<"../figures/rs11079148_eqtl_boxplots".pdf, id=823, 454.69875pt x 216.81pt>
+<"../figures/rs11079148_eqtl_boxplots".pdf, id=875, 454.69875pt x 216.81pt>
 File: "../figures/rs11079148_eqtl_boxplots".pdf Graphic file (type pdf)
 
 <use "../figures/rs11079148_eqtl_boxplots".pdf>
 Package pdftex.def Info: "../figures/rs11079148_eqtl_boxplots".pdf used on inpu
-t line 924.
+t line 949.
 (pdftex.def)             Requested size: 454.69763pt x 216.80946pt.
- [33 <../figures/hervS2_ggm_cc_nodes_bar.pdf>] <"../figures/rs1833977".pdf, id=
-836, 612.2875pt x 373.395pt>
+ [35
+
+ <../figures/rs11079148.pdf> <../figures/ggm_legend.pdf>]
+<"../figures/rs1833977".pdf, id=899, 574.145pt x 350.30875pt>
 File: "../figures/rs1833977".pdf Graphic file (type pdf)
 
 <use "../figures/rs1833977".pdf>
-Package pdftex.def Info: "../figures/rs1833977".pdf used on input line 934.
-(pdftex.def)             Requested size: 367.37534pt x 224.03873pt.
+Package pdftex.def Info: "../figures/rs1833977".pdf used on input line 959.
+(pdftex.def)             Requested size: 315.78073pt x 192.6704pt.
+File: "../figures/ggm_legend".pdf Graphic file (type pdf)
+ <use "../figures/ggm_legend".pdf>
+Package pdftex.def Info: "../figures/ggm_legend".pdf used on input line 960.
+(pdftex.def)             Requested size: 110.41222pt x 133.4984pt.
 
-<"../figures/cg06889971".pdf, id=838, 604.2575pt x 336.25626pt>
+
+LaTeX Warning: Reference `rs12988080.eqtl.boxlplot' on page 36 undefined on inp
+ut line 967.
+
+<"../figures/cg06889971".pdf, id=901, 602.25pt x 325.215pt>
 File: "../figures/cg06889971".pdf Graphic file (type pdf)
 
 <use "../figures/cg06889971".pdf>
-Package pdftex.def Info: "../figures/cg06889971".pdf used on input line 945.
-(pdftex.def)             Requested size: 332.34265pt x 184.94151pt.
-
-<"../figures/ggm_legend".pdf, id=839, 158.5925pt x 180.675pt>
+Package pdftex.def Info: "../figures/cg06889971".pdf used on input line 970.
+(pdftex.def)             Requested size: 331.23851pt x 178.86879pt.
 File: "../figures/ggm_legend".pdf Graphic file (type pdf)
+ <use "../figures/ggm_legend".pdf>
+Package pdftex.def Info: "../figures/ggm_legend".pdf used on input line 971.
+(pdftex.def)             Requested size: 110.41222pt x 133.4984pt.
 
-<use "../figures/ggm_legend".pdf>
-Package pdftex.def Info: "../figures/ggm_legend".pdf used on input line 946.
-(pdftex.def)             Requested size: 111.01396pt x 126.47162pt.
- [34 <../figures/hervS2_ggm_entity_cc_size_scatter.pdf>] [35 <../figures/rs1107
-9148.pdf> <../figures/rs11079148_eqtl_boxplots.pdf>] [36 <../figures/rs1833977.
-pdf> <../figures/cg06889971.pdf> <../figures/ggm_legend.pdf>] [37
+Underfull \vbox (badness 1590) has occurred while \output is active []
 
-] [38] [39] [40] [41
+ [36 <../figures/rs11079148_eqtl_boxplots.pdf> <../figures/rs1833977.pdf>] [37 
+<../figures/cg06889971.pdf>] [38
+
+] [39] [40] [41] [42] [43
 
 ] (./thesis.lof
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [42])
+ [44])
 \tf@lof=\write8
 \openout8 = `thesis.lof'.
 
 
-(./thesis.lot)
+(./thesis.lot
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [45])
 \tf@lot=\write9
 \openout9 = `thesis.lot'.
 
- (./thesis.bbl [43] [44
 
-]
+(./thesis.bbl [46]
 Underfull \hbox (badness 1783) in paragraph at lines 19--22
 []\OT1/cmr/m/n/12 Elizabeth Pen-nisi.  En-code project writes eu-logy for junk 
 dna.  \OT1/cmr/m/it/12 Sci-ence\OT1/cmr/m/n/12 ,
  []
 
-[45] [46] [47]) [48]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1043.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1043.
+[47
+
+] [48] [49]) [50]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1066.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1066.
  (./thesis.aux
 * soulpos - computing points - it may take a few seconds *
 \openout5 = `thesis.upb'.
 
  (./thesis.upa))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1043.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1043.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1066.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1066.
 
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: ED114F16F6786B42A1E63BD80B3E052F;2983.
@@ -2038,37 +2098,36 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 33260 strings out of 494910
- 768558 string characters out of 6179836
- 957681 words of memory out of 5000000
- 35667 multiletter control sequences out of 15000+600000
+ 33786 strings out of 494910
+ 777384 string characters out of 6179836
+ 967711 words of memory out of 5000000
+ 36162 multiletter control sequences out of 15000+600000
  16497 words of font info for 63 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 68i,11n,87p,1316b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 68i,13n,80p,1316b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/seoman/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1200.600pk></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
-onts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
-fonts/symbols/msbm10.pfb>
-Output written on thesis.pdf (60 pages, 3654483 bytes).
+e1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pf
+b></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/sh
+are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/symbols/msbm10.pfb>
+Output written on thesis.pdf (62 pages, 4209202 bytes).
 PDF statistics:
- 1160 PDF objects out of 1200 (max. 8388607)
- 1003 compressed objects within 11 object streams
- 211 named destinations out of 1000 (max. 500000)
- 518 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1212 PDF objects out of 1440 (max. 8388607)
+ 1040 compressed objects within 11 object streams
+ 212 named destinations out of 1000 (max. 500000)
+ 523 words of extra memory for PDF output out of 10000 (max. 10000000)
 

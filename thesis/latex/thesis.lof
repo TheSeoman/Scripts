@@ -1,13 +1,14 @@
 \select@language {english}
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Exemplified structure of an intact HERV element. Based on a HERV-K provirus, which is considered the most recently introduced in humans and contains the most complete viral genes. Taken from Young et. al. \cite {BIES:BIES201300049}}}{1}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces \IeC {\textbullet }}}{4}{figure.1.2}
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Length distribution of elements in HERV S2}}{6}{figure.2.1}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Number of samples with genotype, expression and methylation measurements in KORA F4 Survey}}{7}{figure.2.2}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Distribution of expression values (A) and coefficient of expression variation (B) of 47864 probes in 993 individuals.}}{8}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Histograms of proportions of missing values per CpG-site (A) and sample (B).}}{8}{figure.2.4}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Distribution of all methylation beta values (A) and variance (B) of 485577 CpGs between 1727 individuals.}}{9}{figure.2.5}
 \contentsline {figure}{\numberline {3.1}{\ignorespaces (Left) Continuous time BDMCMC algorithm where $\{t_1 , t_2 , t_3 , ...\}$ are jumping times and $\{w_1 , w_2 , w_3 , ...\}$ are waiting times. (Right) Posterior probability estimation of the graphs based on the proportions of their waiting times.}}{17}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Scheme for data collection starting from a SNP (A) and a CpG (B) within a HERV element. }}{18}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Expected structure of regulatory networks. }}{19}{figure.3.3}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Scheme for data collection starting from a SNP (A) and a CpG (B) within a HERV element. Significantly associated CpGs/SNPs are included as well genes and probes neighboring SNPs and CpGs as well as transcription factors binding close to CpGs. Genes derived from the protein-protein interaction networks connecting SNP genes with CpGs or CpG genes are not shown.}}{18}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Expected structure of effect networks. A path from the SNP to a SNP gene through transcription factors and path genes to the CpGs represents the mechanism that is expected to mediate the association between a SNP and a CpG found in the trans-meQTL data.}}{19}{figure.3.3}
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Distribution of expression (A) and methylation (B) residuals over all samples and probes}}{21}{figure.4.1}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Distribution of expression values (A) and coefficient of expression variation (B) of 2343 expression probes overlapping with HERV S2 in 993 individuals.}}{22}{figure.4.2}
 \contentsline {figure}{\numberline {4.3}{\ignorespaces Distribution of methylation beta values (A) and coefficient of methylation variation (B) of 17077 CpG-sites located within HERV S2 in 1727 individuals.}}{23}{figure.4.3}
@@ -18,12 +19,10 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces in most significant (left column) and least significant (right column) eQTMs for cis (upper row) and trans(lower row).}}{28}{figure.4.8}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Distribution of methylation betas of all CpGs within meQTLs (A) and meQTL-CpGs within HERV S2 (B).}}{29}{figure.4.9}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Fraction of SNP-CpG pairs that were significantly associated sorted into bins according to their genomic locations. Ticks on the axis denote chromosome boundaries. Grey means there were no eQTMs in the given pair of bins. A considers all meQTLs and pairs, while B is limited on the ones whose CpGs and/or SNPs are related to HERV set 2.}}{30}{figure.4.10}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Size and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}}{32}{figure.4.11}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Size and composition of biggest (left) and smallest (right) GGM data sets. The upper row are sets seeded in HERV-SNPs, while the lower row is seeded in HERV-CpGs. In few cases genes were included as SNP or CpG neighboring gene as well as transcription factor. These genes are displayed as the former.}}{31}{figure.4.11}
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Number and composition of nodes in restricted GGM networks. A and B are the ten biggest networks for GGMs seeded in SNPs, C are all networks for GGMs seeded HERV-CpGs.}}{33}{figure.4.12}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Number of entities and size of the biggest connected component of GGMs based on SNP (A) and CpG (B) seeds.}}{34}{figure.4.13}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Number of entities and size of the biggest connected component of GGMs based on SNP (A) and CpG (B) seeds. Networks that contained at least one SNP, CpG, SNP gene, CpG gene and transcription factor or path gene in the connected component containing the seed were retained.}}{34}{figure.4.13}
 \contentsline {figure}{\numberline {4.14}{\ignorespaces Restricted network seeded in rs11079148. }}{35}{figure.4.14}
-\contentsline {figure}{\numberline {4.15}{\ignorespaces }}{35}{figure.4.15}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces }}{36}{figure.4.15}
 \contentsline {figure}{\numberline {4.16}{\ignorespaces Restricted network seeded in rs1833977. }}{36}{figure.4.16}
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Restricted network seeded in cg06889971. }}{36}{figure.4.17}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{36}{subfigure.17.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{36}{subfigure.17.2}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Restricted network seeded in cg06889971. }}{37}{figure.4.17}
